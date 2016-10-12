@@ -56,9 +56,13 @@
         },
 
         resources: {
-            destPath: outputPath + "img",
             images: {
+                destPath: outputPath + "img",
                 files: imgSourcePath + "**/*"
+            },
+            icons : {
+                destPath: outputPath + "icons",
+                files: bowerSourcePath + "/font-awesome/fonts/**/*"
             }
         }
     };

@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='build' AfterBuild='build' ProjectOpened='watch' />
+/// <binding BeforeBuild='clean' AfterBuild='build' ProjectOpened='watch' />
 
 var gulp = require("gulp"),
     config = require("./gulpconfig")(),
@@ -19,19 +19,16 @@ var gulp = require("gulp"),
 
     renameOptions = { suffix: ".min" };
 
-    bowerDir= "./bower_components";
+bowerDir = "./bower_components";
 
 ///*******************************
 //          Aggregated
 //*******************************/
 gulp.task("watch", ["watch:js:base", "watch:js:pages", "watch:js:libs", "watch:sass"]);
-gulp.task("clean", ["clean:js", "clean:css", "clean:images"]);
+gulp.task("clean", ["clean:js", "clean:css", "clean:images", "clean:icons"]);
 gulp.task("min", ["min:js", "min:sass"]);
-gulp.task("copy", ["copy:images"]);
-gulp.task("bower", function () {
-    return bower();
-        //.pipe(gulp.dest(bowerDir));
-});
+gulp.task("copy", ["copy:images", "copy:icons"]);
+gulp.task("bower", function () { return bower(); });
 
 ///*******************************
 //          Configuration
@@ -45,21 +42,21 @@ gulp.task("build", function (cb) {
 ///*******************************
 //          Sass
 //*******************************/
-gulp.task("min:sass", ["min:sass:bootstrap", "min:sass:layout", "min:sass:pages"]);
+gulp.task("min:sass", ["min:sass:bootstrap", "min:sass:site", "min:sass:pages"]);
 
 gulp.task("min:sass:pages", function () {
-    var v = config.sass.pages;
-    return bundleSass(v.files, v.fileName);
+    var pages = config.sass.pages;
+    return bundleSass(pages.files, pages.fileName);
 });
 
 gulp.task("min:sass:bootstrap", function () {
-    var v = config.sass.bootstrap;
-    return bundleSass(v.files, v.fileName);
+    var bootstrap = config.sass.bootstrap;
+    return bundleSass(bootstrap.files, bootstrap.fileName);
 });
 
-gulp.task("min:sass:layout", function () {
-    var v = config.sass.site;
-    return bundleSass(v.files, v.fileName);
+gulp.task("min:sass:site", function () {
+    var site = config.sass.site;
+    return bundleSass(site.files, site.fileName);
 });
 
 ///*******************************
@@ -68,43 +65,42 @@ gulp.task("min:sass:layout", function () {
 gulp.task("min:js", ["min:js:libs", "min:js:base", "min:js:pages"]);
 
 gulp.task("min:js:libs", function () {
-    var v = config.js.libs;
-    return bundleJs(v.files, v.fileName);
+    var libs = config.js.libs;
+    return bundleJs(libs.files, libs.fileName);
 });
 
 gulp.task("min:js:base", function () {
-    var v = config.js.base;
-    return bundleJs(v.files, v.fileName, true);
+    var base = config.js.base;
+    return bundleJs(base.files, base.fileName, true);
 });
 
 gulp.task("min:js:pages", function () {
-    var v = config.js.pages;
-    return bundleJs(v.files, v.fileName, true);
+    var pages = config.js.pages;
+    return bundleJs(pages.files, pages.fileName, true);
 });
 
 ///*******************************
 //          Resources
 //*******************************/
 gulp.task("copy:images", function () {
-    var v = config.resources;
-    return copyFiles(v.images.files, v.destPath);
+    var images = config.resources.images;
+    return copyFiles(images.files, images.destPath);
 });
 
-gulp.task("bootstrap", function () {
-    return gulp.src(bowerDir + "/bootstrap-sass-official/assets/stylesheets/**.*")
-        .pipe(gulp.dest("./out/bootstrap"));
-});
-
-gulp.task("icons", function () {
-    return gulp.src(bowerDir + "/font-awesome/fonts/**.*")
-        .pipe(gulp.dest("./out/icons"));
+gulp.task("copy:icons", function () {
+    var icons = config.resources.icons;
+    return copyFiles(icons.files, icons.destPath);
 });
 
 ///*******************************
 //          Clean
 //*******************************/
 gulp.task("clean:images", function (cb) {
-    clean(config.resources.destPath, cb);
+    clean(config.resources.images.destPath, cb);
+});
+
+gulp.task("clean:icons", function (cb) {
+    clean(config.resources.icons.destPath, cb);
 });
 
 gulp.task("clean:js", function (cb) {
@@ -150,13 +146,13 @@ function bundleJs(files, fileName, jsHint) {
         pipe = pipe.pipe(jshint())
             .pipe(jshint.reporter("jshint-stylish", { verbose: true }))
             .pipe(jshint.reporter("fail"))
-            .on("error", swallowError);
+            .on("error", logError);
     }
-    
+
     pipe = pipe.pipe(concat(fileName))
         .pipe(gulp.dest(outFolder))
         .pipe(rename(renameOptions))
-        .pipe(uglify()).on("error", swallowError)
+        .pipe(uglify()).on("error", logError)
         .pipe(gulp.dest(minOutFolder));
 
     return pipe;
@@ -171,12 +167,12 @@ function bundleSass(files, fileName) {
                 .pipe(print())
                 .pipe(plumber())
 //                .pipe(preprocess({ context: { title: "variables" + config.site.names[i] } }))
-                .pipe(sass()).on("error", swallowError)
+                .pipe(sass()).on("error", logError)
                 .pipe(concat(fileName))
-                .pipe(gulp.dest(destPath)) 
+                .pipe(gulp.dest(destPath))
                 .pipe(rename(renameOptions))
                 .pipe(cssmin({ keepSpecialComments: 0 }))
-                .pipe(gulp.dest(destPath+"/minified/"));
+                .pipe(gulp.dest(destPath + "/minified/"));
         }
     }
     return;
@@ -186,7 +182,7 @@ function copyFiles(files, toPath) {
     return gulp.src(files).pipe(gulp.dest(toPath));
 }
 
-function swallowError(error) {
+function logError(error) {
     console.log(error.toString());
     this.emit("end");
 }
