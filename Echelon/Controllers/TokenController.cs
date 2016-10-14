@@ -1,9 +1,9 @@
 ﻿using System.Configuration;
 using System.Web.Mvc;
-using Twilio.Auth;
 using Faker;
+using Twilio.Auth;
 
-namespace TwilioIpMessaging.Controllers
+namespace Echelon.Controllers
 {
     public class TokenController : Controller
     {

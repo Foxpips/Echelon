@@ -1,4 +1,4 @@
-﻿namespace TwilioIpMessaging.Models.ViewModels
+﻿namespace Echelon.Models.ViewModels
 {
     public class LoginViewModel
     {

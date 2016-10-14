@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TwilioIpMessaging.Controllers
+namespace Echelon.Controllers
 {
     public class HomeController : Controller
     {
