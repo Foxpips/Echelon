@@ -1,0 +1,62 @@
+﻿/*--MAIN COLORS--*/
+$color-primary:                 #2882c2;  
+$color-secondary:               #166298; 
+
+$color-gray:                    #9b9b9b;
+$color-gray-light:              #f1f3f7;
+$color-gray-dark:               #979797;
+
+$color-white:                   #fff;
+$color-white-dark:              #fefdff;
+
+$color-red:                     #ed1c24;
+$color-red-dark:                #C12C32;
+$color-green:                   #47b941;
+$color-brown:                   #4a4a4a;
+
+/*--FONTS--*/
+$font-family-base:              montserrat, arial; 
+$font-family-light:             montserrat-light, arial; 
+$font-family-lightest:          montserrat-hairline, arial; 
+
+$font-size-base:                14px !default;
+$font-size-base-value:          14;
+
+$line-height-base:              1.428571429 !default;
+$line-height-computed:          floor(($font-size-base * $line-height-base)) !default;
+
+/*--SCREEN SIZES--*/
+$screen-xs:                     480px !default;
+$screen-xs-min: $screen-xs      !default;
+
+$screen-sm:                     768px !default;
+$screen-sm-min: $screen-sm      !default;
+
+$screen-md:                     992px !default;
+$screen-md-min: $screen-md      !default;
+
+$screen-lg:                     1200px !default;
+$screen-lg-min: $screen-lg      !default;
+
+$screen-xs-max:                 ($screen-sm-min - 1) !default;
+$screen-sm-max:                 ($screen-md-min - 1) !default;
+$screen-md-max:                 ($screen-lg-min - 1) !default;
+
+/*--FORM--*/
+$form-control-height:           39px;
+$form-btn-height:               41px;
+$form-btn-secondary-height:     28px;
+
+/*--HEADER--*/
+$header-height:                 150px;
+$header-height-checkout:        107px;
+$header-height-mobile:          85px;
+$header-height-checkout-mobile: 62px;
+$header-el-height:              36px;
+$header-el-margin-top:          20px;
+
+/*--BODY-CONTAINER--*/
+$body-container-height:         100vh;
+
+/*--FOOTER--*/
+$footer-height:                 127px;

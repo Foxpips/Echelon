@@ -42,10 +42,15 @@ gulp.task("build", function (cb) {
 ///*******************************
 //          Sass
 //*******************************/
-gulp.task("min:sass", ["min:sass:bootstrap", "min:sass:site", "min:sass:pages"]);
+gulp.task("min:sass", ["min:sass:bootstrap", "min:sass:site", "min:sass:pages", "min:sass:modules"]);
 
 gulp.task("min:sass:pages", function () {
     var pages = config.sass.pages;
+    return bundleSass(pages.files, pages.fileName);
+});
+
+gulp.task("min:sass:modules", function () {
+    var pages = config.sass.modules;
     return bundleSass(pages.files, pages.fileName);
 });
 

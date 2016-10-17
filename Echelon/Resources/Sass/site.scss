@@ -1,4 +1,6 @@
-﻿* {
+﻿@import "mixins";
+
+* {
   box-sizing:border-box;
 }
 
@@ -8,7 +10,7 @@ html, body {
   height:100%;
   width:100%;
   color:#dedede;
-  background-color: #849091;
+  background-color: #7B6F6E;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
 
@@ -31,7 +33,7 @@ header a:hover {
 
 section {
   height:70%;
-  background-color:#2B2B2A;
+  background-color:#D4D4D5;
 }
 
 section input {
@@ -49,7 +51,7 @@ section input {
 }
 
 #messages {
-  background-color:#232323;
+  background-color:#DCDCDC;
   padding:10px;
   height:100%;
   width:800px;
@@ -65,7 +67,7 @@ section input {
 .info {
   margin:5px 0;
   font-style:italic;
-  color: beige;
+  color: black;
 }
 
 .message-container {
@@ -77,7 +79,7 @@ section input {
   display:inline-block;
   margin-right:5px;
   font-weight:bold;
-  color:#849091;
+  color:#7B6F6E;
 }
 
 .me, .username.me {

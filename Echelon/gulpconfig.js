@@ -40,13 +40,18 @@
             sassSourceAllPath: sassSourcePath + "**/*.scss",
 
             site: {
-                fileName: "all.css",
-                files: [sassSourcePath + "*.scss"]
+                fileName: "site.css",
+                files: [sassSourcePath + "site.scss"]
             },
 
             pages: {
                 fileName: "pages.css",
                 files: [sassSourcePath + "Pages/*.scss"]
+            },
+
+            modules: {
+                fileName: "modules.css",
+                files: [sassSourcePath + "Modules/*.scss"]
             },
 
             bootstrap: {

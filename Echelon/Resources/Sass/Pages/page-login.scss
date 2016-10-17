@@ -1,0 +1,8 @@
+﻿@import "../variables";
+@import "../mixins";
+
+
+.login_input{
+    color: $color-red-dark;
+    @include p-base-light;
+}
