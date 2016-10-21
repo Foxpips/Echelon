@@ -1,27 +1,25 @@
 ﻿@using System.Threading
-
 <!DOCTYPE html>
 <html>
+
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Chrome, Firefox OS, Opera and Vivaldi -->
     <meta name="theme-color" content="#2882c2">
-    <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#2882c2">
-    <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
 
     @Html.Partial("_Favicon")
     @RenderSection("metadata")
-    
     @Styles.Render("~/bundles/css")
 </head>
+
 <body>
     @Html.Partial("_TopMenu")
 
     @RenderBody()
     @RenderSection("scripts", false)
 </body>
+
 </html>
