@@ -1,16 +1,27 @@
-﻿<!DOCTYPE html>
+﻿@using System.Threading
+
+<!DOCTYPE html>
 <html>
-<head>
+<head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
-    <link rel="shortcut icon" href="~/echelon.ico">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chrome, Firefox OS, Opera and Vivaldi -->
+    <meta name="theme-color" content="#2882c2">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#2882c2">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
+
+    @Html.Partial("_Favicon")
+    @RenderSection("metadata")
+    
     @Styles.Render("~/bundles/css")
 </head>
 <body>
     @Html.Partial("_TopMenu")
 
     @RenderBody()
-    <script src="//media.twiliocdn.com/sdk/rtc/js/ip-messaging/v0.9/twilio-ip-messaging.min.js"></script>
-    <script src="//media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
     @RenderSection("scripts", false)
 </body>
 </html>

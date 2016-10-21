@@ -2,7 +2,89 @@
 @import "../mixins";
 
 
-.login_input{
+.login_input {
     color: $color-red-dark;
     @include p-base-light;
 }
+
+    .btn{
+    display: inline-block;
+    vertical-align: middle;
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    margin: 0;
+    padding: 12px 1em;
+    overflow: visible;
+    text-align: center;
+    font-weight: 700;
+    background-color: #e6e6e6;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    }
+
+.google {
+
+    &__btn {
+        padding-left: 28px;
+        background-color: #4285f4;
+        border-color: #4285f4;
+        border-bottom-color: #2a75f3;
+    }
+
+    &__btn:hover {
+        background-color: #5a95f5;
+        border-color: #5a95f5;
+        border-bottom-color: #4285f4;
+    }
+
+    &__login-icon {
+        background-image: url('../assets/imgs/g-logo.png');
+        background-size: 36px 36px;
+        left: 20px;
+        top: 5px;
+        width: 38px;
+        height: 38px;
+    }
+
+    &__login-label {
+        padding-left: 28px;
+        color: #ffffff;
+    }
+}
+
+
+
+/*.btn--social.google {
+    background-color: #4285f4;
+    border-color: #4285f4;
+    border-bottom-color: #2a75f3;
+}
+
+.btn--social.google:hover {
+    background-color: #5a95f5;
+    border-color: #5a95f5;
+    border-bottom-color: #4285f4;
+}*/
+
+/*.btn--social .social-label {
+    padding-left: 28px;
+}
+
+.social-icon {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 38px;
+    height: 38px;
+    background-repeat: no-repeat;
+}
+
+.social-icon.google {
+    background-image: url();
+}*/

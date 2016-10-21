@@ -2,16 +2,16 @@
     var rootPath = "./",
         sassSourcePath = rootPath + "Resources/Sass/",
         jsSourcePath = rootPath + "Javascript/",
-        imgSourcePath = rootPath + "Img/",
-        outputPath = rootPath + "out/",
+        imgSourcePath = rootPath + "Resources/Images",
+        outputPath = rootPath + "assets/",
         bowerSourcePath = rootPath + "bower_components/";
 
     var config = {
         site: { names: ["Echelon"] },
 
         js: {
-            destPath: outputPath + "javascript",
-            minDestPath: outputPath + "javascript/minified",
+            destPath: outputPath + "js",
+            minDestPath: outputPath + "js/minified",
 
             libs: {
                 fileName: "libs.js",
@@ -62,8 +62,8 @@
 
         resources: {
             images: {
-                destPath: outputPath + "img",
-                files: imgSourcePath + "**/*"
+                destPath: outputPath + "imgs",
+                files: imgSourcePath + "/*"
             },
             icons : {
                 destPath: outputPath + "icons",

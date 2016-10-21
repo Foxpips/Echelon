@@ -1,0 +1,572 @@
+﻿$atomic-float-start: left;
+$atomic-float-end: right;
+$atomic-spacing-base-unit: 10px;
+
+$atomic-font-size-xs: 10px;
+$atomic-font-size-sm: 12px;
+$atomic-font-size-df: 15px;
+$atomic-font-size-lg: 22px;
+$atomic-font-size-xl: 36px;
+
+$atomic-text-align-start: left;
+$atomic-text-align-end: right;
+
+$atomic-color-primary: "#00beef";
+$atomic-color-accent: "#ffaa00";
+
+// Background
+.bg-n {
+    background: none;
+}
+
+.bgc-w {
+    background-color: white;
+}
+
+.bgc-b {
+    background-color: black;
+}
+
+.bgc-t {
+    background-color: transparent;
+}
+
+.bgc-pr {
+    background-color: $atomic-color-primary;
+}
+
+.bgc-ac {
+    background-color: $atomic-color-accent;
+}
+
+.bg-nr {
+    background: no-repeat;
+}
+
+// Border
+.bd-n {
+    border: none;
+}
+
+.bdcl-c {
+    border-collapse: collapse;
+}
+
+.bdrs-0 {
+    border-radius: 0;
+}
+
+.bdtrrs-0 {
+    border-top-right-radius: 0;
+}
+
+.bdtlrs-0 {
+    border-top-left-radius: 0;
+}
+
+.bdbrrs-0 {
+    border-bottom-right-radius: 0;
+}
+
+.bdblrs-0 {
+    border-bottom-left-radius: 0;
+}
+
+.bdtrs-0 {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.bdrrs-0 {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.bdbrs-0 {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.bdlrs-0 {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+// Color
+.c-w {
+    color: white;
+}
+
+.c-b {
+    color: black;
+}
+
+.c-pr {
+    color: $atomic-color-primary;
+}
+
+.c-ac {
+    color: $atomic-color-accent;
+}
+
+.cl,
+.cl-b {
+    clear: both;
+}
+
+.cl-st {
+    clear: $atomic-float-start;
+}
+
+.cl-nd {
+    clear: $atomic-float-end;
+}
+
+// Misc
+.cur,
+.cur-d {
+    cursor: default;
+}
+
+.cur-a {
+    cursor: auto;
+}
+
+.cur-p {
+    cursor: pointer;
+}
+
+.cur-t {
+    cursor: text;
+}
+
+.d,
+.d-b {
+    display: block;
+}
+
+.d-n {
+    display: none;
+}
+
+.d-i {
+    display: inline;
+}
+
+.d-ib {
+    display: inline-block;
+}
+
+// Typography
+.fw,
+.fw-n {
+    font-weight: normal;
+}
+
+.fw-b {
+    font-weight: bold;
+}
+
+.fw-br {
+    font-weight: bolder;
+}
+
+.fw-lr {
+    font-weight: lighter;
+}
+
+.fw-1 {
+    font-weight: 100;
+}
+
+.fw-2 {
+    font-weight: 200;
+}
+
+.fw-3 {
+    font-weight: 300;
+}
+
+.fw-4 {
+    font-weight: 400;
+}
+
+.fw-5 {
+    font-weight: 500;
+}
+
+.fw-6 {
+    font-weight: 600;
+}
+
+.fw-7 {
+    font-weight: 700;
+}
+
+.fw-8 {
+    font-weight: 800;
+}
+
+.fs,
+.fs-n {
+    font-style: normal;
+}
+
+.fs-i {
+    font-style: italic;
+}
+
+.fz-xs {
+    font-size: $atomic-font-size-xs;
+}
+
+.fz-sm {
+    font-size: $atomic-font-size-sm;
+}
+
+.fz-df {
+    font-size: $atomic-font-size-df;
+}
+
+.fz-lg {
+    font-size: $atomic-font-size-lg;
+}
+
+.fz-xl {
+    font-size: $atomic-font-size-xl;
+}
+
+.fl,
+.fl-st {
+    float: $atomic-float-start;
+}
+
+.fl-nd {
+    float: $atomic-float-end;
+}
+
+.fl-n {
+    float: none;
+}
+
+// Margin, padding, and sizing
+.m-a {
+    margin: auto;
+}
+
+.mt-a {
+    margin-top: auto;
+}
+
+.mr-a {
+    margin-right: auto;
+}
+
+.mb-a {
+    margin-bottom: auto;
+}
+
+.ml-a {
+    margin-left: auto;
+}
+
+.mtb-a {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mlr-a {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ov,
+.ov-h {
+    overflow: hidden;
+}
+
+.ov-v {
+    overflow: visible;
+}
+
+.ov-s {
+    overflow: scroll;
+}
+
+.ov-a {
+    overflow: auto;
+}
+
+.ovx,
+.ovx-h {
+    overflow-x: hidden;
+}
+
+.ovx-v {
+    overflow-x: visible;
+}
+
+.ovx-s {
+    overflow-x: scroll;
+}
+
+.ovx-a {
+    overflow-x: auto;
+}
+
+.ovy,
+.ovy-h {
+    overflow-y: hidden;
+}
+
+.ovy-v {
+    overflow-y: visible;
+}
+
+.ovy-s {
+    overflow-y: scroll;
+}
+
+.ovy-a {
+    overflow-y: auto;
+}
+
+.op-0 {
+    opacity: 0;
+}
+
+.op-2 {
+    opacity: 0.2;
+}
+
+.op-4 {
+    opacity: 0.4;
+}
+
+.op-6 {
+    opacity: 0.6;
+}
+
+.op-8 {
+    opacity: 0.8;
+}
+
+.op-10 {
+    opacity: 1;
+}
+
+// Outline
+.ol-n {
+    outline: none;
+}
+
+.p-a {
+    padding: auto;
+}
+
+.pt-a {
+    padding-top: auto;
+}
+
+.pr-a {
+    padding-right: auto;
+}
+
+.pb-a {
+    padding-bottom: auto;
+}
+
+.pl-a {
+    padding-left: auto;
+}
+
+.ptb-a {
+    padding-top: auto;
+    padding-bottom: auto;
+}
+
+.plr-a {
+    padding-left: auto;
+    padding-right: auto;
+}
+
+// Position and block model
+.pos,
+.pos-r {
+    position: relative;
+}
+
+.pos-s {
+    position: static;
+}
+
+.pos-a {
+    position: absolute;
+}
+
+.pos-f {
+    position: fixed;
+}
+
+// Lists
+.lis-n {
+    list-style: none;
+}
+
+.lh-1 {
+    line-height: 1;
+}
+
+// Print
+.pgbb-al {
+    page-break-before: always;
+}
+
+.pgbb-l {
+    page-break-before: left;
+}
+
+.pgbb-r {
+    page-break-before: right;
+}
+
+.pgbi-av {
+    page-break-inside: avoid;
+}
+
+.pgba-al {
+    page-break-after: always;
+}
+
+.pgba-l {
+    page-break-after: left;
+}
+
+.pgba-r {
+    page-break-after: right;
+}
+
+.trbl {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.t {
+    top: 0;
+}
+
+.r {
+    right: 0;
+}
+
+.b {
+    bottom: 0;
+}
+
+.l {
+    left: 0;
+}
+
+.t-a {
+    top: auto;
+}
+
+.r-a {
+    right: auto;
+}
+
+.b-a {
+    bottom: auto;
+}
+
+.l-a {
+    left: auto;
+}
+
+.ta,
+.ta-st {
+    text-align: $atomic-text-align-start;
+}
+
+.ta-nd {
+    text-align: $atomic-text-align-end;
+}
+
+.ta-c {
+    text-align: center;
+}
+
+.ta-j {
+    text-align: justify;
+}
+
+.td,
+.td-n {
+    text-decoration: none;
+}
+
+.td-u {
+    text-decoration: underline;
+}
+
+.td-l {
+    text-decoration: line-through;
+}
+
+.tt,
+.tt-u {
+    text-transform: uppercase;
+}
+
+.tt-n {
+    text-transform: none;
+}
+
+.tt-c {
+    text-transform: capitalize;
+}
+
+.tt-l {
+    text-transform: lowercase;
+}
+
+.va,
+.va-t {
+    vertical-align: top;
+}
+
+.va-m {
+    vertical-align: middle;
+}
+
+.va-bl {
+    vertical-align: baseline;
+}
+
+.va-b {
+    vertical-align: bottom;
+}
+
+.v,
+.v-h {
+    visibility: hidden;
+}
+
+.v-v {
+    visibility: visible;
+}
+
+.whs-n {
+    white-space: normal;
+}
+
+.whs-p {
+    white-space: pre;
+}
+
+.whs-nw {
+    white-space: nowrap;
+}

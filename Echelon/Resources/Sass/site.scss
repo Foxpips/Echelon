@@ -10,7 +10,7 @@ html, body {
   height:100%;
   width:100%;
   color:#dedede;
-  background-color: #7B6F6E;
+  background-color:#dedede;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
 
@@ -33,13 +33,12 @@ header a:hover {
 
 section {
   height:70%;
-  background-color:#D4D4D5;
+  background-color:#dedede;
 }
 
-section input {
+.chat__input {
   display:block;
   height:52px;
-  width:800px;
   margin:10px auto;
   outline:none;
   background-color:transparent;
