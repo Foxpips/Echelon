@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using Echelon.Core.Logging.Loggers;
+using Echelon.Models.ViewModels;
 
 namespace Echelon.Controllers
 {
@@ -7,6 +9,16 @@ namespace Echelon.Controllers
     {
         public ActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(LoginViewModel loginViewModel)
+        {
+            var clientLogger = new ClientLogger();
+            clientLogger.Info(loginViewModel.Email);
+            clientLogger.Info(loginViewModel.Password);
+
             return View();
         }
     }

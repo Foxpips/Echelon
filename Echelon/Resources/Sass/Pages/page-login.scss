@@ -7,7 +7,7 @@
     @include p-base-light;
 }
 
-    .btn{
+.btn {
     display: inline-block;
     vertical-align: middle;
     font-family: inherit;
@@ -26,7 +26,7 @@
     -ms-user-select: none;
     user-select: none;
     text-decoration: none;
-    }
+}
 
 .google {
 
@@ -43,48 +43,95 @@
         border-bottom-color: #4285f4;
     }
 
-    &__login-icon {
-        background-image: url('../assets/imgs/g-logo.png');
+    &__icon {
+        background-image: url(../assets/imgs/g-logo.png);
         background-size: 36px 36px;
-        left: 20px;
-        top: 5px;
-        width: 38px;
-        height: 38px;
+        background-position-x: 10px;
+        background-position-y: 4px;
+        background-repeat: no-repeat;
     }
 
-    &__login-label {
+    &__label {
         padding-left: 28px;
         color: #ffffff;
     }
 }
 
-
-
-/*.btn--social.google {
-    background-color: #4285f4;
-    border-color: #4285f4;
-    border-bottom-color: #2a75f3;
+.login-panel {
+    margin-top: 25%;
 }
 
-.btn--social.google:hover {
-    background-color: #5a95f5;
-    border-color: #5a95f5;
-    border-bottom-color: #4285f4;
-}*/
-
-/*.btn--social .social-label {
-    padding-left: 28px;
+.white-box {
+    background: #ffffff;
+    padding: 25px;
+    margin-bottom: 15px;
 }
 
-.social-icon {
-    position: absolute;
-    left: 5px;
-    top: 5px;
-    width: 38px;
-    height: 38px;
+.white-box .box-title {
+    margin: 0 0 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.tab-content {
+    margin-top: 30px;
+}
+
+.form-material .form-group {
+    overflow: hidden;
+}
+
+.form-material .form-control {
+    background-color: rgba(0,0,0,0);
+    background-position: center bottom,center calc(99%);
     background-repeat: no-repeat;
+    background-size: 0 2px,100% 1px;
+    padding: 0;
+    transition: background 0s ease-out 0s;
 }
 
-.social-icon.google {
-    background-image: url();
-}*/
+.form-material .form-control, .form-material .form-control.focus, .form-material .form-control:focus {
+    background-image: linear-gradient(#9675ce, #9675ce),linear-gradient(rgba(120,130,140,0.13), rgba(120,130,140,0.13));
+    border: 0 none;
+    border-radius: 0;
+    box-shadow: none;
+    float: none;
+}
+
+.form-material .form-control.focus, .form-material .form-control:focus {
+    background-size: 100% 2px,100% 1px;
+    outline: 0 none;
+    transition-duration: .3s;
+}
+
+.form-bordered .form-group {
+    border-bottom: 1px solid rgba(120,130,140,0.13);
+    padding-bottom: 20px;
+}
+
+
+.login-box {
+    background: #ffffff;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+.login-box .footer {
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.login-box .social {
+    display: block;
+    margin-bottom: 30px;
+}
+
+.login-sidebar {
+    position: absolute;
+    right: 0;
+    margin-top: 0;
+    height: 100%;
+}

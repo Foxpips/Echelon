@@ -1,55 +1,55 @@
-﻿@model Echelon.Models.ViewModels.LoginViewModel
+﻿@using Echelon.Resources.Content
+@model Echelon.Models.ViewModels.LoginViewModel
 
 @section metadata{
-    <title>Login Page</title>
+    <title>@SiteTitle.LoginPage</title>
 }
 
 <section id="wrapper" class="login-register">
     <div class="login-box">
         <div class="white-box">
-            <form class="form-horizontal form-material" id="loginform" action="index.html">
-                <h3 class="box-title m-b-20">Sign In</h3>
-                <div class="form-group ">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Username">
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { id = "loginform", @class = "form-horizontal form-material" }))
+            {
+                <h3 class="box-title m-b-20">@SiteDocument.SignIn</h3>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <input class="form-control" type="text" required="" name="email" placeholder="Username">
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="password" required="" placeholder="Password">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password" required="" placeholder="Password">
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-12">
+                <div class="col-md-12">
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group text-center m-t-20">
+                        <button class="btn btn-info btn-lg btn-block text-uppercase" type="submit">@SiteDocument.LogIn</button>
                     </div>
                 </div>
-                <div class="form-group text-center m-t-20">
-                    <div class="col-xs-12">
-                        <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+            }
+            <div class="row">
+                <div class="col-xs-12 m-t-10 text-center">
+                    <div class="social">
+                        <a class="btn google__btn google__icon fz-df" href="">
+                            <span class="google__label">@SiteDocument.GoogleSignIn</span>
+                        </a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                        <div class="social">
-                            <a class="btn google__btn fz-df" href="">
-                                <span>
-                                    <i class="google__login-icon pos-a bg-nr"></i>
-                                </span>
-                                <span class="google__login-label">Google Sign-In</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group m-b-0">
-                    <div class="col-sm-12 text-center">
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group text-center m-b-0">
                         <p>
-                            Don't have an account? <a href="register.html" class="text-primary m-l-5">
-                                <b>Sign Up</b>
+                            @SiteDocument.NoAccount
+                            <a href="" class="text-primary m-l-5">
+                                <b>@SiteDocument.SignUp</b>
                             </a>
                         </p>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </section>
