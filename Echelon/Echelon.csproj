@@ -44,6 +44,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.0\lib\net451\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Faker.NET4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
       <Private>True</Private>
@@ -168,6 +180,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Infrastructure\AutoFac\Injector.cs" />
+    <Compile Include="Infrastructure\AutoFac\Modules\MvcModule.cs" />
+    <Compile Include="Infrastructure\AutoFac\Modules\LoggingModule.cs" />
+    <Compile Include="Infrastructure\AutoFac\Modules\DataModule.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -176,6 +192,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AutoMapper\LoggingProfile.cs" />
+    <Compile Include="Infrastructure\Services\Login\ILoginService.cs" />
+    <Compile Include="Infrastructure\Services\Login\LoginService.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Content\SiteDocument.Designer.cs">
@@ -257,9 +276,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Echelon.Core.Data\Echelon.Core.Data.csproj">
+      <Project>{A52145C2-3912-4EFF-927A-FFE42E006B43}</Project>
+      <Name>Echelon.Core.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Echelon.Core.Logging\Echelon.Core.Logging.csproj">
       <Project>{4dc32c7a-56b1-4243-a362-19dbb1ec525c}</Project>
       <Name>Echelon.Core.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Echelon.Core\Echelon.Core.csproj">
+      <Project>{DFCFBB3B-169F-4D92-BB17-CFAA5CB47D44}</Project>
+      <Name>Echelon.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

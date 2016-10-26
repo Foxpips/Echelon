@@ -9,7 +9,8 @@ namespace Echelon.Controllers
     {
         public ActionResult Login(string returnUrl)
         {
-            var challengeResult = new ChallengeResult("Google", Url.Action("ExternalLoginCallback", "Account", new {ReturnUrl = returnUrl}));
+            var challengeResult = new ChallengeResult("Google",
+                Url.Action("ExternalLoginCallback", "Account", new {ReturnUrl = returnUrl}));
             return challengeResult;
         }
 

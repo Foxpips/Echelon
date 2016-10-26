@@ -1,5 +1,8 @@
 ﻿using System.Web.Mvc;
-using Echelon.Core.Logging.Loggers;
+using AutoMapper;
+using Echelon.Core.Logging.Interfaces;
+using Echelon.Entities;
+using Echelon.Infrastructure.Services.Login;
 using Echelon.Models.ViewModels;
 
 namespace Echelon.Controllers
@@ -7,6 +10,15 @@ namespace Echelon.Controllers
     [RequireHttps]
     public class LoginController : Controller
     {
+        private readonly IClientLogger _clientLog;
+        private readonly ILoginService _loginService;
+
+        public LoginController(IClientLogger clientLog, ILoginService loginService)
+        {
+            _loginService = loginService;
+            _clientLog = clientLog;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -15,11 +27,19 @@ namespace Echelon.Controllers
         [HttpPost]
         public ActionResult Signin(LoginViewModel loginViewModel)
         {
-            var clientLogger = new ClientLogger();
-            clientLogger.Info(loginViewModel.Email);
-            clientLogger.Info(loginViewModel.Password);
+            var loginEntity = Mapper.Map<LoginEntity>(loginViewModel);
 
-            return View();
+            _clientLog.Info($"Attempting to login email: {loginEntity.Email}");
+            
+            if (_loginService.CheckUserExists(loginEntity))
+            {
+                _loginService.LogUserIn();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            _clientLog.Info($"User not found! {loginViewModel.Email}");
+            return View("Index");
         }
     }
 }

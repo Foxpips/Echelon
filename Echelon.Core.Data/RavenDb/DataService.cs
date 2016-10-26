@@ -1,30 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Echelon.Core.Interfaces.Data;
 using Raven.Client;
-using Raven.Client.Document;
 
-namespace Echelon.Core.Data
+namespace Echelon.Core.Data.RavenDb
 {
-    public class DataService
+    public class DataService : IDataService
     {
-        private DocumentStore _database;
-        private readonly string _dataconnection = "http://localhost:8080/";
+        private readonly IDocumentStore _database = DocumentStoreProvider.Database;
 
-        public DataService()
+        private void Open(Action<IDocumentSession> action)
         {
-            Connect();
-        }
-
-        private void Connect()
-        {
-            _database = new DocumentStore
+            using (var session = _database.OpenSession())
             {
-                Url = _dataconnection,
-                DefaultDatabase = "Echelon"
-            };
-
-            _database.Initialize();
+                action(session);
+                session.SaveChanges();
+            }
         }
 
         public void Create<TType>(TType entity)
@@ -62,15 +54,6 @@ namespace Echelon.Core.Data
                     session.Delete(documentId);
                 }
             });
-        }
-
-        private void Open(Action<IDocumentSession> action)
-        {
-            using (var session = _database.OpenSession())
-            {
-                action(session);
-                session.SaveChanges();
-            }
         }
     }
 }

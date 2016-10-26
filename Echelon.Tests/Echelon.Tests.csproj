@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +62,10 @@
     <ProjectReference Include="..\Echelon.Core.Data\Echelon.Core.Data.csproj">
       <Project>{A52145C2-3912-4EFF-927A-FFE42E006B43}</Project>
       <Name>Echelon.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Echelon.Core\Echelon.Core.csproj">
+      <Project>{DFCFBB3B-169F-4D92-BB17-CFAA5CB47D44}</Project>
+      <Name>Echelon.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Echelon\Echelon.csproj">
       <Project>{5BF23F2F-9CA6-4739-9660-F5887258F9F9}</Project>

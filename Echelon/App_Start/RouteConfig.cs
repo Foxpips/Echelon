@@ -12,14 +12,14 @@ namespace Echelon
             routes.MapRoute(
                 name: "Token",
                 url: "token",
-                defaults: new { controller = "Token", action = "Index" }
-            );
+                defaults: new {controller = "Token", action = "Index"}
+                );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+                defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional}
+                );
         }
     }
 }

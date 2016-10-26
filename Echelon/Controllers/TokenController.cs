@@ -30,7 +30,8 @@ namespace Echelon.Controllers
             };
             token.AddGrant(grant);
 
-            return Json(new {
+            return Json(new
+            {
                 identity,
                 token = token.ToJWT()
             }, JsonRequestBehavior.AllowGet);

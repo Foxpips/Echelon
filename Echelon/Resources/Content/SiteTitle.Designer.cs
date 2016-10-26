@@ -61,7 +61,7 @@ namespace Echelon.Resources.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login Page.
+        ///   Looks up a localized string similar to CheckUserExists Page.
         /// </summary>
         public static string LoginPage {
             get {

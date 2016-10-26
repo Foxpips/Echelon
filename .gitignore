@@ -22,6 +22,7 @@ node_modules/
 */out/
 */assets/
 */bower_components/
+*.css
 *.min.css
 *.min.js
 *.serialized
