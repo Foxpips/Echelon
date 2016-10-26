@@ -13,7 +13,7 @@ namespace Echelon.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(LoginViewModel loginViewModel)
+        public ActionResult Signin(LoginViewModel loginViewModel)
         {
             var clientLogger = new ClientLogger();
             clientLogger.Info(loginViewModel.Email);
