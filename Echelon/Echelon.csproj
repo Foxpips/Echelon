@@ -221,22 +221,10 @@
     <Content Include="package.json" />
     <Content Include="bower.json" />
     <Content Include="Resources\Images\g-logo.png" />
-    <Content Include="Resources\Sass\bootstrap.css">
-      <DependentUpon>bootstrap.scss</DependentUpon>
-    </Content>
-    <Content Include="Resources\Sass\bootstrap.min.css">
-      <DependentUpon>bootstrap.css</DependentUpon>
-    </Content>
     <Content Include="Resources\Sass\bootstrap.scss" />
     <None Include="Resources\Sass\_variables.scss" />
     <None Include="Resources\Sass\_mixins.scss" />
     <None Include="Resources\Sass\Pages\page-login.scss" />
-    <Content Include="Resources\Sass\site.css">
-      <DependentUpon>site.scss</DependentUpon>
-    </Content>
-    <Content Include="Resources\Sass\site.min.css">
-      <DependentUpon>site.css</DependentUpon>
-    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
