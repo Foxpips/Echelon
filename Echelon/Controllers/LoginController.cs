@@ -1,7 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 using AutoMapper;
 using Echelon.Core.Logging.Interfaces;
 using Echelon.Entities;
+using Echelon.Entities.Users;
 using Echelon.Infrastructure.Services.Login;
 using Echelon.Models.ViewModels;
 
@@ -25,13 +27,13 @@ namespace Echelon.Controllers
         }
 
         [HttpPost]
-        public ActionResult Signin(LoginViewModel loginViewModel)
+        public async Task<ActionResult> Signin(LoginViewModel loginViewModel)
         {
             var loginEntity = Mapper.Map<LoginEntity>(loginViewModel);
 
             _clientLog.Info($"Attempting to login email: {loginEntity.Email}");
-            
-            if (_loginService.CheckUserExists(loginEntity))
+
+            if (await _loginService.CheckUserExists(loginEntity))
             {
                 _loginService.LogUserIn();
 

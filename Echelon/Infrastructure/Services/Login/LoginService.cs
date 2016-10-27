@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Echelon.Core.Interfaces.Data;
 using Echelon.Entities;
+using Echelon.Entities.Users;
 
 namespace Echelon.Infrastructure.Services.Login
 {
@@ -13,11 +15,10 @@ namespace Echelon.Infrastructure.Services.Login
             _service = service;
         }
 
-        public bool CheckUserExists(LoginEntity loginEntity)
+        public async Task<bool> CheckUserExists(LoginEntity loginEntity)
         {
-            return _service.Read<LoginEntity>(
-                entity => entity.Email.Equals(loginEntity.Email) && entity.Password.Equals(loginEntity.Password))
-                .SingleOrDefault() != null;
+            var exists = true;
+            return exists != null;
         }
 
         public void LogUserIn()

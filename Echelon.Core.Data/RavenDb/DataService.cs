@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using Echelon.Core.Attributes;
 using Echelon.Core.Interfaces.Data;
 using Raven.Client;
 
@@ -10,50 +13,44 @@ namespace Echelon.Core.Data.RavenDb
     {
         private readonly IDocumentStore _database = DocumentStoreProvider.Database;
 
-        private void Open(Action<IDocumentSession> action)
+        private async Task Open(Func<IAsyncDocumentSession, Task> action)
         {
-            using (var session = _database.OpenSession())
+            using (var session = _database.OpenAsyncSession())
             {
-                action(session);
-                session.SaveChanges();
+                await action(session);
+                await session.SaveChangesAsync();
             }
         }
 
-        public void Create<TType>(TType entity)
+        public async Task Create<TType>(TType entity)
         {
-            using (var session = _database.OpenSession())
-            {
-                session.Store(entity);
-                session.SaveChanges();
-            }
+            await Open(session => session.StoreAsync(entity, entity.GetType().GetCustomAttribute<IdAttribute>().Id));
         }
 
-        public IEnumerable<TType> Read<TType>(Func<TType, bool> query)
+        public async Task<TType> Read<TType>()
         {
             IEnumerable<TType> enumerable = null;
-            Open(session => { enumerable = session.Query<TType>().Where(query).ToList(); });
-
-            return enumerable;
+            await Open(async session => { enumerable = await session.Query<TType>().ToListAsync(); });
+            return enumerable.SingleOrDefault();
         }
 
-        public void Update()
+        public async Task Update<TType>(Action<TType> action)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Delete<TType>(string documentName, Func<TType, bool> query)
-        {
-            Open(session =>
+            await Open(async session =>
             {
-                var activeDocuments = session.Advanced.LoadStartingWith<TType>(documentName, "*", 0, 128);
-                var documentsToDelete = activeDocuments.Where(query);
-
-                foreach (var type in documentsToDelete)
-                {
-                    var documentId = session.Advanced.GetDocumentId(type);
-                    session.Delete(documentId);
-                }
+                var types = await session.LoadAsync<TType>(typeof(TType).GetCustomAttribute<IdAttribute>().Id);
+                action(types);
             });
+        }
+
+        public async Task Delete<TType>()
+        {
+            await Open(
+                async session =>
+                {
+                    await Task.Factory.StartNew(
+                        () => session.Delete(typeof(TType).GetCustomAttribute<IdAttribute>().Id));
+                });
         }
     }
 }

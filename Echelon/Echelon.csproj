@@ -180,7 +180,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Entities\Users\UsersEntity.cs" />
     <Compile Include="Infrastructure\AutoFac\Injector.cs" />
+    <Compile Include="Infrastructure\AutoFac\Modules\ServiceModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\MvcModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\LoggingModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\DataModule.cs" />
@@ -188,7 +190,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
-    <Compile Include="Entities\LoginEntity.cs" />
+    <Compile Include="Entities\Users\LoginEntity.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

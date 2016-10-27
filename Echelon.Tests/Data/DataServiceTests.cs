@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Echelon.Core.Data.RavenDb;
-using Echelon.Entities;
+using Echelon.Entities.Users;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Data
@@ -10,23 +12,47 @@ namespace Echelon.Tests.Data
         private DataService _dataService;
 
         [SetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             _dataService = new DataService();
+
+            await _dataService.Create(new UsersEntity
+            {
+                Users = new List<LoginEntity>
+                {
+                    new LoginEntity("simonpmarkey@gmail.com", "password1"),
+                    new LoginEntity("test@Cindy.com", "test2"),
+                    new LoginEntity("test@test.com", "test1")
+                }
+            });
         }
 
         [Test]
-        public void Connect_DataBase_Success()
+        public async Task Connect_Read_DataBase_Success()
         {
-            var enumerable =
-                _dataService.Read<LoginEntity>(item => item.Email.Equals("simonpmarkey@gmail.com")).ToList();
+            var users = await _dataService.Read<UsersEntity>();
+            Assert.NotNull(users);
+            Assert.IsTrue(users.Users.Count > 0);
+        }
 
-            if (enumerable.Count == 0)
+        [Test]
+        public async Task Remove_Add_User_Success()
+        {
+            var loginEntity = new LoginEntity("Pete", "Peterson");
+            await _dataService.Update<UsersEntity>(entity =>
             {
-                _dataService.Create(new LoginEntity {Password = "password1", Email = "simonpmarkey@gmail.com"});
-            }
+                entity.Users.Remove(entity.Users.SingleOrDefault(x => x.Email.Equals("Pete")));
+                entity.Users.Add(loginEntity);
+            });
 
-            _dataService.Delete<LoginEntity>("LoginEntities", item => item.Email.Equals("simonpmarkey@gmail.com"));
+            var loginEntities = _dataService.Read<UsersEntity>().Result.Users;
+            Assert.That(loginEntities.Any(x => x.Email.Equals(loginEntity.Email)));
+        }
+
+        [Test]
+        public async Task Delete_Document_Success()
+        {
+            await _dataService.Delete<UsersEntity>();
         }
     }
 }
