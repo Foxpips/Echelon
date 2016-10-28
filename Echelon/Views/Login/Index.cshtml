@@ -10,15 +10,18 @@
         <div class="white-box">
             @using (Html.BeginForm("Signin", "Login", FormMethod.Post, new {id = "loginform", @class = "form-horizontal form-material"}))
             {
+                @Html.ValidationSummary(true, "Login failed. Check your login details.")
                 <h3 class="box-title m-b-20">@SiteDocument.SignIn</h3>
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <input class="form-control" type="text" required="" name="email" placeholder="Username">
+                        @Html.TextBoxFor(u => u.Email, new {@class = "form-control", placeholder = "Email"})
+                        @Html.ValidationMessageFor(u => u.Email)
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password" required="" placeholder="Password">
+                        @Html.PasswordFor(u => u.Password, new {@class = "form-control", placeholder = "Password"})
+                        @Html.ValidationMessageFor(u => u.Password)
                     </div>
                 </div>
                 <div class="col-md-12">

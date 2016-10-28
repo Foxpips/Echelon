@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Data.RavenDb;
+using Echelon.Core.Helpers;
 using Echelon.Entities.Users;
 using NUnit.Framework;
 
@@ -16,15 +16,10 @@ namespace Echelon.Tests.Data
         {
             _dataService = new DataService();
 
-            await _dataService.Create(new UsersEntity
-            {
-                Users = new List<LoginEntity>
-                {
-                    new LoginEntity("simonpmarkey@gmail.com", "password1"),
-                    new LoginEntity("test@Cindy.com", "test2"),
-                    new LoginEntity("test@test.com", "test1")
-                }
-            });
+            var usersEntity = new UsersEntity();
+            usersEntity.Users.Add(new LoginEntity("simonpmarkey@gmail.com", HashHelper.CreateHash("password1")));
+
+            await _dataService.Create(usersEntity);
         }
 
         [Test]

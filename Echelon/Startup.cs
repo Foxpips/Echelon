@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using Echelon;
 using Echelon.Infrastructure.AutoFac;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -23,8 +24,9 @@ namespace Echelon
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                LoginPath = new PathString("/Account/CheckUserExists"),
-                AuthenticationType = "GoogleCookie"
+                LoginPath = new PathString("/Login"),
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
+//                AuthenticationType = "GoogleCookie"
             });
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()

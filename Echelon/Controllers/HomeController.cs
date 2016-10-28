@@ -7,7 +7,12 @@ namespace Echelon.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Login");
         }
 
         [Authorize]

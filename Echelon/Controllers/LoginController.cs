@@ -1,11 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using AutoMapper;
 using Echelon.Core.Logging.Interfaces;
-using Echelon.Entities;
 using Echelon.Entities.Users;
 using Echelon.Infrastructure.Services.Login;
 using Echelon.Models.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 
 namespace Echelon.Controllers
 {
@@ -33,15 +37,31 @@ namespace Echelon.Controllers
 
             _clientLog.Info($"Attempting to login email: {loginEntity.Email}");
 
-            if (await _loginService.CheckUserExists(loginEntity))
+            if (ModelState.IsValid)
             {
-                _loginService.LogUserIn();
+                if (await _loginService.CheckUserExists(loginEntity))
+                {
+                    var identity = new ClaimsIdentity(new[] {new Claim(ClaimTypes.Name, loginEntity.Email)},
+                        DefaultAuthenticationTypes.ApplicationCookie,
+                        ClaimTypes.Name, ClaimTypes.Role);
 
-                return RedirectToAction("Index", "Home");
+                    identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
+
+                    var authenticationManager = HttpContext.GetOwinContext().Authentication;
+                    authenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = loginEntity.RememberMe
+                    }, identity);
+
+                    FormsAuthentication.SetAuthCookie(loginViewModel.Email, loginViewModel.RememberMe);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError("", @"Login data is incorrect!");
             }
 
             _clientLog.Info($"User not found! {loginViewModel.Email}");
-            return View("Index");
+            return View("Index", loginViewModel);
         }
     }
 }

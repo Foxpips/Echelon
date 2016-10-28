@@ -6,6 +6,8 @@
 
         public string Password { get; set; }
 
+        public bool RememberMe { get; set; }
+
         public LoginEntity(string email, string password)
         {
             Email = email;

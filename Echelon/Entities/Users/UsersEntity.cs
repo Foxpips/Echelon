@@ -6,7 +6,7 @@ namespace Echelon.Entities.Users
     [Id("UsersTable")]
     public class UsersEntity
     {
-        public List<LoginEntity> Users { get; set; }
+        public IList<LoginEntity> Users { get; set; }
 
         public UsersEntity()
         {

@@ -1,29 +1,33 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Interfaces.Data;
-using Echelon.Entities;
 using Echelon.Entities.Users;
 
 namespace Echelon.Infrastructure.Services.Login
 {
     public class LoginService : ILoginService
     {
-        private readonly IDataService _service;
+        private readonly IDataService _dataservice;
 
-        public LoginService(IDataService service)
+        public LoginService(IDataService dataservice)
         {
-            _service = service;
+            _dataservice = dataservice;
         }
 
         public async Task<bool> CheckUserExists(LoginEntity loginEntity)
         {
-            var exists = true;
-            return exists != null;
+            var usersEntity = await _dataservice.Read<UsersEntity>();
+            return usersEntity.Users.Any(user => user.Email.Equals(loginEntity.Email));
+
         }
 
-        public void LogUserIn()
+        public async Task LogUserIn(LoginEntity loginEntity)
         {
-            throw new System.NotImplementedException();
+            if (await CheckUserExists(loginEntity))
+            {
+                
+            }
         }
     }
 }
