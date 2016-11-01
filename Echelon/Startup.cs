@@ -20,16 +20,16 @@ namespace Echelon
             Injector.RegisterProfilesOnInit();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(Injector.RegisterModulesOnInit()));
 
-            app.SetDefaultSignInAsAuthenticationType("GoogleCookie");
+            app.SetDefaultSignInAsAuthenticationType("LoginCookie");
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 LoginPath = new PathString("/Login"),
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
-//                AuthenticationType = "GoogleCookie"
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                CookieName = "LoginCookie"
             });
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
                 ClientId = "699010356628-rnulg0m5uer1rg51udpb73v4nqjgn9qn.apps.googleusercontent.com",
                 ClientSecret = "q7oDURml260PFcTGAS7VJVLE"

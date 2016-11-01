@@ -6,6 +6,6 @@ namespace Echelon.Infrastructure.Services.Login
     public interface ILoginService
     {
         Task<bool> CheckUserExists(LoginEntity loginEntity);
-        Task LogUserIn(LoginEntity loginEntity);
+        Task<bool> LogUserIn(LoginEntity loginEntity);
     }
 }

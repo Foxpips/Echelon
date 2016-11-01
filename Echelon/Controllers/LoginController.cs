@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -33,31 +34,17 @@ namespace Echelon.Controllers
         [HttpPost]
         public async Task<ActionResult> Signin(LoginViewModel loginViewModel)
         {
+            _clientLog.Info($"Attempting to login email: {loginViewModel.Email}");
+
             var loginEntity = Mapper.Map<LoginEntity>(loginViewModel);
-
-            _clientLog.Info($"Attempting to login email: {loginEntity.Email}");
-
             if (ModelState.IsValid)
             {
-                if (await _loginService.CheckUserExists(loginEntity))
+                if (await _loginService.LogUserIn(loginEntity))
                 {
-                    var identity = new ClaimsIdentity(new[] {new Claim(ClaimTypes.Name, loginEntity.Email)},
-                        DefaultAuthenticationTypes.ApplicationCookie,
-                        ClaimTypes.Name, ClaimTypes.Role);
-
-                    identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
-
-                    var authenticationManager = HttpContext.GetOwinContext().Authentication;
-                    authenticationManager.SignIn(new AuthenticationProperties
-                    {
-                        IsPersistent = loginEntity.RememberMe
-                    }, identity);
-
-                    FormsAuthentication.SetAuthCookie(loginViewModel.Email, loginViewModel.RememberMe);
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("", @"Login data is incorrect!");
+                ModelState.AddModelError("", @"Email or Password is incorrect!");
             }
 
             _clientLog.Info($"User not found! {loginViewModel.Email}");
