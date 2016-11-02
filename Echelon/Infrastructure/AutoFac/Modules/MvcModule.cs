@@ -7,7 +7,7 @@ namespace Echelon.Infrastructure.AutoFac.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterControllers(typeof(Startup).Assembly);
         }
     }
 }

@@ -3,8 +3,9 @@
 namespace Echelon.Controllers
 {
     [RequireHttps]
-    public class HomeController : Controller
+    public class ChatController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             if (Request.IsAuthenticated)

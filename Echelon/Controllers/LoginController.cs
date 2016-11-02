@@ -1,16 +1,11 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.Security;
 using AutoMapper;
 using Echelon.Core.Logging.Interfaces;
 using Echelon.Entities.Users;
 using Echelon.Infrastructure.Services.Login;
 using Echelon.Models.ViewModels;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
+using Microsoft.Owin;
 
 namespace Echelon.Controllers
 {
@@ -19,9 +14,11 @@ namespace Echelon.Controllers
     {
         private readonly IClientLogger _clientLog;
         private readonly ILoginService _loginService;
+        private readonly IOwinContext _owinContext;
 
-        public LoginController(IClientLogger clientLog, ILoginService loginService)
+        public LoginController(IClientLogger clientLog, ILoginService loginService, IOwinContext owinContext)
         {
+            _owinContext = owinContext;
             _loginService = loginService;
             _clientLog = clientLog;
         }
@@ -32,16 +29,18 @@ namespace Echelon.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Signin(LoginViewModel loginViewModel)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginViewModel loginViewModel)
         {
             _clientLog.Info($"Attempting to login email: {loginViewModel.Email}");
 
             var loginEntity = Mapper.Map<LoginEntity>(loginViewModel);
             if (ModelState.IsValid)
             {
-                if (await _loginService.LogUserIn(loginEntity))
+                if (await _loginService.LogUserIn(loginEntity, _owinContext.Authentication))
                 {
-                    return RedirectToActionPermanent("Index","Home");
+                    return RedirectToActionPermanent("Index", "Chat");
                 }
 
                 ModelState.AddModelError("", @"Email or Password is incorrect!");

@@ -12,7 +12,8 @@ namespace Echelon.Core.Helpers
             using (var sha1Managed = new SHA1Managed())
             {
                 var computeHash = sha1Managed.ComputeHash(Encoding.UTF8.GetBytes(input));
-                return Concat(computeHash.Select(b => b.ToString("x2")));
+                var concat = Concat(computeHash.Select(b => b.ToString("x2")));
+                return concat;
             }
         }
     }

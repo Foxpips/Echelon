@@ -52,6 +52,14 @@
       <HintPath>..\packages\Autofac.Mvc5.4.0.0\lib\net451\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Autofac.Integration.Mvc.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.Owin.4.0.0\lib\net451\Autofac.Integration.Mvc.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.4.0.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -200,6 +208,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Models\BusinessModels\ChallengeResult.cs" />
     <Compile Include="Entities\Users\UsersEntity.cs" />
     <Compile Include="Infrastructure\AutoFac\Injector.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\ServiceModule.cs" />
@@ -207,13 +216,10 @@
     <Compile Include="Infrastructure\AutoFac\Modules\LoggingModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\DataModule.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ExternalLoginController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Entities\Users\LoginEntity.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Infrastructure\AutoMapper\LoginProfile.cs" />
     <Compile Include="Infrastructure\Services\Login\ILoginService.cs" />
     <Compile Include="Infrastructure\Services\Login\LoginService.cs" />
@@ -234,7 +240,6 @@
   <ItemGroup>
     <Content Include="Favicons\echelon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Pages\index.js" />
@@ -254,15 +259,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\_TopMenu.cshtml" />
-    <None Include="Views\Home\Secure.cshtml" />
+    <None Include="Views\Chat\Secure.cshtml" />
     <Content Include="Views\Shared\_Favicon.cshtml" />
     <Content Include="Views\Login\ForgottenPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Javascript\Common\" />
     <Folder Include="Javascript\Controls\" />
     <Folder Include="Resources\Sass\Mixins\" />

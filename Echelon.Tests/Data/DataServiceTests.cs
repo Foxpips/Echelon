@@ -17,7 +17,7 @@ namespace Echelon.Tests.Data
             _dataService = new DataService();
 
             var usersEntity = new UsersEntity();
-            usersEntity.Users.Add(new LoginEntity { Email = "simonpmarkey@gmail.com", Password = HashHelper.CreateHash("password1") });
+            usersEntity.Users.Add(new LoginEntity { Email = "Test@gmail.com", UserName = "Test", Password = HashHelper.CreateHash("password1") });
 
             await _dataService.Create(usersEntity);
         }
