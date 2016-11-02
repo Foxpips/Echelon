@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Owin.Security;
@@ -15,8 +15,10 @@ namespace Echelon.Controllers
             return challengeResult;
         }
 
-        public ActionResult ExternalLoginCallback(string returnUrl)
+        public async Task <ActionResult> ExternalLoginCallback(string returnUrl)
         {
+            var externalLoginInfo =  HttpContext.GetOwinContext().Authentication.GetExternalIdentity("ExternalCookie");
+            var externalLoginInfoAsync = await HttpContext.GetOwinContext().Authentication.GetExternalLoginInfoAsync();
             return new RedirectResult(returnUrl);
         }
 

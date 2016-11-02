@@ -22,6 +22,8 @@ namespace Echelon
 
             app.SetDefaultSignInAsAuthenticationType("LoginCookie");
 
+            app.UseExternalSignInCookie();
+
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 LoginPath = new PathString("/Login"),
@@ -32,7 +34,8 @@ namespace Echelon
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
                 ClientId = "699010356628-rnulg0m5uer1rg51udpb73v4nqjgn9qn.apps.googleusercontent.com",
-                ClientSecret = "q7oDURml260PFcTGAS7VJVLE"
+                ClientSecret = "q7oDURml260PFcTGAS7VJVLE",
+                Scope = { "email" }
             });
         }
     }
