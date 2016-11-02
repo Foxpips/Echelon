@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading;
@@ -16,8 +15,7 @@ namespace Echelon.Infrastructure.Services.Login
     {
         private readonly IDataService _dataservice;
 
-        private readonly IAuthenticationManager _authenticationManager =
-            HttpContext.Current.GetOwinContext().Authentication;
+        private IAuthenticationManager AuthenticationManager => HttpContext.Current.GetOwinContext().Authentication;
 
         public LoginService(IDataService dataservice)
         {
@@ -34,15 +32,14 @@ namespace Echelon.Infrastructure.Services.Login
         {
             if (await CheckUserExists(loginEntity))
             {
-                var identity = new ClaimsIdentity(new List<Claim> {new Claim(ClaimTypes.Name, loginEntity.Email)},
+                var identity = new ClaimsIdentity(new List<Claim> { new Claim(ClaimTypes.Email, loginEntity.Email) },
                     DefaultAuthenticationTypes.ApplicationCookie,
                     ClaimTypes.Email, ClaimTypes.Role);
 
-                _authenticationManager.SignIn(new AuthenticationProperties
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                AuthenticationManager.SignIn(new AuthenticationProperties
                 {
                     IsPersistent = loginEntity.RememberMe,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(20),
-                    AllowRefresh = true
                 }, identity);
 
                 Thread.CurrentPrincipal = new ClaimsPrincipal(identity);

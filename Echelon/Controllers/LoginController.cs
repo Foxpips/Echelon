@@ -41,7 +41,7 @@ namespace Echelon.Controllers
             {
                 if (await _loginService.LogUserIn(loginEntity))
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToActionPermanent("Index","Home");
                 }
 
                 ModelState.AddModelError("", @"Email or Password is incorrect!");

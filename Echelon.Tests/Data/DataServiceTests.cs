@@ -17,7 +17,7 @@ namespace Echelon.Tests.Data
             _dataService = new DataService();
 
             var usersEntity = new UsersEntity();
-            usersEntity.Users.Add(new LoginEntity("simonpmarkey@gmail.com", HashHelper.CreateHash("password1")));
+            usersEntity.Users.Add(new LoginEntity { Email = "simonpmarkey@gmail.com", Password = HashHelper.CreateHash("password1") });
 
             await _dataService.Create(usersEntity);
         }
@@ -33,10 +33,10 @@ namespace Echelon.Tests.Data
         [Test]
         public async Task Remove_Add_User_Success()
         {
-            var loginEntity = new LoginEntity("Pete", "Peterson");
+            var loginEntity = new LoginEntity { Email = "Pete@gmail.com", Password = HashHelper.CreateHash("Peterson1") };
             await _dataService.Update<UsersEntity>(entity =>
             {
-                entity.Users.Remove(entity.Users.SingleOrDefault(x => x.Email.Equals("Pete")));
+                entity.Users.Remove(entity.Users.SingleOrDefault(x => x.Email.Equals("Pete@gmail.com")));
                 entity.Users.Add(loginEntity);
             });
 
