@@ -252,6 +252,12 @@
     <None Include="Resources\Sass\_variables.scss" />
     <None Include="Resources\Sass\_mixins.scss" />
     <None Include="Resources\Sass\Pages\page-login.scss" />
+    <Content Include="Resources\Sass\Pages\page-login.css">
+      <DependentUpon>page-login.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Sass\Pages\page-login.min.css">
+      <DependentUpon>page-login.css</DependentUpon>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

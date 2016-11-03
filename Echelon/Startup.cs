@@ -41,7 +41,6 @@ namespace Echelon
             {
                 ClientId = "699010356628-rnulg0m5uer1rg51udpb73v4nqjgn9qn.apps.googleusercontent.com",
                 ClientSecret = "q7oDURml260PFcTGAS7VJVLE",
-                Scope = { "email" }
             });
 
             ConfigureApplication();

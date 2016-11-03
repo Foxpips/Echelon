@@ -4,9 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Echelon.Core.Interfaces.Data;
 using Echelon.Entities.Users;
-using Faker;
 using Microsoft.Owin;
-using Microsoft.Owin.Security;
 using Twilio.Auth;
 
 namespace Echelon.Controllers
@@ -15,6 +13,15 @@ namespace Echelon.Controllers
     {
         private readonly IDataService _dataService;
         private readonly IOwinContext _owinContext;
+
+        // Load Twilio configuration from Web.config
+        private static string AccountSid => ConfigurationManager.AppSettings["TwilioAccountSid"];
+
+        private static string ApiKey => ConfigurationManager.AppSettings["TwilioApiKey"];
+
+        private static string ApiSecret => ConfigurationManager.AppSettings["TwilioApiSecret"];
+
+        private static string IpmServiceSid => ConfigurationManager.AppSettings["TwilioIpmServiceSid"];
 
         public TokenController(IDataService dataService, IOwinContext owinContext)
         {
@@ -25,32 +32,27 @@ namespace Echelon.Controllers
         // GET: /token
         public async Task<ActionResult> Index(string device)
         {
-            // Load Twilio configuration from Web.config
-            var accountSid = ConfigurationManager.AppSettings["TwilioAccountSid"];
-            var apiKey = ConfigurationManager.AppSettings["TwilioApiKey"];
-            var apiSecret = ConfigurationManager.AppSettings["TwilioApiSecret"];
-            var ipmServiceSid = ConfigurationManager.AppSettings["TwilioIpmServiceSid"];
-
             // Create a random identity for the client
             var usersEntity = await _dataService.Read<UsersEntity>();
             var externalLoginInfoAsync = _owinContext.Authentication.User;
-//            var identity = usersEntity.Users.Single(x => x.Email.Equals(externalLoginInfoAsync.Email)).UserName;
-            var identity = externalLoginInfoAsync.Identity.Name;
+            var identity = usersEntity.Users.Single(x => x.Email.Equals(externalLoginInfoAsync.Identity.Name)).UserName;
 
             // Create an Access Token generator
-            var token = new AccessToken(accountSid, apiKey, apiSecret) { Identity = identity };
+            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity };
 
             // Create an IP messaging grant for this token
             var grant = new IpMessagingGrant
             {
                 EndpointId = $"EchelonChat:{identity}:{device}",
-                ServiceSid = ipmServiceSid
+                ServiceSid = IpmServiceSid
             };
+
             token.AddGrant(grant);
 
             return Json(new
             {
                 identity,
+                category = "general",
                 token = token.ToJWT()
             }, JsonRequestBehavior.AllowGet);
         }

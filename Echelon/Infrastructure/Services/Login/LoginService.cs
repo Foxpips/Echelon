@@ -35,7 +35,7 @@ namespace Echelon.Infrastructure.Services.Login
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, loginEntity.Email),
-                    new Claim(ClaimTypes.Name, loginEntity.UserName)
+                    new Claim(ClaimTypes.Name, loginEntity.UserName ?? loginEntity.Email)
                 };
 
                 var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie, ClaimTypes.Email,

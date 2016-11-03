@@ -20,7 +20,8 @@
                     bowerSourcePath + "mustache.js/mustache.js",
                     bowerSourcePath + "history.js/scripts/bundled/html5/jquery.history.js",
                     bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js",
-                    bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"
+                    bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/transition.js",
+                    bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap.js"
                 ]
             },
 

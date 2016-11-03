@@ -4,11 +4,12 @@
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2882c2">
     <meta name="msapplication-navbutton-color" content="#2882c2">
     <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
+
 
     @Html.Partial("_Favicon")
     @RenderSection("metadata")
@@ -16,10 +17,14 @@
 </head>
 
 <body>
-@Html.Partial("_TopMenu")
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("_TopMenu")
+    }
 
-@RenderBody()
-@RenderSection("scripts", false)
+    @RenderBody()
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", false)
 </body>
 
 </html>

@@ -116,6 +116,13 @@
     width: 400px;
     margin: 0 auto;
     margin-top: 10%;
+
+    @include Small {
+        width: 100%;
+    }
+     @include Middle {
+       width: 400px;
+    }
 }
 
 .login-box .footer {

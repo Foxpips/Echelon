@@ -1,6 +1,6 @@
 ﻿$(function () {
     // Get handle to the chat div 
-    var $chatWindow = $('#messages');
+    var $chatWindow = $("#messages");
 
     // Manages the state of our access token we got from the server
     var accessManager;
@@ -18,7 +18,7 @@
 
     // Helper function to print info messages to the chat window
     function print(infoMessage, asHtml) {
-        var $msg = $('<div class="info">');
+        var $msg = $("<div class=\"info\">");
         if (asHtml) {
             $msg.html(infoMessage);
         } else {
@@ -31,10 +31,10 @@
     function printMessage(fromUser, message) {
         var $user = $('<span class="username">').text(fromUser + ':');
         if (fromUser === username) {
-            $user.addClass('me');
+            $user.addClass("me");
         }
-        var $message = $('<span class="message">').text(message);
-        var $container = $('<div class="message-container">');
+        var $message = $("<span class=\"message\">").text(message);
+        var $container = $("<div class=\"message-container\">");
         $container.append($user).append($message);
         $chatWindow.append($container);
         $chatWindow.scrollTop($chatWindow[0].scrollHeight);
@@ -52,7 +52,6 @@
     }, function (data) {
         // Alert the user they have been assigned a random username
         username = data.identity;
-        print('You have been assigned a random username of: ' + '<span class="me">' + username + '</span>', true);
 
         // Initialize the IP messaging client
         accessManager = new Twilio.AccessManager(data.token);
@@ -60,7 +59,7 @@
 
         // Get the general chat channel, which is where all the messages are
         // sent in this simple application
-        print('Attempting to join "general" chat channel...');
+        print('Attempting to join "general" category...');
         var promise = messagingClient.getChannelByUniqueName('general');
         promise.then(function (channel) {
             generalChannel = channel;
