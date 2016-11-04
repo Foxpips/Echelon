@@ -85,22 +85,22 @@
     // Set up channel after it has been found
     function setupChannel() {
         // Join the general channel
-        generalChannel.join().then(function (channel) {
-            print('Joined channel as ' + '<span class="me">' + username + '</span>.', true);
+        generalChannel.join().then(function () {
+            print("Joined channel as " + '<span class="me">' + username + '</span>.', true);
         });
 
         // Listen for new messages sent to the channel
-        generalChannel.on('messageAdded', function (message) {
+        generalChannel.on("messageAdded", function (message) {
             printMessage(message.author, message.body);
         });
     }
 
     // Send a new message to the general channel
-    var $input = $('#chat-input');
-    $input.on('keydown', function (e) {
+    var $input = $("#chat-input");
+    $input.on("keydown", function (e) {
         if (e.keyCode === 13) {
             generalChannel.sendMessage($input.val());
-            $input.val('');
+            $input.val("");
         }
     });
 });

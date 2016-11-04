@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": false,
+    "target": "es5"
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "bower_components",
+    "assets",
+    "gulpconfig.js",
+    "gulpfile.js"
+  ],
+   "compileOnSave": true
+}
