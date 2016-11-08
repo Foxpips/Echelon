@@ -245,6 +245,7 @@
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Pages\index.js" />
+    <TypeScriptCompile Include="Javascript\Scripts\Twilio\twilio-ip-messaging.ts" />
     <Content Include="Resources\Sass\Modules\atomic.scss" />
     <None Include="Resources\Sass\site.scss" />
     <Content Include="package.json" />

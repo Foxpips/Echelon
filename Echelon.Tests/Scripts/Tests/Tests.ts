@@ -3,10 +3,10 @@
 /// <reference path="../../../Echelon/Javascript/Pages/Chat.ts" />
 describe("Person FullName", () => {
 
-    var person: Person;
+    var person: Employee;
 
     beforeEach(() => {
-        person = new Person();
+        person = new Employee();
         person.setFirstName("Joe");
         person.setLastName("Smith");
     });
