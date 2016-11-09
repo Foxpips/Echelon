@@ -1,7 +1,4 @@
-﻿declare var $asd: any;
-$asd = new Twilio.AccessManager(data.token);
-$asd("anything").whateverIsTypedWillBeAllowed("like this");
-
+﻿/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
 class Chat {
 
     private $chatBox: JQuery;
