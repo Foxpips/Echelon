@@ -1,6 +1,5 @@
 /// <reference path="../app/employee.ts" />
 /// <reference path="../typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../../Echelon/Javascript/Pages/Chat.ts" />
 describe("Person FullName", function () {
     var person;
     beforeEach(function () {

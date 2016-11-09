@@ -18,6 +18,7 @@
                 files: [
                     bowerSourcePath + "jquery/dist/jquery.js",
                     bowerSourcePath + "mustache.js/mustache.js",
+//                    bowerSourcePath + "twilio-common/dist/twilio-common.js",
                     bowerSourcePath + "history.js/scripts/bundled/html5/jquery.history.js",
                     bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js",
                     bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/transition.js",
@@ -27,7 +28,7 @@
 
             base: {
                 fileName: "base.js",
-                files: [jsSourcePath + "Common/*.js", jsSourcePath + "Controls/*.js"]
+                files: [jsSourcePath + "Common/*/*.js", jsSourcePath + "Controls/*/*.js"]
             },
 
             pages: {
