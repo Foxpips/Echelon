@@ -19,6 +19,7 @@ node_modules/
 /packages/
 !packages/repositories.config
 
+*/fonts/
 */out/
 */assets/
 */bower_components/

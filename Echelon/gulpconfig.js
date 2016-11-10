@@ -68,8 +68,8 @@
                 files: imgSourcePath + "/*"
             },
             icons : {
-                destPath: outputPath + "icons",
-                files: bowerSourcePath + "/font-awesome/fonts/**/*"
+                destPath: "fonts",
+                files: bowerSourcePath + "/font-awesome/fonts/*.*"
             }
         }
     };
