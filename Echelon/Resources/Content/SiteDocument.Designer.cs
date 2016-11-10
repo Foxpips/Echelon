@@ -61,6 +61,24 @@ namespace Echelon.Resources.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Categories.
+        /// </summary>
+        public static string Categories {
+            get {
+                return ResourceManager.GetString("Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find.
+        /// </summary>
+        public static string Find {
+            get {
+                return ResourceManager.GetString("Find", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Google Sign-In.
         /// </summary>
         public static string GoogleSignIn {
@@ -88,6 +106,33 @@ namespace Echelon.Resources.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Logged In.
+        /// </summary>
+        public static string NotLoggedIn {
+            get {
+                return ResourceManager.GetString("NotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Categories.
+        /// </summary>
+        public static string SearchCategories {
+            get {
+                return ResourceManager.GetString("SearchCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign In.
         /// </summary>
         public static string SignIn {
@@ -97,11 +142,29 @@ namespace Echelon.Resources.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SignOut.
+        /// </summary>
+        public static string SignOut {
+            get {
+                return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign Up.
         /// </summary>
         public static string SignUp {
             get {
                 return ResourceManager.GetString("SignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Echelon Chat.
+        /// </summary>
+        public static string SiteTitle {
+            get {
+                return ResourceManager.GetString("SiteTitle", resourceCulture);
             }
         }
     }
