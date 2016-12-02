@@ -40,7 +40,7 @@ namespace Echelon.Controllers
         {
             _clientLog.Info($"Attempting to login email: {loginViewModel.Email}");
 
-            var loginEntity = Mapper.Map<LoginEntity>(loginViewModel);
+            var loginEntity = Mapper.Map<UserEntity>(loginViewModel);
             if (ModelState.IsValid)
             {
                 if (await _loginService.LogUserIn(loginEntity, _owinContext.Authentication))

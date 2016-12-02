@@ -20,7 +20,7 @@ namespace Echelon.Models.BusinessModels
 
         public override void ExecuteResult(ControllerContext context)
         {
-            var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
+            var properties = new AuthenticationProperties {RedirectUri = RedirectUri};
             _owinContext.Authentication.Challenge(properties, LoginProvider);
         }
     }

@@ -23,7 +23,7 @@ namespace Echelon.Controllers
 
         public ActionResult LoginGoogle(string returnUrl)
         {
-            var redirectUri = Url.Action("ExternalLoginCallback", "ExternalLogin", new { ReturnUrl = returnUrl });
+            var redirectUri = Url.Action("ExternalLoginCallback", "ExternalLogin", new {ReturnUrl = returnUrl});
             var challengeResult = new ChallengeResult("Google", redirectUri, _owinContext);
 
             return challengeResult;
@@ -32,7 +32,7 @@ namespace Echelon.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var externalLoginInfoAsync = await _owinContext.Authentication.GetExternalLoginInfoAsync();
-            var loginEntity = Mapper.Map<LoginEntity>(externalLoginInfoAsync);
+            var loginEntity = Mapper.Map<UserEntity>(externalLoginInfoAsync);
 
             if (await _loginService.LogUserIn(loginEntity, _owinContext.Authentication) ||
                 await _loginService.CreateAndLoguserIn(loginEntity, _owinContext.Authentication))

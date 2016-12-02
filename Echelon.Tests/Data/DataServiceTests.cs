@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Data.RavenDb;
-using Echelon.Core.Helpers;
+using Echelon.Core.Extensions;
 using Echelon.Entities.Users;
 using NUnit.Framework;
 
@@ -17,7 +17,7 @@ namespace Echelon.Tests.Data
             _dataService = new DataService();
 
             var usersEntity = new UsersEntity();
-            usersEntity.Users.Add(new LoginEntity { Email = "Test@gmail.com", UserName = "Test", Password = HashHelper.CreateHash("password1") });
+            usersEntity.Users.Add(new UserEntity { Email = "Test@gmail.com", UserName = "Test", Password = HashHelper.CreateHash("password1") });
 
             await _dataService.Create(usersEntity);
         }
@@ -33,7 +33,7 @@ namespace Echelon.Tests.Data
         [Test]
         public async Task Remove_Add_User_Success()
         {
-            var loginEntity = new LoginEntity { Email = "Pete@gmail.com", Password = HashHelper.CreateHash("Peterson1") };
+            var loginEntity = new UserEntity { Email = "Pete@gmail.com", Password = HashHelper.CreateHash("Peterson1") };
             await _dataService.Update<UsersEntity>(entity =>
             {
                 entity.Users.Remove(entity.Users.SingleOrDefault(x => x.Email.Equals("Pete@gmail.com")));

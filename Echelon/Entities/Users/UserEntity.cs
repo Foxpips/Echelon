@@ -1,6 +1,6 @@
 ﻿namespace Echelon.Entities.Users
 {
-    public class LoginEntity
+    public class UserEntity
     {
         public string Email { get; set; }
 

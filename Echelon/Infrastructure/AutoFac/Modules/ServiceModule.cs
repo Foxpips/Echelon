@@ -1,6 +1,5 @@
 ﻿using Autofac;
-using Echelon.Core.Data.RavenDb;
-using Echelon.Core.Interfaces.Data;
+using Echelon.Infrastructure.Services.Category;
 using Echelon.Infrastructure.Services.Login;
 
 namespace Echelon.Infrastructure.AutoFac.Modules
@@ -10,6 +9,7 @@ namespace Echelon.Infrastructure.AutoFac.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<LoginService>().As<ILoginService>().SingleInstance();
+            builder.RegisterType<CategoryService>().As<ICategoryService>().SingleInstance();
         }
     }
 }

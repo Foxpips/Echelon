@@ -20,22 +20,22 @@ namespace Echelon.Infrastructure.Services.Login
             _dataservice = dataservice;
         }
 
-        public async Task<bool> CheckUserExists(LoginEntity loginEntity)
+        public async Task<bool> CheckUserExists(UserEntity userEntity)
         {
             var usersEntity = await _dataservice.Read<UsersEntity>();
             return usersEntity.Users.Any(
-                    user =>
-                        user.Email.Equals(loginEntity.Email) && user.Password == loginEntity.Password);
+                user =>
+                    user.Email.Equals(userEntity.Email) && user.Password == userEntity.Password);
         }
 
-        public async Task<bool> LogUserIn(LoginEntity loginEntity, IAuthenticationManager authenticationManager)
+        public async Task<bool> LogUserIn(UserEntity userEntity, IAuthenticationManager authenticationManager)
         {
-            if (await CheckUserExists(loginEntity))
+            if (await CheckUserExists(userEntity))
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Email, loginEntity.Email),
-                    new Claim(ClaimTypes.Name, loginEntity.UserName ?? loginEntity.Email)
+                    new Claim(ClaimTypes.Email, userEntity.Email),
+                    new Claim(ClaimTypes.Name, userEntity.UserName ?? userEntity.Email)
                 };
 
                 var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie, ClaimTypes.Email,
@@ -45,7 +45,7 @@ namespace Echelon.Infrastructure.Services.Login
 
                 authenticationManager.SignIn(new AuthenticationProperties
                 {
-                    IsPersistent = loginEntity.RememberMe,
+                    IsPersistent = userEntity.RememberMe,
                     ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(20),
                     AllowRefresh = true
                 }, identity);
@@ -63,17 +63,17 @@ namespace Echelon.Infrastructure.Services.Login
             authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
 
-        public async Task<bool> CreateAndLoguserIn(LoginEntity loginEntity, IAuthenticationManager authenticationManager)
+        public async Task<bool> CreateAndLoguserIn(UserEntity userEntity, IAuthenticationManager authenticationManager)
         {
             await _dataservice.Update<UsersEntity>(usersEntity =>
             {
-                if (!usersEntity.Users.Any(user => user.Email.Equals(loginEntity.Email)))
+                if (!usersEntity.Users.Any(user => user.Email.Equals(userEntity.Email)))
                 {
-                    usersEntity.Users.Add(loginEntity);
+                    usersEntity.Users.Add(userEntity);
                 }
             });
 
-            return await LogUserIn(loginEntity, authenticationManager);
+            return await LogUserIn(userEntity, authenticationManager);
         }
     }
 }

@@ -4,10 +4,9 @@ using Microsoft.Owin.Security;
 
 namespace Echelon.Infrastructure.Services.Login
 {
-    public interface ILoginService
+    public interface ILoginService : IService
     {
-        Task<bool> CheckUserExists(LoginEntity loginEntity);
-        Task<bool> LogUserIn(LoginEntity loginEntity, IAuthenticationManager authenticationManager);
-        Task<bool> CreateAndLoguserIn(LoginEntity loginEntity, IAuthenticationManager authenticationManager);
+        Task<bool> LogUserIn(UserEntity userEntity, IAuthenticationManager authenticationManager);
+        Task<bool> CreateAndLoguserIn(UserEntity userEntity, IAuthenticationManager authenticationManager);
     }
 }

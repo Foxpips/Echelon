@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using static System.String;
 
-namespace Echelon.Core.Helpers
+namespace Echelon.Core.Extensions
 {
     public class HashHelper
     {
@@ -12,7 +12,7 @@ namespace Echelon.Core.Helpers
             using (var sha1Managed = new SHA1Managed())
             {
                 var computeHash = sha1Managed.ComputeHash(Encoding.UTF8.GetBytes(input));
-                var concat = Concat(computeHash.Select(b => b.ToString("x2")));
+                var concat = String.Concat(computeHash.Select(b => b.ToString("x2")));
                 return concat;
             }
         }

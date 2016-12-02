@@ -46,8 +46,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.2.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.2.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -211,9 +211,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Entities\Categories\CategoryEntity.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\Categories\CategoriesEntity.cs" />
+    <Compile Include="Infrastructure\Services\Category\CategoryService.cs" />
+    <Compile Include="Infrastructure\Services\Category\ICategoryService.cs" />
+    <Compile Include="Infrastructure\Services\IService.cs" />
     <Compile Include="Models\BusinessModels\ChallengeResult.cs" />
     <Compile Include="Entities\Users\UsersEntity.cs" />
-    <Compile Include="Infrastructure\AutoFac\Injector.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\ServiceModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\MvcModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\LoggingModule.cs" />
@@ -222,10 +227,12 @@
     <Compile Include="Controllers\ExternalLoginController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
-    <Compile Include="Entities\Users\LoginEntity.cs" />
+    <Compile Include="Entities\Users\UserEntity.cs" />
     <Compile Include="Infrastructure\AutoMapper\LoginProfile.cs" />
     <Compile Include="Infrastructure\Services\Login\ILoginService.cs" />
     <Compile Include="Infrastructure\Services\Login\LoginService.cs" />
+    <Compile Include="Models\ViewModels\CategoriesViewModel.cs" />
+    <Compile Include="Models\ViewModels\Category.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Content\SiteDocument.Designer.cs">
@@ -242,7 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Favicons\echelon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Pages\index.js" />
@@ -301,9 +307,6 @@
     <Folder Include="Resources\Sass\Mixins\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>

@@ -3,8 +3,11 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Autofac;
 using Autofac.Integration.Mvc;
 using Echelon;
+using Echelon.Core.Extensions.Autofac;
+using Echelon.Core.Extensions.AutoMapper;
 using Echelon.Infrastructure.AutoFac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -21,9 +24,9 @@ namespace Echelon
     {
         public void Configuration(IAppBuilder app)
         {
-            Injector.RegisterProfilesOnInit();
+            AutoMapperExtensions.RegisterProfilesOnInit();
 
-            var container = Injector.RegisterModulesOnInit();
+            var container = new ContainerBuilder().RegisterCustomModules().Build();
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -38,7 +38,7 @@ namespace Echelon.Controllers
             var identity = usersEntity.Users.Single(x => x.Email.Equals(externalLoginInfoAsync.Identity.Name)).UserName;
 
             // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity };
+            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) {Identity = identity};
 
             // Create an IP messaging grant for this token
             var grant = new IpMessagingGrant
