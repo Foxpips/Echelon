@@ -4,7 +4,7 @@ namespace Echelon.TaskRunner
 {
     public class TaskRunnerWindowsService
     {
-        public void Initialize()
+        public static void Initialize()
         {
             const string serviceName = "TaskRunnerService";
 
@@ -15,7 +15,7 @@ namespace Echelon.TaskRunner
                         s =>
                         {
                             s.ConstructUsing(f => new TaskRunnerServer());
-                            s.WhenStarted(tc => tc.Start());
+                            s.WhenStarted(tc => { tc.Start(); });
                             s.WhenStopped(tc => { });
                         });
 

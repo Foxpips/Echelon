@@ -1,5 +1,6 @@
-﻿using Autofac;
+﻿using Rhino.ServiceBus;
 using Rhino.ServiceBus.Impl;
+using StructureMap;
 
 namespace Echelon.TaskRunner
 {
@@ -11,8 +12,8 @@ namespace Echelon.TaskRunner
         {
             if (Bus == null)
             {
-                new OnewayRhinoServiceBusConfiguration().UseAutofac(container).Configure();
-                Bus = container.Resolve<TBusType>();
+                new OnewayRhinoServiceBusConfiguration().UseStructureMap(container).Configure();
+                Bus = container.GetInstance<TBusType>();
             }
         }
     }

@@ -22,10 +22,8 @@ namespace Echelon.Core.Logging.Loggers
             Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         }
 
-        public ClientLogger(string outputPath)
+        public ClientLogger(string outputPath) : this()
         {
-            Configure();
-            Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
             SetOutputPath(outputPath);
         }
 
