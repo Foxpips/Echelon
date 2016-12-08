@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Reflection;
+using System.Security.Claims;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -8,7 +9,6 @@ using Autofac.Integration.Mvc;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Core.Extensions.AutoMapper;
-using Echelon.Infrastructure.AutoFac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -24,13 +24,23 @@ namespace Echelon
     {
         public void Configuration(IAppBuilder app)
         {
-            AutoMapperExtensions.RegisterProfilesOnInit();
+            var targetAssembly = Assembly.Load("Echelon.Objects");
+            AutoMapperExtensions.RegisterProfilesOnInit(GetType().Assembly);
 
-            var container = new ContainerBuilder().RegisterCustomModules().Build();
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(GetType().Assembly);
+            var container = builder.RegisterCustomModules(targetAssembly).Build();
+
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
+            ConfigureCookies(app);
+            ConfigureApplication();
+        }
+
+        private static void ConfigureCookies(IAppBuilder app)
+        {
             app.SetDefaultSignInAsAuthenticationType("LoginCookie");
             app.UseExternalSignInCookie();
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -45,11 +55,9 @@ namespace Echelon
                 ClientId = "699010356628-rnulg0m5uer1rg51udpb73v4nqjgn9qn.apps.googleusercontent.com",
                 ClientSecret = "q7oDURml260PFcTGAS7VJVLE",
             });
-
-            ConfigureApplication();
         }
 
-        private void ConfigureApplication()
+        private static void ConfigureApplication()
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -58,21 +66,4 @@ namespace Echelon
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Email;
         }
     }
-
-    //    public static class Extensions
-    //    {
-    //        public static IAppBuilder UseAutofacMvc2(this IAppBuilder app)
-    //        {
-    //            return app.Use(async (context, next) =>
-    //            {
-    //                var lifetimeScope = context.GetAutofacLifetimeScope();
-    //                var httpContext = HttpContext.Current;
-    //
-    //                if (lifetimeScope != null && httpContext != null)
-    //                    httpContext.Items[typeof(ILifetimeScope)] = lifetimeScope;
-    //
-    //                await next();
-    //            });
-    //        }
-    //    }
 }

@@ -8,19 +8,19 @@ namespace Echelon.Core.Extensions.Autofac
 {
     public static class AutofacExtensions
     {
-        public static ContainerBuilder RegisterCustomModules(this ContainerBuilder builder , Assembly targetAssembly = null)
+        public static ContainerBuilder RegisterCustomModules(this ContainerBuilder builder, params Assembly[] assemblies)
         {
             var containerBuilder = builder ?? new ContainerBuilder();
-            var assembly = targetAssembly ?? typeof(AutofacExtensions).GetTypeInfo().Assembly;
-            var modules = assembly.
-                ExportedTypes.Where(type => type.IsAssignableTo<Module>());
-
-            foreach (var module in modules)
+            foreach (var assembly in assemblies)
             {
-                var instance = (Module) Activator.CreateInstance(module);
-                containerBuilder.RegisterModule(instance);
-            }
+                var modules = assembly.ExportedTypes.Where(type => type.IsAssignableTo<Module>());
 
+                foreach (var module in modules)
+                {
+                    var instance = (Module) Activator.CreateInstance(module);
+                    containerBuilder.RegisterModule(instance);
+                }
+            }
             return containerBuilder;
         }
     }

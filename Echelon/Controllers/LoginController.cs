@@ -2,9 +2,9 @@
 using System.Web.Mvc;
 using AutoMapper;
 using Echelon.Core.Logging.Interfaces;
-using Echelon.Entities.Users;
-using Echelon.Infrastructure.Services.Login;
 using Echelon.Models.ViewModels;
+using Echelon.Objects.Entities.Users;
+using Echelon.Objects.Infrastructure.Services.Login;
 using Microsoft.Owin;
 
 namespace Echelon.Controllers

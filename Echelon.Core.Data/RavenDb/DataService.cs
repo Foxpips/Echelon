@@ -7,7 +7,7 @@ using Echelon.Core.Attributes;
 using Echelon.Core.Interfaces.Data;
 using Raven.Client;
 
-namespace Echelon.Core.Data.RavenDb
+namespace Echelon.Data.RavenDb
 {
     public class DataService : IDataService
     {

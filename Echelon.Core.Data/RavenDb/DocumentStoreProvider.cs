@@ -3,7 +3,7 @@ using Raven.Abstractions.Util;
 using Raven.Client;
 using Raven.Client.Document;
 
-namespace Echelon.Core.Data.RavenDb
+namespace Echelon.Data.RavenDb
 {
     internal class DocumentStoreProvider
     {

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Echelon.Core.Data.RavenDb;
 using Echelon.Core.Extensions;
-using Echelon.Entities.Users;
+using Echelon.Data.RavenDb;
+using Echelon.Objects.Entities.Users;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Data

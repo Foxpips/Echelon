@@ -210,27 +210,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AutoMapper\LoginProfile.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
-    <Compile Include="Entities\Categories\CategoryEntity.cs" />
-    <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\Categories\CategoriesEntity.cs" />
-    <Compile Include="Infrastructure\Services\Category\CategoryService.cs" />
-    <Compile Include="Infrastructure\Services\Category\ICategoryService.cs" />
-    <Compile Include="Infrastructure\Services\IService.cs" />
     <Compile Include="Models\BusinessModels\ChallengeResult.cs" />
-    <Compile Include="Entities\Users\UsersEntity.cs" />
-    <Compile Include="Infrastructure\AutoFac\Modules\ServiceModule.cs" />
-    <Compile Include="Infrastructure\AutoFac\Modules\MvcModule.cs" />
-    <Compile Include="Infrastructure\AutoFac\Modules\LoggingModule.cs" />
-    <Compile Include="Infrastructure\AutoFac\Modules\DataModule.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ExternalLoginController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
-    <Compile Include="Entities\Users\UserEntity.cs" />
-    <Compile Include="Infrastructure\AutoMapper\LoginProfile.cs" />
-    <Compile Include="Infrastructure\Services\Login\ILoginService.cs" />
-    <Compile Include="Infrastructure\Services\Login\LoginService.cs" />
     <Compile Include="Models\ViewModels\CategoriesViewModel.cs" />
     <Compile Include="Models\ViewModels\Category.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
@@ -322,17 +308,21 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Echelon.Core.Data\Echelon.Core.Data.csproj">
+    <ProjectReference Include="..\Echelon.Core.Data\Echelon.Data.csproj">
       <Project>{A52145C2-3912-4EFF-927A-FFE42E006B43}</Project>
-      <Name>Echelon.Core.Data</Name>
+      <Name>Echelon.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Echelon.Core.Logging\Echelon.Core.Logging.csproj">
+    <ProjectReference Include="..\Echelon.Core.Logging\Echelon.Logging.csproj">
       <Project>{4dc32c7a-56b1-4243-a362-19dbb1ec525c}</Project>
-      <Name>Echelon.Core.Logging</Name>
+      <Name>Echelon.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Echelon.Core\Echelon.Core.csproj">
       <Project>{DFCFBB3B-169F-4D92-BB17-CFAA5CB47D44}</Project>
       <Name>Echelon.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Echelon.Objects\Echelon.Objects.csproj">
+      <Project>{A9C78335-B58A-42AF-A17E-D2F30152A607}</Project>
+      <Name>Echelon.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

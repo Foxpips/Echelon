@@ -2,24 +2,25 @@
 using System.Reflection;
 using Autofac;
 using AutoMapper;
-using Echelon.Core.Extensions.Autofac;
 
 namespace Echelon.Core.Extensions.AutoMapper
 {
     public static class AutoMapperExtensions
     {
-        public static void RegisterProfilesOnInit()
+        public static void RegisterProfilesOnInit(params Assembly[] assemblies)
         {
-            var profiles = typeof(AutofacExtensions).GetTypeInfo()
-                .Assembly.ExportedTypes.Where(type => type.IsAssignableTo<Profile>());
-
-            Mapper.Initialize(cfg =>
+            foreach (var assembly in assemblies)
             {
-                foreach (var profile in profiles)
+                var profiles = assembly.ExportedTypes.Where(type => type.IsAssignableTo<Profile>());
+
+                Mapper.Initialize(cfg =>
                 {
-                    cfg.AddProfile(profile);
-                }
-            });
+                    foreach (var profile in profiles)
+                    {
+                        cfg.AddProfile(profile);
+                    }
+                });
+            }
         }
     }
 }
