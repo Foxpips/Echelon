@@ -1,21 +1,25 @@
-﻿using Topshelf;
+﻿using System;
+using Echelon.Core.Interfaces;
+using Topshelf;
 
-namespace Echelon.TaskRunner
+namespace Echelon.Core.Helpers
 {
-    public class TaskRunnerWindowsService
+    public class WindowsServiceHelper
     {
-        public static void Initialize()
+        public static void Start<TService>(string serviceName, Action<TService> action = null) where TService : class, IService, new()
         {
-            const string serviceName = "TaskRunnerService";
-
             HostFactory.Run(
                 x =>
                 {
-                    x.Service<TaskRunnerServer>(
+                    x.Service<TService>(
                         s =>
                         {
-                            s.ConstructUsing(f => new TaskRunnerServer());
-                            s.WhenStarted(tc => { tc.Start(); });
+                            s.ConstructUsing(f => new TService());
+                            s.WhenStarted(tc =>
+                            {
+                                tc.Initialize();
+                                action?.Invoke(tc);
+                            });
                             s.WhenStopped(tc => { });
                         });
 

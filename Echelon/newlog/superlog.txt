@@ -1,0 +1,8 @@
+2016-12-09 18:39:40,651 [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query '' on index 'dynamic/UsersEntities' in 'http://localhost:8080 (DB: Echelon);Echelon'
+2016-12-09 18:39:40,786 [33] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 1/1 results
+2016-12-09 18:39:51,936 [30] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query '' on index 'dynamic/UsersEntities' in 'http://localhost:8080 (DB: Echelon);Echelon'
+2016-12-09 18:39:52,035 [36] INFO Echelon.Core.Logging.Loggers.ClientLogger - Logging Info: Attempting to login with email: Pete@gmail.com
+2016-12-09 18:39:52,041 [29] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 1/1 results
+2016-12-09 18:39:52,217 [44] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query '' on index 'dynamic/UsersEntities' in 'http://localhost:8080 (DB: Echelon);Echelon'
+2016-12-09 18:39:52,220 [30] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 1/1 results
+2016-12-09 18:39:52,263 [44] INFO Echelon.Core.Logging.Loggers.ClientLogger - Logging Info: User not found: Pete@gmail.com

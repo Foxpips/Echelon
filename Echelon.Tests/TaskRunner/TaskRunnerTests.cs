@@ -1,4 +1,5 @@
-﻿using Echelon.TaskRunner;
+﻿using Echelon.Core.Helpers;
+using Echelon.TaskRunner;
 using NUnit.Framework;
 
 namespace Echelon.Tests.TaskRunner
@@ -8,7 +9,7 @@ namespace Echelon.Tests.TaskRunner
         [Test]
         public void Method_Scenario_Result()
         {
-            new TaskRunnerServer().Start();
+            WindowsServiceHelper.Start<TaskRunnerServer>("TaskRunnerService-Test");
         }
     }
 }

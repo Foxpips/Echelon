@@ -9,6 +9,7 @@ using Autofac.Integration.Mvc;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Core.Extensions.AutoMapper;
+using MassTransit;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -24,19 +25,27 @@ namespace Echelon
     {
         public void Configuration(IAppBuilder app)
         {
-            var targetAssembly = Assembly.Load("Echelon.Objects");
-            AutoMapperExtensions.RegisterProfilesOnInit(GetType().Assembly);
+            var targetAssembly = GetType().Assembly;
 
             var builder = new ContainerBuilder();
-            builder.RegisterControllers(GetType().Assembly);
-            var container = builder.RegisterCustomModules(targetAssembly).Build();
+            builder.RegisterControllers(targetAssembly);
 
+            var container = builder.RegisterCustomModules().Build();
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
+
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            AutoMapperExtensions.RegisterProfilesOnInit(targetAssembly);
 
             ConfigureCookies(app);
             ConfigureApplication();
+            StartServiceBus(container);
+        }
+
+        private static void StartServiceBus(IContainer container)
+        {
+            var bus = container.Resolve<IBusControl>();
+            bus.StartAsync();
         }
 
         private static void ConfigureCookies(IAppBuilder app)

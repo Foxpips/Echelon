@@ -11,13 +11,19 @@ namespace Echelon.Core.Extensions.Autofac
         public static ContainerBuilder RegisterCustomModules(this ContainerBuilder builder, params Assembly[] assemblies)
         {
             var containerBuilder = builder ?? new ContainerBuilder();
+
+            if (assemblies.Length == 0)
+            {
+                assemblies = new[] { Assembly.Load("Echelon.Objects") };
+            }
+
             foreach (var assembly in assemblies)
             {
                 var modules = assembly.ExportedTypes.Where(type => type.IsAssignableTo<Module>());
 
                 foreach (var module in modules)
                 {
-                    var instance = (Module) Activator.CreateInstance(module);
+                    var instance = (Module)Activator.CreateInstance(module);
                     containerBuilder.RegisterModule(instance);
                 }
             }

@@ -1,10 +1,12 @@
-﻿namespace Echelon.TaskRunner
+﻿using Echelon.Core.Helpers;
+
+namespace Echelon.TaskRunner
 {
     internal class Program
     {
         private static void Main()
         {
-            TaskRunnerWindowsService.Initialize();
+            WindowsServiceHelper.Start<TaskRunnerServer>("TaskRunner");
         }
     }
 }

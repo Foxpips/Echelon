@@ -4,7 +4,9 @@ using AutoMapper;
 using Echelon.Core.Logging.Interfaces;
 using Echelon.Models.ViewModels;
 using Echelon.Objects.Entities.Users;
+using Echelon.Objects.Infrastructure.MassTransit.Commands;
 using Echelon.Objects.Infrastructure.Services.Login;
+using MassTransit;
 using Microsoft.Owin;
 
 namespace Echelon.Controllers
@@ -15,15 +17,18 @@ namespace Echelon.Controllers
         private readonly IClientLogger _clientLog;
         private readonly ILoginService _loginService;
         private readonly IOwinContext _owinContext;
+        private readonly IBus _bus;
 
-        public LoginController(IClientLogger clientLog, ILoginService loginService, IOwinContext owinContext)
+        public LoginController(IClientLogger clientLog, ILoginService loginService, IOwinContext owinContext, IBus bus)
         {
+            _bus = bus;
             _owinContext = owinContext;
             _loginService = loginService;
             _clientLog = clientLog;
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Login()
         {
             if (Request.IsAuthenticated)
             {
@@ -38,7 +43,9 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel loginViewModel)
         {
-            _clientLog.Info($"Attempting to login email: {loginViewModel.Email}");
+            await _bus.Publish(new LogInfoCommand {Content = $"Attempting to login with email: {loginViewModel.Email}"});
+
+//            _clientLog.Info($"Attempting to login email: {loginViewModel.Email}");
 
             var loginEntity = Mapper.Map<UserEntity>(loginViewModel);
             if (ModelState.IsValid)
@@ -51,8 +58,9 @@ namespace Echelon.Controllers
                 ModelState.AddModelError("", @"Email or Password is incorrect!");
             }
 
-            _clientLog.Info($"User not found! {loginViewModel.Email}");
-            return View("Index", loginViewModel);
+            await _bus.Publish(new LogInfoCommand {Content = $"User not found: {loginViewModel.Email}"});
+//            _clientLog.Info($"User not found! {loginViewModel.Email}");
+            return View(loginViewModel);
         }
     }
 }
