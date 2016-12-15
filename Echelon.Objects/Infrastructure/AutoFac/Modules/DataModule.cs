@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using Echelon.Core.Interfaces.Data;
+using Echelon.Data;
 using Echelon.Data.RavenDb;
 
-namespace Echelon.Objects.Infrastructure.AutoFac.Modules
+namespace Echelon.Core.Infrastructure.AutoFac.Modules
 {
     public class DataModule : Module
     {

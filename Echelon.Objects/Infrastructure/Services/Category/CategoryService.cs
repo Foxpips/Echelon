@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Echelon.Core.Interfaces.Data;
-using Echelon.Objects.Entities.Categories;
+using Echelon.Core.Entities.Categories;
+using Echelon.Data;
 
-namespace Echelon.Objects.Infrastructure.Services.Category
+namespace Echelon.Core.Infrastructure.Services.Category
 {
     public class CategoryService : ICategoryService
     {

@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -42,10 +41,13 @@ namespace Echelon
             StartServiceBus(container);
         }
 
-        private static void StartServiceBus(IContainer container)
+        private static void ConfigureApplication()
         {
-            var bus = container.Resolve<IBusControl>();
-            bus.StartAsync();
+            AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Email;
         }
 
         private static void ConfigureCookies(IAppBuilder app)
@@ -62,17 +64,14 @@ namespace Echelon
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
                 ClientId = "699010356628-rnulg0m5uer1rg51udpb73v4nqjgn9qn.apps.googleusercontent.com",
-                ClientSecret = "q7oDURml260PFcTGAS7VJVLE",
+                ClientSecret = "q7oDURml260PFcTGAS7VJVLE"
             });
         }
 
-        private static void ConfigureApplication()
+        private static void StartServiceBus(IComponentContext container)
         {
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Email;
+            var bus = container.Resolve<IBusControl>();
+            bus.StartAsync();
         }
     }
 }

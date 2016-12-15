@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
+using Echelon.Core.Entities.Users;
+using Echelon.Core.Infrastructure.MassTransit.Commands;
+using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Core.Logging.Interfaces;
 using Echelon.Models.ViewModels;
-using Echelon.Objects.Entities.Users;
-using Echelon.Objects.Infrastructure.MassTransit.Commands;
-using Echelon.Objects.Infrastructure.Services.Login;
 using MassTransit;
 using Microsoft.Owin;
 
@@ -45,8 +45,6 @@ namespace Echelon.Controllers
         {
             await _bus.Publish(new LogInfoCommand {Content = $"Attempting to login with email: {loginViewModel.Email}"});
 
-//            _clientLog.Info($"Attempting to login email: {loginViewModel.Email}");
-
             var loginEntity = Mapper.Map<UserEntity>(loginViewModel);
             if (ModelState.IsValid)
             {
@@ -59,7 +57,6 @@ namespace Echelon.Controllers
             }
 
             await _bus.Publish(new LogInfoCommand {Content = $"User not found: {loginViewModel.Email}"});
-//            _clientLog.Info($"User not found! {loginViewModel.Email}");
             return View(loginViewModel);
         }
     }

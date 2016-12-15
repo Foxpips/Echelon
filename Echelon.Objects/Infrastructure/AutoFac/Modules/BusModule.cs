@@ -3,7 +3,7 @@ using System.Configuration;
 using Autofac;
 using MassTransit;
 
-namespace Echelon.Objects.Infrastructure.AutoFac.Modules
+namespace Echelon.Core.Infrastructure.AutoFac.Modules
 {
     public class BusModule : Module
     {

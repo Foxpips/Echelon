@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Echelon.Core.Entities.Users;
 using Echelon.Core.Extensions;
 using Echelon.Models.ViewModels;
-using Echelon.Objects.Entities.Users;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Echelon.AutoMapper

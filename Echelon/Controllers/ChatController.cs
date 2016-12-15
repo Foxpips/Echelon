@@ -13,7 +13,7 @@ namespace Echelon.Controllers
                 return View();
             }
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Login", "Login");
         }
 
         [Authorize]

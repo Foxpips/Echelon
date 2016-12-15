@@ -1,4 +1,4 @@
-﻿namespace Echelon.Objects.Infrastructure.MassTransit.Commands
+﻿namespace Echelon.Core.Infrastructure.MassTransit.Commands
 {
     public class LogInfoCommand
     {

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Echelon.Objects.Entities.Categories;
+using Echelon.Core.Entities.Categories;
 
-namespace Echelon.Objects.Infrastructure.Services.Category
+namespace Echelon.Core.Infrastructure.Services.Category
 {
-    public interface ICategoryService
+    public interface ICategoryService : IService
     {
         Task<CategoriesEntity> GetCategories();
     }

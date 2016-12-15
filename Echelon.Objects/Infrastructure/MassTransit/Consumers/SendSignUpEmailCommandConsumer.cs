@@ -6,11 +6,11 @@ using MassTransit;
 
 namespace Echelon.Core.Infrastructure.MassTransit.Consumers
 {
-    public class LogInfoCommandConsumer : IConsumer<LogInfoCommand>
+    public class SendSignupEmailCommandConsumer : IConsumer<SendSignupEmailCommand>
     {
         private readonly IClientLogger _clientLogger;
 
-        public LogInfoCommandConsumer(IClientLogger clientLogger)
+        public SendSignupEmailCommandConsumer(IClientLogger clientLogger)
         {
             _clientLogger = clientLogger;
         }
@@ -19,6 +19,11 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
         {
             await Console.Out.WriteLineAsync($"Logging Info: {context.Message.Content}");
             _clientLogger.Info($"Logging Info: {context.Message.Content}");
+        }
+
+        public async Task Consume(ConsumeContext<SendSignupEmailCommand> context)
+        {
+            await Console.Out.WriteLineAsync($"Logging Info: {context.Message.UserName}");
         }
     }
 }

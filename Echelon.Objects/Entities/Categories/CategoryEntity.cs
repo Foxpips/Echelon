@@ -1,4 +1,4 @@
-﻿namespace Echelon.Objects.Entities.Categories
+﻿namespace Echelon.Core.Entities.Categories
 {
     public class CategoryEntity
     {

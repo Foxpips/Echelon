@@ -319,21 +319,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Echelon.Core.Data\Echelon.Data.csproj">
+    <ProjectReference Include="..\Echelon.Data\Echelon.Data.csproj">
       <Project>{A52145C2-3912-4EFF-927A-FFE42E006B43}</Project>
       <Name>Echelon.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Echelon.Core.Logging\Echelon.Logging.csproj">
-      <Project>{4dc32c7a-56b1-4243-a362-19dbb1ec525c}</Project>
+    <ProjectReference Include="..\Echelon.Logging\Echelon.Logging.csproj">
+      <Project>{4DC32C7A-56B1-4243-A362-19DBB1EC525C}</Project>
       <Name>Echelon.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Echelon.Core\Echelon.Core.csproj">
-      <Project>{DFCFBB3B-169F-4D92-BB17-CFAA5CB47D44}</Project>
-      <Name>Echelon.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Echelon.Objects\Echelon.Objects.csproj">
+    <ProjectReference Include="..\Echelon.Objects\Echelon.Core.csproj">
       <Project>{A9C78335-B58A-42AF-A17E-D2F30152A607}</Project>
-      <Name>Echelon.Objects</Name>
+      <Name>Echelon.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

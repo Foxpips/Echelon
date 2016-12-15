@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Echelon.Core.Attributes;
+using Echelon.Misc.Attributes;
 
-namespace Echelon.Objects.Entities.Users
+namespace Echelon.Core.Entities.Users
 {
     [Id("UsersTable")]
     public class UsersEntity

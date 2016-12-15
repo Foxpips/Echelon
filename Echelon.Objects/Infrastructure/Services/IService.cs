@@ -1,4 +1,4 @@
-﻿namespace Echelon.Objects.Infrastructure.Services
+﻿namespace Echelon.Core.Infrastructure.Services
 {
     public interface IService
     {

@@ -2,7 +2,7 @@
 using Echelon.Core.Logging.Interfaces;
 using Echelon.Core.Logging.Loggers;
 
-namespace Echelon.Objects.Infrastructure.AutoFac.Modules
+namespace Echelon.Core.Infrastructure.AutoFac.Modules
 {
     public class LoggingModule : Module
     {

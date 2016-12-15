@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using Echelon.Objects.Infrastructure.Services.Category;
-using Echelon.Objects.Infrastructure.Services.Login;
+using Echelon.Core.Infrastructure.Services.Category;
+using Echelon.Core.Infrastructure.Services.Login;
 
-namespace Echelon.Objects.Infrastructure.AutoFac.Modules
+namespace Echelon.Core.Infrastructure.AutoFac.Modules
 {
     public class ServiceModule : Module
     {

@@ -1,4 +1,4 @@
-﻿namespace Echelon.Objects.Entities.Users
+﻿namespace Echelon.Core.Entities.Users
 {
     public class UserEntity
     {

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Echelon.Misc.Attributes;
 
-namespace Echelon.Objects.Entities.Categories
+namespace Echelon.Core.Entities.Categories
 {
+    [Id("CategoriesTable")]
     public class CategoriesEntity
     {
         public IEnumerable<CategoryEntity> Categories { get; set; }

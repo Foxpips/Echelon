@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Echelon.Objects.Entities.Users;
+using Echelon.Core.Entities.Users;
 using Microsoft.Owin.Security;
 
-namespace Echelon.Objects.Infrastructure.Services.Login
+namespace Echelon.Core.Infrastructure.Services.Login
 {
     public interface ILoginService : IService
     {

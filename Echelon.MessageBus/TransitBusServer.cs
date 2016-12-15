@@ -3,6 +3,7 @@ using System.Reflection;
 using Autofac;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Core.Interfaces;
+using Echelon.Core.Interfaces.Windows;
 using MassTransit;
 
 namespace Echelon.MessageBus
