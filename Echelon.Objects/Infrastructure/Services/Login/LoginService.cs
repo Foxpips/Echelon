@@ -41,7 +41,7 @@ namespace Echelon.Core.Infrastructure.Services.Login
                 var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie, ClaimTypes.Email,
                     ClaimTypes.Role);
 
-                LogUserOut(authenticationManager);
+                await LogUserOut(authenticationManager);
 
                 authenticationManager.SignIn(new AuthenticationProperties
                 {
@@ -51,16 +51,19 @@ namespace Echelon.Core.Infrastructure.Services.Login
                 }, identity);
 
                 Thread.CurrentPrincipal = new ClaimsPrincipal(identity);
-
                 return true;
             }
             return false;
         }
 
-        private static void LogUserOut(IAuthenticationManager authenticationManager)
+        public async Task<bool> LogUserOut(IAuthenticationManager authenticationManager)
         {
-            authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            await Task.Run(() =>
+            {
+                authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            });
+            return true;
         }
 
         public async Task<bool> CreateAndLoguserIn(UserEntity userEntity, IAuthenticationManager authenticationManager)

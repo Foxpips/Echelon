@@ -18,7 +18,7 @@
     <AssemblyName>Echelon</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort>44302</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -222,6 +222,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutoMapper\LoginProfile.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Models\BusinessModels\ChallengeResult.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -297,6 +298,8 @@
     <Content Include="Views\Login\ForgottenPassword.cshtml" />
     <Content Include="Views\Navigation\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Error\Account.cshtml" />
+    <Content Include="Views\Login\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Javascript\Common\" />
@@ -354,9 +357,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49636</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44301/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>https://localhost:44301/</IISAppRootUrl>
+          <IISUrl>http://localhost/Echelon</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

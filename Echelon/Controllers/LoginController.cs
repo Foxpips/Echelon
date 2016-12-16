@@ -11,7 +11,6 @@ using Microsoft.Owin;
 
 namespace Echelon.Controllers
 {
-    [RequireHttps]
     public class LoginController : Controller
     {
         private readonly IClientLogger _clientLog;
@@ -25,6 +24,12 @@ namespace Echelon.Controllers
             _owinContext = owinContext;
             _loginService = loginService;
             _clientLog = clientLog;
+        }
+
+        [HttpGet]
+        public ActionResult Help()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -43,7 +48,7 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel loginViewModel)
         {
-            await _bus.Publish(new LogInfoCommand {Content = $"Attempting to login with email: {loginViewModel.Email}"});
+            await _bus.Publish(new LogInfoCommand { Content = $"Attempting to login with email: {loginViewModel.Email}" });
 
             var loginEntity = Mapper.Map<UserEntity>(loginViewModel);
             if (ModelState.IsValid)
@@ -56,8 +61,21 @@ namespace Echelon.Controllers
                 ModelState.AddModelError("", @"Email or Password is incorrect!");
             }
 
-            await _bus.Publish(new LogInfoCommand {Content = $"User not found: {loginViewModel.Email}"});
+            await _bus.Publish(new LogInfoCommand { Content = $"User not found: {loginViewModel.Email}" });
             return View(loginViewModel);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Logout()
+        {
+            if (await _loginService.LogUserOut(_owinContext.Authentication))
+            {
+                await _bus.Publish(new LogInfoCommand { Content = $"Logging user: {_owinContext.Authentication.User.Identity.Name} out" });
+
+                return RedirectToActionPermanent("Login", "Login");
+            }
+            return RedirectToAction("Account", "Error");
         }
     }
 }
