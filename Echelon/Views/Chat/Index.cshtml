@@ -3,11 +3,16 @@
 }
 
 <section class="form-material">
-    <div id="messages">
-        <div id="loggingIn" class="info hidden">Logging in...</div>
-        <div id="joiningChat" class="info hidden">Attempting to join </div>
+    <div id="conversationGrid">
+        <div id="messages">
+            <div id="loggingIn" class="info hidden">Logging in...</div>
+            <div id="joiningChat" class="info hidden">Attempting to join </div>
+        </div>
     </div>
-    <input id="chat-input" class="chat__input form-control" type="text" placeholder="Type a message" autofocus/>
+    <div style="width:451px">
+        <input id="chat-input" class="chat__input form-control" type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" autofocus />
+    </div>
+
 </section>
 
 @section scripts {

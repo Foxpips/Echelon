@@ -1,4 +1,15 @@
 ﻿$(function () {
+
+    var psize = $(window).height() - 160;
+    $("#messages").height(psize);
+
+    $(window).resize(function () {
+        var psize = $(window).height() - 160;
+        $("#messages").height(psize);
+
+        $("#messages").scrollTop($("#messages").scrollHeight);
+    });
+
     // Get handle to the chat div 
     var $chatWindow = $("#messages");
 
@@ -46,8 +57,10 @@
     // Get an access token for the current user, passing a username (identity)
     // and a device ID - for browser-based apps, we'll always just use the 
     // value "browser"
-    $.getJSON('/token', {
-        identity: username,
+
+    var endpoint = $("#chat-input").data("target");
+
+    $.getJSON(endpoint, {
         device: 'browser'
     }, function (data) {
         // Alert the user they have been assigned a random username

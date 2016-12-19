@@ -250,18 +250,6 @@
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Pages\index.js" />
-    <Content Include="Resources\Sass\bootstrap.css">
-      <DependentUpon>bootstrap.scss</DependentUpon>
-    </Content>
-    <Content Include="Resources\Sass\bootstrap.min.css">
-      <DependentUpon>bootstrap.css</DependentUpon>
-    </Content>
-    <Content Include="Resources\Sass\Modules\atomic.css">
-      <DependentUpon>atomic.scss</DependentUpon>
-    </Content>
-    <Content Include="Resources\Sass\Modules\atomic.min.css">
-      <DependentUpon>atomic.css</DependentUpon>
-    </Content>
     <Content Include="Resources\Sass\Modules\atomic.scss" />
     <None Include="Resources\Sass\site.scss" />
     <Content Include="package.json" />
@@ -271,18 +259,6 @@
     <None Include="Resources\Sass\_variables.scss" />
     <None Include="Resources\Sass\_mixins.scss" />
     <None Include="Resources\Sass\Pages\page-login.scss" />
-    <Content Include="Resources\Sass\Pages\page-login.css">
-      <DependentUpon>page-login.scss</DependentUpon>
-    </Content>
-    <Content Include="Resources\Sass\Pages\page-login.min.css">
-      <DependentUpon>page-login.css</DependentUpon>
-    </Content>
-    <Content Include="Resources\Sass\site.css">
-      <DependentUpon>site.scss</DependentUpon>
-    </Content>
-    <Content Include="Resources\Sass\site.min.css">
-      <DependentUpon>site.css</DependentUpon>
-    </Content>
     <Content Include="tsconfig.json" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

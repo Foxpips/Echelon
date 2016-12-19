@@ -7,3 +7,10 @@
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/carousel";
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/navbar";
 @import "../../bower_components/font-awesome/css/font-awesome";
+
+//bootstrap overrides
+
+.navbar {
+    margin-bottom: 0px !important;
+    z-index: 10;
+}

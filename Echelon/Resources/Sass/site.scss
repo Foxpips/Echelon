@@ -1,91 +1,136 @@
 ﻿@import "mixins";
 
 * {
-  box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 html, body {
-  padding:0;
-  margin:0;
-  height:100%;
-  width:100%;
-  background-color:#dedede;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #dedede;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 header {
-  width:100%;
-  position:absolute;
-  text-align:center;
-  bottom:20px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    bottom: 20px;
 }
 
 header a, header a:visited {
-  font-size:18px;
-  color:#dedede;
-  text-decoration:none;
+    font-size: 18px;
+    color: #dedede;
+    text-decoration: none;
 }
 
 header a:hover {
-  text-decoration:underline;
+    text-decoration: underline;
 }
 
 section {
-  height:70%;
-  background-color:#dedede;
+    /*height: 100%;
+    background-color: #fff;
+
+    @Include Middle {
+        height: 70%;
+    }*/
 }
 
 .chat__input {
-  display:block;
-  height:52px;
-  margin:10px auto;
-  outline:none;
-  background-color:transparent;
-  border:none;
-  border-bottom:1px solid #2B2B2A;
-  padding:0;
-  font-size:42px;
-  color:#eee;
+    display: block;
+    height: 52px;
+    margin: 10px auto;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #2B2B2A;
+    padding: 0;
+    font-size: 42px;
+    color: #eee;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    @include Middle {
+        width: 80%;
+    }
+}
+
+#conversationGrid {
+    padding: 10px;
+    width: 100%;
+
+    @include Middle {
+        width: 100%;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
 #messages {
-  background-color:#DCDCDC;
-  padding:10px;
-  height:100%;
-  width:800px;
-  margin:0 auto;
-  overflow-y:auto;
+    width: 100%;
+    margin: 0 auto;
+    bottom: 70px;
+    z-index: 1;
+    position: absolute;
+    background-color: white;
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @include Middle {
+        width: 80%;
+        position: absolute;
+    }
 }
 
 #messages p {
-  margin:5px 0;
-  padding:0;
+    margin: 5px 0;
+    padding: 0;
 }
 
 .info {
-  margin:5px 0;
-  font-style:italic;
-  color: black;
+    margin: 5px 0;
+    font-style: italic;
+    color: black;
 }
 
 .message-container {
-  margin:5px 0;
-  color:#fff;
+    margin: 5px 0;
+    color: #fff;
 }
 
 .message-container .username {
-  display:inline-block;
-  margin-right:5px;
-  font-weight:bold;
-  color:#7B6F6E;
+    display: inline-block;
+    margin-right: 5px;
+    font-weight: bold;
+    color: #7B6F6E;
 }
 
 .me, .username.me {
-  font-weight:bold;
-  color:cyan;
+    font-weight: bold;
+    color: cyan;
 }
 
 .message-container .username.me {
-  display:inline-block;
-  margin-right:5px;
+    display: inline-block;
+    margin-right: 5px;
 }
