@@ -251,6 +251,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Pages\index.js" />
     <Content Include="Resources\Sass\Modules\atomic.scss" />
+    <Content Include="Resources\Sass\Pages\page-chat.scss" />
     <None Include="Resources\Sass\site.scss" />
     <Content Include="package.json" />
     <Content Include="bower.json" />

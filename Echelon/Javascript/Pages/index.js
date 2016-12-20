@@ -6,8 +6,7 @@
     $(window).resize(function () {
         var psize = $(window).height() - 160;
         $("#messages").height(psize);
-
-        $("#messages").scrollTop($("#messages").scrollHeight);
+        $("#messages").scrollTop(document.getElementById("messages").scrollHeight);
     });
 
     // Get handle to the chat div 

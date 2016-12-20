@@ -40,7 +40,7 @@ namespace Echelon.Tests.Data
         [Test]
         public async Task Remove_Add_User_Success()
         {
-            var loginEntity = new UserEntity {Email = "Pete@gmail.com", Password = HashHelper.CreateHash("Peterson1")};
+            var loginEntity = new UserEntity { Email = "Pete@gmail.com", Password = HashHelper.CreateHash("Peterson1"), UserName = "Pete" };
             await _dataService.Update<UsersEntity>(entity =>
             {
                 entity.Users.Remove(entity.Users.SingleOrDefault(x => x.Email.Equals("Pete@gmail.com")));
@@ -60,10 +60,10 @@ namespace Echelon.Tests.Data
         [Test]
         public void CreateEmail_Templates_Success()
         {
-            var emailTemplates = new EmailTemplatesEntity {Templates = new List<EmailTemplateEntity>()};
-//            emailTemplates.Templates.ToList().Add();
+            var emailTemplates = new EmailTemplatesEntity { Templates = new List<EmailTemplateEntity>() };
+            //            emailTemplates.Templates.ToList().Add();
 
-//            await _dataService.Create<EmailTemplatesEntity>(emailTemplates);
+            //            await _dataService.Create<EmailTemplatesEntity>(emailTemplates);
         }
     }
 }

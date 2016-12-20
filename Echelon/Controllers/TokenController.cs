@@ -34,8 +34,8 @@ namespace Echelon.Controllers
         {
             // Create a random identity for the client
             var usersEntity = await _dataService.Read<UsersEntity>();
-            var externalLoginInfoAsync = _owinContext.Authentication.User;
-            var identity = usersEntity.Users.Single(x => x.Email.Equals(externalLoginInfoAsync.Identity.Name)).UserName;
+            var user = _owinContext.Authentication.User;
+            var identity = usersEntity.Users.Single(x => x.Email.Equals(user.Identity.Name)).UserName;
 
             // Create an Access Token generator
             var token = new AccessToken(AccountSid, ApiKey, ApiSecret) {Identity = identity};
