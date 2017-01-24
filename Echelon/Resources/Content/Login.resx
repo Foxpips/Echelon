@@ -117,22 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AllCategories" xml:space="preserve">
-    <value>All Categories</value>
+  <data name="GoogleLogIn" xml:space="preserve">
+    <value>Google Login</value>
   </data>
-  <data name="Categories" xml:space="preserve">
-    <value>Categories</value>
+  <data name="LogIn" xml:space="preserve">
+    <value>Login</value>
   </data>
-  <data name="Find" xml:space="preserve">
-    <value>Find</value>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Login failed. Check your login details.</value>
   </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
+  <data name="LogOut" xml:space="preserve">
+    <value>Logout</value>
   </data>
-  <data name="SearchCategories" xml:space="preserve">
-    <value>Search Categories</value>
+  <data name="NoAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
   </data>
-  <data name="SiteTitle" xml:space="preserve">
-    <value>Echelon Chat</value>
+  <data name="NotLoggedIn" xml:space="preserve">
+    <value>Not Logged In</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
   </data>
 </root>

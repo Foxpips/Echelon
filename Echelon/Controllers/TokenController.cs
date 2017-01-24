@@ -29,16 +29,15 @@ namespace Echelon.Controllers
             _dataService = dataService;
         }
 
-        // GET: /token
-        public async Task<ActionResult> Index(string device)
+        public async Task<ActionResult> Index(string device, string channel)
         {
             // Create a random identity for the client
             var usersEntity = await _dataService.Read<UsersEntity>();
             var user = _owinContext.Authentication.User;
-            var identity = usersEntity.Users.Single(x => x.Email.Equals(user.Identity.Name)).UserName;
+            var identity = usersEntity.Users.Single(x => x.Email.Equals(user.Identity.Name));
 
             // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) {Identity = identity};
+            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity.UserName ?? identity.Email };
 
             // Create an IP messaging grant for this token
             var grant = new IpMessagingGrant
@@ -52,7 +51,7 @@ namespace Echelon.Controllers
             return Json(new
             {
                 identity,
-                category = "general",
+                category = channel,
                 token = token.ToJWT()
             }, JsonRequestBehavior.AllowGet);
         }

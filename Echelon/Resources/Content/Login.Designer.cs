@@ -22,14 +22,14 @@ namespace Echelon.Resources.Content {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SiteDocument {
+    public class Login {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SiteDocument() {
+        internal Login() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Echelon.Resources.Content {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Echelon.Resources.Content.SiteDocument", typeof(SiteDocument).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Echelon.Resources.Content.Login", typeof(Login).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,65 @@ namespace Echelon.Resources.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All Categories.
+        ///   Looks up a localized string similar to Google Login.
         /// </summary>
-        public static string AllCategories {
+        public static string GoogleLogIn {
             get {
-                return ResourceManager.GetString("AllCategories", resourceCulture);
+                return ResourceManager.GetString("GoogleLogIn", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Categories.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
-        public static string Categories {
+        public static string LogIn {
             get {
-                return ResourceManager.GetString("Categories", resourceCulture);
+                return ResourceManager.GetString("LogIn", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find.
+        ///   Looks up a localized string similar to Login failed. Check your login details..
         /// </summary>
-        public static string Find {
+        public static string LoginFailed {
             get {
-                return ResourceManager.GetString("Find", resourceCulture);
+                return ResourceManager.GetString("LoginFailed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Profile.
+        ///   Looks up a localized string similar to Logout.
         /// </summary>
-        public static string Profile {
+        public static string LogOut {
             get {
-                return ResourceManager.GetString("Profile", resourceCulture);
+                return ResourceManager.GetString("LogOut", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search Categories.
+        ///   Looks up a localized string similar to Don&apos;t have an account?.
         /// </summary>
-        public static string SearchCategories {
+        public static string NoAccount {
             get {
-                return ResourceManager.GetString("SearchCategories", resourceCulture);
+                return ResourceManager.GetString("NoAccount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Echelon Chat.
+        ///   Looks up a localized string similar to Not Logged In.
         /// </summary>
-        public static string SiteTitle {
+        public static string NotLoggedIn {
             get {
-                return ResourceManager.GetString("SiteTitle", resourceCulture);
+                return ResourceManager.GetString("NotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
             }
         }
     }

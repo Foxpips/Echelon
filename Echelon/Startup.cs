@@ -8,6 +8,7 @@ using Autofac.Integration.Mvc;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Core.Extensions.AutoMapper;
+using Echelon.Settings;
 using MassTransit;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -52,19 +53,19 @@ namespace Echelon
 
         private static void ConfigureCookies(IAppBuilder app)
         {
-            app.SetDefaultSignInAsAuthenticationType("LoginCookie");
+            app.SetDefaultSignInAsAuthenticationType(SiteSettings.CookieName);
             app.UseExternalSignInCookie();
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                LoginPath = new PathString("/Login"),
+                LoginPath = new PathString(SiteSettings.LoginPath),
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                CookieName = "LoginCookie"
+                CookieName = SiteSettings.CookieName
             });
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
-                ClientId = "699010356628-rnulg0m5uer1rg51udpb73v4nqjgn9qn.apps.googleusercontent.com",
-                ClientSecret = "q7oDURml260PFcTGAS7VJVLE"
+                ClientId = SiteSettings.GoogleClientId,
+                ClientSecret = SiteSettings.GoogleClientSecrect
             });
         }
 

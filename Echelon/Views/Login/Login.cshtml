@@ -11,8 +11,8 @@
             @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "loginform", @class = "form-horizontal form-material" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "Login failed. Check your login details.")
-                <h3 class="box-title m-b-20">@SiteDocument.SignIn</h3>
+                @Html.ValidationSummary(true, Login.LoginFailed)
+                <h3 class="box-title m-b-20">@Login.LogIn</h3>
                 <div class="col-xs-12">
                     <div class="form-group">
                         @Html.TextBoxFor(u => u.Email, new { @class = "form-control", placeholder = "Email", required = "true" })
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group text-center m-t-20">
-                        <button class="btn btn-info btn-lg btn-block text-uppercase" type="submit">@SiteDocument.LogIn</button>
+                        <button class="btn btn-info btn-lg btn-block text-uppercase" type="submit">@Login.LogIn</button>
                     </div>
                 </div>
             }
@@ -37,7 +37,7 @@
                 <div class="col-xs-12 m-t-10 text-center">
                     <div class="social">
                         <a class="btn google__btn google__icon fz-df" href="@Url.Action("LoginGoogle", "ExternalLogin")">
-                            <span class="google__label">@SiteDocument.GoogleSignIn</span>
+                            <span class="google__label">@Login.GoogleLogIn</span>
                         </a>
                     </div>
                 </div>
@@ -46,9 +46,9 @@
                 <div class="col-xs-12">
                     <div class="form-group text-center m-b-0">
                         <p>
-                            @SiteDocument.NoAccount
+                            @Login.NoAccount
                             <a href="" class="text-primary m-l-5">
-                                <b>@SiteDocument.SignUp</b>
+                                <b>@Login.Register</b>
                             </a>
                         </p>
                     </div>

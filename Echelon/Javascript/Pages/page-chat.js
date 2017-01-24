@@ -58,14 +58,10 @@
     // value "browser"
 
     var endpoint = $("#chat-input").data("target");
-
-    $.getJSON(endpoint, {
-        device: 'browser'
-    }, function (data) {
-        // Alert the user they have been assigned a random username
+    $.getJSON(endpoint, { device: "browser", channel: "general" }, function (data) {
         username = data.identity;
-
         // Initialize the IP messaging client
+
         accessManager = new Twilio.AccessManager(data.token);
         messagingClient = new Twilio.IPMessaging.Client(accessManager);
 

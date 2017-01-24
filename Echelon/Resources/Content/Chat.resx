@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AllCategories" xml:space="preserve">
-    <value>All Categories</value>
-  </data>
-  <data name="Categories" xml:space="preserve">
-    <value>Categories</value>
-  </data>
-  <data name="Find" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
-  </data>
-  <data name="SearchCategories" xml:space="preserve">
-    <value>Search Categories</value>
-  </data>
-  <data name="SiteTitle" xml:space="preserve">
-    <value>Echelon Chat</value>
+  <data name="String1" xml:space="preserve">
+    <value>asd</value>
   </data>
 </root>
