@@ -1,16 +1,9 @@
 ﻿$(function () {
 
-    var psize = $(window).height() - 160;
-    $("#messages").height(psize);
-
-    $(window).resize(function () {
-        var psize = $(window).height() - 160;
-        $("#messages").height(psize);
-        $("#messages").scrollTop(document.getElementById("messages").scrollHeight);
-    });
-
-    // Get handle to the chat div 
     var $chatWindow = $("#messages");
+    var $users = $("#conversations");
+    var notificationManager = new notifier();
+    notificationManager.init();
 
     // Manages the state of our access token we got from the server
     var accessManager;
@@ -20,11 +13,20 @@
 
     // A handle to the "general" chat channel - the one and only channel we
     // will have in this sample app
-    var generalChannel;
+    var currentChannel;
 
     // The server will assign the client a random username - store that value
     // here
     var username;
+
+    var psize = $(window).height() - 160;
+    $("#messages").height(psize);
+
+    $(window).resize(function () {
+        var psize = $(window).height() - 160;
+        $("#messages").height(psize);
+        $("#messages").scrollTop(document.getElementById("messages").scrollHeight);
+    });
 
     // Helper function to print info messages to the chat window
     function print(infoMessage, asHtml) {
@@ -39,12 +41,18 @@
 
     // Helper function to print chat message to the chat window
     function printMessage(fromUser, message) {
-        var $user = $('<span class="username">').text(fromUser + ':');
-        if (fromUser === username) {
-            $user.addClass("me");
-        }
-        var $message = $("<span class=\"message\">").text(message);
         var $container = $("<div class=\"message-container\">");
+        var $user = $('<span class="message-container__username message-container__username--me">').text(fromUser + ": ");
+        var $message = $("<span class=\"message-container__message message-container__message--me\">").text(message);
+        $container.append($user).append($message);
+        $chatWindow.append($container);
+        $chatWindow.scrollTop($chatWindow[0].scrollHeight);
+    }
+
+    function printReceivedMessage(fromUser, message) {
+        var $container = $("<div class=\"message-container message-container--other\" >");
+        var $user = $('<span class="message-container__username message-container__username--other">').text(fromUser + ": ");
+        var $message = $("<span class=\"message-container__message message-container__message--other\" >").text(message);
         $container.append($user).append($message);
         $chatWindow.append($container);
         $chatWindow.scrollTop($chatWindow[0].scrollHeight);
@@ -57,8 +65,10 @@
     // and a device ID - for browser-based apps, we'll always just use the 
     // value "browser"
 
+    var selectedChannel = "Anime";
     var endpoint = $("#chat-input").data("target");
-    $.getJSON(endpoint, { device: "browser", channel: "general" }, function (data) {
+
+    $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, function (data) {
         username = data.identity;
         // Initialize the IP messaging client
 
@@ -67,24 +77,24 @@
 
         // Get the general chat channel, which is where all the messages are
         // sent in this simple application
-        print('Attempting to join "general" category...');
-        var promise = messagingClient.getChannelByUniqueName('general');
+        print("Attempting to join " + selectedChannel + " channel...");
+        var promise = messagingClient.getChannelByUniqueName(selectedChannel);
         promise.then(function (channel) {
-            generalChannel = channel;
-            if (!generalChannel) {
+            currentChannel = channel;
+            if (!currentChannel) {
                 // If it doesn't exist, let's create it
                 messagingClient.createChannel({
-                    uniqueName: 'general',
-                    friendlyName: 'General Chat Channel'
+                    uniqueName: selectedChannel,
+                    friendlyName: selectedChannel + "Chat Channel"
                 }).then(function (channel) {
-                    console.log('Created general channel:');
+                    console.log("Created " + selectedChannel + " channel:");
                     console.log(channel);
-                    generalChannel = channel;
+                    currentChannel = channel;
                     setupChannel();
                 });
             } else {
-                console.log('Found general channel:');
-                console.log(generalChannel);
+                console.log("Found " + selectedChannel + " channel:");
+                console.log(currentChannel);
                 setupChannel();
             }
         });
@@ -93,13 +103,31 @@
     // Set up channel after it has been found
     function setupChannel() {
         // Join the general channel
-        generalChannel.join().then(function () {
+        currentChannel.join().then(function () {
             print("Joined channel as " + '<span class="me">' + username + '</span>.', true);
+            $("#loading").hide();
         });
 
         // Listen for new messages sent to the channel
-        generalChannel.on("messageAdded", function (message) {
-            printMessage(message.author, message.body);
+        currentChannel.on("messageAdded", function (message) {
+            if (username === message.author) {
+                printMessage(message.author, message.body);
+            } else {
+                printReceivedMessage(message.author, message.body);
+                notificationManager.sendNotification(message.author, message.body);
+            }
+        });
+
+        currentChannel.on("memberJoined", function (member) {
+            alert("asd");
+            var $msg = $("<div class=\"info\">");
+            $msg.text(member.identity);
+            $users.append($msg);
+            //conversations
+        });
+
+        currentChannel.on('typingStarted', function (member) {
+            console.log(member.identity + 'is currently typing.');
         });
     }
 
@@ -107,7 +135,7 @@
     var $input = $("#chat-input");
     $input.on("keydown", function (e) {
         if (e.keyCode === 13) {
-            generalChannel.sendMessage($input.val());
+            currentChannel.sendMessage($input.val());
             $input.val("");
         }
     });

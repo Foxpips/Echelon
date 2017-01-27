@@ -1,0 +1,71 @@
+﻿@import "mixins";
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+header {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    bottom: 20px;
+}
+
+header a, header a:visited {
+    font-size: 18px;
+    color: #dedede;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+section {
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+.loading-icon {
+    background: url(../assets/imgs/spinner-white.gif) no-repeat;
+    background-size: contain;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    height: 50px;   
+    width: 50px;   
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.63);
+}

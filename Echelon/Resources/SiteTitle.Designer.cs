@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Echelon.Resources.Content {
+namespace Echelon.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Echelon.Resources.Content {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Echelon.Resources.Content.SiteTitle", typeof(SiteTitle).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Echelon.Resources.SiteTitle", typeof(SiteTitle).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

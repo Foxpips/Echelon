@@ -71,7 +71,7 @@
     background: #ffffff;
     padding: 25px;
 
-    @include Middle {
+    @include Middle-more {
         border: 4px solid #fa0029;
     }
 }
@@ -127,7 +127,7 @@
     margin: 0 auto;
     margin-top: 10%;
 
-    @include Middle {
+    @include Middle-more {
         width: 400px;
     }
 }

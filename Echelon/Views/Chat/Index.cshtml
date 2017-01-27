@@ -3,15 +3,19 @@
 }
 
 <section class="form-material">
-    <div id="messages">
-        <div id="loggingIn" class="info hidden">Logging in...</div>
-        <div id="joiningChat" class="info hidden">Attempting to join </div>
+    <div id="loading">
+        <div class="overlay"></div>
+        <div class="loading-icon"></div>
+    </div>
+    <div id="messages" class="messages__console">
+        <div id="loggingIn" class="messages--info hidden">Logging in...</div>
+        <div id="joiningChat" class="messages--info hidden">Attempting to join </div>
     </div>
     <div id="conversations" class="sidebar">
         People in chat
     </div>
     <div>
-        <input id="chat-input" class="chat__input form-control" type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" autofocus />
+        <input id="chat-input" class="form-control chat__input " type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"/>
     </div>
 
 </section>

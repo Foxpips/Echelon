@@ -7,9 +7,12 @@
 <section class="form-material">
     <i class="fa fa-th-list fa-1" aria-hidden="true"></i>
     <ul>
-        @foreach (var category in Model.Categories)
+        @if (Model.Categories != null)
         {
-            <li>@category.Name</li>
+            foreach (var category in Model.Categories)
+             {
+                 <li>@category.Name</li>
+             }
         }
     </ul>
 </section>

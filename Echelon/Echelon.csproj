@@ -147,6 +147,10 @@
       <HintPath>..\packages\RestSharp.104.0\lib\net4\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RouteLocalization.Mvc, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RouteLocalization.Mvc.2.3.0\lib\net40\RouteLocalization.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -221,7 +225,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="AutoMapper\LoginProfile.cs" />
+    <Compile Include="Infrastructure\Attributes\LocalizedControllerActivator.cs" />
+    <Compile Include="Infrastructure\AutoMapper\LoginProfile.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Models\BusinessModels\ChallengeResult.cs" />
@@ -233,50 +238,77 @@
     <Compile Include="Models\ViewModels\Category.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Content\Chat.Designer.cs">
+    <Compile Include="Resources\Chat.es.Designer.cs">
+      <DependentUpon>Chat.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Chat.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Chat.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Content\Login.Designer.cs">
+    <Compile Include="Resources\Login.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Login.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Content\Menu.Designer.cs">
+    <Compile Include="Resources\Menu.es.Designer.cs">
+      <DependentUpon>Menu.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Menu.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Menu.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Content\SiteDocument.Designer.cs">
+    <Compile Include="Resources\SiteDocument.es.Designer.cs">
+      <DependentUpon>SiteDocument.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\SiteDocument.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteDocument.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Content\SiteTitle.Designer.cs">
+    <Compile Include="Resources\SiteTitle.es.Designer.cs">
+      <DependentUpon>SiteTitle.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\SiteTitle.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteTitle.resx</DependentUpon>
     </Compile>
-    <Compile Include="Settings\SiteSettings.cs" />
+    <Compile Include="Resources\Login.es.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Settings\SiteSettings.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\spinner-white.gif" />
+    <Content Include="Content\Images\spinner-black.gif" />
     <Content Include="Favicons\echelon.ico" />
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Pages\page-chat.js" />
-    <Content Include="Resources\Sass\Modules\atomic.scss" />
-    <Content Include="Resources\Sass\Pages\page-chat.scss" />
-    <Content Include="Resources\Sass\Partials\partial-topmenu.scss" />
-    <None Include="Resources\Sass\site.scss" />
+    <Content Include="Content\Sass\Modules\atomic.scss" />
+    <Content Include="Content\Sass\Pages\page-chat.scss" />
+    <Content Include="Content\Sass\Partials\partial-topmenu.scss" />
+    <None Include="Content\Sass\site.scss" />
     <Content Include="package.json" />
     <Content Include="bower.json" />
-    <Content Include="Resources\Images\g-logo.png" />
-    <Content Include="Resources\Sass\bootstrap.scss" />
-    <None Include="Resources\Sass\_variables.scss" />
-    <None Include="Resources\Sass\_mixins.scss" />
-    <None Include="Resources\Sass\Pages\page-login.scss" />
+    <Content Include="Content\Images\g-logo.png" />
+    <Content Include="Content\Sass\bootstrap.scss" />
+    <None Include="Content\Sass\_variables.scss" />
+    <None Include="Content\Sass\_mixins.scss" />
+    <None Include="Content\Sass\Pages\page-login.scss" />
     <Content Include="tsconfig.json" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -296,9 +328,9 @@
     <Content Include="Views\Login\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Sass\Mixins\" />
     <Folder Include="Javascript\Common\" />
     <Folder Include="Javascript\Controls\" />
-    <Folder Include="Resources\Sass\Mixins\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -306,24 +338,45 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Content\Chat.resx">
+    <EmbeddedResource Include="Resources\Chat.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Chat.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Chat.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Chat.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Content\Login.resx">
+    <EmbeddedResource Include="Resources\Login.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Login.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Login.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Content\Menu.resx">
+    <EmbeddedResource Include="Resources\Menu.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Menu.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Menu.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Content\SiteDocument.resx">
+    <EmbeddedResource Include="Resources\SiteDocument.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteDocument.es.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SiteDocument.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SiteDocument.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Content\SiteTitle.resx">
+    <EmbeddedResource Include="Resources\SiteTitle.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteTitle.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SiteTitle.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SiteTitle.Designer.cs</LastGenOutput>
     </EmbeddedResource>

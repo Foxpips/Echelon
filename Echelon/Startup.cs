@@ -8,7 +8,8 @@ using Autofac.Integration.Mvc;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Core.Extensions.AutoMapper;
-using Echelon.Settings;
+using Echelon.Infrastructure.Attributes;
+using Echelon.Infrastructure.Settings;
 using MassTransit;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -36,6 +37,8 @@ namespace Echelon
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             AutoMapperExtensions.RegisterProfilesOnInit(targetAssembly);
+            ControllerBuilder.Current.SetControllerFactory(
+                new DefaultControllerFactory(new LocalizedControllerActivator()));
 
             ConfigureCookies(app);
             ConfigureApplication();

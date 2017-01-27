@@ -1,0 +1,120 @@
+﻿@import "../variables";
+@import "../mixins";
+
+.sidebar {
+    display: none;
+    position: absolute;
+    color: $color-primary;
+    text-align: center;
+    right: 1px;
+    width: 18%;
+    border-left: 1px solid deepskyblue;
+    height: 100%;
+
+    @include Middle-more {
+        display: block;
+    }
+}
+
+.chat__input {
+    display: block;
+    height: 52px;
+    margin: 10px auto;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid $color-secondary !important;
+    padding: 0;
+    font-size: 42px;
+    color: $color-primary;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    @include Middle-more {
+        width: 82%;
+    }
+}
+
+#conversationGrid {
+    padding: 10px;
+    width: 100%;
+
+    @include Middle-more {
+        width: 100%;
+    }
+}
+
+.messages {
+    &__console {
+        width: 100%;
+        margin: 0 auto;
+        bottom: 70px;
+        z-index: 1;
+        position: absolute;
+        background-color: $color-white;
+        padding: 10px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        @include Middle-more {
+            width: 80%;
+            position: absolute;
+        }
+    }
+
+    &--info {
+        margin: 5px 0;
+        font-style: italic;
+        color: black;
+    }
+}
+
+.message-container {
+    margin: 5px 0;
+    color: #fff;
+    text-align: left;
+
+    &--other {
+        @include Middle-less {
+            text-align: right;
+        }
+    }
+
+    &__message {
+        display: inline-block;
+        margin-right: 5px;
+        background: $color-control;
+        padding: 10px 10px 10px 10px;
+
+        &--me {
+            color: $color-brown;
+        }
+
+        &--other {
+            color: $color-brown;
+        }
+    }
+
+    &__username {
+        display: inline-block;
+        margin-right: 5px;
+        font-weight: bold;
+         
+        @include Middle-less {
+            display: block;
+        }
+
+        &--me {
+            color: $color-primary;
+
+        }
+
+        &--other {
+            color: $color-secondary;
+        }
+    }
+}

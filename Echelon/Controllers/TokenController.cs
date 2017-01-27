@@ -29,15 +29,17 @@ namespace Echelon.Controllers
             _dataService = dataService;
         }
 
+        // GET: /token
         public async Task<ActionResult> Index(string device, string channel)
         {
             // Create a random identity for the client
             var usersEntity = await _dataService.Read<UsersEntity>();
             var user = _owinContext.Authentication.User;
-            var identity = usersEntity.Users.Single(x => x.Email.Equals(user.Identity.Name));
+            var userEntity = usersEntity.Users.Single(x => x.Email.Equals(user.Identity.Name));
+            var identity = userEntity.UserName ?? userEntity.Email;
 
             // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity.UserName ?? identity.Email };
+            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity };
 
             // Create an IP messaging grant for this token
             var grant = new IpMessagingGrant

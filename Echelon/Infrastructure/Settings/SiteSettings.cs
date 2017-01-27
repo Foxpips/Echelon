@@ -1,4 +1,4 @@
-﻿namespace Echelon.Settings
+﻿namespace Echelon.Infrastructure.Settings
 {
     public static class SiteSettings
     {

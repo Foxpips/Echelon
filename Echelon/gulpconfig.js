@@ -1,8 +1,8 @@
 ﻿module.exports = function () {
     var rootPath = "./",
-        sassSourcePath = rootPath + "Resources/Sass/",
+        sassSourcePath = rootPath + "Content/Sass/",
         jsSourcePath = rootPath + "Javascript/",
-        imgSourcePath = rootPath + "Resources/Images",
+        imgSourcePath = rootPath + "Content/Images",
         outputPath = rootPath + "assets/",
         bowerSourcePath = rootPath + "bower_components/";
 
@@ -28,7 +28,7 @@
 
             base: {
                 fileName: "base.js",
-                files: [jsSourcePath + "Common/*/*.js", jsSourcePath + "Controls/*/*.js"]
+                files: [jsSourcePath + "Common/*.js", jsSourcePath + "Controls/*.js"]
             },
 
             pages: {

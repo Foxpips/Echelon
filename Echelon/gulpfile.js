@@ -85,7 +85,7 @@ gulp.task("min:js:pages", function () {
 });
 
 ///*******************************
-//          Resources
+//          Content
 //*******************************/
 gulp.task("copy:images", function () {
     var images = config.resources.images;

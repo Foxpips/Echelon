@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Echelon.Resources.Content {
+namespace Echelon.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Echelon.Resources.Content {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Echelon.Resources.Content.Login", typeof(Login).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Echelon.Resources.Login", typeof(Login).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,7 +79,7 @@ namespace Echelon.Resources.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login failed. Check your login details..
+        ///   Looks up a localized string similar to Login failed. Check your login details.
         /// </summary>
         public static string LoginFailed {
             get {
@@ -97,6 +97,24 @@ namespace Echelon.Resources.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid email address.
+        /// </summary>
+        public static string MissingEmail {
+            get {
+                return ResourceManager.GetString("MissingEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter your password.
+        /// </summary>
+        public static string MissingPassword {
+            get {
+                return ResourceManager.GetString("MissingPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Don&apos;t have an account?.
         /// </summary>
         public static string NoAccount {
@@ -106,7 +124,7 @@ namespace Echelon.Resources.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not Logged In.
+        ///   Looks up a localized string similar to Not logged in.
         /// </summary>
         public static string NotLoggedIn {
             get {

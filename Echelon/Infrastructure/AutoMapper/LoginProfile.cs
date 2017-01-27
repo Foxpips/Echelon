@@ -4,7 +4,7 @@ using Echelon.Core.Extensions;
 using Echelon.Models.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 
-namespace Echelon.AutoMapper
+namespace Echelon.Infrastructure.AutoMapper
 {
     public class LoginProfile : Profile
     {
