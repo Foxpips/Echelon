@@ -297,6 +297,7 @@
     <Content Include="Favicons\echelon.ico" />
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
+    <Content Include="Javascript\Controls\notification-control.js" />
     <Content Include="Javascript\Pages\page-chat.js" />
     <Content Include="Content\Sass\Modules\atomic.scss" />
     <Content Include="Content\Sass\Pages\page-chat.scss" />
@@ -330,7 +331,6 @@
   <ItemGroup>
     <Folder Include="Content\Sass\Mixins\" />
     <Folder Include="Javascript\Common\" />
-    <Folder Include="Javascript\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
