@@ -1,4 +1,4 @@
-﻿var notifier = function () {
+﻿var NotificationControl = function () {
     var self = this;
 
     self.init = function () {
@@ -12,7 +12,7 @@
         window.onblur = function () {
             self.windowActive = false;
         };
-    };
+    }();
 
     self.sendNotification = function (author, message) {
         if (self.windowActive === false) {
