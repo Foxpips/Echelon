@@ -299,6 +299,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Controls\chat-control.js" />
     <Content Include="Javascript\Controls\notification-control.js" />
+    <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Pages\page-chat.js" />
     <Content Include="Content\Sass\Modules\atomic.scss" />
     <Content Include="Content\Sass\Pages\page-chat.scss" />
@@ -331,7 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sass\Mixins\" />
-    <Folder Include="Javascript\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

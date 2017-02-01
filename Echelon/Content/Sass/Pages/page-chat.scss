@@ -63,6 +63,7 @@
         @include Middle-more {
             width: 80%;
             position: absolute;
+            padding-left: 221px;
         }
     }
 
@@ -78,6 +79,10 @@
     color: #fff;
     text-align: left;
 
+    @include Middle-more {
+        margin: 10px 0;
+    }
+
     &--other {
         @include Middle-less {
             text-align: right;
@@ -87,8 +92,17 @@
     &__message {
         display: inline-block;
         margin-right: 5px;
-        background: $color-control;
         padding: 10px 10px 10px 10px;
+        overflow-wrap: break-word;
+        border-radius: 25px;
+
+        @include Middle-more {
+            display: block;
+        }
+
+        @include Middle-less {
+            background: $color-control;
+        }
 
         &--me {
             color: $color-brown;
@@ -103,14 +117,13 @@
         display: inline-block;
         margin-right: 5px;
         font-weight: bold;
-         
+
         @include Middle-less {
             display: block;
         }
 
         &--me {
             color: $color-primary;
-
         }
 
         &--other {

@@ -1,7 +1,7 @@
 ﻿var NotificationControl = function () {
     var self = this;
 
-    self.init = function () {
+    (function () {
         self.windowActive = true;
 
         $(window)
@@ -12,7 +12,7 @@
         window.onblur = function () {
             self.windowActive = false;
         };
-    }();
+    })();
 
     self.sendNotification = function (author, message) {
         if (self.windowActive === false) {

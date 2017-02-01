@@ -1,9 +1,9 @@
-﻿$(function () {
+﻿var currentChannel; // A handle to the "general" chat channel - the one and only channel we will have in this sample app
+$(function () {
 
     var $input = $("#chat-input");
     var accessManager; // Manages the state of our access token we got from the server
     var messagingClient; // Our interface to the IP Messaging service
-    var currentChannel; // A handle to the "general" chat channel - the one and only channel we will have in this sample app
     var username; // The server will assign the client a random username - store that value here
 
     var notificationManager = new NotificationControl();
@@ -34,9 +34,11 @@
                 }).then(function (channel) {
                     currentChannel = channel;
                     chatManager.setupChannel(currentChannel, username);
+                    console.log(currentChannel);
                 });
             } else {
                 chatManager.setupChannel(currentChannel, username);
+                console.log(currentChannel);
             }
         });
     });
