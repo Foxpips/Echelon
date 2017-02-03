@@ -2,16 +2,17 @@
 var ChatControl = function (notificationManager) {
     var self = this;
     var $window = $(window);
-    var $chatWindow = $("#messages"); //TODO smarkey use find on a base dom element to speed up search
-    var $conversations = $("#conversations"); //TODO smarkey use find on a base dom element to speed up search
-    var metypedLastMessage = false;
+    const container = $("#container");
+    var $chatWindow = container.find("#messages");
+    var $conversations = container.find("#users");
+    var lastOtherAuthor = "";
 
     (function () {
-        var psize = $window.height() - 160;
+        const psize = $window.height() - 160;
         $chatWindow.height(psize);
 
         $window.resize(function () {
-            var rsize = $window.height() - 160;
+            const rsize = $window.height() - 160;
             $chatWindow.height(rsize);
             $chatWindow.scrollTop(document.getElementById("messages").scrollHeight);
         });
@@ -19,7 +20,7 @@ var ChatControl = function (notificationManager) {
 
     // Helper function to print info messages to the chat window
     self.print = function (infoMessage, asHtml) {
-        var $msg = $("<div class=\"info\">");
+        const $msg = $("<div class=\"info\">");
         if (asHtml) {
             $msg.html(infoMessage);
         } else {
@@ -28,78 +29,74 @@ var ChatControl = function (notificationManager) {
         $chatWindow.append($msg);
     };
 
-    // Helper function to print chat message to the chat window
-    self.printMessage = function (fromUser, message) {
-        var $container = $("<div class=\"message-container\">");
-        var $user = $("<div class=\"message-container__username message-container__username--me\">").text(fromUser + ": ");
-        var $message = $("<div class=\"message-container__message message-container__message--me\">").text(message);
-//        $magicDiv.append($message);
+    const renderMessage = function (fromUser, $message, $time, $container, $user) {
+        $message.append($time);
 
-        if (metypedLastMessage === true) {
+        if (fromUser === lastOtherAuthor) {
             $container.append($message);
         } else {
             $container.append($user).append($message);
         }
-        
+
         $chatWindow.append($container);
         $chatWindow.scrollTop($chatWindow[0].scrollHeight);
-        metypedLastMessage = true;
+        lastOtherAuthor = fromUser;
+    };
+
+    self.printMessage = function (fromUser, message) {
+        const $container = $("<div class=\"message-container\">");
+        const $user = $("<div class=\"message-container__username message-container__username--me\">").text(fromUser + ": ");
+        const $time = $("<div class=\"message-container__timestamp\">").text(` ${message.timestamp.toLocaleTimeString()}`);
+        const $message = $("<div class=\"message-container__message message-container__message--me\">").text(message.body);
+        renderMessage(fromUser, $message, $time, $container, $user);
     };
 
     self.printReceivedMessage = function (fromUser, message) {
-        var $container = $("<div class=\"message-container message-container--other\" >");
-        var $user = $("<div class=\"message-container__username message-container__username--other\">").text(fromUser + ": ");
-        var $message = $("<div class=\"message-container__message message-container__message--other\" >").text(message);
-//        $magicDiv.append($message);
-
-        if (metypedLastMessage === false) {
-            $container.append($message);
-        } else {
-            $container.append($user).append($message);
-        }
-
-        $chatWindow.append($container);
-        $chatWindow.scrollTop($chatWindow[0].scrollHeight);
-        metypedLastMessage = false;
+        const $container = $("<div class=\"message-container message-container--other\" >");
+        const $user = $("<div class=\"message-container__username message-container__username--other\">").text(fromUser + ": ");
+        const $time = $("<div class=\"message-container__timestamp\">").text(` ${message.timestamp.toLocaleTimeString()}`);
+        const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(message.body);
+        renderMessage(fromUser, $message, $time, $container, $user);
     };
 
     self.chatHistory = function (username) {
         setTimeout(function () {
-            for (var i = 0; i < currentChannel.messages.length; i++) {
-                var message = currentChannel.messages[i];
+            for (let i = 0; i < currentChannel.messages.length; i++) {
+                const message = currentChannel.messages[i];
                 if (username === message.author) {
-                    self.printMessage(message.author, message.body);
+                    self.printMessage(message.author, message);
                 } else {
-                    self.printReceivedMessage(message.author, message.body);
+                    self.printReceivedMessage(message.author, message);
                 }
             }
-//            for (let value of currentChannel._membersEntity.members.entries()) {
-//                $conversations.append($("<div>"+ value[1]._identity+"</div>"));
-//            }
 
             $("#loading").hide();
-        },
-            1000);
+        }, 1000);
     };
 
-    // Set up channel after it has been found
-    self.setupChannel = function (currentChannel, username) {
-        // Join the general channel
+    self.setOnline = function () {
+        setTimeout(function () {
+            for (let value of currentChannel._membersEntity.members.entries()) {
+                $conversations.append($(`<div>${value[1]._identity}</div>`));
+            }
+        }, 1000);
+    };
 
+    self.setupChannel = function (currentChannel, username) {
         currentChannel.join()
             .then(function () {
                 self.print("Joined channel as " + "<span class=\"me\">" + username + "</span>.", true);
                 self.chatHistory(username);
+                self.setOnline();
             });
 
-        // Listen for new messages sent to the channel
         currentChannel.on("messageAdded",
             function (message) {
                 if (username === message.author) {
-                    self.printMessage(message.author, message.body);
+                    self.printMessage(message.author, message);
                 } else {
-                    self.printReceivedMessage(message.author, message.body);
-                    notificationManager.sendNotification(message.author, message.body);
+                    self.printReceivedMessage(message.author, message);
+                    notificationManager.sendNotification(message.author, message);
                 }
             });
     };

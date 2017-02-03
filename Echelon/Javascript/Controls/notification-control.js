@@ -19,7 +19,7 @@
             var notification = new window.Notification(author,
             {
                 icon: "https://localhost/Echelon/assets/imgs/spinner-white.gif",
-                body: message,
+                body: message.body,
                 tag: author
             });
 

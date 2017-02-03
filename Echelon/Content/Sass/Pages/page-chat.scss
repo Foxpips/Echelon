@@ -130,4 +130,16 @@
             color: $color-secondary;
         }
     }
+
+    &__timestamp {
+        font-size: 10px;
+        color: $color-gray-dark;
+        float: right;
+
+        @include Middle-less {
+            float: none;
+            color: $color-brown;
+            font-size: 9px;
+        }
+    }
 }

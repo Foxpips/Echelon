@@ -1,6 +1,7 @@
 /// <binding BeforeBuild='clean' AfterBuild='build' ProjectOpened='watch' />
 
 var gulp = require("gulp"),
+    babel = require('gulp-babel'),
     config = require("./gulpconfig")(),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
@@ -157,6 +158,7 @@ function bundleJs(files, fileName, jsHint) {
     pipe = pipe.pipe(concat(fileName))
         .pipe(gulp.dest(outFolder))
         .pipe(rename(renameOptions))
+        .pipe(babel({ presets: ['es2015'] }))
         .pipe(uglify()).on("error", logError)
         .pipe(gulp.dest(minOutFolder));
 
