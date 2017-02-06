@@ -30,14 +30,14 @@ var ChatControl = function (notificationManager) {
     };
 
     const renderMessage = function (fromUser, $message, $time, $container, $user) {
-        $message.append($time);
-
         if (fromUser === lastOtherAuthor) {
             $container.append($message);
+            $(container.find(".message-container__timestamp").last()).hide();
         } else {
             $container.append($user).append($message);
         }
 
+        $container.append($time);
         $chatWindow.append($container);
         $chatWindow.scrollTop($chatWindow[0].scrollHeight);
         lastOtherAuthor = fromUser;
