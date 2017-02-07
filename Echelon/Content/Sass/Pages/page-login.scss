@@ -18,7 +18,7 @@
     overflow: visible;
     text-align: center;
     font-weight: 700;
-    background-color: #5a95f5;
+    background-color: $color-secondary;
     -moz-border-radius: 3px;
     border-radius: 3px;
     -webkit-user-select: none;
@@ -27,10 +27,23 @@
     user-select: none;
     text-decoration: none;
 
-    &:hover {
+     &:hover {
         background-color: #0094ff;
         border-color: #5a95f5;
         border-bottom-color: #4285f4;
+    }
+
+    &__control {
+        background-color: $color-control;
+        
+        @include Middle-less{
+            margin-top: 10px;
+        }
+        
+
+        &:hover {
+            background-color: powderblue;
+        }
     }
 }
 
@@ -72,7 +85,7 @@
     padding: 25px;
 
     @include Middle-more {
-        border: 4px solid #fa0029;
+        border: 4px solid $color-secondary;
     }
 }
 

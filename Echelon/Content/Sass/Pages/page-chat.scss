@@ -98,6 +98,7 @@
 
         @include Middle-more {
             display: block;
+            border-radius: 10px;
         }
 
         @include Middle-less {
@@ -106,10 +107,21 @@
 
         &--me {
             color: $color-brown;
+            background: rgba(66, 62, 255, 0.24);
+
+            @include Middle-more {
+                background: rgba(203, 191, 192, 0.3);
+                margin-right: 30px;
+            }
         }
 
         &--other {
             color: $color-brown;
+
+            @include Middle-more {
+                background: rgba(155, 180, 212, 0.41);
+                margin-left: 30px;
+            }
         }
     }
 
@@ -127,21 +139,21 @@
         }
 
         &--other {
-            color: $color-secondary;
+            color: rgba(0, 109, 249, 0.88);
         }
     }
 
     &__timestamp {
         font-size: 10px;
-        color: $color-gray-dark;
+        color: $color-green;
         float: right;
 
         @include Middle-less {
             float: none;
-            color: $color-green;
             font-size: 9px;
             padding-left: 5px;
             padding-right: 5px;
+            padding-top: 5px;
         }
     }
 }
