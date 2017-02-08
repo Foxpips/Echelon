@@ -1,4 +1,4 @@
-﻿namespace Echelon.Core.Logging.Interfaces
+﻿namespace Echelon.Core.Logging.Loggers
 {
     public interface IClientLogger
     {

@@ -1,4 +1,5 @@
-﻿var currentChannel; // A handle to the "general" chat channel - the one and only channel we will have in this sample app
+﻿/*jshint esversion: 6 */
+var currentChannel; // A handle to the "general" chat channel - the one and only channel we will have in this sample app
 $(function () {
 
     var $input = $("#chat-input");

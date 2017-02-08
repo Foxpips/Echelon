@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.MassTransit.Commands;
-using Echelon.Core.Logging.Interfaces;
+using Echelon.Core.Logging.Loggers;
 using MassTransit;
 
 namespace Echelon.Core.Infrastructure.MassTransit.Consumers

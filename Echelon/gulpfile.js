@@ -17,7 +17,6 @@ var gulp = require("gulp"),
     bower = require("gulp-bower"),
     runSequence = require("gulp-run-sequence"),
     cmq = require("gulp-combine-media-queries"),
-
     renameOptions = { suffix: ".min" };
 
 bowerDir = "./bower_components";

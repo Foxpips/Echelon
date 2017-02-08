@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Loggers\ClientLogger.cs" />
-    <Compile Include="Interfaces\IClientLogger.cs" />
+    <Compile Include="Loggers\IClientLogger.cs" />
     <Compile Include="Resources\ResourceLoader.cs" />
   </ItemGroup>
   <ItemGroup>

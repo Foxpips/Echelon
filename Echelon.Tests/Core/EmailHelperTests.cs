@@ -17,7 +17,6 @@ namespace Echelon.Tests.Core
             _emailSender = new EmailSender(new DataService(), _emailTokenHelper);
         }
 
-        [Ignore("Need to mock private send method as dont want to spam emails each time")]
         [Test]
         public async Task Email_Send_Success()
         {

@@ -26,6 +26,7 @@
     "rimraf": "2.2.8"
   },
   "dependencies": {
+    "google-translate-api": "^2.2.2",
     "gulp-install": "^0.6.0"
   }
 }

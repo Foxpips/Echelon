@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Echelon.Core.Logging.Interfaces;
 using Echelon.Core.Logging.Loggers;
 
 namespace Echelon.Core.Infrastructure.AutoFac.Modules

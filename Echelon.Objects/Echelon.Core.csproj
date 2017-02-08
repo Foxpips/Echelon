@@ -148,6 +148,7 @@
     <Compile Include="Infrastructure\MassTransit\Commands\SendSignupEmailCommand.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\LogInfoCommandConsumer.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\SendSignUpEmailCommandConsumer.cs" />
+    <Compile Include="Infrastructure\Rest\RestManager.cs" />
     <Compile Include="Infrastructure\Services\Category\CategoryService.cs" />
     <Compile Include="Infrastructure\Services\Category\ICategoryService.cs" />
     <Compile Include="Infrastructure\Services\IService.cs" />
@@ -176,9 +177,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

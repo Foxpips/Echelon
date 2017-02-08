@@ -107,6 +107,7 @@
     <Compile Include="Data\DataServiceTests.cs" />
     <Compile Include="LeagueMaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rest\RestManagerTests.cs" />
     <Compile Include="Twilio\TwilioConnectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +125,10 @@
     <ProjectReference Include="..\Echelon.Data\Echelon.Data.csproj">
       <Project>{a52145c2-3912-4eff-927a-ffe42e006b43}</Project>
       <Name>Echelon.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Echelon.Logging\Echelon.Logging.csproj">
+      <Project>{4DC32C7A-56B1-4243-A362-19DBB1EC525C}</Project>
+      <Name>Echelon.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Echelon.Objects\Echelon.Core.csproj">
       <Project>{A9C78335-B58A-42AF-A17E-D2F30152A607}</Project>

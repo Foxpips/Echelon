@@ -4,7 +4,7 @@ using AutoMapper;
 using Echelon.Core.Entities.Users;
 using Echelon.Core.Infrastructure.MassTransit.Commands;
 using Echelon.Core.Infrastructure.Services.Login;
-using Echelon.Core.Logging.Interfaces;
+using Echelon.Core.Logging.Loggers;
 using Echelon.Models.ViewModels;
 using MassTransit;
 using Microsoft.Owin;

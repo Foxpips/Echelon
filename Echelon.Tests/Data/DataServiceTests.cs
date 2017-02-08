@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Echelon.Core.Entities.Email;
 using Echelon.Core.Entities.Users;
 using Echelon.Core.Extensions;
+using Echelon.Core.Features.Email;
 using Echelon.Data.RavenDb;
 using NUnit.Framework;
 
@@ -58,12 +59,14 @@ namespace Echelon.Tests.Data
         }
 
         [Test]
-        public void CreateEmail_Templates_Success()
+        public async Task CreateEmail_Templates_Success()
         {
-            var emailTemplates = new EmailTemplatesEntity { Templates = new List<EmailTemplateEntity>() };
-            //            emailTemplates.Templates.ToList().Add();
+            var emailTemplates = new EmailTemplatesEntity
+            {
+                Templates = new List<EmailTemplateEntity> { new EmailTemplateEntity { Body = "Body Test", Subject = "Subject Test", Type = EmailTemplateEnum.ForgottenPassword } }
+            };
 
-            //            await _dataService.Create<EmailTemplatesEntity>(emailTemplates);
+            await _dataService.Create(emailTemplates);
         }
     }
 }

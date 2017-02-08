@@ -15,7 +15,7 @@
         People in chat
     </div>
     <div>
-        <input id="chat-input" class="form-control chat__input " type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"/>
+        <input id="chat-input" class="form-control chat__input " type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1" />
     </div>
 
 </section>
@@ -23,4 +23,12 @@
 @section scripts {
     <script src="//media.twiliocdn.com/sdk/rtc/js/ip-messaging/v0.9/twilio-ip-messaging.min.js"></script>
     <script src="//media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+    </script>
+
 }

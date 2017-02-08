@@ -69,12 +69,13 @@ var ChatControl = function (notificationManager) {
                     self.printReceivedMessage(message.author, message);
                 }
             }
-
+            $("body").removeAttr("style");
+            $(".skiptranslate").not(".goog-te-gadget").remove();
             $("#loading").hide();
         }, 1000);
     };
 
-    self.setOnline = function () {
+    self.setOnline = function () {  $(".skiptranslate").not(".goog-te-gadget").remove();
         setTimeout(function () {
             for (let value of currentChannel._membersEntity.members.entries()) {
                 $conversations.append($(`<div>${value[1]._identity}</div>`));
