@@ -322,7 +322,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
-    <Content Include="Views\Shared\_TopMenu.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
     <None Include="Views\Chat\Secure.cshtml" />
     <Content Include="Views\Shared\_Favicon.cshtml" />
     <Content Include="Views\Login\ForgottenPassword.cshtml" />

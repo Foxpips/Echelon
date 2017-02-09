@@ -73,6 +73,13 @@ var ChatControl = function (notificationManager) {
             $(".skiptranslate").not(".goog-te-gadget").remove();
             $("#loading").hide();
         }, 1000);
+
+        $(".goog-te-combo").on("change",function () {
+            setTimeout(function () {
+                $("body").removeAttr("style");
+                $(".skiptranslate").not(".goog-te-gadget").remove();
+            }, 1000);
+        });
     };
 
     self.setOnline = function () {  $(".skiptranslate").not(".goog-te-gadget").remove();
