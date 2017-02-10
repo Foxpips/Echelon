@@ -29,11 +29,15 @@ var ChatControl = function (notificationManager) {
         $chatWindow.append($msg);
     };
 
-    const renderMessage = function (fromUser, $message, $time, $container, $user) {
+    const renderMessage = function (fromUser, $message, $time, $container, $user, renderAvatar) {
         if (fromUser === lastOtherAuthor) {
             $container.append($message);
             $(container.find(".message-container__timestamp").last()).hide();
         } else {
+            if (renderAvatar) {
+                $container
+                    .append($("<img class=\"avatar avatar--other\" src=\"http://autokadabra.ru/system/uploads/users/20/20303/small.png?1319912650\" alt=\"avatar\">"));
+            }
             $container.append($user).append($message);
         }
 
@@ -48,7 +52,7 @@ var ChatControl = function (notificationManager) {
         const $user = $("<div class=\"message-container__username message-container__username--me\">").text(fromUser + ": ");
         const $time = $("<div class=\"message-container__timestamp\">").text(` ${message.timestamp.toLocaleTimeString()}`);
         const $message = $("<div class=\"message-container__message message-container__message--me\">").text(message.body);
-        renderMessage(fromUser, $message, $time, $container, $user);
+        renderMessage(fromUser, $message, $time, $container, $user, false);
     };
 
     self.printReceivedMessage = function (fromUser, message) {
@@ -56,7 +60,7 @@ var ChatControl = function (notificationManager) {
         const $user = $("<div class=\"message-container__username message-container__username--other\">").text(fromUser + ": ");
         const $time = $("<div class=\"message-container__timestamp\">").text(` ${message.timestamp.toLocaleTimeString()}`);
         const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(message.body);
-        renderMessage(fromUser, $message, $time, $container, $user);
+        renderMessage(fromUser, $message, $time, $container, $user, true);
     };
 
     self.chatHistory = function (username) {
@@ -74,7 +78,7 @@ var ChatControl = function (notificationManager) {
             $("#loading").hide();
         }, 1000);
 
-        $(".goog-te-combo").on("change",function () {
+        $(".goog-te-combo").on("change", function () {
             setTimeout(function () {
                 $("body").removeAttr("style");
                 $(".skiptranslate").not(".goog-te-gadget").remove();
@@ -82,7 +86,8 @@ var ChatControl = function (notificationManager) {
         });
     };
 
-    self.setOnline = function () {  $(".skiptranslate").not(".goog-te-gadget").remove();
+    self.setOnline = function () {
+        $(".skiptranslate").not(".goog-te-gadget").remove();
         setTimeout(function () {
             for (let value of currentChannel._membersEntity.members.entries()) {
                 $conversations.append($(`<div>${value[1]._identity}</div>`));
