@@ -36,7 +36,7 @@ var ChatControl = function (notificationManager) {
         } else {
             if (renderAvatar) {
                 $container
-                    .append($("<img class=\"avatar avatar--other\" src=\"http://autokadabra.ru/system/uploads/users/20/20303/small.png?1319912650\" alt=\"avatar\">"));
+                    .append($("<img class=\"avatar avatar--other\" src=\"https://avatars3.githubusercontent.com/u/8901911?v=3&amp;u=f2abba16e1849802daf732f0525b1a5f1701d6fd&amp;s=400\" alt=\"avatar\">"));
             }
             $container.append($user).append($message);
         }

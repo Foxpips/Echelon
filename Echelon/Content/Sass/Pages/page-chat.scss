@@ -1,5 +1,6 @@
 ﻿@import "../variables";
 @import "../mixins";
+@import "../Modules/atomic";
 
 .sidebar {
     display: none;
@@ -17,7 +18,8 @@
 }
 
 .chat__input {
-    display: block;
+    @extend .d-b;
+    @extend .w-100;
     height: 52px;
     margin: 10px auto;
     outline: none;
@@ -29,7 +31,6 @@
     color: $color-primary;
     position: absolute;
     bottom: 0;
-    width: 100%;
 
     @include Middle-more {
         width: 82%;
@@ -37,12 +38,8 @@
 }
 
 #conversationGrid {
+    @extend .w-100;
     padding: 10px;
-    width: 100%;
-
-    @include Middle-more {
-        width: 100%;
-    }
 }
 
 .messages {
@@ -161,23 +158,24 @@
 
 /* Rounded avatars */
 .avatar {
-    float: left;
-    margin-top: 5px;
-    /*margin-right: 1em;*/
+    @extend .fl-l;
+    background-color: $color-black; 
+    margin-top: 10px;
     position: relative;
-
-    @include Middle-less {
-        height: 40px;
-        width: 40px;
-        margin-left: 5px;
-    }
-
+    height: 40px;
+    width: 40px;
+    margin-left: 5px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
     -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
     box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+
+    @include Middle-less{
+    margin-top: 5px;
+    margin-left: 10px;
+    }
 
     &--other {
         width: 40px;
@@ -190,6 +188,18 @@
 
         @include Middle-less {
             display: none;
+        }
+    }
+
+    &--profile {
+        @extend .fl-n;
+        margin-bottom: 10px;
+        width: 150px;
+        height: 150px;
+
+        @include Middle-less {
+            width: 20%;
+            height: 20%;
         }
     }
 }

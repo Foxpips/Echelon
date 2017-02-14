@@ -12,11 +12,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <img class="avatar" src="http://autokadabra.ru/system/uploads/users/20/20303/small.png?1319912650" alt="avatar" />
+            <img class="avatar" src="https://avatars3.githubusercontent.com/u/8901911?v=3&amp;u=f2abba16e1849802daf732f0525b1a5f1701d6fd&amp;s=400" alt="avatar" />
         </div>
         <div class="collapse navbar-collapse" id="navbar-main-menu">
-            <div class="d-ib">
-                <div id="google_translate_element" class="d-ib"></div>
+            <div class="google-translate__container">
+                <div id="google-translate-element"></div>
             </div>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -26,7 +26,8 @@
             </form>
             <ul class="nav navbar-nav navbar-right p-t-5">
                 <li class="dropdown active">
-                    @if (string.IsNullOrEmpty(user))
+                   
+                     @if (string.IsNullOrEmpty(user))
                     {
                         <span>@Login.NotLoggedIn</span>
                     }
@@ -41,7 +42,7 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">@SiteDocument.Profile</a>
+                            @Html.ActionLink("Profile", "Index", "Profile")
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>

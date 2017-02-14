@@ -1,6 +1,6 @@
 ﻿@using System.Threading
 <!DOCTYPE html>
-<html>
+<html class="window-container ov-h">
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
@@ -16,7 +16,7 @@
     @Styles.Render("~/bundles/css")
 </head>
 
-<body>
+<body class="window-container ov-a">
 @if (User.Identity.IsAuthenticated)
 {
     @Html.Partial("_Header")

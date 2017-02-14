@@ -1,0 +1,94 @@
+﻿@using Echelon.Resources
+@model Echelon.Models.ViewModels.ProfileViewModel
+
+@section metadata{
+    <title>@SiteTitle.LoginPage</title>
+}
+
+<section id="wrapper" class="profile-container">
+    <div class="profile-container__information">
+        @using (Html.BeginForm("SaveDetails", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "Profile Update Failed")
+            <h3>Profile</h3>
+            <div class="row">
+                <div class="col-xs-12 m-t-10 ta-c">
+                    <div class="avatar-upload">
+                        <div>
+                            <img alt="Foxpips" class="avatar avatar--profile" height="200" src="https://avatars3.githubusercontent.com/u/8901911?v=3&amp;u=f2abba16e1849802daf732f0525b1a5f1701d6fd&amp;s=400" width="200">
+                        </div>
+                        <label class="btn ta-c">
+                            Upload new picture
+                            <input type="file" class="file-upload">
+                        </label>
+
+                        <div class="upload-state loading">
+                            <button type="button" class="btn m-t-5 " disabled="">
+                                <img alt="" class="v-align-text-bottom" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16"> Uploading...
+                            </button>
+                        </div>
+
+                        @*<div class="upload-state text-red file-empty">
+                                This file is empty.
+                            </div>
+
+                            <div class="upload-state text-red too-big">
+                                Please upload a picture smaller than 1 MB.
+                            </div>
+
+                            <div class="upload-state text-red bad-dimensions">
+                                Please upload a picture smaller than 10,000x10,000.
+                            </div>
+
+                            <div class="upload-state text-red bad-file">
+                                We only support PNG, GIF, or JPG pictures.
+                            </div>
+
+                            <div class="upload-state text-red failed-request">
+                                Something went really wrong and we can’t process that picture.
+                            </div>
+
+                            <div class="upload-state text-red bad-format">
+                                File contents don't match the file extension.
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 m-t-10 ta-c">
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control", placeholder = "FirstName", required = "true", oninvalid = "this.setCustomValidity(" + "FirstName error" + ")" })
+                        @Html.ValidationMessageFor(u => u.FirstName)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 m-t-10 ta-c">
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.SecondName, new { @class = "form-control", placeholder = "SecondName", required = "true", oninvalid = "this.setCustomValidity(" + "SecondName error" + ")" })
+                        @Html.ValidationMessageFor(u => u.SecondName)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-9 m-t-10 ta-c">
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.DisplayName, new { @class = "form-control", placeholder = "DisplayName", required = "true", oninvalid = "this.setCustomValidity(" + "DisplayName error" + ")" })
+                        @Html.ValidationMessageFor(u => u.DisplayName)
+                    </div>
+                </div>
+                <div class="col-xs-3 m-t-10 ta-c">
+                    <div class="form-group">
+                        @Html.CheckBoxFor(u => u.UseDisplayName, new { @class = "form-control", placeholder = "Use Display Name", required = "true", oninvalid = "this.setCustomValidity(" + "Use DisplayName error" + ")" })
+                        @Html.ValidationMessageFor(u => u.UseDisplayName)
+                        @Html.LabelFor(u => u.UseDisplayName, "Enabled")
+                    </div>
+                </div>
+            </div>
+            <div class="row ta-c">
+                    <button class="btn btn-info btn-lg text-uppercase" type="submit">Save</button>
+                </div>
+        }
+    </div>
+</section>

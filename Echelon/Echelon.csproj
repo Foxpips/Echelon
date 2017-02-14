@@ -225,6 +225,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Infrastructure\Attributes\LocalizedControllerActivator.cs" />
     <Compile Include="Infrastructure\AutoMapper\LoginProfile.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="Controllers\ExternalLoginController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
+    <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\CategoriesViewModel.cs" />
     <Compile Include="Models\ViewModels\Category.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
@@ -299,6 +301,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Controls\chat-control.js" />
     <Content Include="Javascript\Controls\notification-control.js" />
+    <Content Include="Content\Sass\Pages\page-profile.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\translate-control.js" />
     <Content Include="Javascript\Pages\page-chat.js" />
@@ -330,6 +333,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Error\Account.cshtml" />
     <Content Include="Views\Login\Help.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sass\Mixins\" />

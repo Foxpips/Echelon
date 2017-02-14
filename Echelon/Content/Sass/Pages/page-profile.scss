@@ -1,0 +1,26 @@
+﻿@import "../variables";
+@import "../mixins";
+@import "../Modules/atomic";
+
+.profile-container {
+    @extend .m-0-a;
+    @extend .w-100;
+    background: $color-white;
+
+    @include Middle-more {
+        width: 600px;
+    }
+
+    &__information {
+        background: #ffffff;
+        padding: 25px;
+    }
+}
+
+.file-upload {
+    @extend .pos-a;
+    @extend .cur-p;
+    padding: 5px;
+    margin-left: -80px;
+    opacity: 0.0001;
+}
