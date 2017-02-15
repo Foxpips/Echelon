@@ -5,6 +5,7 @@ var ChatControl = function (notificationManager) {
     const container = $("#container");
     var $chatWindow = container.find("#messages");
     var $conversations = container.find("#users");
+    var $loading = $("#loading");
     var lastOtherAuthor = "";
 
     (function () {
@@ -19,14 +20,14 @@ var ChatControl = function (notificationManager) {
     })();
 
     // Helper function to print info messages to the chat window
-    self.print = function (infoMessage, asHtml) {
-        const $msg = $("<div class=\"info\">");
+    self.printToLoading = function (infoMessage, asHtml, initialPadding) {
+        const $msg = initialPadding ? $("<div class=\"info loading-text loading-text--initial\">") : $("<div class=\"info loading-text\">");
         if (asHtml) {
             $msg.html(infoMessage);
         } else {
             $msg.text(infoMessage);
         }
-        $chatWindow.append($msg);
+        $(".loading-icon").append($msg);
     };
 
     const renderMessage = function (fromUser, $message, $time, $container, $user, renderAvatar) {
@@ -75,7 +76,7 @@ var ChatControl = function (notificationManager) {
             }
             $("body").removeAttr("style");
             $(".skiptranslate").not(".goog-te-gadget").remove();
-            $("#loading").hide();
+            $loading.hide();
         }, 1000);
 
         $(".goog-te-combo").on("change", function () {
@@ -98,7 +99,7 @@ var ChatControl = function (notificationManager) {
     self.setupChannel = function (currentChannel, username) {
         currentChannel.join()
             .then(function () {
-                self.print("Joined channel as " + "<span class=\"me\">" + username + "</span>.", true);
+                self.printToLoading("Joined channel as " + "<span class=\"me\">" + username + "</span>.", true);
                 self.chatHistory(username);
                 self.setOnline();
             });

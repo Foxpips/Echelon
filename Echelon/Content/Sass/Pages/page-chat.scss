@@ -3,14 +3,14 @@
 @import "../Modules/atomic";
 
 .sidebar {
-    display: none;
-    position: absolute;
+    @extend .display-none;
+    @extend .position-absolute;
+    @extend .text-align-center;
+    @extend .height-100-percent;
     color: $color-primary;
-    text-align: center;
     right: 1px;
     width: 18%;
     border-left: 1px solid deepskyblue;
-    height: 100%;
 
     @include Middle-more {
         display: block;
@@ -18,19 +18,19 @@
 }
 
 .chat__input {
-    @extend .d-b;
-    @extend .w-100;
+    @extend .display-block;
+    @extend .width-100-percent;
+    @extend .outline-none;
+    @extend .bg-color-transparent;
+    @extend .border-none;
+    @extend .bottom-0;
+    @extend .position-absolute;
+    @extend .padding-0;
     height: 52px;
     margin: 10px auto;
-    outline: none;
-    background-color: transparent;
-    border: none;
     border-top: 1px solid $color-secondary !important;
-    padding: 0;
     font-size: 42px;
     color: $color-primary;
-    position: absolute;
-    bottom: 0;
 
     @include Middle-more {
         width: 82%;
@@ -38,24 +38,23 @@
 }
 
 #conversationGrid {
-    @extend .w-100;
+    @extend .width-100-percent;
     padding: 10px;
 }
 
 .messages {
     &__console {
-        width: 100%;
-        margin: 0 auto;
+        @extend .width-100-percent;
+        @extend .margin-0-auto;
+        @extend .position-absolute;
+        /*overflow-y: scroll;*/
+        @extend .overflow-y-auto;
+        @extend .overflow-x-hidden;
+        background-color: $color-white;
         bottom: 70px;
         z-index: 1;
-        position: absolute;
-        background-color: $color-white;
         padding: 10px;
-        overflow-x: hidden;
-        overflow-y: scroll;
         margin-bottom: 10px;
-        overflow-x: hidden;
-        overflow-y: auto;
 
         @include Middle-more {
             width: 80%;
@@ -65,16 +64,16 @@
     }
 
     &--info {
+        @extend .font-style-italic;
+        color: $color-black;
         margin: 5px 0;
-        font-style: italic;
-        color: black;
     }
 }
 
 .message-container {
+    @extend .text-align-left;
+    color: $color-white;
     margin: 5px 0;
-    color: #fff;
-    text-align: left;
 
     &--other {
         @include Middle-less {
@@ -83,10 +82,10 @@
     }
 
     &__message {
-        display: inline-block;
+        @extend .display-inline-block;
+        @extend .overflow-wrap-break-word;
         margin-right: 5px;
         padding: 16px;
-        overflow-wrap: break-word;
         border-radius: 25px;
 
         @include Middle-more {
@@ -113,16 +112,16 @@
             color: $color-brown;
 
             @include Middle-more {
-                background: #9fe4ff; // #9cdaff
+                background: #9fe4ff;
                 margin-left: 60px;
             }
         }
     }
 
     &__username {
-        display: inline-block;
+        @extend .display-inline-block;
+        @extend .font-weight-bold;
         margin-right: 5px;
-        font-weight: bold;
 
         @include Middle-less {
             display: block;
@@ -142,9 +141,9 @@
     }
 
     &__timestamp {
+        @extend .float-right;
         font-size: 10px;
         color: $color-green;
-        float: right;
 
         @include Middle-less {
             float: none;
@@ -158,10 +157,10 @@
 
 /* Rounded avatars */
 .avatar {
-    @extend .fl-l;
-    background-color: $color-black; 
+    @extend .float-left;
+    @extend .position-relative;
+    background-color: $color-black;
     margin-top: 10px;
-    position: relative;
     height: 40px;
     width: 40px;
     margin-left: 5px;
@@ -172,9 +171,9 @@
     -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
     box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
 
-    @include Middle-less{
-    margin-top: 5px;
-    margin-left: 10px;
+    @include Middle-less {
+        margin-top: 5px;
+        margin-left: 10px;
     }
 
     &--other {
@@ -192,7 +191,7 @@
     }
 
     &--profile {
-        @extend .fl-n;
+        @extend .float-none;
         margin-bottom: 10px;
         width: 150px;
         height: 150px;

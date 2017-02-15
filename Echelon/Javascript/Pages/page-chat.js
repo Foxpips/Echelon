@@ -9,7 +9,7 @@ $(function () {
 
     var notificationManager = new NotificationControl();
     var chatManager = new ChatControl(notificationManager);
-    chatManager.print('Logging in...');
+    chatManager.printToLoading('Logging in...', false, true);
 
     var selectedChannel = "Anime";  // Get an access token for the current user, passing a username (identity)
     var endpoint = $("#chat-input").data("target"); // and a device ID - for browser-based apps, we'll always just use the value "browser"
@@ -23,7 +23,7 @@ $(function () {
 
         // Get the general chat channel, which is where all the messages are
         // sent in this simple application
-        chatManager.print("Joining channel: " + selectedChannel);
+        chatManager.printToLoading("Joining channel: " + selectedChannel);
         var promise = messagingClient.getChannelByUniqueName(selectedChannel);
         promise.then(function (channel) {
             currentChannel = channel;

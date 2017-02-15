@@ -9,14 +9,14 @@
 }
 
 .btn {
-    @extend .d-ib;
-    @extend .va-m;
-    @extend .cur-p;
-    @extend .bd-n;
-    @extend .m-0;
-    @extend .ov-v;
-    @extend .ta-c;
-    @extend .fw-7;
+    @extend .display-inline-block;
+    @extend .vertical-align-middle;
+    @extend .cursor-pointer;
+    @extend .border-none;
+    @extend .margin-0;
+    @extend .overflow-visible;
+    @extend .text-align-center;
+    @extend .font-weight-bold;
     font-family: inherit;
     padding: 12px 1em;
     background-color: $color-secondary;
@@ -80,7 +80,7 @@
 .google-translate {
 
     &__container {
-        @extend .d-ib;
+        @extend .display-inline-block;
         margin-top: 5px;
     }
 }
@@ -143,8 +143,8 @@
 
 
 .login-box {
-    @extend .w-100;
-    @extend .h-100;
+    @extend .width-100-percent;
+    @extend .height-100-percent;
     background: #ffffff;
     margin: 0 auto;
     margin-top: 10%;
@@ -155,19 +155,19 @@
 }
 
 .login-box .footer {
-    @extend .w-100;
+    @extend .width-100-percent;
     left: 0;
     right: 0;
 }
 
 .login-box .social {
-    display: block;
+    @extend .display-block;
     margin-bottom: 30px;
 }
 
 .login-sidebar {
-    position: absolute;
-    right: 0;
-    margin-top: 0;
+    @extend .position-absolute;
+    @extend .right-0;
+    @extend .margin-top-0;
     height: 100%;
 }

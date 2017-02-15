@@ -12,7 +12,7 @@
 }
 
 header {
-    @extend .w-100;
+    @extend .width-100-percent;
     position: absolute;
     text-align: center;
     bottom: 20px;
@@ -57,12 +57,31 @@ section {
     width: 50px;
 }
 
+.loading-text {
+    position: relative;
+    width: 200px;
+    height: 50px;
+    background-color: white;
+    animation-name: example;
+    animation-duration: 1.5s;
+    color: $color-secondary;
+
+    @keyframes example {
+    0%   {background-color:$color-secondary; left:300px; top:0px;}
+    25%  {background-color:$color-secondary; left:200px; top:0px;}
+}
+
+    &--initial{
+        margin-top: 100px;
+    }
+}
+
 .overlay {
-    @extend .w-100;
-    @extend .h-100;
-    @extend .pos-f;
+    @extend .width-100-percent;
+    @extend .height-100-percent;
+    @extend .position-fixed;
     top: 0;
     left: 0;
     z-index: 10;
-    background-color: rgba(255, 255, 255, 0.63);
+    background-color: rgba(255, 255, 255, 0.93);
 }
