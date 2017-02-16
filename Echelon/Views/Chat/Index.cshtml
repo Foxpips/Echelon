@@ -4,9 +4,9 @@
 
 <section id="container" class="form-material">
     <div id="loading">
-        <div class="overlay"></div>
-        <div class="loading-icon"></div>
-        </div>
+        <div class="loading__overlay"></div>
+        <div class="loading__icon"></div>
+    </div>
     <div id="messages" class="messages__console">
         <div id="loggingIn" class="messages--info hidden">Logging in...</div>
         <div id="joiningChat" class="messages--info hidden">Attempting to join </div>
@@ -15,9 +15,13 @@
         People in chat
     </div>
     <div>
-        <input id="chat-input" class="form-control chat__input " type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1" />
+        <div>
+            <input id="chat-input" class="form-control chat__input " type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"/>
+            <div class="main-wrapper">
+                <i class="material-icons fa fa-envelope"></i>
+            </div>
+        </div>
     </div>
-
 </section>
 
 @section scripts {

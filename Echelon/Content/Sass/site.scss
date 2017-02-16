@@ -45,43 +45,57 @@ section {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
-.loading-icon {
-    background: url(../assets/imgs/spinner-white.gif) no-repeat;
-    background-size: contain;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 11;
-    height: 50px;
-    width: 50px;
-}
 
-.loading-text {
-    position: relative;
-    width: 200px;
-    height: 50px;
-    background-color: white;
-    animation-name: example;
-    animation-duration: 1.5s;
-    color: $color-secondary;
+.loading {
 
-    @keyframes example {
-    0%   {background-color:$color-secondary; left:300px; top:0px;}
-    25%  {background-color:$color-secondary; left:200px; top:0px;}
-}
-
-    &--initial{
-        margin-top: 100px;
+    &__overlay {
+        @extend .width-100-percent;
+        @extend .height-100-percent;
+        @extend .position-fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000002;
+        background-color: rgba(255, 255, 255, 0.93);
     }
-}
 
-.overlay {
-    @extend .width-100-percent;
-    @extend .height-100-percent;
-    @extend .position-fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    background-color: rgba(255, 255, 255, 0.93);
+    &__icon {
+        background: url(../assets/imgs/spinner-white.gif) no-repeat;
+        background-size: contain;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000002;
+        height: 50px;
+        width: 50px;
+    }
+
+
+    &__text {
+        position: relative;
+        width: 200px;
+        height: 50px;
+        background-color: white;
+        animation-name: example;
+        animation-duration: 1.5s;
+        color: $color-secondary;
+
+        @keyframes example {
+            0% {
+                background-color: $color-secondary;
+                left: 300px;
+                top: 0px;
+            }
+
+            25% {
+                background-color: $color-secondary;
+                left: 150px;
+                top: 0px;
+            }
+        }
+
+        &--initial {
+            margin-top: 100px;
+        }
+    }
 }

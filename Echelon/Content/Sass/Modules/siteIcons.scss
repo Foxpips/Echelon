@@ -1,0 +1,169 @@
+﻿@import "../variables";
+@import "../mixins";
+@import "atomic.scss";
+
+.main-wrapper {
+    width: 82%;
+    position: absolute;
+    bottom: 0;
+
+    @include Middle-less{
+        width: 100%;
+    }
+}
+
+i.material-icons {
+    z-index: 2;
+    float:right;
+    font-size: 2rem;
+    color: white;
+    position: relative;
+    border-radius: 50%;
+    padding: 15px;
+    margin: 10px;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.3s ease;
+}
+
+i.material-icons:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border: solid 2px;
+    transform: scale(0.8);
+    position: absolute;
+    top: -1px;
+    left: -5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+@media (min-width:601px) {
+    i.material-icons {
+        padding: 15px;
+        margin: 10px;
+        font-size: 2rem;
+    }
+}
+
+@media (min-width:993px) {
+    i.material-icons {
+        padding: 15px;
+        margin: 10px;
+        font-size: 2rem;
+    }
+
+    i.material-icons:after {
+        border-width: 3px;
+        top: -1px;
+        left: -5px;
+    }
+}
+
+
+i.material-icons:hover:after {
+    transform: scale(1);
+}
+
+i.material-icons:nth-of-type(4) {
+    background-color: #88b999;
+}
+
+i.material-icons:nth-of-type(4):hover {
+    color: #88b999;
+}
+
+i.material-icons:nth-of-type(4):after {
+    border-color: #88b999;
+}
+
+i.material-icons:nth-of-type(5) {
+    background-color: #88b2b9;
+}
+
+i.material-icons:nth-of-type(5):hover {
+    color: #88b2b9;
+}
+
+i.material-icons:nth-of-type(5):after {
+    border-color: #88b2b9;
+}
+
+i.material-icons:nth-of-type(6) {
+    background-color: #8897b9;
+}
+
+i.material-icons:nth-of-type(6):hover {
+    color: #8897b9;
+}
+
+i.material-icons:nth-of-type(6):after {
+    border-color: #8897b9;
+}
+
+i.material-icons:nth-of-type(7) {
+    background-color: #af88b9;
+}
+
+i.material-icons:nth-of-type(7):hover {
+    color: #af88b9;
+}
+
+i.material-icons:nth-of-type(7):after {
+    border-color: #af88b9;
+}
+
+i.material-icons:nth-of-type(8) {
+    background-color: #d59acb;
+}
+
+i.material-icons:nth-of-type(8):hover {
+    color: #d59acb;
+}
+
+i.material-icons:nth-of-type(8):after {
+    border-color: #d59acb;
+}
+
+i.material-icons:nth-of-type(1) {
+    background-color: deepskyblue;
+}
+
+i.material-icons:nth-of-type(1):hover {
+    color: deepskyblue;
+}
+
+i.material-icons:nth-of-type(1):after {
+    border-color: deepskyblue;
+}
+
+i.material-icons:nth-of-type(2) {
+    background-color: #ec9f83;
+}
+
+i.material-icons:nth-of-type(2):hover {
+    color: #ec9f83;
+}
+
+i.material-icons:nth-of-type(2):after {
+    border-color: #ec9f83;
+}
+
+i.material-icons:nth-of-type(3) {
+    background-color: #cdb274;
+}
+
+i.material-icons:nth-of-type(3):hover {
+    color: #cdb274;
+}
+
+i.material-icons:nth-of-type(3):after {
+    border-color: #cdb274;
+}
+
+i.material-icons:hover {
+    background-color: transparent;
+    /*transform: rotate(5deg);*/
+    transform: translate(5px, 0px);
+    cursor: pointer;
+    box-shadow: none;
+}

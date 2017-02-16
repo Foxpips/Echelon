@@ -1,4 +1,5 @@
 ﻿/*jshint esversion: 6 */
+
 var ChatControl = function (notificationManager) {
     var self = this;
     var $window = $(window);
@@ -19,15 +20,14 @@ var ChatControl = function (notificationManager) {
         });
     })();
 
-    // Helper function to print info messages to the chat window
     self.printToLoading = function (infoMessage, asHtml, initialPadding) {
-        const $msg = initialPadding ? $("<div class=\"info loading-text loading-text--initial\">") : $("<div class=\"info loading-text\">");
+        const $msg = initialPadding ? $("<div class=\"info loading__text loading__text--initial\">") : $("<div class=\"info loading__text\">");
         if (asHtml) {
             $msg.html(infoMessage);
         } else {
             $msg.text(infoMessage);
         }
-        $(".loading-icon").append($msg);
+        $(".loading__icon").append($msg);
     };
 
     const renderMessage = function (fromUser, $message, $time, $container, $user, renderAvatar) {
@@ -88,7 +88,6 @@ var ChatControl = function (notificationManager) {
     };
 
     self.setOnline = function () {
-        $(".skiptranslate").not(".goog-te-gadget").remove();
         setTimeout(function () {
             for (let value of currentChannel._membersEntity.members.entries()) {
                 $conversations.append($(`<div>${value[1]._identity}</div>`));

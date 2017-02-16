@@ -16,17 +16,23 @@
 
     self.sendNotification = function (author, message) {
         if (self.windowActive === false) {
-            var notification = new window.Notification(author,
-            {
-                icon: "https://localhost/Echelon/assets/imgs/spinner-white.gif",
-                body: message.body,
-                tag: author
-            });
+            if (window.Notification.permission === "granted") {
+                var notification = new window.Notification(author,
+                {
+                    icon: "https://localhost/Echelon/assets/imgs/spinner-white.gif",
+                    body: message.body,
+                    tag: author
+                });
 
-            notification.onclick = function () {
-                window.focus();
-                notification.close();
-            };
+                notification.onclick = function() {
+                    window.focus();
+                    notification.close();
+                };
+            }
+            else if (window.Notification.permission !== "denied") {
+                Notification.requestPermission(function (permission) {
+                });
+            }
         }
     };
 };
