@@ -17,6 +17,10 @@
     }
 }
 
+.upload-state{
+    display: none;
+}
+
 .file-upload {
     @extend .position-absolute;
     @extend .cursor-pointer;

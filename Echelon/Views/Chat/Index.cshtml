@@ -16,9 +16,10 @@
     </div>
     <div>
         <div>
-            <input id="chat-input" class="form-control chat__input " type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"/>
+@*            <input id="chat-input" class="form-control chat__input " type="text" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"/>*@
+            <textarea id="chat-input" class="chat__input " rows="1" cols="3" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"></textarea>
             <div class="main-wrapper">
-                <i class="material-icons fa fa-envelope"></i>
+                <i id="sendButton" class="material-icons fa fa-envelope"></i>
             </div>
         </div>
     </div>

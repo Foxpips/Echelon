@@ -10,7 +10,7 @@
     color: $color-primary;
     right: 1px;
     width: 18%;
-    border-left: 1px solid deepskyblue;
+    border-left: 2px solid deepskyblue;
 
     @include Middle-more {
         display: block;
@@ -26,15 +26,31 @@
     @extend .bottom-0;
     @extend .position-absolute;
     @extend .padding-0;
+    @extend .font-weight-bold;
+    resize: none;
     z-index: 1;
     height: 52px;
     margin: 10px auto;
-    border-top: 1px solid $color-secondary !important;
-    font-size: 42px;
+    border-top: 2px solid $color-secondary !important;
+    font-size: 16px;
     color: $color-primary;
+    text-indent: 10px;
 
     @include Middle-more {
         width: 82%;
+        font-size: 34px;
+    }
+
+    @include Middle-less {
+        background-color: beige;
+        height: 67px;
+        width: 85%;
+        font-size: 16px;
+        border-radius: 20px;
+        border: 2px solid $color-secondary !important;
+        color: black;
+        margin-right: 4px;
+        margin-left: 10px;
     }
 }
 
@@ -48,7 +64,6 @@
         @extend .width-100-percent;
         @extend .margin-0-auto;
         @extend .position-absolute;
-        /*overflow-y: scroll;*/
         @extend .overflow-y-auto;
         @extend .overflow-x-hidden;
         background-color: $color-white;
@@ -85,9 +100,11 @@
     &__message {
         @extend .display-inline-block;
         @extend .overflow-wrap-break-word;
+        @extend .font-weight-bold;
         margin-right: 5px;
         padding: 16px;
         border-radius: 25px;
+        max-width: 80%;
 
         @include Middle-more {
             display: block;
@@ -101,19 +118,19 @@
 
         &--me {
             color: $color-brown;
-            background: #dddfff;
+            background: #9fe4ff;
+
 
             @include Middle-more {
-                background: #dddfff;
                 margin-right: 60px;
             }
         }
 
         &--other {
             color: $color-brown;
+            background: #dddfff;
 
             @include Middle-more {
-                background: #9fe4ff;
                 margin-left: 60px;
             }
         }
@@ -133,11 +150,11 @@
         }
 
         &--me {
-            color: $color-primary;
+            color: rgba(0, 109, 249, 0.88);
         }
 
         &--other {
-            color: rgba(0, 109, 249, 0.88);
+            color: $color-primary;
         }
     }
 
@@ -180,11 +197,10 @@
     &--other {
         width: 40px;
         height: 40px;
-        margin-top: 34px;
-        margin-left: 30px;
-        -webkit-box-shadow: 0 0 0 3px #00334a, 0 0 0 4px #00334a, 0 0px 5px 4px #00334a;
-        -moz-box-shadow: 0 0 0 3px #00334a, 0 0 0 4px #00334a, 0 0px 5px 4px #00334a;
-        box-shadow: 0 0 0 3px #00334a, 0 0 0 4px #00334a, 0 0px 5px 4px #00334a;
+        margin-right: 10px;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
 
         @include Middle-less {
             display: none;

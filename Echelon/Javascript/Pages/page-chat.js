@@ -6,13 +6,13 @@ $(function () {
     var $input = $("#chat-input");
     var accessManager; // Manages the state of our access token we got from the server
     var messagingClient; // Our interface to the IP Messaging service
-    var username; 
+    var username;
 
     var notificationManager = new NotificationControl();
     var chatManager = new ChatControl(notificationManager);
     chatManager.printToLoading("Logging in...", false, true);
 
-    var selectedChannel = "Anime"; 
+    var selectedChannel = "Anime";
     var endpoint = $("#chat-input").data("target");
 
     $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, function (data) {
@@ -41,6 +41,11 @@ $(function () {
                 chatManager.setupChannel(currentChannel, username);
             }
         });
+    });
+
+    $("#sendButton").on("click", function () {
+        currentChannel.sendMessage($input.val());
+        $input.val("");
     });
 
     $input.on("keydown", function (e) {
