@@ -10,11 +10,11 @@ var ChatControl = function (notificationManager) {
     var lastOtherAuthor = "";
 
     (function () {
-        const psize = $window.height() - 160;
+        const psize = $window.height() - 150;
         $chatWindow.height(psize);
 
         $window.resize(function () {
-            const rsize = $window.height() - 160;
+            const rsize = $window.height() - 150;
             $chatWindow.height(rsize);
             $chatWindow.scrollTop(document.getElementById("messages").scrollHeight);
         });

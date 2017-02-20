@@ -90,6 +90,7 @@
 }
 
 .white-box {
+    z-index: 9;
     background: #ffffff;
     padding: 25px;
 
@@ -148,6 +149,7 @@
     background: #ffffff;
     margin: 0 auto;
     margin-top: 10%;
+    position: relative;
 
     @include Middle-more {
         width: 400px;
