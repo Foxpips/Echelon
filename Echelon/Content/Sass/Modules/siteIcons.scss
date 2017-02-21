@@ -9,7 +9,7 @@
 
     @include Middle-less {
         width: 100%;
-         background: none;
+        background: none;
     }
 }
 
@@ -49,39 +49,39 @@ i.material-icons:hover:after {
 }
 
 i.material-icons:nth-of-type(4) {
-    background-color: #88b999;
+    background-color: $color-primary;
 }
 
 i.material-icons:nth-of-type(4):hover {
-    color: #88b999;
+    color: $color-primary;
 }
 
 i.material-icons:nth-of-type(4):after {
-    border-color: #88b999;
+    border-color: $color-primary;
 }
 
 i.material-icons:nth-of-type(5) {
-    background-color: #88b2b9;
+    background-color: $color-primary;
 }
 
 i.material-icons:nth-of-type(5):hover {
-    color: #88b2b9;
+    color: $color-primary;
 }
 
 i.material-icons:nth-of-type(5):after {
-    border-color: #88b2b9;
+    border-color: $color-primary;
 }
 
 i.material-icons:nth-of-type(6) {
-    background-color: #8897b9;
+    background-color:  $color-primary;
 }
 
 i.material-icons:nth-of-type(6):hover {
-    color: #8897b9;
+    color:  $color-primary;
 }
 
 i.material-icons:nth-of-type(6):after {
-    border-color: #8897b9;
+    border-color:  $color-primary;
 }
 
 i.material-icons:nth-of-type(7) {
@@ -109,15 +109,15 @@ i.material-icons:nth-of-type(8):after {
 }
 
 i.material-icons:nth-of-type(1) {
-    background-color: deepskyblue;
+    background-color:  $color-primary;
 }
 
 i.material-icons:nth-of-type(1):hover {
-    color: deepskyblue;
+    color:  $color-primary;
 }
 
 i.material-icons:nth-of-type(1):after {
-    border-color: deepskyblue;
+    border-color:  $color-primary;
 }
 
 i.material-icons:nth-of-type(2) {

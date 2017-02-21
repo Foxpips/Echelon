@@ -11,7 +11,7 @@
     color: $color-gray-dark;
     right: 1px;
     width: 18%;
-    border-left: 2px solid $color-secondary;
+    border-left: 2px solid $color-primary;
     background-color: $color-white;
 
     @include Middle-more {
@@ -32,8 +32,7 @@
     resize: none;
     z-index: 1;
     height: 52px;
-    margin: 10px auto;
-    border-top: 2px solid $color-secondary !important;
+    border-top: 2px solid $color-primary !important;
     font-size: 16px;
     color: $color-gray-dark;
     text-indent: 10px;
@@ -42,14 +41,16 @@
     @include Middle-more {
         width: 82%;
         font-size: 34px;
+        height: 60px;
     }
 
     @include Middle-less {
+        margin: 10px auto;
         height: 67px;
         width: 85%;
         font-size: 16px;
         border-radius: 20px;
-        border: 2px solid $color-secondary !important;
+        border: 2px solid $color-primary !important;
         margin-right: 4px;
         margin-left: 10px;
     }

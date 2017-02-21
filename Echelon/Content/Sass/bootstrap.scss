@@ -7,6 +7,7 @@
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/carousel";
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/navbar";
 @import "../../bower_components/font-awesome/css/font-awesome";
+@import "variables";
 
 //bootstrap overrides
 
@@ -16,7 +17,8 @@
 }
 
 .navbar-default {
-    background-color: #54b3de;
+    background-color: $color-primary;
+    box-shadow: grey 1px 0px 5px 1px;
 }
 
 .form-control {
@@ -32,7 +34,7 @@
     border-radius: 4px;
 }
 
-$bgDefault: #10a8ec;
+$bgDefault: $color-primary;
 $bgHighlight: #77d1f9;
 $colDefault: #ffffff;
 $colHighlight: #000000;
@@ -40,7 +42,7 @@ $dropDown: true;
 
 .navbar-default {
     background-color: $bgDefault;
-    border-color: $bgHighlight;
+    border-color: none;
 
     .navbar-brand {
         color: $colDefault;
@@ -111,7 +113,7 @@ $dropDown: true;
     }
 
     .navbar-toggle {
-        border-color: $bgHighlight;
+        border-color: none;
 
         &:hover, &:focus {
             background-color: $bgHighlight;
