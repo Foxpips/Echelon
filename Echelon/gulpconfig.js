@@ -49,6 +49,11 @@
                 files: [sassSourcePath + "Pages/*.scss"]
             },
 
+            shared: {
+                fileName: "shared.css",
+                files: [sassSourcePath + "Shared/*.scss"]
+            },
+
             modules: {
                 fileName: "modules.css",
                 files: [sassSourcePath + "Modules/*.scss"]

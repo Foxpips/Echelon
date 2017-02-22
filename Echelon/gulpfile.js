@@ -42,11 +42,16 @@ gulp.task("build", function (cb) {
 ///*******************************
 //          Sass
 //*******************************/
-gulp.task("min:sass", ["min:sass:bootstrap", "min:sass:site", "min:sass:pages", "min:sass:modules"]);
+gulp.task("min:sass", ["min:sass:bootstrap", "min:sass:site", "min:sass:pages", "min:sass:shared", "min:sass:modules"]);
 
 gulp.task("min:sass:pages", function () {
     var pages = config.sass.pages;
     return bundleSass(pages.files, pages.fileName);
+});
+
+gulp.task("min:sass:shared", function () {
+    var shared = config.sass.shared;
+    return bundleSass(shared.files, shared.fileName);
 });
 
 gulp.task("min:sass:modules", function () {

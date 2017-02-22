@@ -13,25 +13,42 @@
     }
 }
 
-i.material-icons {
+i.basic-icon {
     z-index: 2;
-    float: right;
     font-size: 2rem;
     color: white;
     position: relative;
     border-radius: 50%;
-    padding: 15px;
-    margin: 0px 1% 20px;
-    margin-left: 3%;
-    transition: color 0.2s ease, background-color 0.2s ease, transform 0.3s ease;
+    cursor: pointer;
 
-    @include Middle-more {
-        padding: 15px;
-        margin: 0 1% 5px 0%;
+    &--search {
+        transform: scale(1);
+        transition: transform 0.3s;
+        padding: 5px 5px 0px 5px;
+        top: 5px;
+
+        &:hover {
+            transform: scale(1.5); 
+            transition: transform 0.3s;
+        }
     }
 }
 
-i.material-icons:after {
+i.animated-icon {
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.3s ease;
+
+    &--send {
+        padding: 15px;
+        margin: 0px 1% 20px;
+        float: right;
+
+        @include Middle-more {
+            margin: 0 1% 5px 0%;
+        }
+    }
+}
+
+i.animated-icon:after {
     content: "";
     width: 100%;
     height: 100%;
@@ -44,110 +61,24 @@ i.material-icons:after {
     transition: all 0.3s ease;
 }
 
-i.material-icons:hover:after {
+i.animated-icon:hover:after {
     transform: scale(1);
 }
 
-i.material-icons:nth-of-type(4) {
+i.animated-icon:nth-of-type(1) {
     background-color: $color-primary;
 }
 
-i.material-icons:nth-of-type(4):hover {
+i.animated-icon:nth-of-type(1):hover {
     color: $color-primary;
 }
 
-i.material-icons:nth-of-type(4):after {
+i.animated-icon:nth-of-type(1):after {
     border-color: $color-primary;
 }
 
-i.material-icons:nth-of-type(5) {
-    background-color: $color-primary;
-}
-
-i.material-icons:nth-of-type(5):hover {
-    color: $color-primary;
-}
-
-i.material-icons:nth-of-type(5):after {
-    border-color: $color-primary;
-}
-
-i.material-icons:nth-of-type(6) {
-    background-color:  $color-primary;
-}
-
-i.material-icons:nth-of-type(6):hover {
-    color:  $color-primary;
-}
-
-i.material-icons:nth-of-type(6):after {
-    border-color:  $color-primary;
-}
-
-i.material-icons:nth-of-type(7) {
-    background-color: #af88b9;
-}
-
-i.material-icons:nth-of-type(7):hover {
-    color: #af88b9;
-}
-
-i.material-icons:nth-of-type(7):after {
-    border-color: #af88b9;
-}
-
-i.material-icons:nth-of-type(8) {
-    background-color: #d59acb;
-}
-
-i.material-icons:nth-of-type(8):hover {
-    color: #d59acb;
-}
-
-i.material-icons:nth-of-type(8):after {
-    border-color: #d59acb;
-}
-
-i.material-icons:nth-of-type(1) {
-    background-color:  $color-primary;
-}
-
-i.material-icons:nth-of-type(1):hover {
-    color:  $color-primary;
-}
-
-i.material-icons:nth-of-type(1):after {
-    border-color:  $color-primary;
-}
-
-i.material-icons:nth-of-type(2) {
-    background-color: #ec9f83;
-}
-
-i.material-icons:nth-of-type(2):hover {
-    color: #ec9f83;
-}
-
-i.material-icons:nth-of-type(2):after {
-    border-color: #ec9f83;
-}
-
-i.material-icons:nth-of-type(3) {
-    background-color: #cdb274;
-}
-
-i.material-icons:nth-of-type(3):hover {
-    color: #cdb274;
-}
-
-i.material-icons:nth-of-type(3):after {
-    border-color: #cdb274;
-}
-
-i.material-icons:hover {
+i.animated-icon:hover {
     background-color: transparent;
-    /*transform: rotate(5deg);*/
     transform: translate(5px, 0px);
-    cursor: pointer;
     box-shadow: none;
 }

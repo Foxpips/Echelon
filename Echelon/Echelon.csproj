@@ -296,18 +296,21 @@
   <ItemGroup>
     <Content Include="Content\Images\spinner-white.gif" />
     <Content Include="Content\Images\spinner-black.gif" />
+    <Content Include="Content\Images\white-circles-wallpaper.jpg" />
     <Content Include="Favicons\echelon.ico" />
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Controls\chat-control.js" />
     <Content Include="Javascript\Controls\notification-control.js" />
     <Content Include="Content\Sass\Pages\page-profile.scss" />
+    <Content Include="Content\Sass\Modules\siteIcons.scss" />
+    <Content Include="Content\Sass\Modules\bubbles.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\translate-control.js" />
     <Content Include="Javascript\Pages\page-chat.js" />
     <Content Include="Content\Sass\Modules\atomic.scss" />
     <Content Include="Content\Sass\Pages\page-chat.scss" />
-    <Content Include="Content\Sass\Partials\partial-topmenu.scss" />
+    <Content Include="Content\Sass\Partials\partial-header.scss" />
     <None Include="Content\Sass\site.scss" />
     <Content Include="package.json" />
     <Content Include="bower.json" />

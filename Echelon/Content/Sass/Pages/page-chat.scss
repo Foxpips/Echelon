@@ -10,8 +10,8 @@
     @extend .font-weight-bold;
     color: $color-gray-dark;
     right: 1px;
-    width: 18%;
-    border-left: 2px solid $color-primary;
+    width: 17%;
+    border-left: 1px solid $color-border;
     background-color: $color-white;
 
     @include Middle-more {
@@ -32,7 +32,7 @@
     resize: none;
     z-index: 1;
     height: 52px;
-    border-top: 2px solid $color-primary !important;
+    border-top: 1px solid $color-border !important;
     font-size: 16px;
     color: $color-gray-dark;
     text-indent: 10px;
@@ -90,7 +90,7 @@
 .message-container {
     @extend .text-align-left;
     color: $color-white;
-    margin: 5px 0;
+    margin: 2px 0;
 
     &--other {
         @include Middle-less {
@@ -121,7 +121,7 @@
             /*color: $color-brown;*/
             /*background: #9fe4ff;*/
             color: $color-white;
-            background: rgb(75, 175, 255);
+            background: $color-primary;
 
             @include Middle-more {
                 margin-right: 60px;
@@ -152,7 +152,7 @@
         }
 
         &--me {
-            color: rgba(0, 109, 249, 0.88);
+            color: #39b1e6;
         }
 
         &--other {
