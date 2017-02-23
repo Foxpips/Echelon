@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Echelon.Core.Entities.Email;
+using Echelon.Core.Infrastructure.Services.Email.Components;
 
-namespace Echelon.Core.Features.Email
+namespace Echelon.Core.Infrastructure.Services.Email
 {
-    public interface IEmailSender
+    public interface IEmailSenderService : IService
     {
         Task Send(string recipientEmail, string recipientName, string senderName,
             EmailTemplateEnum emailTemplateEnum, object tokens);

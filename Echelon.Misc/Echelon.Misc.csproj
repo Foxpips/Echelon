@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\IdAttribute.cs" />
+    <Compile Include="Translation\LanguageEnum.cs" />
+    <Compile Include="Translation\TranslatedChatModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

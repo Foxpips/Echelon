@@ -3,17 +3,17 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Echelon.Core.Entities.Email;
-using Echelon.Core.Features.Email.Settings;
+using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data;
 
-namespace Echelon.Core.Features.Email
+namespace Echelon.Core.Infrastructure.Services.Email
 {
-    public class EmailSender : IEmailSender
+    public class EmailSenderService : IEmailSenderService
     {
         private readonly IDataService _dataService;
         private readonly ITokenHelper _tokenHelper;
 
-        public EmailSender(IDataService dataService, ITokenHelper tokenHelper)
+        public EmailSenderService(IDataService dataService, ITokenHelper tokenHelper)
         {
             _tokenHelper = tokenHelper;
             _dataService = dataService;

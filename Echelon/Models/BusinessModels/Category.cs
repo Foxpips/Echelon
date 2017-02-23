@@ -1,4 +1,4 @@
-﻿namespace Echelon.Models.ViewModels
+﻿namespace Echelon.Models.BusinessModels
 {
     public class Category : ICategory
     {

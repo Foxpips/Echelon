@@ -1,4 +1,4 @@
-﻿namespace Echelon.Core.Features.Email
+﻿namespace Echelon.Core.Infrastructure.Services.Email.Components
 {
     public enum EmailTemplateEnum
     {

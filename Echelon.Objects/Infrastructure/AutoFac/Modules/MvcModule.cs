@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Echelon.Core.Infrastructure.Services.Rest;
 
 namespace Echelon.Core.Infrastructure.AutoFac.Modules
 {
@@ -6,7 +7,7 @@ namespace Echelon.Core.Infrastructure.AutoFac.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-         
+            builder.RegisterType<RestService>().As<IRestService>().SingleInstance();
         }
     }
 }

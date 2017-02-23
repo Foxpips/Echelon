@@ -1,4 +1,4 @@
-﻿namespace Echelon.Core.Features.Email.Settings
+﻿namespace Echelon.Core.Infrastructure.Services.Email.Components
 {
     public class EmailSettings
     {

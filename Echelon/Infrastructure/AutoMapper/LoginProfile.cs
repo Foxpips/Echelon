@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using Echelon.Core.Entities.Users;
 using Echelon.Core.Extensions;
 using Echelon.Models.ViewModels;
@@ -11,7 +12,6 @@ namespace Echelon.Infrastructure.AutoMapper
         public LoginProfile()
         {
             CreateMap<LoginViewModel, UserEntity>()
-                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.RememberMe, opt => opt.MapFrom(src => src.RememberMe))
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => HashHelper.CreateHash(src.Password)));

@@ -1,7 +1,7 @@
 ﻿using System;
 using Topshelf;
 
-namespace Echelon.Core.Features.WindowsService
+namespace Echelon.Core.Infrastructure.Services.Windows
 {
     public class WindowsServiceHelper
     {

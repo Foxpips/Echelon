@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Echelon.Models.BusinessModels;
 
 namespace Echelon.Models.ViewModels
 {

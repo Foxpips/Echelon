@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Echelon.Core.Entities.Email;
-using Echelon.Core.Features.Email;
+using Echelon.Core.Infrastructure.Services.Email;
+using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data.RavenDb;
 using NUnit.Framework;
 
@@ -8,20 +9,20 @@ namespace Echelon.Tests.Core
 {
     public class EmailHelperTests
     {
-        private EmailSender _emailSender;
+        private EmailSenderService _emailSenderService;
         private readonly EmailTokenHelper _emailTokenHelper = new EmailTokenHelper();
 
         [SetUp]
         public void SetUp()
         {
-            _emailSender = new EmailSender(new DataService(), _emailTokenHelper);
+            _emailSenderService = new EmailSenderService(new DataService(), _emailTokenHelper);
         }
 
         [Test]
         public async Task Email_Send_Success()
         {
             await
-                _emailSender.Send("simonpmarkey@gmail.com", "Simon", "Test", EmailTemplateEnum.ForgottenPassword,
+                _emailSenderService.Send("simonpmarkey@gmail.com", "Simon", "Test", EmailTemplateEnum.ForgottenPassword,
                     new {name = "Test"});
         }
 

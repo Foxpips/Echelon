@@ -128,17 +128,18 @@
     <Compile Include="Entities\Categories\CategoriesEntity.cs" />
     <Compile Include="Entities\Categories\CategoryEntity.cs" />
     <Compile Include="Entities\Email\EmailTemplateEntity.cs" />
-    <Compile Include="Features\Email\EmailTemplateEnum.cs" />
+    <Compile Include="Infrastructure\Services\Email\Components\EmailTemplateEnum.cs" />
     <Compile Include="Entities\Email\EmailTemplatesEntity.cs" />
     <Compile Include="Entities\Users\UserEntity.cs" />
     <Compile Include="Entities\Users\UsersEntity.cs" />
     <Compile Include="Extensions\Autofac\AutofacExtensions.cs" />
     <Compile Include="Extensions\AutoMapper\AutoMapperExtensions.cs" />
     <Compile Include="Extensions\HashHelper.cs" />
-    <Compile Include="Features\Email\EmailSender.cs" />
-    <Compile Include="Features\Email\EmailTokenHelper.cs" />
-    <Compile Include="Features\Email\ITokenHelper.cs" />
-    <Compile Include="Features\WindowsService\WindowsServiceHelper.cs" />
+    <Compile Include="Infrastructure\Services\Rest\IRestService.cs" />
+    <Compile Include="Infrastructure\Services\Email\EmailSenderService.cs" />
+    <Compile Include="Infrastructure\Services\Email\Components\EmailTokenHelper.cs" />
+    <Compile Include="Infrastructure\Services\Email\Components\ITokenHelper.cs" />
+    <Compile Include="Infrastructure\Services\Windows\WindowsServiceHelper.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\BusModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\DataModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\LoggingModule.cs" />
@@ -148,16 +149,16 @@
     <Compile Include="Infrastructure\MassTransit\Commands\SendSignupEmailCommand.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\LogInfoCommandConsumer.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\SendSignUpEmailCommandConsumer.cs" />
-    <Compile Include="Infrastructure\Rest\RestManager.cs" />
+    <Compile Include="Infrastructure\Services\Rest\RestService.cs" />
     <Compile Include="Infrastructure\Services\Category\CategoryService.cs" />
     <Compile Include="Infrastructure\Services\Category\ICategoryService.cs" />
     <Compile Include="Infrastructure\Services\IService.cs" />
     <Compile Include="Infrastructure\Services\Login\ILoginService.cs" />
     <Compile Include="Infrastructure\Services\Login\LoginService.cs" />
-    <Compile Include="Features\Email\IEmailSender.cs" />
-    <Compile Include="Features\WindowsService\IWindowsService.cs" />
+    <Compile Include="Infrastructure\Services\Email\IEmailSenderService.cs" />
+    <Compile Include="Infrastructure\Services\Windows\IWindowsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Features\Email\Settings\EmailSettings.cs" />
+    <Compile Include="Infrastructure\Services\Email\Components\EmailSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Echelon.Data\Echelon.Data.csproj">

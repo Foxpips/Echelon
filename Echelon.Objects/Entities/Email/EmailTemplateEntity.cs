@@ -1,4 +1,5 @@
-﻿using Echelon.Core.Features.Email;
+﻿using Echelon.Core.Infrastructure.Services.Email;
+using Echelon.Core.Infrastructure.Services.Email.Components;
 
 namespace Echelon.Core.Entities.Email
 {

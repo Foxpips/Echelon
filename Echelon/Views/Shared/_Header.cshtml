@@ -12,7 +12,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="@Url.Action("Index","Chat")"><img class="avatar" src="https://lh3.googleusercontent.com/-ac36Zq6pxJU/WFAQrF4AFCI/AAAAAAAAABc/8aSPh68Fo6o02SA6KX2o2gGtgUOuN4z0gCEw/w140-h140-p/14449921_1312686748750585_3156269063761027826_n.jpg" alt="avatar" /></a>
+            <a href="@Url.Action("Index", "Chat")">
+                <img class="avatar" src="@ViewBag.AvatarImage" alt="avatar"/>
+                @ViewBag.AvatarImage
+                @ViewBag.AvatarImage
+            </a>
+            @ViewBag.Message
         </div>
         <div class="collapse navbar-collapse" id="navbar-main-menu">
             <div class="google-translate__container">
@@ -26,8 +31,8 @@
             </form>
             <ul class="nav navbar-nav navbar-right padding-top-5">
                 <li class="dropdown active">
-                   
-                     @if (string.IsNullOrEmpty(user))
+
+                    @if (string.IsNullOrEmpty(user))
                     {
                         <span>@Login.NotLoggedIn</span>
                     }
