@@ -8,9 +8,10 @@ $(function () {
     var messagingClient; // Our interface to the IP Messaging service
     var username;
 
-    var notificationManager = new NotificationControl();
-    var chatManager = new ChatControl(notificationManager);
-    chatManager.printToLoading("Logging in...", false, true);
+    var notificationControl = new NotificationControl();
+    var avatarControl = new AvatarControl();
+    var chatControl = new ChatControl(notificationControl, avatarControl);
+    chatControl.printToLoading("Logging in...", false, true);
 
     var selectedChannel = "Anime";
     var endpoint = $("#chat-input").data("target");
@@ -24,7 +25,7 @@ $(function () {
 
         // Get the general chat channel, which is where all the messages are
         // sent in this simple application
-        chatManager.printToLoading("Joining channel: " + selectedChannel);
+        chatControl.printToLoading("Joining channel: " + selectedChannel);
         var promise = messagingClient.getChannelByUniqueName(selectedChannel);
         promise.then(function (channel) {
             currentChannel = channel;
@@ -35,10 +36,10 @@ $(function () {
                     friendlyName: selectedChannel
                 }).then(function (channel) {
                     currentChannel = channel;
-                    chatManager.setupChannel(currentChannel, username);
+                    chatControl.setupChannel(currentChannel, username);
                 });
             } else {
-                chatManager.setupChannel(currentChannel, username);
+                chatControl.setupChannel(currentChannel, username);
             }
         });
     });
@@ -50,6 +51,8 @@ $(function () {
 
     $input.on("keydown", function (e) {
         if (e.keyCode === 13) {
+            e.stopPropagation();
+            e.preventDefault();
             currentChannel.sendMessage($input.val());
             $input.val("");
         }

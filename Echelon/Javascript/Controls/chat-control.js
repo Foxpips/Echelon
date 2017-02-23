@@ -1,6 +1,5 @@
 ﻿/*jshint esversion: 6 */
-
-var ChatControl = function (notificationManager) {
+var ChatControl = function (notificationControl, avatarControl) {
     var self = this;
     var $window = $(window);
     const container = $("#container");
@@ -12,6 +11,7 @@ var ChatControl = function (notificationManager) {
     (function () {
         const psize = $window.height() - 150;
         $chatWindow.height(psize);
+        avatarControl.setAvatarUrl();
 
         $window.resize(function () {
             const rsize = $window.height() - 150;
@@ -105,11 +105,12 @@ var ChatControl = function (notificationManager) {
 
         currentChannel.on("messageAdded",
             function (message) {
+                console.log(message);
                 if (username === message.author) {
                     self.printMessage(message.author, message);
                 } else {
                     self.printReceivedMessage(message.author, message);
-                    notificationManager.sendNotification(message.author, message);
+                    notificationControl.sendNotification(message.author, message);
                 }
             });
     };

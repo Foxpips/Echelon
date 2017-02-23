@@ -301,6 +301,7 @@
     <Content Include="Favicons\echelon.ico" />
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
+    <Content Include="Javascript\Controls\avatar-control.js" />
     <Content Include="Javascript\Controls\chat-control.js" />
     <Content Include="Javascript\Controls\notification-control.js" />
     <Content Include="Content\Sass\Pages\page-profile.scss" />
