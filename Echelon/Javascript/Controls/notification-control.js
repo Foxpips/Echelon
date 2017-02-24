@@ -14,13 +14,13 @@
         };
     })();
 
-    self.sendNotification = function (author, message) {
+    self.sendNotification = function (author, content) {
         if (self.windowActive === false) {
             if (window.Notification.permission === "granted") {
                 var notification = new window.Notification(author,
                 {
-                    icon: "https://localhost/Echelon/assets/imgs/spinner-white.gif",
-                    body: message.body,
+                    icon: content.avatar,
+                    body: content.message,
                     tag: author
                 });
 

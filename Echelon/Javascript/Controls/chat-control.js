@@ -1,5 +1,5 @@
 ﻿/*jshint esversion: 6 */
-var ChatControl = function (notificationControl, avatarControl) {
+var ChatControl = function (notificationControl) {
     var self = this;
     var $window = $(window);
     const container = $("#container");
@@ -11,7 +11,6 @@ var ChatControl = function (notificationControl, avatarControl) {
     (function () {
         const psize = $window.height() - 150;
         $chatWindow.height(psize);
-        avatarControl.setAvatarUrl();
 
         $window.resize(function () {
             const rsize = $window.height() - 150;
@@ -30,14 +29,14 @@ var ChatControl = function (notificationControl, avatarControl) {
         $(".loading__icon").append($msg);
     };
 
-    const renderMessage = function (fromUser, $message, $time, $container, $user, renderAvatar) {
+    const renderMessage = function (fromUser, $message, $time, $container, $user, renderAvatar, avatarUrl) {
         if (fromUser === lastOtherAuthor) {
             $container.append($message);
             $(container.find(".message-container__timestamp").last()).hide();
         } else {
             if (renderAvatar) {
                 $container
-                    .append($("<img class=\"avatar avatar--other\" src=\"https://avatars3.githubusercontent.com/u/8901911?v=3&amp;u=f2abba16e1849802daf732f0525b1a5f1701d6fd&amp;s=400\" alt=\"avatar\">"));
+                    .append($(`<img class="avatar avatar--other" src="${avatarUrl}" alt="avatar">`));
             }
             $container.append($user).append($message);
         }
@@ -48,34 +47,34 @@ var ChatControl = function (notificationControl, avatarControl) {
         lastOtherAuthor = fromUser;
     };
 
-    self.printMessage = function (fromUser, message) {
+    self.printMessage = function (fromUser, data, content) {
         const $container = $("<div class=\"message-container\">");
         const $user = $("<div class=\"message-container__username message-container__username--me\">").text(fromUser + ": ");
-        const $time = $("<div class=\"message-container__timestamp\">").text(` ${message.timestamp.toLocaleTimeString()}`);
-        const $message = $("<div class=\"message-container__message message-container__message--me\">").text(message.body);
+        const $time = $("<div class=\"message-container__timestamp\">").text(` ${data.timestamp.toLocaleTimeString()}`);
+        const $message = $("<div class=\"message-container__message message-container__message--me\">").text(content.message);
         renderMessage(fromUser, $message, $time, $container, $user, false);
     };
 
-    self.printReceivedMessage = function (fromUser, message) {
+    self.printReceivedMessage = function (fromUser, timestamp, content) {
         const $container = $("<div class=\"message-container message-container--other\" >");
         const $user = $("<div class=\"message-container__username message-container__username--other\">").text(fromUser + ": ");
-        const $time = $("<div class=\"message-container__timestamp\">").text(` ${message.timestamp.toLocaleTimeString()}`);
-        const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(message.body);
-        renderMessage(fromUser, $message, $time, $container, $user, true);
+        const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
+        const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(content.message);
+        renderMessage(fromUser, $message, $time, $container, $user, true, content.avatar);
     };
 
     self.chatHistory = function (username) {
         setTimeout(function () {
-            for (let i = 0; i < currentChannel.messages.length; i++) {
-                const message = currentChannel.messages[i];
-                if (username === message.author) {
-                    self.printMessage(message.author, message);
-                } else {
-                    self.printReceivedMessage(message.author, message);
-                }
-            }
-            $("body").removeAttr("style");
-            $(".skiptranslate").not(".goog-te-gadget").remove();
+//            for (let i = 0; i < currentChannel.messages.length; i++) {
+//                const message = currentChannel.messages[i];
+//                if (username === message.author) {
+//                    self.printMessage(message.author, message);
+//                } else {
+//                    self.printReceivedMessage(message.author, message);
+//                }
+//            }
+//            $("body").removeAttr("style");
+//            $(".skiptranslate").not(".goog-te-gadget").remove();
             $loading.hide();
         }, 1000);
 
@@ -104,13 +103,15 @@ var ChatControl = function (notificationControl, avatarControl) {
             });
 
         currentChannel.on("messageAdded",
-            function (message) {
-                console.log(message);
-                if (username === message.author) {
-                    self.printMessage(message.author, message);
+            function (data) {
+                console.log(data.body);
+                let content = JSON.parse(data.body);
+
+                if (username === data.author) {
+                    self.printMessage(data.author, data, content);
                 } else {
-                    self.printReceivedMessage(message.author, message);
-                    notificationControl.sendNotification(message.author, message);
+                    self.printReceivedMessage(data.author, data.timestamp, content);
+                    notificationControl.sendNotification(data.author, content);
                 }
             });
     };

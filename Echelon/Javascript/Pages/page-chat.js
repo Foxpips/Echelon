@@ -4,13 +4,14 @@ var currentChannel; // A handle to the "general" chat channel - the one and only
 $(function () {
 
     var $input = $("#chat-input");
+    var $sendButton = $("#sendButton");
     var accessManager; // Manages the state of our access token we got from the server
     var messagingClient; // Our interface to the IP Messaging service
     var username;
 
     var notificationControl = new NotificationControl();
     var avatarControl = new AvatarControl();
-    var chatControl = new ChatControl(notificationControl, avatarControl);
+    var chatControl = new ChatControl(notificationControl);
     chatControl.printToLoading("Logging in...", false, true);
 
     var selectedChannel = "Anime";
@@ -18,6 +19,8 @@ $(function () {
 
     $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, function (data) {
         username = data.identity;
+
+        avatarControl.setAvatarUrl();
 
         // Initialize the IP messaging client
         accessManager = new Twilio.AccessManager(data.token);
@@ -44,7 +47,7 @@ $(function () {
         });
     });
 
-    $("#sendButton").on("click", function () {
+    $sendButton.on("click", function () {
         currentChannel.sendMessage($input.val());
         $input.val("");
     });
@@ -53,7 +56,7 @@ $(function () {
         if (e.keyCode === 13) {
             e.stopPropagation();
             e.preventDefault();
-            currentChannel.sendMessage($input.val());
+            currentChannel.sendMessage(JSON.stringify({ message: $input.val(), avatar: avatarControl.avatarUrl }));
             $input.val("");
         }
     });
