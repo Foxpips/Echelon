@@ -1,44 +1,41 @@
 ﻿/*jshint esversion: 6 */
 
-var currentChannel; // A handle to the "general" chat channel - the one and only channel we will have in this sample app
+var currentChannel;
 $(function () {
 
+    var accessManager;
+    var messagingClient;
+    var selectedChannel = "Anime"; //TODO set via data target of hidden field or something
+
     var $input = $("#chat-input");
-    var $sendButton = $("#sendButton");
-    var accessManager; // Manages the state of our access token we got from the server
-    var messagingClient; // Our interface to the IP Messaging service
-    var username;
+    const endpoint = $("#chat-input").data("target");
+    const $sendButton = $("#sendButton");
 
-    var notificationControl = new NotificationControl();
     var avatarControl = new AvatarControl();
+    const notificationControl = new NotificationControl();
     var chatControl = new ChatControl(notificationControl);
+
     chatControl.printToLoading("Logging in...", false, true);
+    $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, data => {
+        const identity = data.identity;
+        const username = identity.username;
+        const email = identity.email;
 
-    var selectedChannel = "Anime";
-    var endpoint = $("#chat-input").data("target");
+        accessManager = new window.Twilio.AccessManager(data.token);
+        messagingClient = new window.Twilio.IPMessaging.Client(accessManager);
 
-    $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, function (data) {
-        username = data.identity;
-
-        avatarControl.setAvatarUrl();
-
-        // Initialize the IP messaging client
-        accessManager = new Twilio.AccessManager(data.token);
-        messagingClient = new Twilio.IPMessaging.Client(accessManager);
-
-        // Get the general chat channel, which is where all the messages are
-        // sent in this simple application
         chatControl.printToLoading("Joining channel: " + selectedChannel);
-        var promise = messagingClient.getChannelByUniqueName(selectedChannel);
-        promise.then(function (channel) {
+        avatarControl.setAvatarUrl(email);
+
+        const promise = messagingClient.getChannelByUniqueName(selectedChannel);
+        promise.then(channel => {
             currentChannel = channel;
             if (!currentChannel) {
-                // If it doesn't exist, let's create it
                 messagingClient.createChannel({
                     uniqueName: selectedChannel,
                     friendlyName: selectedChannel
-                }).then(function (channel) {
-                    currentChannel = channel;
+                }).then(activechannel => {
+                    currentChannel = activechannel;
                     chatControl.setupChannel(currentChannel, username);
                 });
             } else {
@@ -47,16 +44,26 @@ $(function () {
         });
     });
 
-    $sendButton.on("click", function () {
-        currentChannel.sendMessage($input.val());
+    $sendButton.on("click", () => {
+        const dataToSend = JSON.stringify({
+            message: $input.val(),
+            avatar: avatarControl.avatarUrl
+        });
+        currentChannel.sendMessage(dataToSend);
         $input.val("");
     });
 
-    $input.on("keydown", function (e) {
+    $input.on("keydown", e => {
         if (e.keyCode === 13) {
             e.stopPropagation();
             e.preventDefault();
-            currentChannel.sendMessage(JSON.stringify({ message: $input.val(), avatar: avatarControl.avatarUrl }));
+
+            const dataToSend = JSON.stringify({
+                message: $input.val(),
+                avatar: avatarControl.avatarUrl
+            });
+
+            currentChannel.sendMessage(dataToSend);
             $input.val("");
         }
     });

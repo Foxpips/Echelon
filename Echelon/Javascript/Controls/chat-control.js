@@ -1,50 +1,37 @@
 ﻿/*jshint esversion: 6 */
 var ChatControl = function (notificationControl) {
     var self = this;
+    var lastOtherAuthor = "";
     var $window = $(window);
+
+    const $body = $("body");
+    const $loading = $("#loading");
+    const $loadingIcon = $(".loading__icon");
+    const $skiptranslate = $(".skiptranslate");
     const container = $("#container");
+
     var $chatWindow = container.find("#messages");
     var $conversations = container.find("#users");
-    var $loading = $("#loading");
-    var lastOtherAuthor = "";
 
     (function () {
         const psize = $window.height() - 150;
         $chatWindow.height(psize);
 
-        $window.resize(function () {
+        $window.resize(() => {
             const rsize = $window.height() - 150;
             $chatWindow.height(rsize);
             $chatWindow.scrollTop(document.getElementById("messages").scrollHeight);
         });
     })();
 
-    self.printToLoading = function (infoMessage, asHtml, initialPadding) {
+    self.printToLoading = (infoMessage, asHtml, initialPadding) => {
         const $msg = initialPadding ? $("<div class=\"info loading__text loading__text--initial\">") : $("<div class=\"info loading__text\">");
         if (asHtml) {
             $msg.html(infoMessage);
         } else {
             $msg.text(infoMessage);
         }
-        $(".loading__icon").append($msg);
-    };
-
-    const renderMessage = function (fromUser, $message, $time, $container, $user, renderAvatar, avatarUrl) {
-        if (fromUser === lastOtherAuthor) {
-            $container.append($message);
-            $(container.find(".message-container__timestamp").last()).hide();
-        } else {
-            if (renderAvatar) {
-                $container
-                    .append($(`<img class="avatar avatar--other" src="${avatarUrl}" alt="avatar">`));
-            }
-            $container.append($user).append($message);
-        }
-
-        $container.append($time);
-        $chatWindow.append($container);
-        $chatWindow.scrollTop($chatWindow[0].scrollHeight);
-        lastOtherAuthor = fromUser;
+        $loadingIcon.append($msg);
     };
 
     self.printMessage = function (fromUser, data, content) {
@@ -63,56 +50,70 @@ var ChatControl = function (notificationControl) {
         renderMessage(fromUser, $message, $time, $container, $user, true, content.avatar);
     };
 
-    self.chatHistory = function (username) {
-        setTimeout(function () {
-//            for (let i = 0; i < currentChannel.messages.length; i++) {
-//                const message = currentChannel.messages[i];
-//                if (username === message.author) {
-//                    self.printMessage(message.author, message);
-//                } else {
-//                    self.printReceivedMessage(message.author, message);
-//                }
-//            }
-//            $("body").removeAttr("style");
-//            $(".skiptranslate").not(".goog-te-gadget").remove();
+    self.chatHistory = function(username) {
+        setTimeout(() => {
+            //            for (let i = 0; i < currentChannel.messages.length; i++) {
+            //                const message = currentChannel.messages[i];
+            //                if (username === message.author) {
+            //                    self.printMessage(message.author, message);
+            //                } else {
+            //                    self.printReceivedMessage(message.author, message);
+            //                }
+            //            }
+            $body.removeAttr("style");
+            $skiptranslate.not(".goog-te-gadget").remove();
             $loading.hide();
         }, 1000);
 
-        $(".goog-te-combo").on("change", function () {
-            setTimeout(function () {
-                $("body").removeAttr("style");
-                $(".skiptranslate").not(".goog-te-gadget").remove();
+        $(".goog-te-combo").on("change", () => {
+            setTimeout(() => {
+                $body.removeAttr("style");
+                $skiptranslate.not(".goog-te-gadget").remove();
             }, 1000);
         });
     };
 
-    self.setOnline = function () {
-        setTimeout(function () {
+    self.setOnline = function() {
+        setTimeout(() => {
             for (let value of currentChannel._membersEntity.members.entries()) {
                 $conversations.append($(`<div>${value[1]._identity}</div>`));
             }
         }, 1000);
     };
 
-    self.setupChannel = function (currentChannel, username) {
+    self.setupChannel = function(currentChannel, username) {
         currentChannel.join()
-            .then(function () {
-                self.printToLoading("Joined channel as " + "<span class=\"me\">" + username + "</span>.", true);
+            .then(() => {
+                self.printToLoading(`Joined channel as <span class="me">${username}</span>.`, true);
                 self.chatHistory(username);
                 self.setOnline();
             });
 
-        currentChannel.on("messageAdded",
-            function (data) {
-                console.log(data.body);
-                let content = JSON.parse(data.body);
-
-                if (username === data.author) {
-                    self.printMessage(data.author, data, content);
-                } else {
-                    self.printReceivedMessage(data.author, data.timestamp, content);
-                    notificationControl.sendNotification(data.author, content);
-                }
-            });
+        currentChannel.on("messageAdded", data => {
+            const content = JSON.parse(data.body);
+            if (username === data.author) {
+                self.printMessage(data.author, data, content);
+            } else {
+                self.printReceivedMessage(data.author, data.timestamp, content);
+                notificationControl.sendNotification(data.author, content);
+            }
+        });
     };
+
+    function renderMessage(fromUser, $message, $time, $container, $user, renderAvatar, avatarUrl) {
+        if (fromUser === lastOtherAuthor) {
+            $container.append($message);
+            $(container.find(".message-container__timestamp").last()).hide();
+        } else {
+            if (renderAvatar) {
+                $container.append($(`<img class="avatar avatar--other" src="${avatarUrl}" alt="avatar">`));
+            }
+            $container.append($user).append($message);
+        }
+
+        $container.append($time);
+        $chatWindow.append($container);
+        $chatWindow.scrollTop($chatWindow[0].scrollHeight);
+        lastOtherAuthor = fromUser;
+    }
 };

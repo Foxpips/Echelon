@@ -15,12 +15,5 @@ namespace Echelon.Controllers
 
             return RedirectToAction("Login", "Login");
         }
-
-        [Authorize]
-        public ActionResult Secure()
-        {
-            ViewBag.Message = "Secure page.";
-            return View();
-        }
     }
 }

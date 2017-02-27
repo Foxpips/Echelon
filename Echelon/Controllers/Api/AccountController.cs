@@ -4,18 +4,17 @@ using System.Web.Http;
 using System.Web.Mvc;
 using Echelon.Core.Entities.Users;
 using Echelon.Data;
-using Echelon.Data.RavenDb;
 
-namespace Echelon.Api.Controllers
+namespace Echelon.Controllers.Api
 {
     public class AvatarController : ApiController
     {
-        private readonly IDataService _dataservice = new DataService();
+        private readonly IDataService _dataservice;
 
-        //public AccountController(IDataService dataservice)
-        //{
-        //    _dataservice = dataservice;
-        //}
+        public AvatarController(IDataService dataservice)
+        {
+            _dataservice = dataservice;
+        }
 
         [System.Web.Mvc.Authorize]
         [ValidateAntiForgeryToken]

@@ -1,14 +1,14 @@
 ﻿/*jshint esversion: 6 */
 
 var AvatarControl = function() {
-    const self = this;
+    var self = this;
     self.avatarUrl = "";
 
-    self.setAvatarUrl = function() {
+    self.setAvatarUrl = function(email) {
         const settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://localhost/Echelon.Api/api/avatar?email=simonpmarkey%40gmail.com",
+            "url": `https://localhost/Echelon/api/avatar?email=${email}`,
             "method": "GET",
             "headers": {
                 "cache-control": "no-cache",
@@ -19,7 +19,6 @@ var AvatarControl = function() {
         $.ajax(settings)
             .done(function(response) {
                 self.avatarUrl = response;
-                console.log(response + " asd");
             });
     };
 };

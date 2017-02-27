@@ -44,10 +44,10 @@ namespace Echelon.Controllers
             var usersEntity = await _dataService.Read<UsersEntity>();
             var user = _owinContext.Authentication.User;
             var userEntity = usersEntity.Users.Single(x => x.Email.Equals(user.Identity.Name));
-            var identity = userEntity.UserName ?? userEntity.Email;
+            var identity = new { username = userEntity.UserName, email = userEntity.Email };
 
             // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity };
+            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity.email };
 
             // Create an IP messaging grant for this token
             var grant = new IpMessagingGrant

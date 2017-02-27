@@ -1,11 +1,13 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Helpers;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Core.Extensions.AutoMapper;
@@ -31,15 +33,19 @@ namespace Echelon
 
             var builder = new ContainerBuilder();
             builder.RegisterControllers(targetAssembly);
+            builder.RegisterApiControllers(targetAssembly);
 
             var container = builder.RegisterCustomModules().Build();
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
 
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             AutoMapperExtensions.RegisterProfilesOnInit(targetAssembly);
             ControllerBuilder.Current.SetControllerFactory(
                 new DefaultControllerFactory(new LocalizedControllerActivator()));
+            
 
             ConfigureCookies(app);
             ConfigureApplication();
@@ -49,6 +55,7 @@ namespace Echelon
         private static void ConfigureApplication()
         {
             AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

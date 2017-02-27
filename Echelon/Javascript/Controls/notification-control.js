@@ -1,17 +1,12 @@
-﻿var NotificationControl = function () {
+﻿/*jshint esversion: 6 */
+
+var NotificationControl = function () {
     var self = this;
+    self.windowActive = true;
 
     (function () {
-        self.windowActive = true;
-
-        $(window)
-            .focus(function () {
-                self.windowActive = true;
-            });
-
-        window.onblur = function () {
-            self.windowActive = false;
-        };
+        $(window).focus(() => { self.windowActive = true; });
+        window.onblur = () => { self.windowActive = false; };
     })();
 
     self.sendNotification = function (author, content) {
@@ -24,13 +19,13 @@
                     tag: author
                 });
 
-                notification.onclick = function() {
+                notification.onclick = () => {
                     window.focus();
                     notification.close();
                 };
             }
             else if (window.Notification.permission !== "denied") {
-                Notification.requestPermission(function (permission) {
+                Notification.requestPermission(permission => {
                 });
             }
         }
