@@ -13,17 +13,17 @@ namespace Echelon.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IClientLogger _clientLog;
         private readonly ILoginService _loginService;
         private readonly IOwinContext _owinContext;
         private readonly IBus _bus;
+        private IMapper _mapper;
 
-        public LoginController(IClientLogger clientLog, ILoginService loginService, IOwinContext owinContext, IBus bus)
+        public LoginController(ILoginService loginService, IOwinContext owinContext, IBus bus, IMapper mapper)
         {
+            _mapper = mapper;
             _bus = bus;
             _owinContext = owinContext;
             _loginService = loginService;
-            _clientLog = clientLog;
         }
 
         [HttpGet]
@@ -50,7 +50,7 @@ namespace Echelon.Controllers
         {
             await _bus.Publish(new LogInfoCommand { Content = $"Attempting to login with email: {loginViewModel.Email}" });
 
-            var loginEntity = Mapper.Map<UserEntity>(loginViewModel);
+            var loginEntity = _mapper.Map<UserEntity>(loginViewModel);
             if (ModelState.IsValid)
             {
                 if (await _loginService.LogUserIn(loginEntity, _owinContext.Authentication))

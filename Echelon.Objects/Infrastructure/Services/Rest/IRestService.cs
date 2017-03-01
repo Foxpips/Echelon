@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using Echelon.Misc.Translation;
 
 namespace Echelon.Core.Infrastructure.Services.Rest
 {
     public interface IRestService :IService
     {
-        TranslatedChatModel MakeTranslationRequest(string textToTranslate, LanguageEnum selectedLanguage);
-        TType MakeGenericRequest<TType>(Uri requestUri);
+        Task<TranslatedChatModel> MakeTranslationRequest(string textToTranslate, LanguageEnum selectedLanguage);
+        Task<TType> MakeGenericRequest<TType>(Uri requestUri);
     }
 }

@@ -10,9 +10,11 @@ var ChatControl = function (notificationControl) {
     const $skiptranslate = $(".skiptranslate");
     const container = $("#container");
 
+    var messageContainer = document.getElementById("messages");
     var $chatWindow = container.find("#messages");
     var $conversations = container.find("#users");
 
+    //constructor
     (function () {
         const psize = $window.height() - 150;
         $chatWindow.height(psize);
@@ -20,11 +22,39 @@ var ChatControl = function (notificationControl) {
         $window.resize(() => {
             const rsize = $window.height() - 150;
             $chatWindow.height(rsize);
-            $chatWindow.scrollTop(document.getElementById("messages").scrollHeight);
+            $chatWindow.scrollTop(messageContainer.scrollHeight);
         });
     })();
 
-    self.printToLoading = (infoMessage, asHtml, initialPadding) => {
+    //public methods
+    self.setOnline = function () {
+        setTimeout(() => {
+            for (let value of currentChannel._membersEntity.members.entries()) {
+                $conversations.append($(`<div>${value[1]._identity}</div>`));
+            }
+        }, 1000);
+    };
+
+    self.setupChannel = function (currentChannel, identity) {
+        currentChannel.join()
+            .then(() => {
+                self.printToLoading(`Joined channel as <span class="me">${identity.username}</span>.`, true);
+                self.chatHistory(identity.username);
+                self.setOnline();
+            });
+
+        currentChannel.on("messageAdded", data => {
+            const content = JSON.parse(data.body);
+            if (identity.email === data.author) {
+                self.printMessage(data.timestamp, content);
+            } else {
+                self.printReceivedMessage(data.timestamp, content);
+                notificationControl.sendNotification(content);
+            }
+        });
+    };
+
+    self.printToLoading = function (infoMessage, asHtml, initialPadding) {
         const $msg = initialPadding ? $("<div class=\"info loading__text loading__text--initial\">") : $("<div class=\"info loading__text\">");
         if (asHtml) {
             $msg.html(infoMessage);
@@ -34,23 +64,7 @@ var ChatControl = function (notificationControl) {
         $loadingIcon.append($msg);
     };
 
-    self.printMessage = function (fromUser, data, content) {
-        const $container = $("<div class=\"message-container\">");
-        const $user = $("<div class=\"message-container__username message-container__username--me\">").text(fromUser + ": ");
-        const $time = $("<div class=\"message-container__timestamp\">").text(` ${data.timestamp.toLocaleTimeString()}`);
-        const $message = $("<div class=\"message-container__message message-container__message--me\">").text(content.message);
-        renderMessage(fromUser, $message, $time, $container, $user, false);
-    };
-
-    self.printReceivedMessage = function (fromUser, timestamp, content) {
-        const $container = $("<div class=\"message-container message-container--other\" >");
-        const $user = $("<div class=\"message-container__username message-container__username--other\">").text(fromUser + ": ");
-        const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
-        const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(content.message);
-        renderMessage(fromUser, $message, $time, $container, $user, true, content.avatar);
-    };
-
-    self.chatHistory = function(username) {
+    self.chatHistory = function (username) {
         setTimeout(() => {
             //            for (let i = 0; i < currentChannel.messages.length; i++) {
             //                const message = currentChannel.messages[i];
@@ -73,33 +87,23 @@ var ChatControl = function (notificationControl) {
         });
     };
 
-    self.setOnline = function() {
-        setTimeout(() => {
-            for (let value of currentChannel._membersEntity.members.entries()) {
-                $conversations.append($(`<div>${value[1]._identity}</div>`));
-            }
-        }, 1000);
+    self.printMessage = function (timestamp, content) {
+        const $container = $("<div class=\"message-container\">");
+        const $user = $("<div class=\"message-container__username message-container__username--me\">").text(content.username + ": ");
+        const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
+        const $message = $("<div class=\"message-container__message message-container__message--me\">").text(content.message);
+        renderMessage(content.username, $message, $time, $container, $user, false);
     };
 
-    self.setupChannel = function(currentChannel, username) {
-        currentChannel.join()
-            .then(() => {
-                self.printToLoading(`Joined channel as <span class="me">${username}</span>.`, true);
-                self.chatHistory(username);
-                self.setOnline();
-            });
-
-        currentChannel.on("messageAdded", data => {
-            const content = JSON.parse(data.body);
-            if (username === data.author) {
-                self.printMessage(data.author, data, content);
-            } else {
-                self.printReceivedMessage(data.author, data.timestamp, content);
-                notificationControl.sendNotification(data.author, content);
-            }
-        });
+    self.printReceivedMessage = function (timestamp, content) {
+        const $container = $("<div class=\"message-container message-container--other\" >");
+        const $user = $("<div class=\"message-container__username message-container__username--other\">").text(content.username + ": ");
+        const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
+        const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(content.message);
+        renderMessage(content.username, $message, $time, $container, $user, true, content.avatar);
     };
 
+    //private methods
     function renderMessage(fromUser, $message, $time, $container, $user, renderAvatar, avatarUrl) {
         if (fromUser === lastOtherAuthor) {
             $container.append($message);

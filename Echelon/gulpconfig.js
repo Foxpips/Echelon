@@ -26,7 +26,7 @@
 
             base: {
                 fileName: "base.js",
-                files: [jsSourcePath + "Common/*.js", jsSourcePath + "Controls/*.js"]
+                files: [jsSourcePath + "Common/*.js", jsSourcePath + "Controls/*.js", jsSourcePath + "Helpers/*.js"]
             },
 
             pages: {
@@ -70,7 +70,7 @@
                 destPath: outputPath + "imgs",
                 files: imgSourcePath + "/*"
             },
-            icons : {
+            icons: {
                 destPath: "fonts",
                 files: bowerSourcePath + "/font-awesome/fonts/*.*"
             }

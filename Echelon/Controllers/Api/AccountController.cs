@@ -7,6 +7,7 @@ using Echelon.Data;
 
 namespace Echelon.Controllers.Api
 {
+    [RequireHttps]
     public class AvatarController : ApiController
     {
         private readonly IDataService _dataservice;
@@ -16,11 +17,9 @@ namespace Echelon.Controllers.Api
             _dataservice = dataservice;
         }
 
-        [System.Web.Mvc.Authorize]
-        [ValidateAntiForgeryToken]
+        [System.Web.Http.Authorize]
         public async Task<IHttpActionResult> GetAvatar(string email)
         {
-
             var loginEntities = await _dataservice.Read<UsersEntity>();
             var user = loginEntities.Users.Single(x => x.Email.Equals(email));
 

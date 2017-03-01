@@ -1,12 +1,7 @@
 ﻿namespace Echelon.Models.BusinessModels
 {
-    public class Category : ICategory
+    public class Category 
     {
         public string Name { get; set; }
-    }
-
-    public interface ICategory
-    {
-        string Name { get; set; }
     }
 }

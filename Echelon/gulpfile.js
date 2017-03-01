@@ -1,5 +1,5 @@
 /// <binding BeforeBuild='clean' AfterBuild='build' ProjectOpened='watch' />
-
+/*jshint esversion: 6 */
 var gulp = require("gulp"),
     babel = require('gulp-babel'),
     config = require("./gulpconfig")(),
@@ -45,27 +45,27 @@ gulp.task("build", function (cb) {
 gulp.task("min:sass", ["min:sass:bootstrap", "min:sass:site", "min:sass:pages", "min:sass:shared", "min:sass:modules"]);
 
 gulp.task("min:sass:pages", function () {
-    var pages = config.sass.pages;
+    const pages = config.sass.pages;
     return bundleSass(pages.files, pages.fileName);
 });
 
 gulp.task("min:sass:shared", function () {
-    var shared = config.sass.shared;
+    const shared = config.sass.shared;
     return bundleSass(shared.files, shared.fileName);
 });
 
 gulp.task("min:sass:modules", function () {
-    var pages = config.sass.modules;
+    const pages = config.sass.modules;
     return bundleSass(pages.files, pages.fileName);
 });
 
 gulp.task("min:sass:bootstrap", function () {
-    var bootstrap = config.sass.bootstrap;
+    const bootstrap = config.sass.bootstrap;
     return bundleSass(bootstrap.files, bootstrap.fileName);
 });
 
 gulp.task("min:sass:site", function () {
-    var site = config.sass.site;
+    const site = config.sass.site;
     return bundleSass(site.files, site.fileName);
 });
 
@@ -75,17 +75,17 @@ gulp.task("min:sass:site", function () {
 gulp.task("min:js", ["min:js:libs", "min:js:base", "min:js:pages"]);
 
 gulp.task("min:js:libs", function () {
-    var libs = config.js.libs;
+    const libs = config.js.libs;
     return bundleJs(libs.files, libs.fileName);
 });
 
 gulp.task("min:js:base", function () {
-    var base = config.js.base;
+    const base = config.js.base;
     return bundleJs(base.files, base.fileName, true);
 });
 
 gulp.task("min:js:pages", function () {
-    var pages = config.js.pages;
+    const pages = config.js.pages;
     return bundleJs(pages.files, pages.fileName, true);
 });
 
@@ -93,12 +93,12 @@ gulp.task("min:js:pages", function () {
 //          Content
 //*******************************/
 gulp.task("copy:images", function () {
-    var images = config.resources.images;
+    const images = config.resources.images;
     return copyFiles(images.files, images.destPath);
 });
 
 gulp.task("copy:icons", function () {
-    var icons = config.resources.icons;
+    const icons = config.resources.icons;
     return copyFiles(icons.files, icons.destPath);
 });
 
@@ -148,8 +148,8 @@ function clean(folderPath, callback) {
 }
 
 function bundleJs(files, fileName, jsHint) {
-    var outFolder = config.js.destPath;
-    var minOutFolder = config.js.minDestPath;
+    const outFolder = config.js.destPath;
+    const minOutFolder = config.js.minDestPath;
     var pipe = gulp.src(files).pipe(print());
 
     if (jsHint) {
@@ -170,7 +170,7 @@ function bundleJs(files, fileName, jsHint) {
 }
 
 function bundleSass(files, fileName) {
-    var destPath = config.sass.destPath;
+    const destPath = config.sass.destPath;
 
     for (var i in config.site.names) {
         if (config.site.names.hasOwnProperty(i)) {

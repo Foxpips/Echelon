@@ -29,15 +29,8 @@ namespace Echelon.Controllers
             _dataService = dataService;
         }
 
-        public async Task<string> Avatar()
-        {
-            var usersEntity = await _dataService.Read<UsersEntity>();
-            var user = _owinContext.Authentication.User;
-            var userEntity = usersEntity.Users.Single(x => x.Email.Equals(user.Identity.Name));
-            return userEntity.AvatarUrl;
-        }
-
         // GET: /token
+        [Authorize]
         public async Task<ActionResult> Index(string device, string channel)
         {
             // Create a random identity for the client

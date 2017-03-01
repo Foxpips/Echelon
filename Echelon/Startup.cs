@@ -35,14 +35,15 @@ namespace Echelon
             builder.RegisterControllers(targetAssembly);
             builder.RegisterApiControllers(targetAssembly);
 
-            var container = builder.RegisterCustomModules().Build();
+            var container = builder.RegisterCustomModules(typeof(AutofacExtensions).Assembly, targetAssembly).Build();
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-            AutoMapperExtensions.RegisterProfilesOnInit(targetAssembly);
+            var autofacDependencyResolver = new AutofacDependencyResolver(container);
+            DependencyResolver.SetResolver(autofacDependencyResolver);
+//            AutoMapperExtensions.RegisterProfilesOnInit(targetAssembly);
             ControllerBuilder.Current.SetControllerFactory(
                 new DefaultControllerFactory(new LocalizedControllerActivator()));
             

@@ -4,19 +4,21 @@ var NotificationControl = function () {
     var self = this;
     self.windowActive = true;
 
+    //constructor
     (function () {
         $(window).focus(() => { self.windowActive = true; });
         window.onblur = () => { self.windowActive = false; };
     })();
 
-    self.sendNotification = function (author, content) {
+    //public methods
+    self.sendNotification = function (content) {
         if (self.windowActive === false) {
             if (window.Notification.permission === "granted") {
-                var notification = new window.Notification(author,
+                var notification = new window.Notification(content.username,
                 {
                     icon: content.avatar,
                     body: content.message,
-                    tag: author
+                    tag: content.username
                 });
 
                 notification.onclick = () => {

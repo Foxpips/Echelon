@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.Services.Rest;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Misc.Translation;
@@ -10,10 +11,10 @@ namespace Echelon.Tests.Rest
     public class RestManagerTests
     {
         [Test]
-        public void Method_Scenario_Result()
+        public async Task Method_Scenario_Result()
         {
             var restManager = new RestService(new ClientLogger());
-            var translatedChatModel = restManager.MakeTranslationRequest("¡No puedo esperar hasta que termine el trabajo!", LanguageEnum.En);
+            var translatedChatModel = await restManager.MakeTranslationRequest("¡No puedo esperar hasta que termine el trabajo!", LanguageEnum.En);
 
             Console.WriteLine(translatedChatModel.Text.First());
         }

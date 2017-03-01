@@ -243,10 +243,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
+    <Compile Include="Infrastructure\AutoMapper\Modules\AutoMapperModule.cs" />
     <Compile Include="Models\BusinessModels\GooglePlusInfo.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Infrastructure\Attributes\LocalizedControllerActivator.cs" />
-    <Compile Include="Infrastructure\AutoMapper\LoginProfile.cs" />
+    <Compile Include="Infrastructure\AutoMapper\Profiles\LoginProfile.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Models\BusinessModels\ChallengeResult.cs" />
@@ -339,7 +340,6 @@
     <None Include="Content\Sass\_variables.scss" />
     <None Include="Content\Sass\_mixins.scss" />
     <None Include="Content\Sass\Pages\page-login.scss" />
-    <Content Include="tsconfig.json" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

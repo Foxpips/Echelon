@@ -20,9 +20,11 @@ namespace Echelon.Controllers
         private readonly ILoginService _loginService;
         private readonly IOwinContext _owinContext;
         private readonly IRestService _restService;
+        private IMapper _mapper;
 
-        public ExternalLoginController(ILoginService loginService, IOwinContext owinContext, IRestService restService)
+        public ExternalLoginController(ILoginService loginService, IOwinContext owinContext, IRestService restService,IMapper mapper)
         {
+            _mapper = mapper;
             _restService = restService;
             _owinContext = owinContext;
             _loginService = loginService;
@@ -39,29 +41,16 @@ namespace Echelon.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var externalLoginInfoAsync = await _owinContext.Authentication.GetExternalLoginInfoAsync();
-            var loginEntity = Mapper.Map<UserEntity>(externalLoginInfoAsync);
-            SetGoogleAvatar(externalLoginInfoAsync, loginEntity);
+            var userEntity = _mapper.Map<UserEntity>(externalLoginInfoAsync);
 
-            if (await _loginService.LogUserIn(loginEntity, _owinContext.Authentication) ||
-                await _loginService.CreateAndLoguserIn(loginEntity, _owinContext.Authentication))
+            if (await _loginService.LogUserIn(userEntity, _owinContext.Authentication) ||
+                await _loginService.CreateAndLoguserIn(userEntity, _owinContext.Authentication))
             {
                 return RedirectToAction("Index", "Chat");
             }
 
             ModelState.AddModelError("", @"Login Failed!");
             return RedirectToAction("Login", "Login");
-        }
-
-        private void SetGoogleAvatar(ExternalLoginInfo externalLoginInfoAsync, UserEntity loginEntity)
-        {
-            var requestUri =
-                new Uri(SiteSettings.GoogleProfileUri +
-                        externalLoginInfoAsync.ExternalIdentity.Claims.Where(
-                            c => c.Type.Equals(SiteSettings.GoogleAccessToken))
-                            .Select(c => c.Value)
-                            .FirstOrDefault());
-
-            loginEntity.AvatarUrl = _restService.MakeGenericRequest<GooglePlusInfo>(requestUri).Picture;
         }
     }
 }
