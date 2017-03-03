@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -10,7 +12,6 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
-using Echelon.Core.Extensions.AutoMapper;
 using Echelon.Infrastructure.Attributes;
 using Echelon.Infrastructure.Settings;
 using MassTransit;
@@ -35,18 +36,15 @@ namespace Echelon
             builder.RegisterControllers(targetAssembly);
             builder.RegisterApiControllers(targetAssembly);
 
-            var container = builder.RegisterCustomModules(typeof(AutofacExtensions).Assembly, targetAssembly).Build();
+            var container = builder.RegisterCustomModules(true, targetAssembly).Build();
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            var autofacDependencyResolver = new AutofacDependencyResolver(container);
-            DependencyResolver.SetResolver(autofacDependencyResolver);
-//            AutoMapperExtensions.RegisterProfilesOnInit(targetAssembly);
             ControllerBuilder.Current.SetControllerFactory(
                 new DefaultControllerFactory(new LocalizedControllerActivator()));
-            
 
             ConfigureCookies(app);
             ConfigureApplication();
@@ -83,9 +81,12 @@ namespace Echelon
                 {
                     OnAuthenticated = (context) =>
                     {
-                        context.Identity.AddClaim(new Claim("urn:google:name", context.Identity.FindFirstValue(ClaimTypes.Name)));
-                        context.Identity.AddClaim(new Claim("urn:google:email", context.Identity.FindFirstValue(ClaimTypes.Email)));
-                        context.Identity.AddClaim(new Claim("urn:google:accesstoken", context.AccessToken, ClaimValueTypes.String, "Google"));
+                        context.Identity.AddClaim(new Claim("urn:google:name",
+                            context.Identity.FindFirstValue(ClaimTypes.Name)));
+                        context.Identity.AddClaim(new Claim("urn:google:email",
+                            context.Identity.FindFirstValue(ClaimTypes.Email)));
+                        context.Identity.AddClaim(new Claim("urn:google:accesstoken", context.AccessToken,
+                            ClaimValueTypes.String, "Google"));
 
                         return Task.FromResult(0);
                     }

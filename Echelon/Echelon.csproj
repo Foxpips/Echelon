@@ -243,7 +243,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
-    <Compile Include="Infrastructure\AutoMapper\Modules\AutoMapperModule.cs" />
+    <Compile Include="Infrastructure\Autofac\Modules\AutoMapperModule.cs" />
+    <Compile Include="Infrastructure\Autofac\Modules\MvcModule.cs" />
     <Compile Include="Models\BusinessModels\GooglePlusInfo.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Infrastructure\Attributes\LocalizedControllerActivator.cs" />
@@ -418,7 +419,7 @@
       <Project>{4DC32C7A-56B1-4243-A362-19DBB1EC525C}</Project>
       <Name>Echelon.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Echelon.Objects\Echelon.Core.csproj">
+    <ProjectReference Include="..\Echelon.Core\Echelon.Core.csproj">
       <Project>{A9C78335-B58A-42AF-A17E-D2F30152A607}</Project>
       <Name>Echelon.Core</Name>
     </ProjectReference>

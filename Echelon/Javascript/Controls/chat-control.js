@@ -4,11 +4,10 @@ var ChatControl = function (notificationControl) {
     var lastOtherAuthor = "";
     var $window = $(window);
 
-    const $body = $("body");
-    const $loading = $("#loading");
-    const $loadingIcon = $(".loading__icon");
-    const $skiptranslate = $(".skiptranslate");
-    const container = $("#container");
+    var $body = $("body");
+    var $loading = $("#loading");
+    var $loadingIcon = $(".loading__icon");
+    var container = $("#container");
 
     var messageContainer = document.getElementById("messages");
     var $chatWindow = container.find("#messages");
@@ -39,12 +38,12 @@ var ChatControl = function (notificationControl) {
         currentChannel.join()
             .then(() => {
                 self.printToLoading(`Joined channel as <span class="me">${identity.username}</span>.`, true);
-                self.chatHistory(identity.username);
+                self.chatHistory(identity.email);
                 self.setOnline();
             });
 
         currentChannel.on("messageAdded", data => {
-            const content = JSON.parse(data.body);
+            var content = JSON.parse(data.body);
             if (identity.email === data.author) {
                 self.printMessage(data.timestamp, content);
             } else {
@@ -55,7 +54,7 @@ var ChatControl = function (notificationControl) {
     };
 
     self.printToLoading = function (infoMessage, asHtml, initialPadding) {
-        const $msg = initialPadding ? $("<div class=\"info loading__text loading__text--initial\">") : $("<div class=\"info loading__text\">");
+        var $msg = initialPadding ? $("<div class=\"info loading__text loading__text--initial\">") : $("<div class=\"info loading__text\">");
         if (asHtml) {
             $msg.html(infoMessage);
         } else {
@@ -66,23 +65,24 @@ var ChatControl = function (notificationControl) {
 
     self.chatHistory = function (username) {
         setTimeout(() => {
-            //            for (let i = 0; i < currentChannel.messages.length; i++) {
-            //                const message = currentChannel.messages[i];
-            //                if (username === message.author) {
-            //                    self.printMessage(message.author, message);
-            //                } else {
-            //                    self.printReceivedMessage(message.author, message);
-            //                }
-            //            }
+            for (let i = 90; i < 100; i++) {
+                var message = currentChannel.messages[i];
+                var content = JSON.parse(message.body);
+                if (username === message.author) {
+                    self.printMessage(message.timestamp, content);
+                } else {
+                    self.printReceivedMessage(message.timestamp, content);
+                }
+            }
             $body.removeAttr("style");
-            $skiptranslate.not(".goog-te-gadget").remove();
+            $(".skiptranslate").not(".goog-te-gadget").remove();
             $loading.hide();
         }, 1000);
 
         $(".goog-te-combo").on("change", () => {
             setTimeout(() => {
                 $body.removeAttr("style");
-                $skiptranslate.not(".goog-te-gadget").remove();
+                $(".skiptranslate").not(".goog-te-gadget").remove();
             }, 1000);
         });
     };

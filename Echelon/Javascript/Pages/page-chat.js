@@ -9,11 +9,11 @@ $(function () {
     var selectedChannel = "Anime"; //TODO set via data target of hidden field or something
 
     var $input = $("#chat-input");
-    const endpoint = $("#chat-input").data("target");
-    const $sendButton = $("#sendButton");
+    var endpoint = $("#chat-input").data("target");
+    var $sendButton = $("#sendButton");
 
-    const ajaxHelper = new AjaxHelper();
-    const notificationControl = new NotificationControl();
+    var ajaxHelper = new AjaxHelper();
+    var notificationControl = new NotificationControl();
     var avatarControl = new AvatarControl(ajaxHelper);
     var chatControl = new ChatControl(notificationControl);
 

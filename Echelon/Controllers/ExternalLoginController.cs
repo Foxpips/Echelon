@@ -20,9 +20,9 @@ namespace Echelon.Controllers
         private readonly ILoginService _loginService;
         private readonly IOwinContext _owinContext;
         private readonly IRestService _restService;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
-        public ExternalLoginController(ILoginService loginService, IOwinContext owinContext, IRestService restService,IMapper mapper)
+        public ExternalLoginController(ILoginService loginService, IOwinContext owinContext, IRestService restService, IMapper mapper)
         {
             _mapper = mapper;
             _restService = restService;
@@ -32,7 +32,7 @@ namespace Echelon.Controllers
 
         public ActionResult LoginGoogle(string returnUrl)
         {
-            var redirectUri = Url.Action("ExternalLoginCallback", "ExternalLogin", new {ReturnUrl = returnUrl});
+            var redirectUri = Url.Action("ExternalLoginCallback", "ExternalLogin", new { ReturnUrl = returnUrl });
             var challengeResult = new ChallengeResult(SiteSettings.GoogleProvider, redirectUri, _owinContext);
 
             return challengeResult;
@@ -42,6 +42,7 @@ namespace Echelon.Controllers
         {
             var externalLoginInfoAsync = await _owinContext.Authentication.GetExternalLoginInfoAsync();
             var userEntity = _mapper.Map<UserEntity>(externalLoginInfoAsync);
+                userEntity.AvatarUrl = await SetGoogleAvatar(externalLoginInfoAsync);
 
             if (await _loginService.LogUserIn(userEntity, _owinContext.Authentication) ||
                 await _loginService.CreateAndLoguserIn(userEntity, _owinContext.Authentication))
@@ -51,6 +52,17 @@ namespace Echelon.Controllers
 
             ModelState.AddModelError("", @"Login Failed!");
             return RedirectToAction("Login", "Login");
+        }
+
+        private async Task<string> SetGoogleAvatar(ExternalLoginInfo externalLoginInfoAsync)
+        {
+            var requestUri =
+                new Uri(SiteSettings.GoogleProfileUri + externalLoginInfoAsync.ExternalIdentity.Claims.Where(
+                    c => c.Type.Equals(SiteSettings.GoogleAccessToken))
+                    .Select(c => c.Value)
+                    .FirstOrDefault());
+
+            return (await _restService.MakeGenericRequest<GooglePlusInfo>(requestUri)).Picture;
         }
     }
 }
