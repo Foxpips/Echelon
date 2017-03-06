@@ -9,15 +9,18 @@ $(function () {
     var selectedChannel = "Anime"; //TODO set via data target of hidden field or something
 
     var $input = $("#chat-input");
-    var endpoint = $("#chat-input").data("target");
-    var $sendButton = $("#sendButton");
+    const endpoint = $("#chat-input").data("target");
+    const $sendButton = $("#sendButton");
 
-    var ajaxHelper = new AjaxHelper();
-    var notificationControl = new NotificationControl();
-    var avatarControl = new AvatarControl(ajaxHelper);
+    const ajaxHelper = new AjaxHelper();
+    const notificationControl = new NotificationControl();
+
     var chatControl = new ChatControl(notificationControl);
-
     chatControl.printToLoading("Logging in...", false, true);
+
+    var avatarControl = new AvatarControl(ajaxHelper);
+    avatarControl.setAvatarUrl($("#headerAvatar").data("target"));
+
 
     $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, data => {
         identity = data.identity;
@@ -26,7 +29,6 @@ $(function () {
         messagingClient = new window.Twilio.IPMessaging.Client(accessManager);
 
         chatControl.printToLoading(`Joining channel: ${selectedChannel}`);
-        avatarControl.setAvatarUrl(identity.email);
 
         const promise = messagingClient.getChannelByUniqueName(selectedChannel);
         promise.then(channel => {
@@ -45,29 +47,28 @@ $(function () {
         });
     });
 
-    $sendButton.on("click", () => {
+    const sendMessage = function () {
+        if ($input.val().length === 0) return;
+
         const dataToSend = JSON.stringify({
-            username: identity.username, 
+            username: identity.username,
             message: $input.val(),
             avatar: avatarControl.avatarUrl
         });
+
         currentChannel.sendMessage(dataToSend);
         $input.val("");
+    };
+
+    $sendButton.on("click", () => {
+        sendMessage();
     });
 
     $input.on("keydown", e => {
         if (e.keyCode === 13) {
             e.stopPropagation();
             e.preventDefault();
-
-            const dataToSend = JSON.stringify({
-                username: identity.username,
-                message: $input.val(),
-                avatar: avatarControl.avatarUrl
-            });
-
-            currentChannel.sendMessage(dataToSend);
-            $input.val("");
+            sendMessage();
         }
     });
 });

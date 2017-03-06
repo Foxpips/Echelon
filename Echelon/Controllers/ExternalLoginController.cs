@@ -44,8 +44,7 @@ namespace Echelon.Controllers
             var userEntity = _mapper.Map<UserEntity>(externalLoginInfoAsync);
                 userEntity.AvatarUrl = await SetGoogleAvatar(externalLoginInfoAsync);
 
-            if (await _loginService.LogUserIn(userEntity, _owinContext.Authentication) ||
-                await _loginService.CreateAndLoguserIn(userEntity, _owinContext.Authentication))
+            if (await _loginService.LogUserIn(userEntity, _owinContext.Authentication) || await _loginService.CreateAndLoguserIn(userEntity, _owinContext.Authentication))
             {
                 return RedirectToAction("Index", "Chat");
             }

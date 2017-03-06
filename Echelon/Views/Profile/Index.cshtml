@@ -16,7 +16,7 @@
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="avatar-upload">
                         <div>
-                            <img alt="Foxpips" class="avatar avatar--profile" height="200" src="https://avatars3.githubusercontent.com/u/8901911?v=3&amp;u=f2abba16e1849802daf732f0525b1a5f1701d6fd&amp;s=400" width="200">
+                            <img alt="Foxpips" class="avatar avatar--user avatar--profile" height="200" src="" width="200">
                         </div>
                         <label class="btn btn-info text-align-center">
                             Upload new picture
@@ -25,7 +25,7 @@
 
                         <div class="upload-state uloading">
                             <button type="button" class="btn margin-top-5" disabled="">
-                                <img alt="" class="v-align-text-bottom" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16"> Uploading...
+                                <img alt="uploading image" class="v-align-text-bottom" height="16" src="" width="16"> Uploading...
                             </button>
                         </div>
 
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control", placeholder = "FirstName", required = "true", oninvalid = "this.setCustomValidity(" + "FirstName error" + ")" })
+                        @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control", placeholder = "FirstName", required = "true"})
                         @Html.ValidationMessageFor(u => u.FirstName)
                     </div>
                 </div>
@@ -66,7 +66,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.SecondName, new { @class = "form-control", placeholder = "SecondName", required = "true", oninvalid = "this.setCustomValidity(" + "SecondName error" + ")" })
+                        @Html.TextBoxFor(u => u.SecondName, new { @class = "form-control", placeholder = "SecondName", required = "true" })
                         @Html.ValidationMessageFor(u => u.SecondName)
                     </div>
                 </div>
@@ -74,13 +74,13 @@
             <div class="row">
                 <div class="col-xs-9 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.DisplayName, new { @class = "form-control", placeholder = "DisplayName", required = "true", oninvalid = "this.setCustomValidity(" + "DisplayName error" + ")" })
+                        @Html.TextBoxFor(u => u.DisplayName, new { @class = "form-control", placeholder = "DisplayName", required = "true" })
                         @Html.ValidationMessageFor(u => u.DisplayName)
                     </div>
                 </div>
                 <div class="col-xs-3 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.CheckBoxFor(u => u.UseDisplayName, new { @class = "form-control", placeholder = "Use Display Name", required = "true", oninvalid = "this.setCustomValidity(" + "Use DisplayName error" + ")" })
+                        @Html.CheckBoxFor(u => u.UseDisplayName, new { @class = "form-control", placeholder = "Use Display Name", required = "true" })
                         @Html.ValidationMessageFor(u => u.UseDisplayName)
                         @Html.LabelFor(u => u.UseDisplayName, "Enabled")
                     </div>

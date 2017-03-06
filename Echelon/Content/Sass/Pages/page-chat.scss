@@ -92,6 +92,10 @@
     color: $color-white;
     margin: 2px 0;
 
+    @include Middle-less {
+        margin-right: 25px;
+    }
+
     &--other {
         @include Middle-less {
             text-align: right;
@@ -118,8 +122,6 @@
         }
 
         &--me {
-            /*color: $color-brown;*/
-            /*background: #9fe4ff;*/
             color: $color-white;
             background: $color-primary;
 
@@ -169,7 +171,6 @@
             float: none;
             font-size: 9px;
             padding-left: 5px;
-            padding-right: 5px;
             padding-top: 5px;
         }
     }
@@ -205,7 +206,12 @@
         box-shadow: none;
 
         @include Middle-less {
-            display: none;
+            width: 30px;
+            height: 30px;
+            float: none;
+            position: relative;
+            left: 40px;
+            top: 15px;
         }
     }
 

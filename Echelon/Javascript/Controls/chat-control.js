@@ -15,14 +15,16 @@ var ChatControl = function (notificationControl) {
 
     //constructor
     (function () {
-        const psize = $window.height() - 150;
-        $chatWindow.height(psize);
+        if ($chatWindow.length !== 0) {
+            const psize = $window.height() - 150;
+            $chatWindow.height(psize);
 
-        $window.resize(() => {
-            const rsize = $window.height() - 150;
-            $chatWindow.height(rsize);
-            $chatWindow.scrollTop(messageContainer.scrollHeight);
-        });
+            $window.resize(() => {
+                const rsize = $window.height() - 150;
+                $chatWindow.height(rsize);
+                $chatWindow.scrollTop(messageContainer.scrollHeight);
+            });
+        }
     })();
 
     //public methods
@@ -89,7 +91,7 @@ var ChatControl = function (notificationControl) {
 
     self.printMessage = function (timestamp, content) {
         const $container = $("<div class=\"message-container\">");
-        const $user = $("<div class=\"message-container__username message-container__username--me\">").text(content.username + ": ");
+        const $user = $("<div class=\"message-container__username message-container__username--me\">").text(content.username);
         const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
         const $message = $("<div class=\"message-container__message message-container__message--me\">").text(content.message);
         renderMessage(content.username, $message, $time, $container, $user, false);
@@ -97,7 +99,7 @@ var ChatControl = function (notificationControl) {
 
     self.printReceivedMessage = function (timestamp, content) {
         const $container = $("<div class=\"message-container message-container--other\" >");
-        const $user = $("<div class=\"message-container__username message-container__username--other\">").text(content.username + ": ");
+        const $user = $("<div class=\"message-container__username message-container__username--other\">").text(content.username);
         const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
         const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(content.message);
         renderMessage(content.username, $message, $time, $container, $user, true, content.avatar);
