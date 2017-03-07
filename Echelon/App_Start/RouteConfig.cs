@@ -14,7 +14,7 @@ namespace Echelon
                 name: "DefaultLocalized",
                 url: "{lang}/{controller}/{action}/{id}",
                 constraints: new {lang = @"(\w{2})|(\w{2}-\w{2})"}, // en or en-US
-                defaults: new {controller = "Login", action = "Login", id = UrlParameter.Optional}
+                defaults: new {controller = "Login", action = "Index", id = UrlParameter.Optional}
                 );
 
             routes.MapRoute(
@@ -26,7 +26,7 @@ namespace Echelon
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new {controller = "Login", action = "Login", id = UrlParameter.Optional}
+                defaults: new {controller = "Login", action = "Index", id = UrlParameter.Optional}
                 );
         }
     }

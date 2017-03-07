@@ -353,7 +353,7 @@
     <Content Include="Views\Shared\_Favicon.cshtml" />
     <Content Include="Views\Login\ForgottenPassword.cshtml" />
     <Content Include="Views\Navigation\Index.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Error\Account.cshtml" />
     <Content Include="Views\Login\Help.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />

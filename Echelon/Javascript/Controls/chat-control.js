@@ -1,5 +1,5 @@
 ﻿/*jshint esversion: 6 */
-var ChatControl = function (notificationControl) {
+var ChatControl = function (notificationControl, avatarControl) {
     var self = this;
     var lastOtherAuthor = "";
     var $window = $(window);
@@ -30,9 +30,12 @@ var ChatControl = function (notificationControl) {
     //public methods
     self.setOnline = function () {
         setTimeout(() => {
-            for (let value of currentChannel._membersEntity.members.entries()) {
-                $conversations.append($(`<div>${value[1]._identity}</div>`));
-            }
+
+            //            for (let value of currentChannel._membersEntity.members.entries()) {
+            //                $conversations.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" data-target=${value} alt="avatar">  ${value[1]._identity}</div>`));
+            //            }
+
+            avatarControl.setParticipantAvatars();
         }, 1000);
     };
 
@@ -110,10 +113,19 @@ var ChatControl = function (notificationControl) {
         if (fromUser === lastOtherAuthor) {
             $container.append($message);
             $(container.find(".message-container__timestamp").last()).hide();
-        } else {
+        }
+        else {
             if (renderAvatar) {
                 $container.append($(`<img class="avatar avatar--other" src="${avatarUrl}" alt="avatar">`));
             }
+
+            if ($message.hasClass("message-container__message--me")) {
+                $message.addClass("message-container__message--initial-me");
+            } else {
+                $message.addClass("message-container__message--initial-other");
+            }
+
+           
             $container.append($user).append($message);
         }
 

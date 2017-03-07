@@ -33,7 +33,7 @@ namespace Echelon.Controllers
         }
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Index()
         {
             if (Request.IsAuthenticated)
             {
@@ -46,7 +46,7 @@ namespace Echelon.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel loginViewModel)
+        public async Task<ActionResult> Index(LoginViewModel loginViewModel)
         {
             await _bus.Publish(new LogInfoCommand { Content = $"Attempting to login with email: {loginViewModel.Email}" });
 
@@ -73,7 +73,7 @@ namespace Echelon.Controllers
             {
                 await _bus.Publish(new LogInfoCommand { Content = $"Logging user: {_owinContext.Authentication.User.Identity.Name} out" });
 
-                return RedirectToActionPermanent("Login", "Login");
+                return RedirectToActionPermanent("Index", "Login");
             }
             return RedirectToAction("Account", "Error");
         }

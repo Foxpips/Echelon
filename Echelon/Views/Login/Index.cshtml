@@ -9,7 +9,7 @@
 <section id="wrapper" class="login-register">
     <div class="login-box">
         <div class="white-box">
-            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "loginform", @class = "form-horizontal form-material" }))
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { id = "loginform", @class = "form-horizontal form-material" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, Login.LoginFailed)

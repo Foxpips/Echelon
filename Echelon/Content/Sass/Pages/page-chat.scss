@@ -17,6 +17,22 @@
     @include Middle-more {
         display: block;
     }
+
+    &__participant {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $color-gray-light;
+        }
+        
+        &--username{
+            margin-top: 15px;
+            float: left;
+        }       
+    }
 }
 
 .chat__input {
@@ -106,9 +122,9 @@
         @extend .display-inline-block;
         @extend .overflow-wrap-break-word;
         @extend .font-weight-bold;
+        border-radius: 25px;
         margin-right: 5px;
         padding: 16px;
-        border-radius: 25px;
         max-width: 80%;
 
         @include Middle-more {
@@ -119,6 +135,7 @@
         @include Middle-less {
             background: $color-control;
             padding: 10px;
+            text-align: center;
         }
 
         &--me {
@@ -136,6 +153,18 @@
 
             @include Middle-more {
                 margin-left: 60px;
+            }
+        }
+
+        &--initial-me {
+            @include Middle-less {
+                border-radius: 0px 25px 25px 25px;
+            }
+        }
+
+        &--initial-other {
+            @include Middle-less {
+                border-radius: 25px 0px 25px 25px;
             }
         }
     }
@@ -180,6 +209,7 @@
 .avatar {
     @extend .float-left;
     @extend .position-relative;
+    image-rendering: auto;
     background-color: $color-black;
     margin-top: 10px;
     height: 40px;

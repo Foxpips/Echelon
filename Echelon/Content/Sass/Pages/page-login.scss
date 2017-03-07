@@ -93,9 +93,11 @@
 }
 
 .google-translate {
-
     &__container {
-        @extend .display-inline-block;
+        @include Middle-more {
+            display: inline-block;
+        }
+
         margin-top: 5px;
     }
 }

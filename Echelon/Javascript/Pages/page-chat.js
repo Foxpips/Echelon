@@ -9,18 +9,17 @@ $(function () {
     var selectedChannel = "Anime"; //TODO set via data target of hidden field or something
 
     var $input = $("#chat-input");
-    const endpoint = $("#chat-input").data("target");
-    const $sendButton = $("#sendButton");
+    var endpoint = $("#chat-input").data("target");
+    var $sendButton = $("#sendButton");
 
-    const ajaxHelper = new AjaxHelper();
-    const notificationControl = new NotificationControl();
-
-    var chatControl = new ChatControl(notificationControl);
-    chatControl.printToLoading("Logging in...", false, true);
+    var ajaxHelper = new AjaxHelper();
+    var notificationControl = new NotificationControl();
 
     var avatarControl = new AvatarControl(ajaxHelper);
-    avatarControl.setAvatarUrl($("#headerAvatar").data("target"));
+    avatarControl.setUserAvatar($("#headerAvatar").data("target"));
 
+    var chatControl = new ChatControl(notificationControl, avatarControl);
+    chatControl.printToLoading("Logging in...", false, true);
 
     $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, data => {
         identity = data.identity;
@@ -60,8 +59,20 @@ $(function () {
         $input.val("");
     };
 
+    const fadeBubbleOut = function () {
+        $('#bubbles').fadeOut(2000);
+    };
+
+    var fadeBubbleIn = setTimeout(function () {
+    }, 18000);
+
     $sendButton.on("click", () => {
         sendMessage();
+        fadeBubbleOut();
+        clearTimeout(fadeBubbleIn);
+        fadeBubbleIn = setTimeout(function () {
+            $('#bubbles').fadeIn(2000);
+        }, 18000);
     });
 
     $input.on("keydown", e => {
@@ -69,6 +80,11 @@ $(function () {
             e.stopPropagation();
             e.preventDefault();
             sendMessage();
+            fadeBubbleOut();
+            clearTimeout(fadeBubbleIn);
+            fadeBubbleIn = setTimeout(function () {
+                $('#bubbles').fadeIn(2000);
+            }, 25000);
         }
     });
 });
