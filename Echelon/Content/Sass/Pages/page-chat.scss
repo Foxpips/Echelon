@@ -21,17 +21,19 @@
     &__participant {
         overflow: hidden;
         white-space: nowrap;
-        text-overflow: ellipsis;
         cursor: pointer;
 
         &:hover {
             background-color: $color-gray-light;
         }
-        
-        &--username{
+
+        &--username {
             margin-top: 15px;
-            float: left;
-        }       
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-align: left;
+        }
     }
 }
 

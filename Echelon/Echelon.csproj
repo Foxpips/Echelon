@@ -315,6 +315,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\missing-image.png" />
     <Content Include="Content\Images\spinner-white.gif" />
     <Content Include="Content\Images\spinner-black.gif" />
     <Content Include="Content\Images\white-circles-wallpaper.jpg" />
@@ -328,6 +329,7 @@
     <Content Include="Content\Sass\Modules\siteIcons.scss" />
     <Content Include="Content\Sass\Modules\bubbles.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
+    <Content Include="Javascript\Controls\screensaver-control.js" />
     <Content Include="Javascript\Helpers\ajax-helper.js" />
     <Content Include="Javascript\Pages\page-chat.js" />
     <Content Include="Content\Sass\Modules\atomic.scss" />

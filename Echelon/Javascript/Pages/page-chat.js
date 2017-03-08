@@ -1,8 +1,9 @@
 ﻿/*jshint esversion: 6 */
 
 var currentChannel;
-$(function () {
+var siteurl;
 
+$(function () {
     var identity;
     var accessManager;
     var messagingClient;
@@ -11,9 +12,11 @@ $(function () {
     var $input = $("#chat-input");
     var endpoint = $("#chat-input").data("target");
     var $sendButton = $("#sendButton");
+    siteurl = $("#SiteUrl").val();
 
     var ajaxHelper = new AjaxHelper();
     var notificationControl = new NotificationControl();
+    var screensaverControl = new ScreenSaverControl();
 
     var avatarControl = new AvatarControl(ajaxHelper);
     avatarControl.setUserAvatar($("#headerAvatar").data("target"));
@@ -59,20 +62,9 @@ $(function () {
         $input.val("");
     };
 
-    const fadeBubbleOut = function () {
-        $('#bubbles').fadeOut(2000);
-    };
-
-    var fadeBubbleIn = setTimeout(function () {
-    }, 18000);
-
     $sendButton.on("click", () => {
         sendMessage();
-        fadeBubbleOut();
-        clearTimeout(fadeBubbleIn);
-        fadeBubbleIn = setTimeout(function () {
-            $('#bubbles').fadeIn(2000);
-        }, 18000);
+        screensaverControl.runScreenSaver();
     });
 
     $input.on("keydown", e => {
@@ -80,11 +72,7 @@ $(function () {
             e.stopPropagation();
             e.preventDefault();
             sendMessage();
-            fadeBubbleOut();
-            clearTimeout(fadeBubbleIn);
-            fadeBubbleIn = setTimeout(function () {
-                $('#bubbles').fadeIn(2000);
-            }, 25000);
+            screensaverControl.runScreenSaver();
         }
     });
 });

@@ -41,14 +41,17 @@ namespace Echelon.Controllers.Api
             {
                 var loginEntities = await _dataservice.Read<UsersEntity>();
 
-                var userEntity = loginEntities.Users.Single(x => x.Email == email);
-                var item = new
+                var userEntity = loginEntities.Users.SingleOrDefault(x => x.Email == email);
+                if (userEntity != null)
                 {
-                    url = userEntity.AvatarUrl,
-                    email = userEntity.UserName
-                };
+                    var item = new
+                    {
+                        url = userEntity.AvatarUrl ?? "https://localhost/Echelon/Content/Images/missing-image.png",
+                        email = userEntity.UserName
+                    };
 
-                urllist.Add(item);
+                    urllist.Add(item);
+                }
             }
 
             if (!urllist.Any())

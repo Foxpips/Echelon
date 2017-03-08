@@ -11,7 +11,7 @@ var ChatControl = function (notificationControl, avatarControl) {
 
     var messageContainer = document.getElementById("messages");
     var $chatWindow = container.find("#messages");
-    var $conversations = container.find("#users");
+    var $participants = container.find("#users");
 
     //constructor
     (function () {
@@ -30,12 +30,15 @@ var ChatControl = function (notificationControl, avatarControl) {
     //public methods
     self.setOnline = function () {
         setTimeout(() => {
+            var members = [];
 
-            //            for (let value of currentChannel._membersEntity.members.entries()) {
-            //                $conversations.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" data-target=${value} alt="avatar">  ${value[1]._identity}</div>`));
-            //            }
+            for (let value of currentChannel._membersEntity.members.entries()) {
+                members.push(value[1]._identity);
+            }
 
-            avatarControl.setParticipantAvatars();
+            avatarControl.setParticipantAvatars(members, result => {
+                $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" src=${result.url} alt="avatar"><div class="sidebar__participant--username">${result.email}</div></div>`));
+            });
         }, 1000);
     };
 
@@ -125,7 +128,7 @@ var ChatControl = function (notificationControl, avatarControl) {
                 $message.addClass("message-container__message--initial-other");
             }
 
-           
+
             $container.append($user).append($message);
         }
 
