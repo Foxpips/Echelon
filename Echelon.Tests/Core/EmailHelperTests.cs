@@ -15,7 +15,7 @@ namespace Echelon.Tests.Core
         [SetUp]
         public void SetUp()
         {
-            _emailSenderService = new EmailSenderService(new DataService(), _emailTokenHelper);
+            _emailSenderService = new EmailSenderService(new RavenDataService(), _emailTokenHelper);
         }
 
         [Test]

@@ -4,21 +4,20 @@ using System.Threading.Tasks;
 using Echelon.Core.Entities.Email;
 using Echelon.Core.Entities.Users;
 using Echelon.Core.Extensions;
-using Echelon.Core.Infrastructure.Services.Email;
 using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data.RavenDb;
 using NUnit.Framework;
 
-namespace Echelon.Tests.Data
+namespace Echelon.Tests.Data.Raven
 {
     public class DataServiceTests
     {
-        private DataService _dataService;
+        private RavenDataService _dataService;
 
         [SetUp]
         public async Task SetUp()
         {
-            _dataService = new DataService();
+            _dataService = new RavenDataService();
 
             var usersEntity = new UsersEntity();
             usersEntity.Users.Add(new UserEntity

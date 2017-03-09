@@ -16,10 +16,6 @@ var AjaxHelper = function() {
     //private methods
     function ajaxRequest(requestType, url, dataToSend, callback) {
 
-//        if (dataToSend !== null && dataToSend !== undefined) {
-//            dataToSend.__RequestVerificationToken = $("[name=__RequestVerificationToken]").val();
-//        }
-
         $.ajax({
                 async: true,
                 type: requestType,

@@ -8,7 +8,7 @@ using Raven.Client;
 
 namespace Echelon.Data.RavenDb
 {
-    public class DataService : IDataService
+    public class RavenDataService : IDataService
     {
         private readonly IDocumentStore _database = DocumentStoreProvider.Database;
 

@@ -6,6 +6,7 @@
     (function() {
         self.bubbles.fadeOut(1);
     })();
+
     self.fadeBubbleOut = function() {
         self.bubbles.fadeOut(1000);
     };
@@ -16,7 +17,6 @@
 
         self.fadeBubbleIn = setTimeout(function() {
                 self.bubbles.fadeIn(2000);
-            },
-            25000);
+            }, 25000);
     };
 };

@@ -8,7 +8,7 @@ namespace Echelon.Core.Infrastructure.AutoFac.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<DataService>().As<IDataService>().SingleInstance();
+            builder.RegisterType<RavenDataService>().As<IDataService>().SingleInstance();
         }
     }
 }

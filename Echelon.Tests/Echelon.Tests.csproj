@@ -104,7 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\EmailHelperTests.cs" />
-    <Compile Include="Data\DataServiceTests.cs" />
+    <Compile Include="Data\Raven\DataServiceTests.cs" />
+    <Compile Include="Data\Mongo\MongoDbTests.cs" />
     <Compile Include="LeagueMaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest\RestManagerTests.cs" />
