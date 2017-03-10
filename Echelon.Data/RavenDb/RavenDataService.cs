@@ -12,6 +12,11 @@ namespace Echelon.Data.RavenDb
     {
         private readonly IDocumentStore _database = DocumentStoreProvider.Database;
 
+        private static string GetId<TType>()
+        {
+            return typeof(TType).GetCustomAttribute<IdAttribute>().Id;
+        }
+
         private async Task Open(Func<IAsyncDocumentSession, Task> action)
         {
             using (var session = _database.OpenAsyncSession())
@@ -23,7 +28,7 @@ namespace Echelon.Data.RavenDb
 
         public async Task Create<TType>(TType entity)
         {
-            await Open(session => session.StoreAsync(entity, entity.GetType().GetCustomAttribute<IdAttribute>().Id));
+            await Open(session => session.StoreAsync(entity, GetId<TType>()));
         }
 
         public async Task<TType> Read<TType>()
@@ -37,8 +42,8 @@ namespace Echelon.Data.RavenDb
         {
             await Open(async session =>
             {
-                var types = await session.LoadAsync<TType>(typeof(TType).GetCustomAttribute<IdAttribute>().Id);
-                action(types);
+                var type = await session.LoadAsync<TType>(GetId<TType>());
+                action(type);
             });
         }
 
@@ -48,7 +53,7 @@ namespace Echelon.Data.RavenDb
                 async session =>
                 {
                     await Task.Factory.StartNew(
-                        () => session.Delete(typeof(TType).GetCustomAttribute<IdAttribute>().Id));
+                        () => session.Delete(GetId<TType>()));
                 });
         }
     }

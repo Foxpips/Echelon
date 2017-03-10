@@ -14,40 +14,49 @@ namespace Echelon.Data.MongoDb
     {
         protected static IMongoDatabase Database = DocumentStoreProvider.Database;
 
-        public async Task Create<TType>(TType entity)
+        private static async Task Open<TType>(Func<IMongoCollection<TType>, Task> action)
         {
-            await
-                Database.GetCollection<TType>(entity.GetType().GetCustomAttribute<IdAttribute>().Id)
-                    .InsertOneAsync(entity);
+            var c = await Database.ListCollectionsAsync();
+            var b = await c.AnyAsync();
+
+            await action(Database.GetCollection<TType>(typeof(TType).GetCustomAttribute<IdAttribute>().Id));
         }
 
-        Task<TType> IDataService.Read<TType>()
+        public async Task Create<TType>(TType entity)
         {
-            throw new NotImplementedException();
+            await Open<TType>(async x => await x.InsertOneAsync(entity));
+        }
+
+        public async Task<TType> Read<TType>()
+        {
+            var types = await ReadAll<TType>();
+            return types.SingleOrDefault();
         }
 
         public async Task<List<TType>> ReadAll<TType>()
         {
             List<TType> all = null;
-            await OpenConnection<TType>(async x => all = await x.Find(Builders<TType>.Filter.Empty).ToListAsync());
+            await Open<TType>(async collection => all = await collection.Find(Builders<TType>.Filter.Empty).ToListAsync());
             return all;
         }
 
-        public async Task<TType> Query<TType>(Expression<Func<TType, bool>> q)
+        public async Task<IEnumerable<TType>> Query<TType>(Expression<Func<TType, bool>> q)
         {
-            IEnumerable<TType> z = null;
-            await OpenConnection<TType>(async x => z = await x.Find(Builders<TType>.Filter.Where(q)).ToListAsync());
-            return z.FirstOrDefault();
+            IEnumerable<TType> query = null;
+            await Open<TType>(async collection => query = await collection.Find(Builders<TType>.Filter.Where(q)).ToListAsync());
+            return query;
         }
 
-        public async Task OpenConnection<TType>(Func<IMongoCollection<TType>, Task> action)
+        public async Task Update<TType>(Action<TType> action)
         {
-            await action(Database.GetCollection<TType>(typeof(TType).GetCustomAttribute<IdAttribute>().Id));
-        }
+            var read = await Read<TType>();
+            action(read);
 
-        public Task Update<TType>(Action<TType> action)
-        {
-            throw new NotImplementedException();
+            await Open<TType>(
+                    async collection =>
+                    {
+                        await collection.ReplaceOneAsync(type => type.Equals(read), read, new UpdateOptions { IsUpsert = true });
+                    });
         }
 
         public Task Delete<TType>()

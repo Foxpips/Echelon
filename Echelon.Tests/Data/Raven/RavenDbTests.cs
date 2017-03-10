@@ -10,11 +10,11 @@ using NUnit.Framework;
 
 namespace Echelon.Tests.Data.Raven
 {
-    public class DataServiceTests
+    public class RavenDbTests
     {
         private RavenDataService _dataService;
 
-        [SetUp]
+        [OneTimeSetUp]
         public async Task SetUp()
         {
             _dataService = new RavenDataService();
@@ -56,6 +56,7 @@ namespace Echelon.Tests.Data.Raven
         public async Task Delete_Document_Success()
         {
             await _dataService.Delete<UsersEntity>();
+            await _dataService.Create(new UsersEntity());
         }
 
         [Test]
@@ -67,6 +68,15 @@ namespace Echelon.Tests.Data.Raven
             };
 
             await _dataService.Create(emailTemplates);
+        }
+
+        [OneTimeTearDown]
+        public async Task TearDown()
+        {
+            await _dataService.Update<UsersEntity>(entity =>
+            {
+                entity.Users.Clear();
+            });
         }
     }
 }
