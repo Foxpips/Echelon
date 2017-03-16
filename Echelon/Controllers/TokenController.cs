@@ -34,9 +34,9 @@ namespace Echelon.Controllers
         public async Task<ActionResult> Index(string device, string channel)
         {
             // Create a random identity for the client
-            var usersEntity = await _dataService.Read<UsersEntity>();
+            var usersEntity = await _dataService.Read<UserEntity>();
             var user = _owinContext.Authentication.User;
-            var userEntity = usersEntity.Users.Single(x => x.Email.Equals(user.Identity.Name));
+            var userEntity = usersEntity.Single(x => x.Email.Equals(user.Identity.Name));
             var identity = new { username = userEntity.UserName, email = userEntity.Email };
 
             // Create an Access Token generator

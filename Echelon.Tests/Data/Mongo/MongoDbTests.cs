@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Echelon.Core.Entities.Users;
 using Echelon.Core.Extensions;
 using Echelon.Data.MongoDb;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.IdGenerators;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Data.Mongo
@@ -19,26 +17,32 @@ namespace Echelon.Tests.Data.Mongo
         public async Task SetUp()
         {
             _dataService = new MongoDataService();
-            
-            var usersEntity = new UsersEntity();
-            usersEntity.Users.Add(new UserEntity
+
+            var userEntity = new UserEntity
             {
                 Email = "Test@gmail.com",
                 UserName = "Test",
                 Password = HashHelper.CreateHash("password1")
-            });
+            };
 
-            await _dataService.Create(usersEntity);
+            await _dataService.Create(userEntity);
+
+            var userEntity2 = new UserEntity
+            {
+                Email = "Test2@gmail.com",
+                UserName = "Test2",
+                Password = HashHelper.CreateHash("password1")
+            };
+
+            await _dataService.Create(userEntity2);
         }
 
         [Test]
-        public async Task Connect_Read_Count_Success()
+        public async Task Connect_ReadRows_DataBase_Success()
         {
-            List<UsersEntity> users = await _dataService.ReadAll<UsersEntity>();
-            foreach (var usersEntity in users)
-            {
-                Console.WriteLine(usersEntity.Users.First().Email);
-            }
+            var users = await _dataService.Read<UserEntity>();
+            Assert.NotNull(users);
+            Assert.IsTrue(users.Count > 0);
         }
 
 
@@ -59,7 +63,7 @@ namespace Echelon.Tests.Data.Mongo
         [Test]
         public async Task Connect_ReadAll_DataBase_Success()
         {
-            var read = await _dataService.ReadAll<UsersEntity>();
+            var read = await _dataService.Read<UsersEntity>();
             Assert.NotNull(read);
             foreach (var user in read)
             {

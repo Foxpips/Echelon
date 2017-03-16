@@ -1,7 +1,14 @@
-﻿namespace Echelon.Core.Entities.Users
+﻿using Echelon.Data;
+
+namespace Echelon.Core.Entities.Users
 {
-    public class UserEntity
+    public class UserEntity : EntityBase
     {
+        public UserEntity()
+        {
+            Id = Email;
+        }
+
         public string Email { get; set; }
 
         public string UserName { get; set; }

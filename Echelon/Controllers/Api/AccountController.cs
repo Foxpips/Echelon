@@ -21,8 +21,8 @@ namespace Echelon.Controllers.Api
         [Authorize]
         public async Task<IHttpActionResult> GetAvatar(string email)
         {
-            var loginEntities = await _dataservice.Read<UsersEntity>();
-            var user = loginEntities.Users.Single(x => x.Email.Equals(email));
+            var loginEntities = await _dataservice.Read<UserEntity>();
+            var user = loginEntities.Single(x => x.Email.Equals(email));
 
             if (user == null)
             {
@@ -39,9 +39,9 @@ namespace Echelon.Controllers.Api
             var urllist = new List<object>();
             foreach (var email in list.Emails)
             {
-                var loginEntities = await _dataservice.Read<UsersEntity>();
+                var loginEntities = await _dataservice.Read<UserEntity>();
 
-                var userEntity = loginEntities.Users.SingleOrDefault(x => x.Email == email);
+                var userEntity = loginEntities.SingleOrDefault(x => x.Email == email);
                 if (userEntity != null)
                 {
                     var item = new

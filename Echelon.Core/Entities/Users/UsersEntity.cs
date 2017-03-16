@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Echelon.Data;
 using Echelon.Misc.Attributes;
 
 namespace Echelon.Core.Entities.Users
@@ -13,15 +13,5 @@ namespace Echelon.Core.Entities.Users
         {
             Users = new List<UserEntity>();
         }
-    }
-
-    public class EntityBase
-    {
-        public EntityBase()
-        {
-            Id = Guid.NewGuid();
-        }
-
-        public object Id { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Entities.Email;
@@ -19,37 +20,57 @@ namespace Echelon.Tests.Data.Raven
         {
             _dataService = new RavenDataService();
 
-            var usersEntity = new UsersEntity();
-            usersEntity.Users.Add(new UserEntity
-            {
-                Email = "Test@gmail.com",
-                UserName = "Test",
-                Password = HashHelper.CreateHash("password1")
-            });
+                        var userEntity = new UserEntity
+                        {
+                            Email = "Test@gmail.com",
+                            UserName = "Test",
+                            Password = HashHelper.CreateHash("password1")
+                        };
+            
+                        await _dataService.Create(userEntity);
+            
+                        var userEntity2 = new UserEntity
+                        {
+                            Email = "Test2@gmail.com",
+                            UserName = "Test2",
+                            Password = HashHelper.CreateHash("password1")
+                        };
 
-            await _dataService.Create(usersEntity);
+                        await _dataService.Create(userEntity2);
         }
 
         [Test]
         public async Task Connect_Read_DataBase_Success()
         {
-            var users = await _dataService.Read<UsersEntity>();
+            var users = await _dataService.Read<UserEntity>();
             Assert.NotNull(users);
-            Assert.IsTrue(users.Users.Count > 0);
+            Assert.IsTrue(users.Count > 0);
+        }
+
+        [Test]
+        public async Task Read_User_Database()
+        {
+            var users =
+                await
+                    _dataService.Query<UserEntity>(
+                        entities => entities.Where(userEntity => userEntity.Email == "Test@gmail.com"));
+            Console.WriteLine(users.First().Email);
         }
 
         [Test]
         public async Task Remove_Add_User_Success()
         {
-            var loginEntity = new UserEntity { Email = "Pete@gmail.com", Password = HashHelper.CreateHash("Peterson1"), UserName = "Pete" };
-            await _dataService.Update<UsersEntity>(entity =>
+            var loginEntity = new UserEntity
             {
-                entity.Users.Remove(entity.Users.SingleOrDefault(x => x.Email.Equals("Pete@gmail.com")));
-                entity.Users.Add(loginEntity);
-            });
+                Email = "Pete@gmail.com",
+                Password = HashHelper.CreateHash("Peterson1"),
+                UserName = "Pete"
+            };
 
-            var loginEntities = await _dataService.Read<UsersEntity>();
-            Assert.That(loginEntities.Users.Any(x => x.Email.Equals(loginEntity.Email)));
+            var query = await _dataService.Query<UserEntity>(x => x.Where(y => y.Email == "test2@gmail.com"));
+            await _dataService.Update<UserEntity>(entity => { entity.Email = "updated@gmail.com"; }, query.SingleOrDefault()?.Id);
+            var loginEntities = await _dataService.Read<UserEntity>();
+            Assert.That(loginEntities.Any(x => x.Email.Equals(loginEntity.Email)));
         }
 
         [Test]
@@ -64,7 +85,16 @@ namespace Echelon.Tests.Data.Raven
         {
             var emailTemplates = new EmailTemplatesEntity
             {
-                Templates = new List<EmailTemplateEntity> { new EmailTemplateEntity { Body = "Body Test", Subject = "Subject Test", Type = EmailTemplateEnum.ForgottenPassword } }
+                Templates =
+                    new List<EmailTemplateEntity>
+                    {
+                        new EmailTemplateEntity
+                        {
+                            Body = "Body Test",
+                            Subject = "Subject Test",
+                            Type = EmailTemplateEnum.ForgottenPassword
+                        }
+                    }
             };
 
             await _dataService.Create(emailTemplates);
@@ -73,10 +103,7 @@ namespace Echelon.Tests.Data.Raven
         [OneTimeTearDown]
         public async Task TearDown()
         {
-            await _dataService.Update<UsersEntity>(entity =>
-            {
-                entity.Users.Clear();
-            });
+            await _dataService.Update<UserEntity>(entity => { });
         }
     }
 }

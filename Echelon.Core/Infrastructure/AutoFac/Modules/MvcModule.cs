@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Echelon.Core.Infrastructure.Services.Rest;
 
 namespace Echelon.Core.Infrastructure.AutoFac.Modules
 {

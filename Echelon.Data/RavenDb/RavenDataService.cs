@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Echelon.Misc.Attributes;
 using Raven.Client;
+using Raven.Client.Linq;
 
 namespace Echelon.Data.RavenDb
 {
@@ -26,34 +27,43 @@ namespace Echelon.Data.RavenDb
             }
         }
 
-        public async Task Create<TType>(TType entity)
+        public async Task Create<TType>(TType entity) where TType : EntityBase
         {
-            await Open(session => session.StoreAsync(entity, GetId<TType>()));
+            await Open(session => session.StoreAsync(entity, entity.Id));
         }
 
-        public async Task<TType> Read<TType>()
+        public async Task<List<TType>> Read<TType>()
         {
-            IEnumerable<TType> enumerable = null;
+            IList<TType> enumerable = null;
             await Open(async session => { enumerable = await session.Query<TType>().ToListAsync(); });
-            return enumerable.SingleOrDefault();
+            return enumerable.ToList();
         }
 
-        public async Task Update<TType>(Action<TType> action)
+        public async Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)
+        {
+            using (var session = _database.OpenAsyncSession())
+            {
+                var types = await action(session.Query<TType>()).ToListAsync();
+                await session.SaveChangesAsync();
+                return types;
+            }
+        }
+
+        public async Task Update<TType>(Action<TType> action, string id = null)
         {
             await Open(async session =>
             {
-                var type = await session.LoadAsync<TType>(GetId<TType>());
+                var type = await session.LoadAsync<TType>(id ?? GetId<TType>());
                 action(type);
             });
         }
 
-        public async Task Delete<TType>()
+        public async Task Delete<TType>(string id = null)
         {
             await Open(
                 async session =>
                 {
-                    await Task.Factory.StartNew(
-                        () => session.Delete(GetId<TType>()));
+                    await Task.Factory.StartNew(() => session.Delete(id ?? GetId<TType>()));
                 });
         }
     }

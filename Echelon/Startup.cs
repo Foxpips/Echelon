@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Web.Http;

@@ -24,7 +24,7 @@ namespace Echelon.Core.Infrastructure.Services.Email
         {
             var fromAddress = new MailAddress(EmailSettings.EmailAccount, senderName);
 
-            var emailTemplates = await _dataService.Read<EmailTemplatesEntity>();
+            var emailTemplates = await _dataService.Single<EmailTemplatesEntity>();
             var emailContent = emailTemplates.Templates.Single(x => x.Type.Equals(emailTemplateEnum));
 
             _tokenHelper.Replace(tokens, emailContent.Subject);

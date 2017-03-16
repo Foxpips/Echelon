@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityBase.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="MongoDb\DocumentStoreProvider.cs" />
     <Compile Include="MongoDb\MongoDataService.cs" />

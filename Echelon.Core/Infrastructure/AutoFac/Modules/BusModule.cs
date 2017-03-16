@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using Autofac;
 using MassTransit;
+using static System.Configuration.ConfigurationManager;
 
 namespace Echelon.Core.Infrastructure.AutoFac.Modules
 {
@@ -13,23 +13,22 @@ namespace Echelon.Core.Infrastructure.AutoFac.Modules
             builder.RegisterConsumers(GetType().Assembly);
 
             // Creates our bus from the factory and registers it as a singleton against two interfaces
-            builder.Register(c => Bus.Factory.CreateUsingRabbitMq(sbc =>
+            builder.Register(componentContext => Bus.Factory.CreateUsingRabbitMq(sbc =>
             {
-                var host = sbc.Host(new Uri(ConfigurationManager.AppSettings["RabbitMQHost"]), h =>
+                var host = sbc.Host(new Uri(AppSettings["RabbitMQHost"]), h =>
                 {
-                    h.Username(ConfigurationManager.AppSettings["RabbitMQUsername"]);
-                    h.Password(ConfigurationManager.AppSettings["RabbitMQPassword"]);
+                    h.Username(AppSettings["RabbitMQUsername"]);
+                    h.Password(AppSettings["RabbitMQPassword"]);
                 });
 
-                sbc.ReceiveEndpoint(host, ConfigurationManager.AppSettings["QueueName"], ep =>
+                sbc.ReceiveEndpoint(host, AppSettings["QueueName"], ep =>
                 {
-                    ep.LoadFrom(c.Resolve<ILifetimeScope>());
+                    ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
                 });
             }))
                 .As<IBusControl>()
                 .As<IBus>()
                 .SingleInstance();
-
         }
     }
 }

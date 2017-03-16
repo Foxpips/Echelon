@@ -22,8 +22,8 @@ namespace Echelon.Core.Infrastructure.Services.Login
 
         public async Task<bool> CheckUserExists(UserEntity userEntity)
         {
-            var usersEntity = await _dataservice.Read<UsersEntity>();
-            return usersEntity.Users.Any(
+            var userEntities = await _dataservice.Read<UserEntity>();
+            return userEntities.Any(
                 user =>
                     user.Email.Equals(userEntity.Email) && user.Password == userEntity.Password);
         }

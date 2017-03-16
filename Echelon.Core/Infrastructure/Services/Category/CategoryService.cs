@@ -15,7 +15,7 @@ namespace Echelon.Core.Infrastructure.Services.Category
 
         public async Task<CategoriesEntity> GetCategories()
         {
-            return await _dataService.Read<CategoriesEntity>();
+            return await _dataService.Single<CategoriesEntity>();
         }
     }
 }
