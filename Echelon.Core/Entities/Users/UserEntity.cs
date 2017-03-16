@@ -1,13 +1,12 @@
 ﻿using Echelon.Data;
+using Echelon.Misc.Attributes;
 
 namespace Echelon.Core.Entities.Users
 {
+    [Id("UserEntityTable")]
     public class UserEntity : EntityBase
     {
-        public UserEntity()
-        {
-            Id = Email;
-        }
+        public override string Id => Email;
 
         public string Email { get; set; }
 

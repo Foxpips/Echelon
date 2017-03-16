@@ -20,23 +20,23 @@ namespace Echelon.Tests.Data.Raven
         {
             _dataService = new RavenDataService();
 
-                        var userEntity = new UserEntity
-                        {
-                            Email = "Test@gmail.com",
-                            UserName = "Test",
-                            Password = HashHelper.CreateHash("password1")
-                        };
-            
-                        await _dataService.Create(userEntity);
-            
-                        var userEntity2 = new UserEntity
-                        {
-                            Email = "Test2@gmail.com",
-                            UserName = "Test2",
-                            Password = HashHelper.CreateHash("password1")
-                        };
+//                        var userEntity = new UserEntity
+//                        {
+//                            Email = "Test@gmail.com",
+//                            UserName = "Test",
+//                            Password = HashHelper.CreateHash("password1")
+//                        };
+//            
+//                        await _dataService.Create(userEntity);
+//            
+//                        var userEntity2 = new UserEntity
+//                        {
+//                            Email = "Test2@gmail.com",
+//                            UserName = "Test2",
+//                            Password = HashHelper.CreateHash("password1")
+//                        };
 
-                        await _dataService.Create(userEntity2);
+//                        await _dataService.Create(userEntity2);
         }
 
         [Test]
@@ -67,8 +67,7 @@ namespace Echelon.Tests.Data.Raven
                 UserName = "Pete"
             };
 
-            var query = await _dataService.Query<UserEntity>(x => x.Where(y => y.Email == "test2@gmail.com"));
-            await _dataService.Update<UserEntity>(entity => { entity.Email = "updated@gmail.com"; }, query.SingleOrDefault()?.Id);
+            await _dataService.Update<UserEntity>(entity => { entity.UserName = "updated@gmail.com"; }, "test@gmail.com");
             var loginEntities = await _dataService.Read<UserEntity>();
             Assert.That(loginEntities.Any(x => x.Email.Equals(loginEntity.Email)));
         }

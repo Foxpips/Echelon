@@ -37,6 +37,16 @@ namespace Echelon.Data.MongoDb
             return all;
         }
 
+        public Task Update<TType>(Action<TType> action, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Delete<TType>(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<TType> Single<TType>()
         {
             throw new NotImplementedException();

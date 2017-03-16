@@ -9,8 +9,8 @@ namespace Echelon.Data
     {
         Task Create<TType>(TType entity) where TType : EntityBase;
         Task<List<TType>> Read<TType>();
-        Task Update<TType>(Action<TType> action, string id);
-        Task Delete<TType>(string id);
+        Task Update<TType>(Action<TType> action, string id = null);
+        Task Delete<TType>(string id = null);
         Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action);
     }
 }
