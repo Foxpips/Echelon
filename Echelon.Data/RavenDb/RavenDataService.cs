@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
-using Echelon.Misc.Attributes;
 using Raven.Client;
-using Raven.Client.Linq;
 
 namespace Echelon.Data.RavenDb
 {
@@ -13,17 +10,19 @@ namespace Echelon.Data.RavenDb
     {
         private readonly IDocumentStore _database = DocumentStoreProvider.Database;
 
-        private static string GetId<TType>()
-        {
-            return typeof(TType).GetCustomAttribute<IdAttribute>().Id;
-        }
-
         private async Task Open(Func<IAsyncDocumentSession, Task> action)
         {
-            using (var session = _database.OpenAsyncSession())
+            try
             {
-                await action(session);
-                await session.SaveChangesAsync();
+                using (var session = _database.OpenAsyncSession())
+                {
+                    await action(session);
+                    await session.SaveChangesAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
 
@@ -32,11 +31,11 @@ namespace Echelon.Data.RavenDb
             await Open(session => session.StoreAsync(entity, entity.Id));
         }
 
-        public async Task<List<TType>> Read<TType>()
+        public async Task<IList<TType>> Read<TType>()
         {
             IList<TType> enumerable = null;
             await Open(async session => { enumerable = await session.Query<TType>().ToListAsync(); });
-            return enumerable.ToList();
+            return enumerable;
         }
 
         public async Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)
@@ -49,22 +48,30 @@ namespace Echelon.Data.RavenDb
             }
         }
 
-        public async Task Update<TType>(Action<TType> action, string id = null)
+        public async Task Update<TType>(Action<TType> action, string id) where TType : EntityBase
         {
             await Open(async session =>
             {
-                var type = await session.LoadAsync<TType>(id ?? GetId<TType>());
+                var type = await session.LoadAsync<TType>(id);
                 action(type);
             });
         }
 
-        public async Task Delete<TType>(string id = null)
+        public async Task Delete<TType>(string id) where TType : EntityBase
         {
-            await Open(
-                async session =>
+            await Open(async session => { await Task.Factory.StartNew(() => session.Delete(id)); });
+        }
+
+        public async Task DeleteDocuments<TType>()
+        {
+            await Open(async session =>
+            {
+                var documentCollection = await session.Query<TType>().ToListAsync();
+                foreach (var document in documentCollection)
                 {
-                    await Task.Factory.StartNew(() => session.Delete(id ?? GetId<TType>()));
-                });
+                    session.Delete(document);
+                }
+            });
         }
     }
 }

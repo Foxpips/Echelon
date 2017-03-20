@@ -1,7 +1,7 @@
 ﻿using System;
-using Raven.Abstractions.Util;
 using Raven.Client;
 using Raven.Client.Document;
+using static Raven.Abstractions.Util.ConfigurationManager;
 
 namespace Echelon.Data.RavenDb
 {
@@ -15,8 +15,8 @@ namespace Echelon.Data.RavenDb
         {
             return new DocumentStore
             {
-                ConnectionStringName = "DatabaseConnection",
-                DefaultDatabase = ConfigurationManager.GetAppSetting("DefaultDatabase")
+                ConnectionStringName = "RavenDbConnection",
+                DefaultDatabase = GetAppSetting("Database")
             }.Initialize();
         }
     }

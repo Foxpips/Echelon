@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Echelon.Core.Entities.Email;
 using Echelon.Core.Entities.Users;
 using Echelon.Core.Extensions;
+using Echelon.Core.Infrastructure.Services.Email.Components;
+using Echelon.Data;
 using Echelon.Data.MongoDb;
 using NUnit.Framework;
 
@@ -11,7 +14,7 @@ namespace Echelon.Tests.Data.Mongo
 {
     public class MongoDbTests
     {
-        private MongoDataService _dataService;
+        private IDataService _dataService;
 
         [OneTimeSetUp]
         public async Task SetUp()
@@ -35,52 +38,79 @@ namespace Echelon.Tests.Data.Mongo
             };
 
             await _dataService.Create(userEntity2);
+
+            var emailTemplates = new EmailTemplatesEntity
+            {
+                Templates =
+                    new List<EmailTemplateEntity>
+                    {
+                        new EmailTemplateEntity
+                        {
+                            Body = "Body Test",
+                            Subject = "Subject Test",
+                            Type = EmailTemplateEnum.ForgottenPassword
+                        }
+                    }
+            };
+
+            await _dataService.Create(emailTemplates);
         }
 
         [Test]
-        public async Task Connect_ReadRows_DataBase_Success()
+        public async Task Connect_Read_DataBase_Success()
         {
             var users = await _dataService.Read<UserEntity>();
             Assert.NotNull(users);
             Assert.IsTrue(users.Count > 0);
         }
 
-
         [Test]
-        public async Task Connect_Read_DataBase_Success()
+        public async Task Read_User_Database()
         {
-            var exists = await _dataService.Query<UsersEntity>(user => user.Users.First().Email.Equals("simonpmarkey@gmail.com"));
-            if (exists == null)
-            {
-                await _dataService.Create(new UserEntity { Email = "simonpmarkey@gmail.com", UserName = "Simon" });
-            }
-
-            var read = await _dataService.Query<User>(user => user.Name.Equals("Simon"));
-            Assert.NotNull(read);
-            Console.WriteLine(read.First().Email);
+            var users =
+                await
+                    _dataService.Query<UserEntity>(
+                        entities => entities.Where(userEntity => userEntity.Email == "Test@gmail.com"));
+            Console.WriteLine(users.First().Email);
         }
 
         [Test]
-        public async Task Connect_ReadAll_DataBase_Success()
+        public async Task Update_Add_User_Success()
         {
-            var read = await _dataService.Read<UsersEntity>();
-            Assert.NotNull(read);
-            foreach (var user in read)
-            {
-                Console.WriteLine(user.Users.First().Email);
-            }
+            await _dataService.Update<UserEntity>(entity => { entity.UserName = "updated@gmail.com"; }, "Test@gmail.com");
+            var loginEntities = await _dataService.Read<UserEntity>();
+            Assert.That(loginEntities.Any(x => x.UserName.Equals("updated@gmail.com")));
         }
 
         [Test]
-        public async Task Update_User_Result()
+        public async Task Delete_Document_Success()
         {
-            await _dataService.Update<UsersEntity>(entity =>
+            var userEntity = new UserEntity
             {
-                entity.Users.Remove(entity.Users.SingleOrDefault(x => x.Email.Equals("Pete@gmail.com")));
-                entity.Users.Add(new UserEntity { Email = "Pete@gmail.com", Password = HashHelper.CreateHash("Peterson1"), UserName = "Pete" });
-            });
+                Email = "deleteTest@gmail.com",
+                UserName = "Test",
+                Password = HashHelper.CreateHash("password1")
+            };
 
-            var query = await _dataService.Query<User>(x => x.Email == "Pete@gmail.com");
+            await _dataService.Create(userEntity);
+            Assert.NotNull(await _dataService.Query<UserEntity>(x => x.Where(z => z.Email.Equals(userEntity.Email))));
+
+            await _dataService.Delete<UserEntity>("deleteTest@gmail.com");
+            Assert.False((await _dataService.Read<UserEntity>()).Any(x => x.Email.Equals(userEntity.Email)));
+        }
+
+        [Test]
+        public async Task CreateEmail_Templates_Success()
+        {
+            var expected = await _dataService.Read<EmailTemplatesEntity>();
+            Assert.AreEqual(expected.SingleOrDefault()?.Templates.First().Body, "Body Test");
+        }
+
+        [OneTimeTearDown]
+        public async Task TearDown()
+        {
+            await _dataService.DeleteDocuments<UserEntity>();
+            await _dataService.DeleteDocuments<EmailTemplatesEntity>();
         }
     }
 }

@@ -3,7 +3,7 @@ using Echelon.Misc.Attributes;
 
 namespace Echelon.Core.Entities.Categories
 {
-    [Id("CategoriesTable")]
+    [Name("CategoriesTable")]
     public class CategoriesEntity
     {
         public IEnumerable<CategoryEntity> Categories { get; set; }

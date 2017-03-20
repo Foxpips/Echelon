@@ -1,5 +1,6 @@
 ﻿using System;
 using MongoDB.Driver;
+using static System.Configuration.ConfigurationManager;
 
 namespace Echelon.Data.MongoDb
 {
@@ -11,7 +12,9 @@ namespace Echelon.Data.MongoDb
 
         private static IMongoDatabase CreateStore()
         {
-            return new MongoClient("mongodb://localhost").GetDatabase("EchelonAppDb");
+            return
+                new MongoClient(ConnectionStrings["MongoDbConnection"].ConnectionString).GetDatabase(
+                    AppSettings["Database"]);
         }
     }
 }

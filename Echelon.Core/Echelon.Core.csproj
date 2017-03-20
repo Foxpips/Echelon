@@ -131,7 +131,6 @@
     <Compile Include="Infrastructure\Services\Email\Components\EmailTemplateEnum.cs" />
     <Compile Include="Entities\Email\EmailTemplatesEntity.cs" />
     <Compile Include="Entities\Users\UserEntity.cs" />
-    <Compile Include="Entities\Users\UsersEntity.cs" />
     <Compile Include="Extensions\Autofac\AutofacExtensions.cs" />
     <Compile Include="Extensions\HashHelper.cs" />
     <Compile Include="Infrastructure\Services\Rest\IRestService.cs" />

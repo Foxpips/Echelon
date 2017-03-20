@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using Echelon.Misc.Attributes;
-using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 
 namespace Echelon.Data.MongoDb
@@ -14,9 +12,14 @@ namespace Echelon.Data.MongoDb
     {
         protected static IMongoDatabase Database = DocumentStoreProvider.Database;
 
+        private static string GetName<TType>()
+        {
+            return typeof(TType).GetCustomAttribute<NameAttribute>()?.Name;
+        }
+
         private static async Task Open<TType>(Func<IMongoCollection<TType>, Task> action)
         {
-            await action(Database.GetCollection<TType>(typeof(TType).Name));
+            await action(Database.GetCollection<TType>(GetName<TType>()));
         }
 
         public async Task Create<TType>(TType entity) where TType : EntityBase
@@ -24,69 +27,47 @@ namespace Echelon.Data.MongoDb
             await Open<TType>(async x => await x.InsertOneAsync(entity));
         }
 
-//        public async Task<TType> Read<TType>()
-//        {
-//            var types = await ReadAll<TType>();
-//            return types.SingleOrDefault();
-//        }
-
-        public async Task<List<TType>> Read<TType>()
+        public async Task<IList<TType>> Read<TType>()
         {
             List<TType> all = null;
             await Open<TType>(async collection => all = await collection.Find(Builders<TType>.Filter.Empty).ToListAsync());
             return all;
         }
 
-        public Task Update<TType>(Action<TType> action, string id)
+        public async Task Delete<TType>(string id) where TType : EntityBase
         {
-            throw new NotImplementedException();
+            await Open<TType>(async collection =>
+            {
+                var filter = Builders<TType>.Filter.Eq(s => s.Id, id);
+                await collection.DeleteOneAsync(filter);
+            });
         }
 
-        public Task Delete<TType>(string id)
+        public async Task DeleteDocuments<TType>()
         {
-            throw new NotImplementedException();
+            await Open<TType>(async collection =>
+            {
+                await collection.DeleteManyAsync(Builders<TType>.Filter.Empty);
+            });
         }
 
-        public Task<TType> Single<TType>()
+        public async Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)
         {
-            throw new NotImplementedException();
+            var collection = Database.GetCollection<TType>(GetName<TType>());
+            var queryable = action(collection.AsQueryable()) as IAsyncCursorSource<TType>;
+            return await queryable.ToListAsync();
+
         }
 
-        public async Task<IEnumerable<TType>> Query<TType>(Expression<Func<TType, bool>> q)
+        public async Task Update<TType>(Action<TType> action, string id) where TType : EntityBase
         {
-            IEnumerable<TType> query = null;
-            await Open<TType>(async collection => query = await collection.Find(Builders<TType>.Filter.Where(q)).ToListAsync());
-            return query;
+            await Open<TType>(async collection =>
+            {
+                var filter = Builders<TType>.Filter.Eq(s => s.Id, id);
+                var findAsync = await collection.Find(filter).SingleOrDefaultAsync();
+                action(findAsync);
+                await collection.ReplaceOneAsync(filter, findAsync);
+            });
         }
-
-        public async Task Update<TType>(Action<TType> action)
-        {
-//            var read = await Read<TType>();
-//            action(read);
-//
-//            await Open<TType>(
-//                    async collection =>
-//                    {
-//                        await collection.ReplaceOneAsync(type => type.Equals(read), read, new UpdateOptions { IsUpsert = true });
-//                    });
-        }
-
-        public Task Delete<TType>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    [Id("Users")]
-    [BsonIgnoreExtraElements]
-    public class User
-    {
-        public string Name { get; set; }
-        public string Email { get; set; }
     }
 }

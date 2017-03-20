@@ -3,7 +3,7 @@ using Echelon.Misc.Attributes;
 
 namespace Echelon.Core.Entities.Users
 {
-    [Id("UserEntityTable")]
+    [Name("Users")]
     public class UserEntity : EntityBase
     {
         public override string Id => Email;

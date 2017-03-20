@@ -68,13 +68,11 @@ namespace Echelon.Core.Infrastructure.Services.Login
 
         public async Task<bool> CreateAndLoguserIn(UserEntity userEntity, IAuthenticationManager authenticationManager)
         {
-            await _dataservice.Update<UsersEntity>(usersEntity =>
+            var currentUsers = await _dataservice.Query<UserEntity>(x => x.Where(y => y.Email.Equals(userEntity.Email)));
+            if (currentUsers.Count == 0)
             {
-                if (!usersEntity.Users.Any(user => user.Email.Equals(userEntity.Email)))
-                {
-                    usersEntity.Users.Add(userEntity);
-                }
-            });
+                await _dataservice.Create(userEntity);
+            }
 
             return await LogUserIn(userEntity, authenticationManager);
         }
