@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Echelon.Core.Extensions
+namespace Echelon.Core.Helpers
 {
     public class HashHelper
     {

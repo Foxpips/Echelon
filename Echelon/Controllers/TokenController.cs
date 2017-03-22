@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Echelon.Core.Entities.Users;
 using Echelon.Data;
+using Echelon.Data.Entities.Users;
 using Microsoft.Owin;
 using Twilio.Auth;
 

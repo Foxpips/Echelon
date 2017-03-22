@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Echelon.Data.Entities;
 using Echelon.Misc.Attributes;
 using MongoDB.Driver;
 

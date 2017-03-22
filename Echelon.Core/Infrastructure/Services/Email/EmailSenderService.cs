@@ -2,9 +2,9 @@
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using Echelon.Core.Entities.Email;
 using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data;
+using Echelon.Data.Entities.Email;
 
 namespace Echelon.Core.Infrastructure.Services.Email
 {

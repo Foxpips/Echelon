@@ -4,8 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Echelon.Core.Entities.Users;
 using Echelon.Data;
+using Echelon.Data.Entities.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 

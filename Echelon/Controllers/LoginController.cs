@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
-using Echelon.Core.Entities.Users;
 using Echelon.Core.Infrastructure.MassTransit.Commands;
 using Echelon.Core.Infrastructure.Services.Login;
-using Echelon.Core.Logging.Loggers;
+using Echelon.Data.Entities.Users;
 using Echelon.Models.ViewModels;
 using MassTransit;
 using Microsoft.Owin;
@@ -16,7 +15,7 @@ namespace Echelon.Controllers
         private readonly ILoginService _loginService;
         private readonly IOwinContext _owinContext;
         private readonly IBus _bus;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public LoginController(ILoginService loginService, IOwinContext owinContext, IBus bus, IMapper mapper)
         {

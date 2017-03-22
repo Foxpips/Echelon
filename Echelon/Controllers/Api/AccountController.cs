@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Echelon.Core.Entities.Users;
 using Echelon.Data;
+using Echelon.Data.Entities.Users;
 
 namespace Echelon.Controllers.Api
 {

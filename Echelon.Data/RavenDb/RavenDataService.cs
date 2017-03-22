@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Echelon.Data.Entities;
 using Raven.Client;
 
 namespace Echelon.Data.RavenDb

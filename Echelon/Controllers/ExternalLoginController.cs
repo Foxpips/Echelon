@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
-using Echelon.Core.Entities.Users;
 using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Core.Infrastructure.Services.Rest;
+using Echelon.Data.Entities.Users;
 using Echelon.Infrastructure.Settings;
 using Echelon.Models.BusinessModels;
 using Microsoft.AspNet.Identity.Owin;
@@ -50,7 +50,7 @@ namespace Echelon.Controllers
             }
 
             ModelState.AddModelError("", @"Login Failed!");
-            return RedirectToAction("Login", "Login");
+            return RedirectToAction("Index", "Login");
         }
 
         private async Task<string> SetGoogleAvatar(ExternalLoginInfo externalLoginInfoAsync)

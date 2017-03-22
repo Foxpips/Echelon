@@ -46,7 +46,6 @@ namespace Echelon
 
             ConfigureCookies(app);
             ConfigureApplication();
-            StartServiceBus(container);
         }
 
         private static void ConfigureApplication()
@@ -75,7 +74,7 @@ namespace Echelon
                 ClientId = SiteSettings.GoogleClientId,
                 ClientSecret = SiteSettings.GoogleClientSecrect,
                 Scope = { "profile email" },
-                Provider = new GoogleOAuth2AuthenticationProvider()
+                Provider = new GoogleOAuth2AuthenticationProvider
                 {
                     OnAuthenticated = (context) =>
                     {
@@ -90,12 +89,6 @@ namespace Echelon
                     }
                 }
             });
-        }
-
-        private static void StartServiceBus(IComponentContext container)
-        {
-            var bus = container.Resolve<IBusControl>();
-            bus.StartAsync();
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Echelon.Data;
 using Echelon.Misc.Attributes;
 
-namespace Echelon.Core.Entities.Email
+namespace Echelon.Data.Entities.Email
 {
     [Name("EmailTemplates")]
     public class EmailTemplatesEntity : EntityBase

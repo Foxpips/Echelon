@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Echelon.Misc.Attributes;
 
-namespace Echelon.Core.Entities.Categories
+namespace Echelon.Data.Entities.Categories
 {
     [Name("CategoriesTable")]
     public class CategoriesEntity

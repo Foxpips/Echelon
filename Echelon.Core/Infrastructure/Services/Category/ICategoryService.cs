@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Echelon.Core.Entities.Categories;
+using Echelon.Data.Entities.Categories;
 
 namespace Echelon.Core.Infrastructure.Services.Category
 {

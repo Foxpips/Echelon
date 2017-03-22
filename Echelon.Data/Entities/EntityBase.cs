@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Echelon.Data
+namespace Echelon.Data.Entities
 {
     public abstract class EntityBase
     {

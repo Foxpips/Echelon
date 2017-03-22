@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Echelon.Core.Entities.Email;
 using Echelon.Core.Infrastructure.Services.Email;
 using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data.RavenDb;

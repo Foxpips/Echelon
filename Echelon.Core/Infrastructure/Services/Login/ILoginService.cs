@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Echelon.Core.Entities.Users;
+using Echelon.Data.Entities.Users;
 using Microsoft.Owin.Security;
 
 namespace Echelon.Core.Infrastructure.Services.Login

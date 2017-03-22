@@ -125,14 +125,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Categories\CategoriesEntity.cs" />
-    <Compile Include="Entities\Categories\CategoryEntity.cs" />
-    <Compile Include="Entities\Email\EmailTemplateEntity.cs" />
     <Compile Include="Infrastructure\Services\Email\Components\EmailTemplateEnum.cs" />
-    <Compile Include="Entities\Email\EmailTemplatesEntity.cs" />
-    <Compile Include="Entities\Users\UserEntity.cs" />
     <Compile Include="Extensions\Autofac\AutofacExtensions.cs" />
-    <Compile Include="Extensions\HashHelper.cs" />
+    <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Infrastructure\Services\Rest\IRestService.cs" />
     <Compile Include="Infrastructure\Services\Email\EmailSenderService.cs" />
     <Compile Include="Infrastructure\Services\Email\Components\EmailTokenHelper.cs" />

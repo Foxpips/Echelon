@@ -1,7 +1,6 @@
-﻿using Echelon.Data;
-using Echelon.Misc.Attributes;
+﻿using Echelon.Misc.Attributes;
 
-namespace Echelon.Core.Entities.Users
+namespace Echelon.Data.Entities.Users
 {
     [Name("Users")]
     public class UserEntity : EntityBase
