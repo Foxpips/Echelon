@@ -1,24 +1,27 @@
 ﻿/*--MAIN COLORS--*/
 $color-primary:                 #268dbb; //deepemerald  
-$color-secondary:               #00bfff; //deepskyblue
-$color-header:                  #10a8ec; //deepblue
 $color-control:                 #77d1f9; //darkblue #87ceeb
 $color-hover:                   #5ab5de; //shallowemerald
 
 $color-border:                  #cad1d4;
 $color-gray:                    #9b9b9b;
 $color-gray-light:              #f1f3f7;
+$color-gray-medium:             #dedede;
 $color-gray-dark:               #909090;
 $color-gray-darkest:            #444444;
 
 $color-white:                   #ffffff;
-$color-white-dark:              #f5f5f5;
+$color-black:                   #000000;
     
-$color-red:                     #ed1c24;
 $color-red-dark:                #C12C32;
 $color-green:                   #556b2f;
-$color-brown:                   #4a4a4a;
-$color-black:                   #000000;
+
+$color-btn-hover:               #0094ff;
+$color-btn-border-hover:        #5a95f5;
+$color-btn-border-bottom:       #4285f4;
+$color-username-me:            #39b1e6;
+$color-username-other:         #946def;
+        
 
 /*--FONTS--*/
 $font-family-base:              montserrat, arial; 

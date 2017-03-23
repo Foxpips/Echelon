@@ -1,6 +1,7 @@
 ﻿@import "../variables";
 @import "../mixins";
 @import "../Modules/atomic";
+@import "../Modules/avatar";
 
 .profile-container {
     @extend .margin-0-auto;

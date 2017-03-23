@@ -1,6 +1,8 @@
 ﻿@import "../variables";
 @import "../mixins";
 @import "../Modules/atomic";
+@import "../Modules/loading";
+@import "../Modules/avatar";
 
 .sidebar {
     @extend .display-none;
@@ -185,11 +187,11 @@
         }
 
         &--me {
-            color: #39b1e6;
+            color: $color-username-me;
         }
 
         &--other {
-            color: #946def;
+            color: $color-username-other;
         }
     }
 
@@ -203,59 +205,6 @@
             font-size: 9px;
             padding-left: 5px;
             padding-top: 5px;
-        }
-    }
-}
-
-/* Rounded avatars */
-.avatar {
-    @extend .float-left;
-    @extend .position-relative;
-    image-rendering: auto;
-    background-color: $color-black;
-    margin-top: 10px;
-    height: 40px;
-    width: 40px;
-    margin-left: 5px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-
-    @include Middle-less {
-        margin-top: 5px;
-        margin-left: 10px;
-    }
-
-    &--other {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-
-        @include Middle-less {
-            width: 30px;
-            height: 30px;
-            float: none;
-            position: relative;
-            left: 40px;
-            top: 15px;
-        }
-    }
-
-    &--profile {
-        @extend .float-none;
-        margin-bottom: 10px;
-        width: 150px;
-        height: 150px;
-
-        @include Middle-less {
-            width: 20%;
-            height: 20%;
         }
     }
 }

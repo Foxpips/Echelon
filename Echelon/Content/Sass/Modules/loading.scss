@@ -1,0 +1,55 @@
+﻿@import "../variables";
+@import "atomic";
+
+.loading {
+    &__overlay {
+        @extend .width-100-percent;
+        @extend .height-100-percent;
+        @extend .position-fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000002;
+        background-color: $color-white;
+    }
+
+    &__icon {
+        background: url(../assets/imgs/spinner-white.gif) no-repeat;
+        background-size: contain;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000002;
+        height: 50px;
+        width: 50px;
+    }
+
+
+    &__text {
+        position: relative;
+        width: 200px;
+        height: 50px;
+        background-color: white;
+        animation-name: example;
+        animation-duration: 1.5s;
+        color: $color-primary;
+
+        @keyframes example {
+            0% {
+                background-color: $color-primary;
+                left: 300px;
+                top: 0px;
+            }
+
+            25% {
+                background-color: $color-primary;
+                left: 150px;
+                top: 0px;
+            }
+        }
+
+        &--initial {
+            margin-top: 100px;
+        }
+    }
+}

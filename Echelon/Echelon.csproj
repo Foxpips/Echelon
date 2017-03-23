@@ -328,10 +328,14 @@
     <Content Include="Content\Sass\Pages\page-profile.scss" />
     <Content Include="Content\Sass\Modules\siteIcons.scss" />
     <Content Include="Content\Sass\Modules\bubbles.scss" />
+    <Content Include="Content\Sass\Modules\avatar.scss" />
+    <Content Include="Content\Sass\Modules\loading.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\screensaver-control.js" />
     <Content Include="Javascript\Helpers\ajax-helper.js" />
-    <Content Include="Javascript\Pages\page-chat.js" />
+    <Content Include="Javascript\Pages\login-page.js" />
+    <Content Include="Javascript\Pages\profile-page.js" />
+    <Content Include="Javascript\Pages\chat-page.js" />
     <Content Include="Content\Sass\Modules\atomic.scss" />
     <Content Include="Content\Sass\Pages\page-chat.scss" />
     <Content Include="Content\Sass\Shared\partial-header.scss" />
@@ -384,6 +388,7 @@
     <EmbeddedResource Include="Resources\Login.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Login.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Menu.es.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

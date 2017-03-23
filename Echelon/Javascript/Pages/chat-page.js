@@ -1,18 +1,17 @@
 ﻿/*jshint esversion: 6 */
 
 var currentChannel;
-var siteurl;
 
-$(function () {
+var ChatPage = function (){
     var identity;
     var accessManager;
     var messagingClient;
-    var selectedChannel = "Anime"; //TODO set via data target of hidden field or something
+    var selectedChannel = "Anime"; 
 
     var $input = $("#chat-input");
     var endpoint = $("#chat-input").data("target");
     var $sendButton = $("#sendButton");
-    siteurl = $("#SiteUrl").val();
+
 
     var ajaxHelper = new AjaxHelper();
     var notificationControl = new NotificationControl();
@@ -75,4 +74,4 @@ $(function () {
             screensaverControl.runScreenSaver();
         }
     });
-});
+};

@@ -13,8 +13,8 @@
 
         &:hover {
             background-color: $color-hover !important;
-            border-color: #5a95f5;
-            border-bottom-color: #4285f4;
+            border-color: $color-btn-border-hover;
+            border-bottom-color: $color-btn-border-bottom;
         }
     }
 }

@@ -24,6 +24,11 @@
 
     @RenderBody()
     @Scripts.Render("~/bundles/js")
+
+    <script>
+        var siteurl = $("#SiteUrl").val();
+    </script>
+
     @RenderSection("scripts", false)
 </body>
 
