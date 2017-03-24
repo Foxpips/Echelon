@@ -1,4 +1,4 @@
-﻿namespace Echelon.Core.Infrastructure.MassTransit.Commands
+﻿namespace Echelon.Core.Infrastructure.MassTransit.Commands.Email
 {
     public class SendSignupEmailCommand
     {

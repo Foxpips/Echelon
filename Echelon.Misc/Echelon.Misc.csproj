@@ -31,7 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\FileSizeAttribute.cs" />
+    <Compile Include="Attributes\FileTypesAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Translation\LanguageEnum.cs" />
     <Compile Include="Translation\TranslatedChatModel.cs" />

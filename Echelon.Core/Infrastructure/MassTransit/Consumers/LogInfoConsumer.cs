@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Echelon.Core.Infrastructure.MassTransit.Commands;
+using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Logging.Loggers;
 using MassTransit;
 
 namespace Echelon.Core.Infrastructure.MassTransit.Consumers
 {
-    public class SendSignupEmailCommandConsumer : IConsumer<SendSignupEmailCommand>
+    public class LogInfoConsumer : IConsumer<LogInfoCommand>
     {
         private readonly IClientLogger _clientLogger;
 
-        public SendSignupEmailCommandConsumer(IClientLogger clientLogger)
+        public LogInfoConsumer(IClientLogger clientLogger)
         {
             _clientLogger = clientLogger;
         }
@@ -19,11 +19,6 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
         {
             await Console.Out.WriteLineAsync($"Logging Info: {context.Message.Content}");
             _clientLogger.Info($"Logging Info: {context.Message.Content}");
-        }
-
-        public async Task Consume(ConsumeContext<SendSignupEmailCommand> context)
-        {
-            await Console.Out.WriteLineAsync($"Logging Info: {context.Message.UserName}");
         }
     }
 }

@@ -430,6 +430,10 @@
       <Project>{A9C78335-B58A-42AF-A17E-D2F30152A607}</Project>
       <Name>Echelon.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Echelon.Misc\Echelon.Misc.csproj">
+      <Project>{6E78BF23-63C5-4501-9A60-009404D2EED6}</Project>
+      <Name>Echelon.Misc</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

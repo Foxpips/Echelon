@@ -7,10 +7,10 @@
 
 <section id="wrapper" class="profile-container">
     <div class="profile-container__information">
-        @using (Html.BeginForm("SaveDetails", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material" }))
+        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "Profile Update Failed")
+            @Html.ValidationSummary(false);
             <h3>Profile</h3>
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
@@ -20,7 +20,8 @@
                         </div>
                         <label class="btn btn-info text-align-center">
                             Upload new picture
-                            <input type="file" class="file-upload">
+                            <input type="file" class="file-upload form-control" placeholder="Avatar" name="File">
+@*                            $(".file-upload").prop("files")*@
                         </label>
 
                         <div class="upload-state uloading">
@@ -66,35 +67,35 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.SecondName, new { @class = "form-control", placeholder = "SecondName", required = "true" })
-                        @Html.ValidationMessageFor(u => u.SecondName)
+                        @Html.TextBoxFor(u => u.LastName, new { @class = "form-control", placeholder = "LastName", required = "true" })
+                        @Html.ValidationMessageFor(u => u.LastName)
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-9 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.DisplayName, new { @class = "form-control", placeholder = "DisplayName", required = "true" })
-                        @Html.ValidationMessageFor(u => u.DisplayName)
+                        @Html.TextBoxFor(u => u.UserName, new { @class = "form-control", placeholder = "UserName", required = "true" })
+                        @Html.ValidationMessageFor(u => u.UserName)
                     </div>
                 </div>
                 <div class="col-xs-3 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.CheckBoxFor(u => u.UseDisplayName, new { @class = "form-control", placeholder = "Use Display Name", required = "true" })
-                        @Html.ValidationMessageFor(u => u.UseDisplayName)
-                        @Html.LabelFor(u => u.UseDisplayName, "Enabled")
+                        @Html.CheckBoxFor(u => u.UserNameEnabled, new { @class = "form-control", placeholder = "Use Display Name" })
+                        @Html.ValidationMessageFor(u => u.UserNameEnabled)
+                        @Html.LabelFor(u => u.UserNameEnabled, "Enabled")
                     </div>
                 </div>
             </div>
             <div class="row text-align-center">
-                <button class="btn btn-info btn-lg" type="submit">Save</button>
+                <input class="btn btn-info btn-lg" type="submit" name="Save">
             </div>
         }
     </div>
 </section>
 @section scripts {
     <script>
-        $(function() {
+        $(function () {
             ProfilePage();
         });
     </script>

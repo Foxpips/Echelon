@@ -73,7 +73,7 @@ var ChatControl = function (notificationControl, avatarControl) {
 
     self.chatHistory = function (username) {
         setTimeout(() => {
-            for (let i = 90; i < 100; i++) {
+            for (let i = 40; i < 100; i++) {
                 var message = currentChannel.messages[i];
                 var content = JSON.parse(message.body);
                 if (username === message.author) {

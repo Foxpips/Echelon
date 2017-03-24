@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using AutoMapper;
 using Echelon.Core.Infrastructure.MassTransit.Commands;
+using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Data.Entities.Users;
 using Echelon.Models.ViewModels;
