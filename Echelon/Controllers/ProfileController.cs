@@ -46,15 +46,13 @@ namespace Echelon.Controllers
                         file.SaveAs(Path.Combine(path, fileName));
                     }
                 }
-
-                ModelState.AddModelError("photo", @"Invalid type. Only the following types (jpg, jpeg, png) are supported.");
             }
 
             await _dataService.Update<UserEntity>(x =>
             {
                 x.UserNameEnabled = profileViewModel.UserNameEnabled;
                 x.UserName = profileViewModel.UserName;
-                x.FirstName = profileViewModel.UserName;
+                x.FirstName = profileViewModel.FirstName;
                 x.LastName = profileViewModel.LastName;
             },
                 Request.GetOwinContext().Authentication.User.Identity.Name);

@@ -33,6 +33,10 @@
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
 
+.validation-summary-errors{
+    color: $color-red-dark;
+}
+
 header {
     @extend .width-100-percent;
     position: absolute;

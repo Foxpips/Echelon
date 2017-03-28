@@ -20,13 +20,13 @@
                         </div>
                         <label class="btn btn-info text-align-center">
                             Upload new picture
-                            <input type="file" class="file-upload form-control" placeholder="Avatar" name="File">
-@*                            $(".file-upload").prop("files")*@
+                            <input id="fileUpload" type="file" class="file-upload form-control" placeholder="Avatar" name="File">
                         </label>
 
-                        <div class="upload-state uloading">
-                            <button type="button" class="btn margin-top-5" disabled="">
+                        <div id="uploading" class="upload-state uploading margin-top-10">
+                            <button type="button" class="btn btn-info text-align-center" disabled="">
                                 <img alt="uploading image" class="v-align-text-bottom" height="16" src="" width="16"> Uploading...
+                                <span id="fileNameUploaded"></span>
                             </button>
                         </div>
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Echelon.Misc.Attributes
@@ -13,7 +14,7 @@ namespace Echelon.Misc.Attributes
 
         public FileTypesAttribute(string types)
         {
-            _types = types.Split(',').ToList();
+            _types = Regex.Replace(types, @"\s+", "").Split(',').ToList();
         }
 
         public override bool IsValid(object value)

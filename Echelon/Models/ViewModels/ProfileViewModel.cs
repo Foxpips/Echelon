@@ -5,7 +5,7 @@ namespace Echelon.Models.ViewModels
 {
     public class ProfileViewModel
     {
-        [FileSize(10240)]
+        [FileSize(250000)]
         [FileTypes("jpg, jpeg, png, gif")]
         public HttpPostedFileBase File { get; set; }
 
