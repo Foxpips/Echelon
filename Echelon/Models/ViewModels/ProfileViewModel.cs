@@ -6,7 +6,7 @@ namespace Echelon.Models.ViewModels
     public class ProfileViewModel
     {
         [FileSize(250000)]
-        [FileTypes("jpg, jpeg, png, gif")]
+        [FileTypes(FileTypes.Jpeg, FileTypes.Jpg, FileTypes.Png, FileTypes.Gif)]
         public HttpPostedFileBase File { get; set; }
 
         public string AvatarUrl { get; set; }

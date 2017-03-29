@@ -15,7 +15,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="@Url.Action("Index", "Chat")">
-                <img id="headerAvatar" data-target="@user" class="avatar avatar--user" src="@ViewBag.AvatarImage" alt="avatar" />
+@*                <img id="headerAvatar" data-target="@user" class="avatar avatar--user" src="@ViewBag.AvatarImage" alt="avatar" />*@
+                <img src='@Url.Action( "GetAvatarImage", "Profile", new { email = user })' alt="avatar" class="avatar avatar--user"/>
             </a>
             @ViewBag.Message
         </div>

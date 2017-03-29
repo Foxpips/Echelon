@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Mvc;
 using Echelon.Data;
+using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Users;
 
 namespace Echelon.Controllers.Api
@@ -17,8 +19,8 @@ namespace Echelon.Controllers.Api
             _dataservice = dataservice;
         }
 
-        [HttpGet]
-        [Authorize]
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Authorize]
         public async Task<IHttpActionResult> GetAvatar(string email)
         {
             var loginEntities = await _dataservice.Read<UserEntity>();
@@ -31,8 +33,22 @@ namespace Echelon.Controllers.Api
             return Ok(user.AvatarUrl);
         }
 
-        [HttpPost]
-        [Authorize]
+//        [System.Web.Http.HttpGet]
+//        [System.Web.Http.Authorize]
+//        public async Task<ActionResult> GetAvatarImage(string email)
+//        {
+//            var avatarEntities = await _dataservice.Read<AvatarEntity>();
+//            var avatarFile = avatarEntities.Single(x => x.Email.Equals("simonpmarkey@gmail.com"));
+//            var fileContentResult = new FileContentResult(avatarFile.ImageBytes, "image/png")
+//            {
+//                FileDownloadName = avatarFile.ImageName
+//            };
+//
+//            return fileContentResult;
+//        }
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Authorize]
         public async Task<IHttpActionResult> PrintPerson(EmailList list)
         {
             Console.WriteLine(@"test");
