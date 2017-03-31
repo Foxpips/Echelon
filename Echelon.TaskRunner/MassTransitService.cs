@@ -3,7 +3,7 @@ using Echelon.Core.Extensions.Autofac;
 using Echelon.Core.Infrastructure.Services.Windows;
 using MassTransit;
 
-namespace TaskRunner
+namespace Echelon.TaskRunner
 {
     public class MassTransitService : IWindowsService
     {

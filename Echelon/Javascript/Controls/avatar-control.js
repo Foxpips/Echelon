@@ -9,7 +9,6 @@ var AvatarControl = function (ajaxhelper) {
     self.setUserAvatar = function (email) {
         ajaxhelper.Get(`${siteurl}/api/avatar?email=${email}`,
             response => {
-                console.log(response);
                 self.avatarUrl = response;
                 for (let avatar of $(".avatar--user")) {
                     $(avatar).attr("src", response);

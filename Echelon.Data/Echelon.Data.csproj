@@ -74,6 +74,7 @@
     <Compile Include="Entities\Users\UserEntity.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="IDataService.cs" />
+    <Compile Include="Indexes\UsersAvatars.cs" />
     <Compile Include="MongoDb\DocumentStoreProvider.cs" />
     <Compile Include="MongoDb\MongoDataService.cs" />
     <Compile Include="RavenDb\RavenDataService.cs" />

@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Data.Entities;
+using Echelon.Data.Entities.Avatar;
+using Echelon.Data.Entities.Users;
+using Echelon.Data.Indexes;
 using Raven.Client;
+using Raven.Client.Linq;
 
 namespace Echelon.Data.RavenDb
 {
@@ -73,6 +77,35 @@ namespace Echelon.Data.RavenDb
                     session.Delete(document);
                 }
             });
+        }
+
+        public async Task<IList<AvatarUserEntity>> GetIndex()
+        {
+            new UsersAvatars().Execute(_database);
+
+            using (var session = _database.OpenAsyncSession())
+            {
+                var avatarEntities = session.Query<AvatarEntity>().Where(x => x.Email.Equals("simonpmarkey@gmail.com"));
+                var foo = await avatarEntities.TransformWith<UsersAvatars, AvatarUserEntity>().ToListAsync();
+
+                await session.SaveChangesAsync();
+
+                return foo;
+            }
+        }
+
+        public async Task GetInclude()
+        {
+            using (var session = _database.OpenAsyncSession())
+            {
+                var results =
+                    await session.Include<UserEntity>(x => x.Email).LoadAsync<UserEntity>("simonpmarkey@gmail.com");
+
+                // this will not require querying the server!
+                var customer = await session.LoadAsync<AvatarEntity>();
+
+                await session.SaveChangesAsync();
+            }
         }
     }
 }

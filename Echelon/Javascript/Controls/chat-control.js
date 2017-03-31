@@ -37,7 +37,7 @@ var ChatControl = function (notificationControl, avatarControl) {
             }
 
             avatarControl.setParticipantAvatars(members, result => {
-                $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" src=${result.url} alt="avatar"><div class="sidebar__participant--username">${result.email}</div></div>`));
+                $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" src=${result.url} alt="avatar"><div class="sidebar__participant--username">${result.username}</div></div>`));
             });
         }, 1000);
     };

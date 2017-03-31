@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Echelon.Core.Extensions;
 using Echelon.Core.Helpers;
 using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data;
+using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Email;
 using Echelon.Data.Entities.Users;
 using Echelon.Data.RavenDb;
@@ -15,7 +15,7 @@ namespace Echelon.Tests.Data.Raven
 {
     public class RavenDbTests
     {
-        private IDataService _dataService;
+        private RavenDataService _dataService;
 
         [OneTimeSetUp]
         public async Task SetUp()
@@ -33,12 +33,21 @@ namespace Echelon.Tests.Data.Raven
 
             var userEntity2 = new UserEntity
             {
-                Email = "Test2@gmail.com",
+                Email = "simonpmarkey@gmail.com",
                 UserName = "Test2",
                 Password = HashHelper.CreateHash("password1")
             };
 
             await _dataService.Create(userEntity2);
+
+            var userEntity3 = new UserEntity
+            {
+                Email = "smarkey@gmail.com",
+                UserName = "simon",
+                Password = HashHelper.CreateHash("password1")
+            };
+
+            await _dataService.Create(userEntity3);
 
             var emailTemplates = new EmailTemplatesEntity
             {
@@ -108,11 +117,26 @@ namespace Echelon.Tests.Data.Raven
             Assert.AreEqual(expected.SingleOrDefault()?.Templates.First().Body, "Body Test");
         }
 
+        [Test]
+        public async Task IndexTest_Scenario_Result()
+        {
+            var avatarEntity = new AvatarEntity { Email = "simonpmarkey@gmail.com", AvatarUrl = "someurl/pic.jpg" };
+            var avatarEntity2 = new AvatarEntity { Email = "smarkey@gmail.com", AvatarUrl = "someurl/pic2.jpg" };
+            await _dataService.Create(avatarEntity);
+            await _dataService.Create(avatarEntity2);
+
+            var avatarUserEntities = await _dataService.GetIndex();
+            var avatarUserEntity = avatarUserEntities.First();
+            Assert.That(avatarUserEntities.Count(x => x.AvatarUrl == avatarUserEntity.AvatarUrl), Is.EqualTo(1));
+            Assert.AreEqual(avatarUserEntity.AvatarUrl, avatarEntity.AvatarUrl);
+        }
+
         [OneTimeTearDown]
         public async Task TearDown()
         {
             await _dataService.DeleteDocuments<UserEntity>();
             await _dataService.DeleteDocuments<EmailTemplatesEntity>();
+            await _dataService.DeleteDocuments<AvatarEntity>();
         }
     }
 }

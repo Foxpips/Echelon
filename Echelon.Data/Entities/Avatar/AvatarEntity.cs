@@ -9,5 +9,7 @@
         public string ImageName { get; set; }
 
         public string FileType { get; set; }
+
+        public string AvatarUrl { get; set; }
     }
 }

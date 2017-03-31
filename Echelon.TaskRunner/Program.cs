@@ -1,6 +1,6 @@
 ﻿using Echelon.Core.Infrastructure.Services.Windows;
 
-namespace TaskRunner
+namespace Echelon.TaskRunner
 {
     internal class Program
     {

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using Echelon.Data;
+using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -69,12 +70,21 @@ namespace Echelon.Core.Infrastructure.Services.Login
         public async Task<bool> CreateAndLoguserIn(UserEntity userEntity, IAuthenticationManager authenticationManager)
         {
             var currentUsers = await _dataservice.Query<UserEntity>(x => x.Where(y => y.Email.Equals(userEntity.Email)));
-            if (currentUsers.Count == 0)
+            if (!currentUsers.Any())
             {
                 await _dataservice.Create(userEntity);
             }
 
             return await LogUserIn(userEntity, authenticationManager);
+        }
+
+        public async Task SetUserAvatar(string email, string avatarUrl)
+        {
+            var avatarEntities = await _dataservice.Query<AvatarEntity>(x => x.Where(z => z.Email.Equals(email)));
+            if (!avatarEntities.Any())
+            {
+                await _dataservice.Create(new AvatarEntity {Email = email, AvatarUrl = avatarUrl});
+            }
         }
     }
 }

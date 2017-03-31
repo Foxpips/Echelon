@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -45,23 +43,6 @@ namespace Echelon.Controllers
             return View();
         }
 
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Authorize]
-        public async Task<ActionResult> GetAvatarImage(string email)
-        {
-            var avatarEntities = await _dataService.Read<AvatarEntity>();
-            var avatarFile = avatarEntities.Single(x => x.Email.Equals("simonpmarkey@gmail.com"));
-            var fileContentResult = File(avatarFile.ImageBytes, "image/png", "avatar.png");
-            //            return fileContentResult;
-
-            using (var webClient = new WebClient())
-            {
-                var foo = await webClient.DownloadDataTaskAsync(new Uri("https://lh5.googleusercontent.com/-h85Scfoq274/AAAAAAAAAAI/AAAAAAAAABQ/rFY9Ow0Nn4M/photo.jpg"));
-                fileContentResult = File(foo, "image/jpg", "avatar.jpg");
-            }
-            return fileContentResult;
-        }
-
         private async Task UpdateProfile(ProfileViewModel profileViewModel, string email)
         {
             await _dataService.Update<UserEntity>(x =>
@@ -84,20 +65,17 @@ namespace Echelon.Controllers
                 {
                     if (file.ContentLength > 0)
                     {
-                        //file.SaveAs(Path.Combine(Server.MapPath("~/Images/"), Path.GetFileName(file.FileName)));
+                        var filePath = Path.Combine(Server.MapPath("~/Users/Profiles/Images/"),
+                            Path.GetFileName($"{Guid.NewGuid()}-{file.FileName}"));
+                        file.SaveAs(filePath);
 
-                        using (var binaryReader = new BinaryReader(file.InputStream))
+                        await _dataService.Create(new AvatarEntity
                         {
-                            var fileData = binaryReader.ReadBytes(file.ContentLength);
-                            await
-                                _dataService.Create(new AvatarEntity
-                                {
-                                    Email = email,
-                                    ImageName = file.FileName,
-                                    FileType = file.ContentType,
-                                    ImageBytes = fileData
-                                });
-                        }
+                            Email = email,
+                            ImageName = file.FileName,
+                            FileType = file.ContentType,
+                            AvatarUrl = filePath
+                        });
                     }
                 }
             }

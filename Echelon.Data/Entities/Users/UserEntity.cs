@@ -19,8 +19,6 @@ namespace Echelon.Data.Entities.Users
 
         public string Password { get; set; }
 
-        public string AvatarUrl { get; set; }
-
         public bool RememberMe { get; set; }
     }
 }

@@ -42,7 +42,7 @@ namespace Echelon.Controllers
         {
             var externalLoginInfoAsync = await _owinContext.Authentication.GetExternalLoginInfoAsync();
             var userEntity = _mapper.Map<UserEntity>(externalLoginInfoAsync);
-                userEntity.AvatarUrl = await SetGoogleAvatar(externalLoginInfoAsync);
+            await _loginService.SetUserAvatar(userEntity.Email, await SetGoogleAvatar(externalLoginInfoAsync));
 
             if (await _loginService.LogUserIn(userEntity, _owinContext.Authentication) || await _loginService.CreateAndLoguserIn(userEntity, _owinContext.Authentication))
             {
@@ -61,7 +61,7 @@ namespace Echelon.Controllers
                     .Select(c => c.Value)
                     .FirstOrDefault());
 
-            return (await _restService.MakeGenericRequest<GooglePlusInfo>(requestUri)).Picture;
+            return (await _restService.MakeGenericRequest<GooglePlusInfo>(requestUri))?.Picture;
         }
     }
 }
