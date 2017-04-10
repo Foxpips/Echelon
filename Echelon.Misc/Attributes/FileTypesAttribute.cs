@@ -24,7 +24,7 @@ namespace Echelon.Misc.Attributes
             }
 
             FileTypes fileExtEnum;
-            var fileExtString = Path.GetExtension(((HttpPostedFileBase)value).FileName)?.Substring(1);
+            var fileExtString = Path.GetExtension(((HttpPostedFileBase) value).FileName)?.Substring(1);
             var hasFileType = Enum.TryParse(fileExtString, true, out fileExtEnum);
 
             return hasFileType && _types.Contains<FileTypes>(fileExtEnum);

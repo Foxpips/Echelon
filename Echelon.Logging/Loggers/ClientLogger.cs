@@ -46,7 +46,7 @@ namespace Echelon.Core.Logging.Loggers
         private static void SetOutputPath(string outputPath)
         {
             var appender = LogManager.GetRepository().GetAppenders().First(x => x is RollingFileAppender);
-            var fileAppender = ((FileAppender)appender);
+            var fileAppender = ((FileAppender) appender);
             fileAppender.File = outputPath;
             fileAppender.ActivateOptions();
         }

@@ -7,10 +7,11 @@
 
 <section id="wrapper" class="profile-container">
     <div class="profile-container__information">
-        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new {id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data"}))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(false);
+            @Html.ValidationSummary(false)
+            ;
             <h3>Profile</h3>
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
@@ -59,7 +60,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control", placeholder = "FirstName", required = "true" })
+                        @Html.TextBoxFor(u => u.FirstName, new {@class = "form-control", placeholder = "FirstName", required = "true"})
                         @Html.ValidationMessageFor(u => u.FirstName)
                     </div>
                 </div>
@@ -67,7 +68,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.LastName, new { @class = "form-control", placeholder = "LastName", required = "true" })
+                        @Html.TextBoxFor(u => u.LastName, new {@class = "form-control", placeholder = "LastName", required = "true"})
                         @Html.ValidationMessageFor(u => u.LastName)
                     </div>
                 </div>
@@ -75,13 +76,13 @@
             <div class="row">
                 <div class="col-xs-9 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.UserName, new { @class = "form-control", placeholder = "UserName", required = "true" })
+                        @Html.TextBoxFor(u => u.UserName, new {@class = "form-control", placeholder = "UserName", required = "true"})
                         @Html.ValidationMessageFor(u => u.UserName)
                     </div>
                 </div>
                 <div class="col-xs-3 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.CheckBoxFor(u => u.UserNameEnabled, new { @class = "form-control", placeholder = "Use Display Name" })
+                        @Html.CheckBoxFor(u => u.UserNameEnabled, new {@class = "form-control", placeholder = "Use Display Name"})
                         @Html.ValidationMessageFor(u => u.UserNameEnabled)
                         @Html.LabelFor(u => u.UserNameEnabled, "Enabled")
                     </div>
@@ -95,7 +96,7 @@
 </section>
 @section scripts {
     <script>
-        $(function () {
+        $(function() {
             ProfilePage();
         });
     </script>

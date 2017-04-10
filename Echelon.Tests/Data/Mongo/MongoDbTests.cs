@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Echelon.Core.Extensions;
 using Echelon.Core.Helpers;
 using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data;
+using Echelon.Data.DataProviders.MongoDb;
 using Echelon.Data.Entities.Email;
 using Echelon.Data.Entities.Users;
-using Echelon.Data.MongoDb;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Data.Mongo
@@ -78,7 +77,8 @@ namespace Echelon.Tests.Data.Mongo
         [Test]
         public async Task Update_Add_User_Success()
         {
-            await _dataService.Update<UserEntity>(entity => { entity.UserName = "updated@gmail.com"; }, "Test@gmail.com");
+            await
+                _dataService.Update<UserEntity>(entity => { entity.UserName = "updated@gmail.com"; }, "Test@gmail.com");
             var loginEntities = await _dataService.Read<UserEntity>();
             Assert.That(loginEntities.Any(x => x.UserName.Equals("updated@gmail.com")));
         }

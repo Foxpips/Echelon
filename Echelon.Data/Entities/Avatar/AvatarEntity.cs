@@ -2,11 +2,7 @@
 {
     public class AvatarEntity : EntityBase
     {
-        public string Email { get; set; }
-
-        public byte[] ImageBytes { get; set; }
-
-        public string ImageName { get; set; }
+        public string ImageName => "Avatar";
 
         public string FileType { get; set; }
 

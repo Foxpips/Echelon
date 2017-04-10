@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Echelon.Data;
-using Echelon.Data.RavenDb;
+using Echelon.Data.DataProviders.RavenDb;
 
 namespace Echelon.Core.Infrastructure.AutoFac.Modules
 {

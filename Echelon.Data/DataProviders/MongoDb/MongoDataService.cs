@@ -4,10 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Echelon.Data.Entities;
+using Echelon.Data.Entities.Transforms;
 using Echelon.Misc.Attributes;
 using MongoDB.Driver;
 
-namespace Echelon.Data.MongoDb
+namespace Echelon.Data.DataProviders.MongoDb
 {
     public class MongoDataService : IDataService
     {
@@ -31,7 +32,8 @@ namespace Echelon.Data.MongoDb
         public async Task<IList<TType>> Read<TType>()
         {
             List<TType> all = null;
-            await Open<TType>(async collection => all = await collection.Find(Builders<TType>.Filter.Empty).ToListAsync());
+            await
+                Open<TType>(async collection => all = await collection.Find(Builders<TType>.Filter.Empty).ToListAsync());
             return all;
         }
 
@@ -46,10 +48,17 @@ namespace Echelon.Data.MongoDb
 
         public async Task DeleteDocuments<TType>()
         {
-            await Open<TType>(async collection =>
-            {
-                await collection.DeleteManyAsync(Builders<TType>.Filter.Empty);
-            });
+            await Open<TType>(async collection => { await collection.DeleteManyAsync(Builders<TType>.Filter.Empty); });
+        }
+
+        public Task<UserAvatarEntity> TransformUserAvatars(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TType> GetIndex<TType>(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)
@@ -57,7 +66,6 @@ namespace Echelon.Data.MongoDb
             var collection = Database.GetCollection<TType>(GetName<TType>());
             var queryable = action(collection.AsQueryable()) as IAsyncCursorSource<TType>;
             return await queryable.ToListAsync();
-
         }
 
         public async Task Update<TType>(Action<TType> action, string id) where TType : EntityBase

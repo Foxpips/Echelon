@@ -4,8 +4,8 @@
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="theme-color" content="#2882c2">
     <meta name="msapplication-navbutton-color" content="#2882c2">
     <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
@@ -17,19 +17,19 @@
 </head>
 
 <body class="window-container overflow-auto">
-    @if (User.Identity.IsAuthenticated)
-    {
-        @Html.Partial("_Header")
-    }
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_Header")
+}
 
-    @RenderBody()
-    @Scripts.Render("~/bundles/js")
+@RenderBody()
+@Scripts.Render("~/bundles/js")
 
-    <script>
-        var siteurl = $("#SiteUrl").val();
-    </script>
+<script>
+    var siteurl = $("#SiteUrl").val();
+</script>
 
-    @RenderSection("scripts", false)
+@RenderSection("scripts", false)
 </body>
 
 </html>

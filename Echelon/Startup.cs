@@ -12,7 +12,6 @@ using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Infrastructure.Attributes;
 using Echelon.Infrastructure.Settings;
-using MassTransit;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -73,7 +72,7 @@ namespace Echelon
             {
                 ClientId = SiteSettings.GoogleClientId,
                 ClientSecret = SiteSettings.GoogleClientSecrect,
-                Scope = { "profile email" },
+                Scope = {"profile email"},
                 Provider = new GoogleOAuth2AuthenticationProvider
                 {
                     OnAuthenticated = (context) =>

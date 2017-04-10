@@ -59,7 +59,7 @@ namespace Echelon.Controllers
         {
             if (file != null && file.ContentLength > 0 && file.FileName != null)
             {
-                await _bus.Publish(new LogInfoCommand { Content = $"Uploading : {file.FileName}" });
+                await _bus.Publish(new LogInfoCommand {Content = $"Uploading : {file.FileName}"});
 
                 if (ModelState.IsValid)
                 {
@@ -71,8 +71,6 @@ namespace Echelon.Controllers
 
                         await _dataService.Create(new AvatarEntity
                         {
-                            Email = email,
-                            ImageName = file.FileName,
                             FileType = file.ContentType,
                             AvatarUrl = filePath
                         });

@@ -8,7 +8,8 @@ namespace Echelon.Core.Extensions.Autofac
 {
     public static class AutofacExtensions
     {
-        public static ContainerBuilder RegisterCustomModules(this ContainerBuilder builder, bool includeCoreModules, params Assembly[] assemblies)
+        public static ContainerBuilder RegisterCustomModules(this ContainerBuilder builder, bool includeCoreModules,
+            params Assembly[] assemblies)
         {
             var containerBuilder = builder ?? new ContainerBuilder();
 
@@ -30,7 +31,7 @@ namespace Echelon.Core.Extensions.Autofac
 
             foreach (var module in modules)
             {
-                var instance = (Module)Activator.CreateInstance(module);
+                var instance = (Module) Activator.CreateInstance(module);
                 containerBuilder.RegisterModule(instance);
             }
         }

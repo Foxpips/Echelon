@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.Services.Email;
 using Echelon.Core.Infrastructure.Services.Email.Components;
-using Echelon.Data.RavenDb;
+using Echelon.Data.DataProviders.RavenDb;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Core

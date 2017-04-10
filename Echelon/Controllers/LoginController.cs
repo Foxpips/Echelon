@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
-using Echelon.Core.Infrastructure.MassTransit.Commands;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Data.Entities.Users;
@@ -48,7 +47,7 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(LoginViewModel loginViewModel)
         {
-            await _bus.Publish(new LogInfoCommand { Content = $"Attempting to login with email: {loginViewModel.Email}" });
+            await _bus.Publish(new LogInfoCommand {Content = $"Attempting to login with email: {loginViewModel.Email}"});
 
             var loginEntity = _mapper.Map<UserEntity>(loginViewModel);
             if (ModelState.IsValid)
@@ -61,7 +60,7 @@ namespace Echelon.Controllers
                 ModelState.AddModelError("", @"Email or Password is incorrect!");
             }
 
-            await _bus.Publish(new LogInfoCommand { Content = $"User not found: {loginViewModel.Email}" });
+            await _bus.Publish(new LogInfoCommand {Content = $"User not found: {loginViewModel.Email}"});
             return View(loginViewModel);
         }
 
@@ -71,7 +70,11 @@ namespace Echelon.Controllers
         {
             if (await _loginService.LogUserOut(_owinContext.Authentication))
             {
-                await _bus.Publish(new LogInfoCommand { Content = $"Logging user: {_owinContext.Authentication.User.Identity.Name} out" });
+                await
+                    _bus.Publish(new LogInfoCommand
+                    {
+                        Content = $"Logging user: {_owinContext.Authentication.User.Identity.Name} out"
+                    });
 
                 return RedirectToActionPermanent("Index", "Login");
             }

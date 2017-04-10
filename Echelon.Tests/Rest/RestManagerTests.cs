@@ -14,7 +14,10 @@ namespace Echelon.Tests.Rest
         public async Task Method_Scenario_Result()
         {
             var restManager = new RestService(new ClientLogger());
-            var translatedChatModel = await restManager.MakeTranslationRequest("¡No puedo esperar hasta que termine el trabajo!", LanguageEnum.En);
+            var translatedChatModel =
+                await
+                    restManager.MakeTranslationRequest("¡No puedo esperar hasta que termine el trabajo!",
+                        LanguageEnum.En);
 
             Console.WriteLine(translatedChatModel.Text.First());
         }

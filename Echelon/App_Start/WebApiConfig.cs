@@ -12,7 +12,7 @@ namespace Echelon
             config.Routes.MapHttpRoute(
                 "WithActionApi",
                 "api/{controller}/{action}/{person}",
-                 defaults: new { person = RouteParameter.Optional }
+                defaults: new {person = RouteParameter.Optional}
                 );
 
             config.Routes.MapHttpRoute(

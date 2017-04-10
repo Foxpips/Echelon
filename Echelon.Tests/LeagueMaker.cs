@@ -29,17 +29,18 @@ namespace Echelon.Tests
         public void Method_Scenario_Result()
         {
             var league = new League();
-            Players = new List<string> { "Simon", "Stefan", "Niall", "Eoin", "Laurent", "Domhnall" };
+            Players = new List<string> {"Simon", "Stefan", "Niall", "Eoin", "Laurent", "Domhnall"};
             while (Players.Count > 0)
             {
-                league.Teams.Add(new Team { Player1 = Players.PickRandom(), Player2 = Players.PickRandom() });
+                league.Teams.Add(new Team {Player1 = Players.PickRandom(), Player2 = Players.PickRandom()});
             }
 
-            while (league.Teams.Count >=2)
+            while (league.Teams.Count >= 2)
             {
                 var pickRandom = league.Teams.PickRandom();
                 var random = league.Teams.PickRandom();
-                Console.WriteLine($"{pickRandom.Player1} and {pickRandom.Player2} Versus {random.Player1} and {random.Player2}");
+                Console.WriteLine(
+                    $"{pickRandom.Player1} and {pickRandom.Player2} Versus {random.Player1} and {random.Player2}");
             }
         }
     }

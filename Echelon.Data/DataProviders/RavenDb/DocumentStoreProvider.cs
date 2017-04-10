@@ -1,11 +1,11 @@
 ﻿using System;
+using Raven.Abstractions.Util;
 using Raven.Client;
 using Raven.Client.Document;
-using static Raven.Abstractions.Util.ConfigurationManager;
 
-namespace Echelon.Data.RavenDb
+namespace Echelon.Data.DataProviders.RavenDb
 {
-    internal class DocumentStoreProvider
+    internal class DocumentStoreProvider : BaseDbStoreProvider
     {
         public static IDocumentStore Database => DocumentStore.Value;
 
@@ -13,11 +13,14 @@ namespace Echelon.Data.RavenDb
 
         private static IDocumentStore CreateStore()
         {
-            return new DocumentStore
+            var documentStore = new DocumentStore
             {
                 ConnectionStringName = "RavenDbConnection",
-                DefaultDatabase = GetAppSetting("Database")
+                DefaultDatabase = ConfigurationManager.GetAppSetting("Database")
             }.Initialize();
+
+            ConfigureDatabase(documentStore);
+            return documentStore;
         }
     }
 }

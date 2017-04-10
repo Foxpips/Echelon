@@ -5,7 +5,8 @@ namespace Echelon.Core.Infrastructure.Services.Windows
 {
     public class WindowsServiceHelper
     {
-        public static void Start<TService>(string serviceName, Action<TService> action = null) where TService : class, IWindowsService, new()
+        public static void Start<TService>(string serviceName, Action<TService> action = null)
+            where TService : class, IWindowsService, new()
         {
             HostFactory.Run(
                 x =>

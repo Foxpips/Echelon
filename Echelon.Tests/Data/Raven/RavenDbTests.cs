@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Helpers;
 using Echelon.Core.Infrastructure.Services.Email.Components;
-using Echelon.Data;
+using Echelon.Data.DataProviders.RavenDb;
 using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Email;
 using Echelon.Data.Entities.Users;
-using Echelon.Data.RavenDb;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Data.Raven
@@ -38,16 +37,11 @@ namespace Echelon.Tests.Data.Raven
                 Password = HashHelper.CreateHash("password1")
             };
 
+            var avatarEntity = new AvatarEntity {AvatarUrl = "someurl/pic.jpg"};
+            await _dataService.Create(avatarEntity);
+
+            userEntity2.AvatarId = avatarEntity.Id;
             await _dataService.Create(userEntity2);
-
-            var userEntity3 = new UserEntity
-            {
-                Email = "smarkey@gmail.com",
-                UserName = "simon",
-                Password = HashHelper.CreateHash("password1")
-            };
-
-            await _dataService.Create(userEntity3);
 
             var emailTemplates = new EmailTemplatesEntity
             {
@@ -120,15 +114,8 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task IndexTest_Scenario_Result()
         {
-            var avatarEntity = new AvatarEntity { Email = "simonpmarkey@gmail.com", AvatarUrl = "someurl/pic.jpg" };
-            var avatarEntity2 = new AvatarEntity { Email = "smarkey@gmail.com", AvatarUrl = "someurl/pic2.jpg" };
-            await _dataService.Create(avatarEntity);
-            await _dataService.Create(avatarEntity2);
-
-            var avatarUserEntities = await _dataService.GetIndex();
-            var avatarUserEntity = avatarUserEntities.First();
-            Assert.That(avatarUserEntities.Count(x => x.AvatarUrl == avatarUserEntity.AvatarUrl), Is.EqualTo(1));
-            Assert.AreEqual(avatarUserEntity.AvatarUrl, avatarEntity.AvatarUrl);
+            var avatarUserEntity = await _dataService.TransformUserAvatars("simonpmarkey@gmail.com");
+            Assert.AreEqual(avatarUserEntity.AvatarUrl, "someurl/pic.jpg");
         }
 
         [OneTimeTearDown]

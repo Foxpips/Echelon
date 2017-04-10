@@ -74,11 +74,16 @@
     <Compile Include="Entities\Users\UserEntity.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="IDataService.cs" />
-    <Compile Include="Indexes\UsersAvatars.cs" />
-    <Compile Include="MongoDb\DocumentStoreProvider.cs" />
-    <Compile Include="MongoDb\MongoDataService.cs" />
-    <Compile Include="RavenDb\RavenDataService.cs" />
-    <Compile Include="RavenDb\DocumentStoreProvider.cs" />
+    <Compile Include="Indexes\Mongo\UsersAvatars.cs" />
+    <Compile Include="IDbStartup.cs" />
+    <Compile Include="Entities\Transforms\UserAvatarEntity.cs" />
+    <Compile Include="Indexes\Raven\UsersAvatarsTransform.cs" />
+    <Compile Include="DataProviders\BaseDbStoreProvider.cs" />
+    <Compile Include="DataProviders\MongoDb\DocumentStoreProvider.cs" />
+    <Compile Include="DataProviders\MongoDb\MongoDataService.cs" />
+    <Compile Include="DataProviders\RavenDb\RavenDataService.cs" />
+    <Compile Include="DataProviders\RavenDb\DocumentStoreProvider.cs" />
+    <Compile Include="IRavenDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

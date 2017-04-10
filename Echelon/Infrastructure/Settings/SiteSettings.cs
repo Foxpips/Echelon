@@ -4,7 +4,10 @@
     {
         public static string CookieName => "LoginCookie";
         public static string LoginPath => "/Login";
-        public static string GoogleClientId => "502894229257-gvisrn8ie0dfkdec82fjevgcabj24di7.apps.googleusercontent.com";
+
+        public static string GoogleClientId
+            => "502894229257-gvisrn8ie0dfkdec82fjevgcabj24di7.apps.googleusercontent.com";
+
         public static string GoogleClientSecrect => "6uKMduQZCfzLcyEIIpN106EY";
 
         public static string GoogleProvider = "Google";

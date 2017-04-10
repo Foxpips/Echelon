@@ -67,24 +67,20 @@ namespace Echelon.Core.Infrastructure.Services.Login
             return true;
         }
 
-        public async Task<bool> CreateAndLoguserIn(UserEntity userEntity, IAuthenticationManager authenticationManager)
+        public async Task<bool> CreateAndLoguserIn(UserEntity userEntity, string avatarUrl,
+            IAuthenticationManager authenticationManager)
         {
             var currentUsers = await _dataservice.Query<UserEntity>(x => x.Where(y => y.Email.Equals(userEntity.Email)));
             if (!currentUsers.Any())
             {
+                var avatarEntity = new AvatarEntity {AvatarUrl = avatarUrl};
+                userEntity.AvatarId = avatarEntity.Id;
+
                 await _dataservice.Create(userEntity);
+                await _dataservice.Create(avatarEntity);
             }
 
             return await LogUserIn(userEntity, authenticationManager);
-        }
-
-        public async Task SetUserAvatar(string email, string avatarUrl)
-        {
-            var avatarEntities = await _dataservice.Query<AvatarEntity>(x => x.Where(z => z.Email.Equals(email)));
-            if (!avatarEntities.Any())
-            {
-                await _dataservice.Create(new AvatarEntity {Email = email, AvatarUrl = avatarUrl});
-            }
         }
     }
 }

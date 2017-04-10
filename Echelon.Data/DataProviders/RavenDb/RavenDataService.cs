@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Data.Entities;
-using Echelon.Data.Entities.Avatar;
+using Echelon.Data.Entities.Transforms;
 using Echelon.Data.Entities.Users;
-using Echelon.Data.Indexes;
+using Echelon.Data.Indexes.Raven;
 using Raven.Client;
+using Raven.Client.Indexes;
 using Raven.Client.Linq;
 
-namespace Echelon.Data.RavenDb
+namespace Echelon.Data.DataProviders.RavenDb
 {
     public class RavenDataService : IDataService
     {
@@ -31,6 +32,25 @@ namespace Echelon.Data.RavenDb
             }
         }
 
+        private async Task<TReturnType> OpenAndReturn<TReturnType>(Func<IAsyncDocumentSession, Task<TReturnType>> action)
+        {
+            try
+            {
+                using (var session = _database.OpenAsyncSession())
+                {
+                    var returnType = await action(session);
+                    await session.SaveChangesAsync();
+                    return returnType;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return default(TReturnType);
+        }
+
         public async Task Create<TType>(TType entity) where TType : EntityBase
         {
             await Open(session => session.StoreAsync(entity, entity.Id));
@@ -38,19 +58,17 @@ namespace Echelon.Data.RavenDb
 
         public async Task<IList<TType>> Read<TType>()
         {
-            IList<TType> enumerable = null;
-            await Open(async session => { enumerable = await session.Query<TType>().ToListAsync(); });
-            return enumerable;
+            return await OpenAndReturn(async session => await session.Query<TType>().ToListAsync());
         }
 
         public async Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)
         {
-            using (var session = _database.OpenAsyncSession())
+            return await OpenAndReturn(async session =>
             {
                 var types = await action(session.Query<TType>()).ToListAsync();
                 await session.SaveChangesAsync();
                 return types;
-            }
+            });
         }
 
         public async Task Update<TType>(Action<TType> action, string id) where TType : EntityBase
@@ -79,33 +97,32 @@ namespace Echelon.Data.RavenDb
             });
         }
 
-        public async Task<IList<AvatarUserEntity>> GetIndex()
+        public async Task<UserAvatarEntity> TransformUserAvatars(string id)
         {
-            new UsersAvatars().Execute(_database);
-
-            using (var session = _database.OpenAsyncSession())
+            return await OpenAndReturn(async session =>
             {
-                var avatarEntities = session.Query<AvatarEntity>().Where(x => x.Email.Equals("simonpmarkey@gmail.com"));
-                var foo = await avatarEntities.TransformWith<UsersAvatars, AvatarUserEntity>().ToListAsync();
+                var userEntities = session.Query<UserEntity>().Where(x => x.Email.Equals(id));
+                var transformedTypes =
+                    await userEntities.TransformWith<UsersAvatarsTransform, UserAvatarEntity>().ToListAsync();
 
                 await session.SaveChangesAsync();
 
-                return foo;
-            }
+                return transformedTypes.SingleOrDefault();
+            });
         }
 
-        public async Task GetInclude()
+        public async Task<TTransformedType> GetIndex<TTransformer, TTransformedType>(string id)
+            where TTransformer : AbstractTransformerCreationTask, new()
         {
-            using (var session = _database.OpenAsyncSession())
+            return await OpenAndReturn(async session =>
             {
-                var results =
-                    await session.Include<UserEntity>(x => x.Email).LoadAsync<UserEntity>("simonpmarkey@gmail.com");
-
-                // this will not require querying the server!
-                var customer = await session.LoadAsync<AvatarEntity>();
+                var userEntities = session.Query<UserEntity>().Where(x => x.Email.Equals(id));
+                var transformedTypes = await userEntities.TransformWith<TTransformer, TTransformedType>().ToListAsync();
 
                 await session.SaveChangesAsync();
-            }
+
+                return transformedTypes.SingleOrDefault();
+            });
         }
     }
 }
