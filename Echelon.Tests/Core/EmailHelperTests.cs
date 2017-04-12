@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.Services.Email;
 using Echelon.Core.Infrastructure.Services.Email.Components;
+using Echelon.Core.Logging.Loggers;
 using Echelon.Data.DataProviders.RavenDb;
 using NUnit.Framework;
 
@@ -14,7 +15,7 @@ namespace Echelon.Tests.Core
         [SetUp]
         public void SetUp()
         {
-            _emailSenderService = new EmailSenderService(new RavenDataService(), _emailTokenHelper);
+            _emailSenderService = new EmailSenderService(new RavenDataService(new ClientLogger()), _emailTokenHelper);
         }
 
         [Test]

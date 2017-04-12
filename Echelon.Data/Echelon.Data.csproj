@@ -74,10 +74,10 @@
     <Compile Include="Entities\Users\UserEntity.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="IDataService.cs" />
-    <Compile Include="Indexes\Mongo\UsersAvatars.cs" />
+    <Compile Include="Indexes\Mongo\UserAvatarTransform.cs" />
     <Compile Include="IDbStartup.cs" />
     <Compile Include="Entities\Transforms\UserAvatarEntity.cs" />
-    <Compile Include="Indexes\Raven\UsersAvatarsTransform.cs" />
+    <Compile Include="Indexes\Raven\UserAvatarTransform.cs" />
     <Compile Include="DataProviders\BaseDbStoreProvider.cs" />
     <Compile Include="DataProviders\MongoDb\DocumentStoreProvider.cs" />
     <Compile Include="DataProviders\MongoDb\MongoDataService.cs" />
@@ -90,6 +90,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Echelon.Logging\Echelon.Logging.csproj">
+      <Project>{4DC32C7A-56B1-4243-A362-19DBB1EC525C}</Project>
+      <Name>Echelon.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Echelon.Misc\Echelon.Misc.csproj">
       <Project>{6E78BF23-63C5-4501-9A60-009404D2EED6}</Project>
       <Name>Echelon.Misc</Name>

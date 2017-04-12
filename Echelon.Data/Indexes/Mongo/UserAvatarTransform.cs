@@ -1,6 +1,6 @@
 ﻿namespace Echelon.Data.Indexes.Mongo
 {
-    public class UsersAvatars
+    public class UserAvatarTransform
     {
     }
 }

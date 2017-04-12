@@ -7,7 +7,7 @@
 
 <section id="wrapper" class="profile-container">
     <div class="profile-container__information">
-        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new {id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data"}))
+        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(false)
@@ -25,42 +25,19 @@
                         </label>
 
                         <div id="uploading" class="upload-state uploading margin-top-10">
-                            <button type="button" class="btn btn-info text-align-center" disabled="">
-                                <img alt="uploading image" class="v-align-text-bottom" height="16" src="" width="16"> Uploading...
+                            <button type="button" class="btn btn-info upload__button text-align-center" disabled="">
+                                <div alt="uploading image" class="loading__icon loading__icon--upload"></div>
+                                <span>Uploading...</span>
                                 <span id="fileNameUploaded"></span>
                             </button>
                         </div>
-
-                        @*<div class="upload-state text-red file-empty">
-                                This file is empty.
-                            </div>
-
-                            <div class="upload-state text-red too-big">
-                                Please upload a picture smaller than 1 MB.
-                            </div>
-
-                            <div class="upload-state text-red bad-dimensions">
-                                Please upload a picture smaller than 10,000x10,000.
-                            </div>
-
-                            <div class="upload-state text-red bad-file">
-                                We only support PNG, GIF, or JPG pictures.
-                            </div>
-
-                            <div class="upload-state text-red failed-request">
-                                Something went really wrong and we can’t process that picture.
-                            </div>
-
-                            <div class="upload-state text-red bad-format">
-                                File contents don't match the file extension.
-                            </div>*@
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.FirstName, new {@class = "form-control", placeholder = "FirstName", required = "true"})
+                        @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control", placeholder = "FirstName", required = "true" })
                         @Html.ValidationMessageFor(u => u.FirstName)
                     </div>
                 </div>
@@ -68,7 +45,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.LastName, new {@class = "form-control", placeholder = "LastName", required = "true"})
+                        @Html.TextBoxFor(u => u.LastName, new { @class = "form-control", placeholder = "LastName", required = "true" })
                         @Html.ValidationMessageFor(u => u.LastName)
                     </div>
                 </div>
@@ -76,27 +53,27 @@
             <div class="row">
                 <div class="col-xs-9 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.UserName, new {@class = "form-control", placeholder = "UserName", required = "true"})
+                        @Html.TextBoxFor(u => u.UserName, new { @class = "form-control", placeholder = "UserName", required = "true" })
                         @Html.ValidationMessageFor(u => u.UserName)
                     </div>
                 </div>
                 <div class="col-xs-3 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.CheckBoxFor(u => u.UserNameEnabled, new {@class = "form-control", placeholder = "Use Display Name"})
+                        @Html.CheckBoxFor(u => u.UserNameEnabled, new { @class = "form-control", placeholder = "Use Display Name" })
                         @Html.ValidationMessageFor(u => u.UserNameEnabled)
                         @Html.LabelFor(u => u.UserNameEnabled, "Enabled")
                     </div>
                 </div>
             </div>
             <div class="row text-align-center">
-                <input class="btn btn-info btn-lg" type="submit" name="Save">
+                <input class="btn btn-info btn-lg" type="submit" value="Save">
             </div>
         }
     </div>
 </section>
 @section scripts {
     <script>
-        $(function() {
+        $(function () {
             ProfilePage();
         });
     </script>

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Helpers;
 using Echelon.Core.Infrastructure.Services.Email.Components;
+using Echelon.Core.Logging.Loggers;
 using Echelon.Data.DataProviders.RavenDb;
 using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Email;
+using Echelon.Data.Entities.Transforms;
 using Echelon.Data.Entities.Users;
 using NUnit.Framework;
 
@@ -19,7 +21,7 @@ namespace Echelon.Tests.Data.Raven
         [OneTimeSetUp]
         public async Task SetUp()
         {
-            _dataService = new RavenDataService();
+            _dataService = new RavenDataService(new ClientLogger());
 
             var userEntity = new UserEntity
             {
@@ -114,7 +116,7 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task IndexTest_Scenario_Result()
         {
-            var avatarUserEntity = await _dataService.TransformUserAvatars("simonpmarkey@gmail.com");
+            var avatarUserEntity = await _dataService.TransformUserAvatars<UserAvatarEntity>("simonpmarkey@gmail.com");
             Assert.AreEqual(avatarUserEntity.AvatarUrl, "someurl/pic.jpg");
         }
 

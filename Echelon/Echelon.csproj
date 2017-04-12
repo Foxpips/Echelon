@@ -245,6 +245,7 @@
     <Compile Include="Controllers\Api\AvatarController.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\AutoMapperModule.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\MvcModule.cs" />
+    <Compile Include="Infrastructure\AutoMapper\Profiles\UserProfile.cs" />
     <Compile Include="Models\BusinessModels\GooglePlusInfo.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Infrastructure\Attributes\LocalizedControllerActivator.cs" />
@@ -366,6 +367,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sass\Mixins\" />
+    <Folder Include="UserAvatars\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

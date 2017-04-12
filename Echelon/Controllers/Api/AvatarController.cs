@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Echelon.Data;
+using Echelon.Data.Entities.Transforms;
 
 namespace Echelon.Controllers.Api
 {
@@ -19,7 +20,7 @@ namespace Echelon.Controllers.Api
         [Authorize]
         public async Task<IHttpActionResult> GetAvatar(string email)
         {
-            var user = await _dataservice.TransformUserAvatars(email);
+            var user = await _dataservice.TransformUserAvatars<UserAvatarEntity>(email);
 
             if (user == null)
             {
@@ -35,7 +36,7 @@ namespace Echelon.Controllers.Api
             var urllist = new List<object>();
             foreach (var email in list.Emails)
             {
-                var avatarEntity = await _dataservice.TransformUserAvatars(email);
+                var avatarEntity = await _dataservice.TransformUserAvatars<UserAvatarEntity>(email);
 
                 if (avatarEntity != null)
                 {

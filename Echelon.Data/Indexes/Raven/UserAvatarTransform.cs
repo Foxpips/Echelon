@@ -6,9 +6,9 @@ using Raven.Client.Indexes;
 
 namespace Echelon.Data.Indexes.Raven
 {
-    public class UsersAvatarsTransform : AbstractTransformerCreationTask<UserEntity>, IDbStartup
+    public class UserAvatarTransform : AbstractTransformerCreationTask<UserEntity>, IDbStartup
     {
-        public UsersAvatarsTransform()
+        public UserAvatarTransform()
         {
             TransformResults = avatarEntities => avatarEntities.Select(userEntity => new
             {

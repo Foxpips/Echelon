@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Echelon.Core.Logging.Loggers;
 using Echelon.Data.Entities;
-using Echelon.Data.Entities.Transforms;
 using Echelon.Data.Entities.Users;
 using Echelon.Data.Indexes.Raven;
 using Raven.Client;
@@ -15,6 +15,12 @@ namespace Echelon.Data.DataProviders.RavenDb
     public class RavenDataService : IDataService
     {
         private readonly IDocumentStore _database = DocumentStoreProvider.Database;
+        private IClientLogger _clientLogger;
+
+        public RavenDataService(IClientLogger clientLogger)
+        {
+            _clientLogger = clientLogger;
+        }
 
         private async Task Open(Func<IAsyncDocumentSession, Task> action)
         {
@@ -28,7 +34,7 @@ namespace Echelon.Data.DataProviders.RavenDb
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _clientLogger.Error($"Accessing Ravendb query error:{e.Message}");
             }
         }
 
@@ -45,7 +51,7 @@ namespace Echelon.Data.DataProviders.RavenDb
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _clientLogger.Error($"Accessing Ravendb query error:{e.Message}");
             }
 
             return default(TReturnType);
@@ -68,6 +74,16 @@ namespace Echelon.Data.DataProviders.RavenDb
                 var types = await action(session.Query<TType>()).ToListAsync();
                 await session.SaveChangesAsync();
                 return types;
+            });
+        }
+
+        public async Task<TType> Single<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)
+        {
+            return await OpenAndReturn(async session =>
+            {
+                var types = await action(session.Query<TType>()).ToListAsync();
+                await session.SaveChangesAsync();
+                return types.SingleOrDefault();
             });
         }
 
@@ -97,13 +113,13 @@ namespace Echelon.Data.DataProviders.RavenDb
             });
         }
 
-        public async Task<UserAvatarEntity> TransformUserAvatars(string id)
+        public async Task<TType> TransformUserAvatars<TType>(string id)
         {
             return await OpenAndReturn(async session =>
             {
                 var userEntities = session.Query<UserEntity>().Where(x => x.Email.Equals(id));
                 var transformedTypes =
-                    await userEntities.TransformWith<UsersAvatarsTransform, UserAvatarEntity>().ToListAsync();
+                    await userEntities.TransformWith<UserAvatarTransform, TType>().ToListAsync();
 
                 await session.SaveChangesAsync();
 

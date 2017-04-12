@@ -6,7 +6,6 @@ var ChatControl = function (notificationControl, avatarControl) {
 
     var $body = $("body");
     var $loading = $("#loading");
-    var $loadingIcon = $(".loading__icon");
     var container = $("#container");
 
     var messageContainer = document.getElementById("messages");
@@ -45,7 +44,7 @@ var ChatControl = function (notificationControl, avatarControl) {
     self.setupChannel = function (currentChannel, identity) {
         currentChannel.join()
             .then(() => {
-                self.printToLoading(`Joined channel as <span class="me">${identity.username}</span>.`, true);
+                self.printToLoading("#joinedAs",`<span class="me">${identity.username}</span>`);
                 self.chatHistory(identity.email);
                 self.setOnline();
             });
@@ -61,14 +60,10 @@ var ChatControl = function (notificationControl, avatarControl) {
         });
     };
 
-    self.printToLoading = function (infoMessage, asHtml, initialPadding) {
-        var $msg = initialPadding ? $("<div class=\"info loading__text loading__text--initial\">") : $("<div class=\"info loading__text\">");
-        if (asHtml) {
-            $msg.html(infoMessage);
-        } else {
-            $msg.text(infoMessage);
-        }
-        $loadingIcon.append($msg);
+    self.printToLoading = function (control, infoMessage) {
+        let content = $(control);
+        content.append(infoMessage);
+        content.show();
     };
 
     self.chatHistory = function (username) {

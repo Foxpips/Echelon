@@ -46,17 +46,22 @@ namespace Echelon.Data.DataProviders.MongoDb
             });
         }
 
+        public Task<TType> Single<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task DeleteDocuments<TType>()
         {
             await Open<TType>(async collection => { await collection.DeleteManyAsync(Builders<TType>.Filter.Empty); });
         }
 
-        public Task<UserAvatarEntity> TransformUserAvatars(string id)
+        public Task<TType> TransformUserAvatars<TType>(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TType> GetIndex<TType>(string id)
+        public Task<UserAvatarEntity> TransformUserAvatars(string id)
         {
             throw new NotImplementedException();
         }

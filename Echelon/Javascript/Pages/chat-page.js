@@ -2,11 +2,11 @@
 
 var currentChannel;
 
-var ChatPage = function (){
+var ChatPage = function () {
     var identity;
     var accessManager;
     var messagingClient;
-    var selectedChannel = "Anime"; 
+    var selectedChannel = "Anime";
 
     var $input = $("#chat-input");
     var endpoint = $("#chat-input").data("target");
@@ -21,7 +21,7 @@ var ChatPage = function (){
     avatarControl.setUserAvatar($("#headerAvatar").data("target"));
 
     var chatControl = new ChatControl(notificationControl, avatarControl);
-    chatControl.printToLoading("Logging in...", false, true);
+    chatControl.printToLoading("#loggingIn");
 
     $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, data => {
         identity = data.identity;
@@ -29,7 +29,7 @@ var ChatPage = function (){
         accessManager = new window.Twilio.AccessManager(data.token);
         messagingClient = new window.Twilio.IPMessaging.Client(accessManager);
 
-        chatControl.printToLoading(`Joining channel: ${selectedChannel}`);
+        chatControl.printToLoading("#joiningChannel", `${selectedChannel}`);
 
         const promise = messagingClient.getChannelByUniqueName(selectedChannel);
         promise.then(channel => {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Data.Entities;
-using Echelon.Data.Entities.Transforms;
 
 namespace Echelon.Data
 {
@@ -14,7 +13,8 @@ namespace Echelon.Data
         Task Update<TType>(Action<TType> action, string id) where TType : EntityBase;
         Task Delete<TType>(string id) where TType : EntityBase;
         Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action);
+        Task<TType> Single<TType>(Func<IQueryable<TType>, IQueryable<TType>> action);
         Task DeleteDocuments<TType>();
-        Task<UserAvatarEntity> TransformUserAvatars(string id);
+        Task<TType> TransformUserAvatars<TType>(string id);
     }
 }

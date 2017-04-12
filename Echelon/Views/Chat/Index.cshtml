@@ -7,13 +7,16 @@
 <section id="container" class="form-material">
     <div class="main-background"></div>
     <div id="loading">
-        <div class="loading__overlay"></div>
-        <div class="loading__icon"></div>
+        <div class="loading__overlay">
+            <div id="loadingMessages" class="loading__messages">
+                <div id="loggingIn" class="info loading__text loading__text--initial">Logging in...</div>
+                <div id="joiningChannel" class="info loading__text">Joining channel: </div>
+                <div id="joinedAs" class="info loading__text">Joined channel as: </div>
+            </div>
+        </div>
+        <div class="loading__icon loading__icon--main"></div>
     </div>
-    <div id="messages" class="messages__console">
-        <div id="loggingIn" class="messages--info hidden">Logging in...</div>
-        <div id="joiningChat" class="messages--info hidden">Attempting to join </div>
-    </div>
+    <div id="messages" class="messages__console"></div>
     <div id="users" class="sidebar">
         People in chat
     </div>
@@ -52,7 +55,7 @@
             new google.translate.TranslateElement({ pageLanguage: '' }, 'google-translate-element');
         }
 
-        $(function() {
+        $(function () {
             ChatPage();
         });
     </script>
