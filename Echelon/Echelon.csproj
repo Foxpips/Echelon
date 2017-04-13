@@ -331,6 +331,7 @@
     <Content Include="Content\Sass\Modules\bubbles.scss" />
     <Content Include="Content\Sass\Modules\avatar.scss" />
     <Content Include="Content\Sass\Modules\loading.scss" />
+    <Content Include="Content\Sass\Modules\menuIcons.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\screensaver-control.js" />
     <Content Include="Javascript\Helpers\ajax-helper.js" />

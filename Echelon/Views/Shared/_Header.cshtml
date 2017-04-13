@@ -3,7 +3,6 @@
     var user = Request.GetOwinContext().Authentication.User.Identity.Name;
 }
 
-
 @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -17,16 +16,15 @@
             <a href="@Url.Action("Index", "Chat")">
                 <img id="headerAvatar" data-target="@user" class="avatar avatar--user" src="@ViewBag.AvatarImage" alt="avatar"/>
             </a>
-            @ViewBag.Message
+            <a href="#"><i class="material-icons fa fa-globe"></i></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-main-menu">
-            <div class="google-translate__container">
-                <div id="google-translate-element"></div>
-            </div>
-            <form class="navbar-form navbar-left">
+            <form class="navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control topmenu-search__input margin-top-20-small" placeholder="@SiteDocument.SearchCategories">
-                    <i class="basic-icon basic-icon--search fa fa-search" aria-hidden="true"></i>
+                    <div class="google-translate__container">
+                        <div id="google-translate-element"></div>
+                        <input/>
+                    </div>
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right padding-top-5">

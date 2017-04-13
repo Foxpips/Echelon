@@ -43,7 +43,7 @@ namespace Echelon.Controllers.Api
                     var item = new
                     {
                         url = avatarEntity.AvatarUrl ?? "https://localhost/Echelon/Content/Images/missing-image.png",
-                        username = avatarEntity.Email
+                        username = avatarEntity.UserName
                     };
 
                     urllist.Add(item);
