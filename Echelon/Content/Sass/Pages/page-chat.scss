@@ -153,7 +153,7 @@
 
         &--other {
             color: $color-white;
-            background: #7a709e;
+            background: $color-secondary; 
 
             @include Middle-more {
                 margin-left: 60px;

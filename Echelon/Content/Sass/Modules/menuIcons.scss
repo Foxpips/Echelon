@@ -1,14 +1,22 @@
-﻿i.material-icons {
-    padding: 10px;
-    padding-right: 12px;
-    padding-left: 12px;
-    margin: 10px;
+﻿@import "../variables";
+@import "../mixins";
+@import "atomic.scss";
+
+i.material-icons {
+    padding: 7px;
+    height: 50px;
+    width: 50px;
+    border: solid;
+    align-content: initial;
+    text-align: center;
+    margin: 5px;
     font-size: 3rem;
-    color: white;
+    border-radius: 100%;
+    color: $color-white;
     position: relative;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: color 0.2s ease, background-color 0.2s ease, transform 0.3s ease;
-    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    transition: color .2s ease,background-color .2s ease,transform .3s ease;
+    transition: all .3s ease;
 }
 
 i.material-icons:after {
@@ -89,15 +97,15 @@ i.material-icons:nth-of-type(8):after {
 }
 
 i.material-icons:nth-of-type(1) {
-    background-color: #cd8484;
+    background-color: $color-secondary;
 }
 
 i.material-icons:nth-of-type(1):hover {
-    color: #cd8484;
+    color: $color-tertiary;
 }
 
 i.material-icons:nth-of-type(1):after {
-    border-color: #cd8484;
+    border-color: $color-tertiary;
 }
 
 i.material-icons:nth-of-type(2) {
