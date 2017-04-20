@@ -94,10 +94,6 @@
 
 .google-translate {
     &__container {
-        @include Middle-more {
-            display: inline-block;
-        }
-
         margin-top: 5px;
     }
 }
@@ -166,7 +162,7 @@
     @extend .height-100-percent;
     background: $color-white;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 120px;
     position: relative;
 
     @include Middle-more {
