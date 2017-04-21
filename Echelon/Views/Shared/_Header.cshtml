@@ -6,13 +6,18 @@
 @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 <nav class="navbar navbar-default">
     <div class="container-fluid">
+        @if (string.IsNullOrEmpty(user))
+            {
+            <span>@Login.NotLoggedIn</span>
+        }
+
+        else
+        {
+            <span class="dropdown-toggle profile float-right margin-top-5" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span><i id="menuGlobe" class="material-icons fa fa-globe"></i></span>
+            </span>
+        }
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main-menu" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a href="@Url.Action("Index", "Chat")">
                 <img id="headerAvatar" data-target="@user" class="avatar avatar--user margin-right-10" src="@ViewBag.AvatarImage" alt="avatar" />
             </a>
@@ -20,44 +25,11 @@
                 <div id="google-translate-element"></div>
             </div>
         </div>
-        <div class="collapse navbar-collapse" id="navbar-main-menu">
-            <form class="navbar-left">
-                <div class="form-group">
-
-                </div>
-            </form>
-            <ul class="nav navbar-nav navbar-right padding-top-5">
-                <li class="dropdown active">
-
-                    @if (string.IsNullOrEmpty(user))
-                    {
-                        <span>@Login.NotLoggedIn</span>
-                    }
-
-                    else
-                    {
-                        <span class="dropdown-toggle profile" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span href="#"><i class="material-icons fa fa-globe" onclick="openNav()"></i></span>
-                        </span>
-                    }
-
-                    @*<ul class="dropdown-menu">
-                        <li>
-                            @Html.ActionLink("Profile", "Index", "Profile")
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            @Html.ActionLink(Login.LogOut, "Logout", "Login")
-                        </li>
-                    </ul>*@
-                </li>
-            </ul>
-        </div>
     </div>
 </nav>
 
 <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <span class="closebtn">&times;</span>
     @Html.ActionLink("Profile", "Index", "Profile")
     @Html.ActionLink(Login.LogOut, "Logout", "Login")
 </div>

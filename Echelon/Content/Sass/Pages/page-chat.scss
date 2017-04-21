@@ -59,9 +59,10 @@
     background-color: $color-white;
 
     @include Middle-more {
-        width: 82%;
+        width: 65%;
         font-size: 34px;
         height: 60px;
+        left: 17%;
     }
 
     @include Middle-less {
@@ -96,7 +97,7 @@
         @include Middle-more {
             width: 80%;
             position: absolute;
-            padding-left: 221px;
+            padding-left: 18%;
         }
     }
 
@@ -153,7 +154,7 @@
 
         &--other {
             color: $color-white;
-            background: $color-secondary; 
+            background: $color-secondary;
 
             @include Middle-more {
                 margin-left: 60px;
