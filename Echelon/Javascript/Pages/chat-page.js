@@ -12,16 +12,17 @@ var ChatPage = function () {
     var endpoint = $("#chat-input").data("target");
     var $sendButton = $("#sendButton");
 
-
     var ajaxHelper = new AjaxHelper();
     var notificationControl = new NotificationControl();
     var screensaverControl = new ScreenSaverControl();
 
     var avatarControl = new AvatarControl(ajaxHelper);
-    avatarControl.setUserAvatar($("#headerAvatar").data("target"));
-
     var chatControl = new ChatControl(notificationControl, avatarControl);
-    chatControl.printToLoading("#loggingIn");
+
+    (function() {
+        avatarControl.setUserAvatar($("#headerAvatar").data("target"));
+        chatControl.printToLoading("#loggingIn");
+    })();
 
     $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, data => {
         identity = data.identity;

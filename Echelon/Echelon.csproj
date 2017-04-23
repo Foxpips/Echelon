@@ -18,7 +18,7 @@
     <AssemblyName>Echelon</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44302</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -325,7 +325,6 @@
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Controls\avatar-control.js" />
     <Content Include="Javascript\Controls\chat-control.js" />
-    <Content Include="Javascript\Controls\sidemenu-control.js" />
     <Content Include="Javascript\Controls\notification-control.js" />
     <Content Include="Content\Sass\Pages\page-profile.scss" />
     <Content Include="Content\Sass\Modules\siteIcons.scss" />
@@ -344,6 +343,7 @@
     <Content Include="Content\Sass\Pages\page-chat.scss" />
     <Content Include="Content\Sass\Shared\partial-header.scss" />
     <None Include="Content\Sass\site.scss" />
+    <Content Include="Javascript\Pages\site-page.js" />
     <Content Include="package.json" />
     <Content Include="bower.json" />
     <Content Include="Content\Images\g-logo.png" />

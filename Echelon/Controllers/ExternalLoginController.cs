@@ -31,6 +31,11 @@ namespace Echelon.Controllers
             _loginService = loginService;
         }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult LoginGoogle(string returnUrl)
         {
             var redirectUri = Url.Action("ExternalLoginCallback", "ExternalLogin", new {ReturnUrl = returnUrl});
