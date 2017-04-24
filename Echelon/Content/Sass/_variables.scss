@@ -1,73 +1,114 @@
 ﻿/*--MAIN COLORS--*/
-$color-primary:                 #268dbb; //deepemerald  
-$color-secondary:               #7a709e; //deep purple
-$color-tertiary:                #de8b5c; //deep purple
-$color-control:                 #77d1f9; //darkblue #87ceeb
-$color-hover:                   #5ab5de; //shallowemerald
 
-$color-border:                  #cad1d4;
-$color-gray:                    #9b9b9b;
-$color-gray-light:              #f1f3f7;
-$color-gray-medium:             #dedede;
-$color-gray-dark:               #909090;
-$color-gray-darkest:            #444444;
+// Color themes
+$themes: ( default: #666, banana: #f1c40f, cherry: #c0392b, blueberry: #8e44ad, leaf: #27ae60, nightsky: #2980b9 );
 
-$color-white:                   #ffffff;
-$color-black:                   #000000;
-    
-$color-red-dark:                #C12C32;
-$color-green:                   #556b2f;
+// Helper theme mixin
+// @param $name: name of the theme (HTML class)
+// @param $color: color of the theme
+@mixin theme($name, $background, $text, $controls) {
+    .#{$name} {
+        .component__background {
+            background-color: $background;
+        }
 
-$color-btn-hover:               #0094ff;
-$color-btn-border-hover:        #5a95f5;
-$color-btn-border-bottom:       #4285f4;
-$color-username-me:             #39b1e6;
-$color-username-other:          #946def;
-        
+        .component__text {
+            color: $text;
+        }
+
+        .component__control {
+            background-color: $controls;
+        }
+    }
+    /*[data-theme='#{$name}'] {
+        background: $color;
+
+        &:hover {
+            background: darken($color, 10%);
+        }
+
+        &[disabled] {
+            background: desaturate($color, 40%);
+        }
+    }*/
+}
+
+$color-primary: #268dbb; //deepemerald
+$color-secondary: #7a709e; //deep purple
+$color-tertiary: #de8b5c; //deep purple
+$color-control: #77d1f9; //darkblue #87ceeb
+$color-hover: #5ab5de; //shallowemerald
+
+$color-border: #cad1d4;
+$color-gray: #9b9b9b;
+$color-gray-light: #f1f3f7;
+$color-gray-medium: #dedede;
+$color-gray-dark: #909090;
+$color-gray-darkest: #444444;
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-red-dark: #C12C32;
+$color-green: #556b2f;
+
+$color-btn-hover: #0094ff;
+$color-btn-border-hover: #5a95f5;
+$color-btn-border-bottom: #4285f4;
+$color-username-me: #39b1e6;
+$color-username-other: #946def;
+
+// Including themes
+// By looping through the $themes map
+/*@each $key, $value in $themes {*/
+@include theme("light-theme", $color-white, $color-black, $color-primary);
+@include theme("dark-theme", $color-black, $color-white, $color-primary);
+/*}*/
+
 
 /*--FONTS--*/
-$font-family-base:              montserrat, arial; 
-$font-family-light:             montserrat-light, arial; 
-$font-family-lightest:          montserrat-hairline, arial; 
+$font-family-base: montserrat, arial;
+$font-family-light: montserrat-light, arial;
+$font-family-lightest: montserrat-hairline, arial;
 
-$font-size-base:                14px !default;
-$font-size-base-value:          14;
+$font-size-base: 14px !default;
+$font-size-base-value: 14;
 
-$line-height-base:              1.428571429 !default;
-$line-height-computed:          floor(($font-size-base * $line-height-base)) !default;
+$line-height-base: 1.428571429 !default;
+$line-height-computed: floor(($font-size-base * $line-height-base)) !default;
 
 /*--SCREEN SIZES--*/
-$screen-xs:                     480px !default;
-$screen-xs-min: $screen-xs      !default;
+$screen-xs: 480px !default;
+$screen-xs-min: $screen-xs !default;
 
-$screen-sm:                     768px !default;
-$screen-sm-min: $screen-sm      !default;
+$screen-sm: 768px !default;
+$screen-sm-min: $screen-sm !default;
 
-$screen-md:                     992px !default;
-$screen-md-min: $screen-md      !default;
+$screen-md: 992px !default;
+$screen-md-min: $screen-md !default;
 
-$screen-lg:                     1200px !default;
-$screen-lg-min: $screen-lg      !default;
+$screen-lg: 1200px !default;
+$screen-lg-min: $screen-lg !default;
 
-$screen-xs-max:                 ($screen-sm-min - 1) !default;
-$screen-sm-max:                 ($screen-md-min - 1) !default;
-$screen-md-max:                 ($screen-lg-min - 1) !default;
+$screen-xs-max: ($screen-sm-min - 1) !default;
+$screen-sm-max: ($screen-md-min - 1) !default;
+$screen-md-max: ($screen-lg-min - 1) !default;
 
 /*--FORM--*/
-$form-control-height:           39px;
-$form-btn-height:               41px;
-$form-btn-secondary-height:     28px;
+$form-control-height: 39px;
+$form-btn-height: 41px;
+$form-btn-secondary-height: 28px;
 
 /*--HEADER--*/
-$header-height:                 150px;
-$header-height-checkout:        107px;
-$header-height-mobile:          85px;
+$header-height: 150px;
+$header-height-checkout: 107px;
+$header-height-mobile: 85px;
 $header-height-checkout-mobile: 62px;
-$header-el-height:              36px;
-$header-el-margin-top:          20px;
+$header-el-height: 36px;
+$header-el-margin-top: 20px;
 
 /*--BODY-CONTAINER--*/
-$body-container-height:         100vh;
+$body-container-height: 100vh;
 
 /*--FOOTER--*/
-$footer-height:                 127px;
+$footer-height: 127px;
