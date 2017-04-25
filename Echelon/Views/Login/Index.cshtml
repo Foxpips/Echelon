@@ -5,15 +5,15 @@
     <title>@SiteTitle.LoginPage</title>
 }
 
-<div class="main-background main-background--hide-small"></div>
+<div class="main-background main-background--hide-small component__background component__background--image"></div>
 <section id="wrapper" class="login-register">
     <div class="login-box">
-        <div class="white-box">
+        <div class="white-box component__background">
             @using (Html.BeginForm("Index", "Login", FormMethod.Post, new {id = "loginform", @class = "form-horizontal form-material"}))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, Login.LoginFailed)
-                <h3 class="box-title margin-bottom-20">@Login.LogIn</h3>
+                <h3 class="box-title margin-bottom-20 component__text">@Login.LogIn</h3>
                 <div class="col-xs-12">
                     <div class="form-group">
                         @Html.TextBoxFor(u => u.Email, new {@class = "form-control", placeholder = "Email", required = "true", oninvalid = "this.setCustomValidity(" + Login.MissingEmail + ")"})

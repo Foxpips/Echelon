@@ -140,7 +140,8 @@
 .form-material .form-control, .form-material .form-control.focus, .form-material .form-control:focus {
     background-image: linear-gradient(#9675ce, #9675ce),linear-gradient(rgba(120,130,140,0.13), rgba(120,130,140,0.13));
     border: 0 none;
-    border-radius: 0;
+    border-radius: 3px;
+    text-indent: 10px;
     box-shadow: none;
     float: none;
 }
@@ -160,7 +161,6 @@
 .login-box {
     @extend .width-100-percent;
     @extend .height-100-percent;
-    background: $color-white;
     margin: 0 auto;
     margin-top: 120px;
     position: relative;

@@ -1,6 +1,6 @@
 ﻿@using System.Threading
 <!DOCTYPE html>
-<html class="window-container overflow-hidden">
+<html class="window-container overflow-hidden theme--dark">
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
@@ -14,7 +14,7 @@
     @Styles.Render("~/bundles/css")
 </head>
 
-<body class="window-container overflow-auto">
+<body class="window-container overflow-auto component__background">
     @if (User.Identity.IsAuthenticated)
     {
         @Html.Partial("_Header")
