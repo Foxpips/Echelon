@@ -3,7 +3,6 @@
     var user = Request.GetOwinContext().Authentication.User.Identity.Name;
 }
 
-@Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         @if (string.IsNullOrEmpty(user))

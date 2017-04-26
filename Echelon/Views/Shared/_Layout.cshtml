@@ -1,6 +1,8 @@
 ﻿@using System.Threading
+@using Echelon.Infrastructure.Helpers
 <!DOCTYPE html>
-<html class="window-container overflow-hidden theme--dark">
+
+<html id="htmlContainer" class="window-container overflow-hidden @CookieStore.GetCookie("theme")">
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
@@ -15,6 +17,11 @@
 </head>
 
 <body class="window-container overflow-auto component__background">
+    @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
+
+    <button id="themeDark" data-attribute="theme" data-target="theme--dark" class="btn btn-info">Dark</button>
+    <button id="themeLight" data-attribute="theme" data-target="theme--light" class="btn btn-info">Light</button>
+
     @if (User.Identity.IsAuthenticated)
     {
         @Html.Partial("_Header")

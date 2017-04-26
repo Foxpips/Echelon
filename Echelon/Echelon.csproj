@@ -246,6 +246,7 @@
     <Compile Include="Infrastructure\Autofac\Modules\AutoMapperModule.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\MvcModule.cs" />
     <Compile Include="Infrastructure\AutoMapper\Profiles\UserProfile.cs" />
+    <Compile Include="Infrastructure\Helpers\CookieStore.cs" />
     <Compile Include="Models\BusinessModels\GooglePlusInfo.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Infrastructure\Attributes\LocalizedControllerActivator.cs" />
@@ -338,6 +339,7 @@
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\screensaver-control.js" />
     <Content Include="Javascript\Helpers\ajax-helper.js" />
+    <Content Include="Javascript\Helpers\cookie-helper.js" />
     <Content Include="Javascript\Pages\login-page.js" />
     <Content Include="Javascript\Pages\profile-page.js" />
     <Content Include="Javascript\Pages\chat-page.js" />
@@ -370,9 +372,7 @@
     <Content Include="Views\Login\Help.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserAvatars\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
