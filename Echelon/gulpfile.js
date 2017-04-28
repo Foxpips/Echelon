@@ -172,18 +172,18 @@ function bundleJs(files, fileName, jsHint) {
 function bundleSass(files, fileName) {
     const destPath = config.sass.destPath;
 
-    for (var i in config.site.names) {
-        if (config.site.names.hasOwnProperty(i)) {
+    for (var i in config.site.themes) {
+        if (config.site.themes.hasOwnProperty(i)) {
             gulp.src(files)
                 .pipe(print())
                 .pipe(plumber())
-//                .pipe(preprocess({ context: { title: "variables" + config.site.names[i] } }))
+                .pipe(preprocess({ context: { title: "theme" + config.site.themes[i] } }))
                 .pipe(sass()).on("error", logError)
                 .pipe(concat(fileName))
-                .pipe(gulp.dest(destPath))
+                .pipe(gulp.dest(destPath + "/" + "theme-" + config.site.themes[i])) //save minified css
                 .pipe(rename(renameOptions))
                 .pipe(cssmin({ keepSpecialComments: 0 }))
-                .pipe(gulp.dest(destPath + "/minified/"));
+               .pipe(gulp.dest(destPath + "/" + "theme-" + config.site.themes[i] + "/minified/")); //save minified css
         }
     }
     return;

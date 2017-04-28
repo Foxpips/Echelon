@@ -7,7 +7,9 @@
         bowerSourcePath = rootPath + "bower_components/";
 
     var config = {
-        site: { names: ["Echelon"] },
+        site: {
+            themes: ["Dark", "Light"]
+        },
 
         js: {
             destPath: outputPath + "js",
