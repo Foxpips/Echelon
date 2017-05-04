@@ -1,7 +1,4 @@
-﻿@import "Mixins/theme-mixin";
-//@import "..//*@echo title*/";
-
-/*--MAIN COLORS--*/
+﻿/*--MAIN COLORS--*/
 $color-primary: #268dbb; //deepemerald
 $color-secondary: #7a709e; //deep purple
 $color-tertiary: #de8b5c; //deep purple
@@ -27,13 +24,6 @@ $color-btn-border-hover: #5a95f5;
 $color-btn-border-bottom: #4285f4;
 $color-username-me: #39b1e6;
 $color-username-other: #946def;
-
-/*--THEMES--*/
-@include theme("theme--light", $color-white, $color-black, $color-primary,
- $color-secondary, $color-tertiary, '../assets/imgs/white-circles-wallpaper.jpg');
-
-@include theme("theme--dark", $color-obsidian, $color-white, $color-primary,
- $color-secondary, $color-tertiary, '../assets/imgs/dark-circles-wallpaper.jpg');
 
 /*--FONTS--*/
 $font-family-base: montserrat, arial;

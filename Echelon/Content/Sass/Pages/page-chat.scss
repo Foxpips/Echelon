@@ -1,13 +1,9 @@
 ﻿@import "../variables";
-@import "../Themes//*@echo title*/";
 @import "../mixins";
 @import "../Modules/atomic";
 @import "../Modules/loading";
 @import "../Modules/avatar";
-
-.optimus{
-    color: $color-primary;
-}
+@import "../Themes//*@echo title*/";
 
 .sidebar {
     @extend .display-none;

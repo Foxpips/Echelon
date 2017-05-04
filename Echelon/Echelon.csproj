@@ -336,8 +336,9 @@
     <Content Include="Content\Sass\Modules\menuIcons.scss" />
     <Content Include="Content\Sass\Modules\sidemenu.scss" />
     <Content Include="Content\Sass\Mixins\theme-mixin.scss" />
-    <Content Include="Content\Sass\Themes\_themeDark.scss" />
-    <Content Include="Content\Sass\Themes\_themeLight.scss" />
+    <Content Include="Content\Sass\Themes\themeDark.scss" />
+    <Content Include="Content\Sass\Themes\themeLight.scss" />
+    <Content Include="Content\Sass\_variablesTheme.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\screensaver-control.js" />
     <Content Include="Javascript\Helpers\ajax-helper.js" />

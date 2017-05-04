@@ -1,4 +1,6 @@
-﻿using System.Web.Optimization;
+﻿using System;
+using System.IO;
+using System.Web.Optimization;
 
 namespace Echelon
 {
@@ -8,11 +10,16 @@ namespace Echelon
         {
             BundleTable.EnableOptimizations = true;
 
-            bundles.Add(new ScriptBundle("~/bundles/js")
+            bundles.Add(new ScriptBundle("~/content/js")
                 .IncludeDirectory("~/assets/js/minified/", "*.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/css")
-                .IncludeDirectory("~/assets/css/minified/", "*.css"));
+            var directories = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\assets\\css");
+            foreach (var directory in directories)
+            {
+                var cssFolder = Path.GetFileName(directory);
+                bundles.Add(new StyleBundle($"~/content/css/{cssFolder}")
+                 .IncludeDirectory($"~/assets/css/{cssFolder}/minified/", "*.css"));
+            }
         }
     }
 }
