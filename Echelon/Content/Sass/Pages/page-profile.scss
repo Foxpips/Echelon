@@ -1,19 +1,18 @@
-﻿@import "../variables";
-@import "../mixins";
+﻿@import "../mixins";
 @import "../Modules/atomic";
-@import "../Modules/avatar";
+@import "../variables";
+@import "../Themes//*@echo title*/";
 
 .profile-container {
     @extend .margin-0-auto;
     @extend .width-100-percent;
-    background: $color-white;
+    color: $color-text-alternate;
 
     @include Middle-more {
         width: 600px;
     }
 
     &__information {
-        background: $color-white;
         padding: 25px;
     }
 }
@@ -28,6 +27,7 @@
     padding: 5px;
     margin-left: -80px;
     opacity: 0.0001;
+    width:0%;
 }
 
 .upload__button{

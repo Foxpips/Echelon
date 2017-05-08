@@ -1,8 +1,6 @@
-﻿@import "../variables";
-@import "../mixins";
+﻿@import "../mixins";
 @import "../Modules/atomic";
-@import "../Modules/loading";
-@import "../Modules/avatar";
+@import "../variables";
 @import "../Themes//*@echo title*/";
 
 .sidebar {
@@ -15,7 +13,6 @@
     right: 1px;
     width: 17%;
     border-left: 1px solid $color-border;
-    background-color: $color-white;
 
     @include Middle-more {
         display: block;
@@ -27,7 +24,7 @@
         cursor: pointer;
 
         &:hover {
-            background-color: $color-gray-light;
+            background-color: $color-box-bottom;
         }
 
         &--username {
@@ -57,7 +54,6 @@
     font-size: 16px;
     color: $color-gray-dark;
     text-indent: 10px;
-    background-color: $color-white;
 
     @include Middle-more {
         width: 65%;
@@ -104,7 +100,7 @@
 
     &--info {
         @extend .font-style-italic;
-        color: $color-black;
+        color: $color-text;
         margin: 5px 0;
     }
 }
@@ -200,7 +196,7 @@
     &__timestamp {
         @extend .float-right;
         font-size: 10px;
-        color: $color-green;
+        color: $color-timestamp;
 
         @include Middle-less {
             float: none;

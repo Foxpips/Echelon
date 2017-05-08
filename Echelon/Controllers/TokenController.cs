@@ -34,13 +34,12 @@ namespace Echelon.Controllers
         public async Task<ActionResult> Index(string device, string channel)
         {
             // Create a random identity for the client
-            var usersEntity = await _dataService.Read<UserEntity>();
             var user = _owinContext.Authentication.User;
-            var userEntity = usersEntity.Single(x => x.Email.Equals(user.Identity.Name));
-            var identity = new {username = userEntity.UserName, email = userEntity.Email};
+            var userEntity = await _dataService.Single<UserEntity>(x => x.Where(y => y.Email.Equals(user.Identity.Name)));
+            var identity = new { username = userEntity.DisplayNameEnabled ? userEntity.DisplayName : userEntity.UserName, email = userEntity.Email };
 
             // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) {Identity = identity.email};
+            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity.email };
 
             // Create an IP messaging grant for this token
             var grant = new IpMessagingGrant

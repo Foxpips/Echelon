@@ -12,7 +12,7 @@ namespace Echelon.Infrastructure.AutoMapper.Profiles
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
-                .ForMember(dest => dest.UserNameEnabled, opt => opt.MapFrom(src => src.UserNameEnabled));
+                .ForMember(dest => dest.DisplayNameEnabled, opt => opt.MapFrom(src => src.DisplayNameEnabled));
 
         }
     }

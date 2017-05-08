@@ -1,17 +1,16 @@
-﻿@import "../variables";
-@import "../mixins";
+﻿@import "../mixins";
 @import "../Modules/atomic";
-@import "../Modules/loading";
-@import "../Modules/avatar";
+@import "../variables";
+@import "../Themes//*@echo title*/";
 
 /* The side navigation menu */
 .sidenav {
     display: none;
-    z-index: 999;
+    z-index: 9;
     height: 100% !important; /* 100% Full-height */
     width: 17%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    background-color: #111; /* Black*/
+    background-color: $color-gray-darkest; /* Black*/
     right: 0px;
 
         @include Middle-less{
@@ -24,14 +23,14 @@
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
     display: block;
-    transition: 0.3s
+    transition: 0.3s;
+    color: $color-gray-medium;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
+    color: $color-white;
 }
 
 /* Position and style the close button (top right corner) */

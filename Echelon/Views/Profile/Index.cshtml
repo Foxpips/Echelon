@@ -6,13 +6,12 @@
 }
 
 <section id="wrapper" class="profile-container">
-    <div class="profile-container__information">
+    <div class="profile-container__information component__background">
+        <h3>Profile</h3>
         @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(false)
-            ;
-            <h3>Profile</h3>
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="avatar-upload">
@@ -53,15 +52,15 @@
             <div class="row">
                 <div class="col-xs-9 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.UserName, new { @class = "form-control", placeholder = "UserName", required = "true" })
-                        @Html.ValidationMessageFor(u => u.UserName)
+                        @Html.TextBoxFor(u => u.DisplayName, new { @class = "form-control", placeholder = "UserName", required = "true" })
+                        @Html.ValidationMessageFor(u => u.DisplayName)
                     </div>
                 </div>
                 <div class="col-xs-3 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.CheckBoxFor(u => u.UserNameEnabled, new { @class = "form-control", placeholder = "Use Display Name" })
-                        @Html.ValidationMessageFor(u => u.UserNameEnabled)
-                        @Html.LabelFor(u => u.UserNameEnabled, "Enabled")
+                        @Html.CheckBoxFor(u => u.DisplayNameEnabled, new { @class = "form-control", placeholder = "Use Display Name" })
+                        @Html.ValidationMessageFor(u => u.DisplayNameEnabled)
+                        @Html.LabelFor(u => u.DisplayNameEnabled, "Enabled")
                     </div>
                 </div>
             </div>
@@ -69,6 +68,14 @@
                 <input class="btn btn-info btn-lg" type="submit" value="Save">
             </div>
         }
+
+        <form>
+            <div class="row">
+                <h3>Themes</h3>
+                    <button id="themeDark" data-attribute="theme" data-target="Dark" class="btn btn-info">Dark</button>
+                    <button id="themeLight" data-attribute="theme" data-target="Light" class="btn btn-info">Light</button>
+            </div>
+        </form>
     </div>
 </section>
 @section scripts {

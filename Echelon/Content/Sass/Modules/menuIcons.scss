@@ -1,6 +1,7 @@
-﻿@import "../variables";
-@import "../mixins";
+﻿@import "../mixins";
 @import "atomic.scss";
+@import "../variables";
+@import "../Themes//*@echo title*/";
 
 i.material-icons {
     padding: 7px;
@@ -100,11 +101,11 @@ i.material-icons:nth-of-type(1) {
 }
 
 i.material-icons:nth-of-type(1):hover {
-    color: $color-tertiary;
+    color: $color-secondary;
 }
 
 i.material-icons:nth-of-type(1):after {
-    border-color: $color-tertiary;
+    border-color: $color-secondary;
 }
 
 i.material-icons:nth-of-type(2) {

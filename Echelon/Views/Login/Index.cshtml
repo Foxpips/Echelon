@@ -13,7 +13,7 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, Login.LoginFailed)
-                <h3 class="box-title margin-bottom-20 component__text">@Login.LogIn</h3>
+                <h3 class="box-title margin-bottom-20 component__text--alternate">@Login.LogIn</h3>
                 <div class="col-xs-12">
                     <div class="form-group">
                         @Html.TextBoxFor(u => u.Email, new {@class = "form-control", placeholder = "Email", required = "true", oninvalid = "this.setCustomValidity(" + Login.MissingEmail + ")"})

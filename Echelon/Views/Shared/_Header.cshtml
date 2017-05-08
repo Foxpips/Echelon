@@ -28,7 +28,7 @@
 </nav>
 
 <div id="mySidenav" class="sidenav">
-    <span class="closebtn">&times;</span>
-    @Html.ActionLink("Profile", "Index", "Profile")
-    @Html.ActionLink(Login.LogOut, "Logout", "Login")
+    <span class="closebtn component__text">&times;</span>
+    @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "" })
+    @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new { @class = "" })
 </div>

@@ -1,5 +1,4 @@
-﻿/// <reference path="../Helpers/ajax-helper.js" />
-/*jshint esversion: 6 */
+﻿/*jshint esversion: 6 */
 
 var AvatarControl = function (ajaxhelper) {
     var self = this;

@@ -55,8 +55,8 @@ namespace Echelon.Controllers
         {
             await _dataService.Update<UserEntity>(user =>
             {
-                user.UserNameEnabled = profileViewModel.UserNameEnabled;
-                user.UserName = profileViewModel.UserName;
+                user.DisplayNameEnabled = profileViewModel.DisplayNameEnabled;
+                user.DisplayName= profileViewModel.DisplayName;
                 user.FirstName = profileViewModel.FirstName;
                 user.LastName = profileViewModel.LastName;
             },

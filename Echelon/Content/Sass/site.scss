@@ -1,10 +1,26 @@
 ﻿@import "mixins";
 @import "Modules/atomic";
 @import "variables";
+@import "Themes//*@echo title*/";
 
 * {
     box-sizing: border-box;
 }
+
+.component {
+
+    &__background {
+        background-color: $color-background;
+    }
+
+    &__text{
+        color: $color-text;
+        &--alternate{
+            color: $color-text-alternate;
+        }
+    }
+}
+
 
 .main-background {
     position: absolute;
@@ -12,7 +28,6 @@
     height: 50%;
     opacity: 0.7;
     background-repeat: no-repeat;
-
 
     @include Middle-less {
         width: 100%;

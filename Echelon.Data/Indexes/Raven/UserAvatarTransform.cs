@@ -14,6 +14,7 @@ namespace Echelon.Data.Indexes.Raven
             {
                 userEntity.Email,
                 userEntity.UserName,
+                userEntity.DisplayName,
                 LoadDocument<AvatarEntity>(userEntity.AvatarId).AvatarUrl
             });
         }

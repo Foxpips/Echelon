@@ -24,10 +24,7 @@
 
 <body class="window-container overflow-auto component__background">
     @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
-
-    <button id="themeDark" data-attribute="theme" data-target="Dark" class="btn btn-info">Dark</button>
-    <button id="themeLight" data-attribute="theme" data-target="Light" class="btn btn-info">Light</button>
-
+  
     @if (User.Identity.IsAuthenticated)
     {
         @Html.Partial("_Header")

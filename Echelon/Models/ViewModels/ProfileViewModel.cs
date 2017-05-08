@@ -17,6 +17,8 @@ namespace Echelon.Models.ViewModels
 
         public string UserName { get; set; }
 
-        public bool UserNameEnabled { get; set; }
+        public string DisplayName { get; set; }
+
+        public bool DisplayNameEnabled { get; set; }
     }
 }

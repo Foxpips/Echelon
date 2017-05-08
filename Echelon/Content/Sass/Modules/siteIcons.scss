@@ -1,6 +1,7 @@
-﻿@import "../variables";
-@import "../mixins";
+﻿@import "../mixins";
 @import "atomic.scss";
+@import "../variables";
+@import "../Themes//*@echo title*/";
 
 .main-wrapper {
     width: 82%;
