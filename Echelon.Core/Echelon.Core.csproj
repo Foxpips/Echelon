@@ -125,6 +125,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\MassTransit\Commands\File\DeleteFileCommand.cs" />
+    <Compile Include="Infrastructure\MassTransit\Consumers\DeleteFileConsumer.cs" />
     <Compile Include="Infrastructure\Services\Email\Components\EmailTemplateEnum.cs" />
     <Compile Include="Extensions\Autofac\AutofacExtensions.cs" />
     <Compile Include="Helpers\HashHelper.cs" />

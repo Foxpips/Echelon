@@ -11,5 +11,6 @@ var ProfilePage = function () {
 
         $("#uploading").show();
         $("#fileNameUploaded").text(fileToUpload.name);
+        $("#avatarform").submit();
     });
 };

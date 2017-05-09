@@ -8,10 +8,10 @@
 <section id="wrapper" class="profile-container">
     <div class="profile-container__information component__background">
         <h3>Profile</h3>
-        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
+
+        @using (Html.BeginForm("UploadAvatar", "Profile", FormMethod.Post, new { id = "avatarform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(false)
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="avatar-upload">
@@ -33,6 +33,11 @@
                     </div>
                 </div>
             </div>
+        }
+        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false)
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
@@ -65,15 +70,15 @@
                 </div>
             </div>
             <div class="row text-align-center">
-                <input class="btn btn-info btn-lg" type="submit" value="Save">
+                <input id="saveProfile" class="btn btn-info btn-lg" type="submit" value="Save">
             </div>
         }
 
         <form>
             <div class="row">
                 <h3>Themes</h3>
-                    <button id="themeDark" data-attribute="theme" data-target="Dark" class="btn btn-info">Dark</button>
-                    <button id="themeLight" data-attribute="theme" data-target="Light" class="btn btn-info">Light</button>
+                <button id="themeDark" data-attribute="theme" data-target="Dark" class="btn btn-info">Dark</button>
+                <button id="themeLight" data-attribute="theme" data-target="Light" class="btn btn-info">Light</button>
             </div>
         </form>
     </div>

@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Echelon.Core.Infrastructure.MassTransit.Commands.File;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Data;
 using Echelon.Data.Entities.Avatar;
+using Echelon.Data.Entities.Transforms;
 using Echelon.Data.Entities.Users;
 using Echelon.Infrastructure.Settings;
 using Echelon.Models.ViewModels;
@@ -34,7 +36,7 @@ namespace Echelon.Controllers
         {
             var email = Request.GetOwinContext().Authentication.User.Identity.Name;
             var userEntity = await _dataService.Single<UserEntity>(entities => entities.Where(user => user.Email.Equals(email)));
-            
+
             return View(_mapper.Map<ProfileViewModel>(userEntity));
         }
 
@@ -42,13 +44,22 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(ProfileViewModel profileViewModel)
         {
+            var email = Request.GetOwinContext().Authentication.User.Identity.Name;
+            await UpdateProfile(profileViewModel, email);
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UploadAvatar(ProfileViewModel profileViewModel)
+        {
             var file = profileViewModel.File;
             var email = Request.GetOwinContext().Authentication.User.Identity.Name;
 
             await UploadAvatar(file, email);
-            await UpdateProfile(profileViewModel, email);
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         private async Task UpdateProfile(ProfileViewModel profileViewModel, string email)
@@ -56,7 +67,7 @@ namespace Echelon.Controllers
             await _dataService.Update<UserEntity>(user =>
             {
                 user.DisplayNameEnabled = profileViewModel.DisplayNameEnabled;
-                user.DisplayName= profileViewModel.DisplayName;
+                user.DisplayName = profileViewModel.DisplayName;
                 user.FirstName = profileViewModel.FirstName;
                 user.LastName = profileViewModel.LastName;
             },
@@ -78,8 +89,11 @@ namespace Echelon.Controllers
                         file.SaveAs(filePath);
 
                         var avatarUrl = SiteSettings.AvatarImagesPath + uploadedFileDestination;
-                        var userEntities = await _dataService.Query<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
-                        await _dataService.Update<AvatarEntity>(x => x.AvatarUrl = avatarUrl, userEntities.SingleOrDefault()?.AvatarId);
+                        var userEntity = await _dataService.Single<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
+
+                        var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);
+                        await _bus.Publish(new DeleteFileCommand { FilePath = Path.Combine(Server.MapPath("~/UserAvatars/"), Path.GetFileName(user.AvatarUrl) )});
+                        await _dataService.Update<AvatarEntity>(x => x.AvatarUrl = avatarUrl, userEntity.AvatarId);
                     }
                 }
             }
