@@ -20,7 +20,6 @@ var ChatPage = function () {
     var chatControl = new ChatControl(notificationControl, avatarControl);
 
     (function() {
-        avatarControl.setUserAvatar($("#headerAvatar").data("target"));
         chatControl.printToLoading("#loggingIn");
     })();
 

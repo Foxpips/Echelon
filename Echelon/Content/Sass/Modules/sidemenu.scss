@@ -11,10 +11,16 @@
     width: 17%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     background-color: $color-gray-darkest; /* Black*/
-    right: 0px;
-
-        @include Middle-less{
+    @include Middle-less {
         width: 100%;
+    }
+
+    &--left {
+        left: 0px;
+    }
+
+    &--right {
+        right: 0px;
     }
 }
 
@@ -29,7 +35,7 @@
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus{
+.sidenav a:hover, .offcanvas a:focus {
     color: $color-white;
 }
 
@@ -50,6 +56,11 @@
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }

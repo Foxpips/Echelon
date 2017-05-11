@@ -24,7 +24,7 @@
 
 <body class="window-container overflow-auto component__background">
     @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
-  
+
     @if (User.Identity.IsAuthenticated)
     {
         @Html.Partial("_Header")
@@ -34,8 +34,10 @@
     @Scripts.Render("~/content/js")
 
     <script>
-    var siteurl = $("#SiteUrl").val();
-    $(function() { SitePage(); });
+        const siteurl = $("#SiteUrl").val();
+        $(function () {
+            SitePage();
+        });
     </script>
 
     @RenderSection("scripts", false)

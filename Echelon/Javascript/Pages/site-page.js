@@ -3,8 +3,12 @@
 var SitePage = function () {
     var cookieHelper = new CookieHelper();
     const $menubar = $("#menuGlobe");
-    const $sideNav = $("#mySidenav");
+    const $rightNav = $("#rightSideNav");
+    const $leftNav = $("#leftSideNav");
     const theme = document.body.querySelectorAll("[data-attribute='theme']");
+    const ajaxHelper = new AjaxHelper();
+    const avatarControl = new AvatarControl(ajaxHelper);
+    const $userAvatar = $("#headerAvatar");
 
     function hasLocalStorage(storagefunction, nonstoragefunction) {
         if (typeof (Storage) !== "undefined") {
@@ -16,14 +20,19 @@ var SitePage = function () {
 
     //constructor
     (function () {
-        $menubar.on("click", () => { $sideNav.toggle("slide"); });
+        if ($userAvatar.length > 0) {
+            avatarControl.setUserAvatar($userAvatar.data("target"));
+            $userAvatar.on("click", () => {
+                $leftNav.toggle("slide");
+            });
+        }
+
+        $menubar.on("click", () => { $rightNav.toggle("slide"); });
         $(theme).on("click", function () {
             const themeSelected = $(this).data("target");
-            
             cookieHelper.setCookie("theme", themeSelected, 300);
-//            $('link[title=mystyle]')[0].disabled = true;
-
             localStorage.theme = themeSelected;
+            // $('link[title=mystyle]')[0].disabled = true;
         });
     })();
 };
