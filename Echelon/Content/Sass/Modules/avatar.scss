@@ -6,6 +6,7 @@
 .avatar {
     @extend .float-left;
     @extend .position-relative;
+    cursor: pointer;
     image-rendering: auto;
     background-color: $color-background;
     margin-top: 10px;
@@ -24,33 +25,33 @@
         transition: all .3s ease;
     }
 
-&--other {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    &--other {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
 
-    @include Middle-less {
-        width: 30px;
-        height: 30px;
-        float: none;
-        position: relative;
-        left: 40px;
-        top: 15px;
+        @include Middle-less {
+            width: 30px;
+            height: 30px;
+            float: none;
+            position: relative;
+            left: 40px;
+            top: 15px;
+        }
     }
-}
 
-&--profile {
-    @extend .float-none;
-    margin-bottom: 10px;
-    width: 150px;
-    height: 150px;
+    &--profile {
+        @extend .float-none;
+        margin-bottom: 10px;
+        width: 150px;
+        height: 150px;
 
-    @include Middle-less {
-        width: 110px;
-        height: 110px;
+        @include Middle-less {
+            width: 110px;
+            height: 110px;
+        }
     }
-}
 }

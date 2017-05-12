@@ -5,22 +5,54 @@
 
 /* The side navigation menu */
 .sidenav {
+    padding-top: 60px;
     display: none;
     z-index: 9;
     height: 100% !important; /* 100% Full-height */
     width: 17%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     background-color: $color-gray-darkest; /* Black*/
+    box-shadow: #444 -1px 0 5px 1px;
+
     @include Middle-less {
-        width: 100%;
+        width: 98%;
+        border-radius: 50px;
+        margin-top: 2px;
+        height: 30% !important; /* 100% Full-height */
     }
 
     &--left {
         left: 0px;
+
+        @include Middle-less {
+            margin-left: 1%;
+        }
     }
 
     &--right {
         right: 0px;
+
+        @include Middle-less {
+            margin-right: 1%;
+        }
+    }
+
+    &__overlay {
+        display: none;
+        width: 100%;
+        height: 100% !important;
+        z-index: 5;
+        background-color: black;
+        position: absolute;
+        opacity: 0.5;
+
+        &--right {
+            right: 0px;
+        }
+
+        &--left {
+            left: 0px;
+        }
     }
 }
 

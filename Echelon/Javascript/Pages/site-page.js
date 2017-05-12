@@ -9,6 +9,9 @@ var SitePage = function () {
     const ajaxHelper = new AjaxHelper();
     const avatarControl = new AvatarControl(ajaxHelper);
     const $userAvatar = $("#headerAvatar");
+    const $menuOverlayRight = $("#menuOverlayRight");
+    const $menuOverlayLeft = $("#menuOverlayLeft");
+    
 
     function hasLocalStorage(storagefunction, nonstoragefunction) {
         if (typeof (Storage) !== "undefined") {
@@ -22,12 +25,22 @@ var SitePage = function () {
     (function () {
         if ($userAvatar.length > 0) {
             avatarControl.setUserAvatar($userAvatar.data("target"));
-            $userAvatar.on("click", () => {
-                $leftNav.toggle("slide");
-            });
         }
 
-        $menubar.on("click", () => { $rightNav.toggle("slide"); });
+        $userAvatar.on("click", () => {
+            $menuOverlayRight.hide();
+            $leftNav.toggle("slide");
+            $menuOverlayLeft.toggle("slide");
+            $rightNav.hide();
+        });
+
+        $menubar.on("click", () => {
+            $menuOverlayLeft.hide();
+            $rightNav.toggle("slide");
+            $menuOverlayRight.toggle("slide");
+            $leftNav.hide();
+        });
+
         $(theme).on("click", function () {
             const themeSelected = $(this).data("target");
             cookieHelper.setCookie("theme", themeSelected, 300);
