@@ -13,11 +13,9 @@ namespace Echelon.Data.Entities.Users
 
         public string LastName { get; set; }
 
-        public string UserName { get; set; }
+        public string UniqueIdentifier { get; set; }
 
         public string DisplayName { get; set; }
-
-        public bool DisplayNameEnabled { get; set; }
 
         public string Password { get; set; }
 

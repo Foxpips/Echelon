@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Echelon.Core.Helpers;
 using Echelon.Data.Entities.Users;
 using Echelon.Models.ViewModels;
@@ -16,8 +17,9 @@ namespace Echelon.Infrastructure.AutoMapper.Profiles
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => HashHelper.CreateHash(src.Password)));
 
             CreateMap<ExternalLoginInfo, UserEntity>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.DefaultUserName))
+                .ForMember(dest => dest.UniqueIdentifier, opt => opt.MapFrom(src => Guid.NewGuid()))
                 .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.DefaultUserName))
+
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.RememberMe, opt => opt.MapFrom(src => false))
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => string.Empty));

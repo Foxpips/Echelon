@@ -11,9 +11,7 @@ namespace Echelon.Infrastructure.AutoMapper.Profiles
             CreateMap<UserEntity, ProfileViewModel>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
-                .ForMember(dest => dest.DisplayNameEnabled, opt => opt.MapFrom(src => src.DisplayNameEnabled));
-
+                .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.DisplayName));
         }
     }
 }

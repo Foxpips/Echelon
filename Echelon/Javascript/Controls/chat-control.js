@@ -45,13 +45,13 @@ var ChatControl = function (notificationControl, avatarControl) {
         currentChannel.join()
             .then(() => {
                 self.printToLoading("#joinedAs",`<span class="me">${identity.username}</span>`);
-                self.chatHistory(identity.email);
+                self.chatHistory(identity.uniqueuserid);
                 self.setOnline();
             });
 
         currentChannel.on("messageAdded", data => {
             var content = JSON.parse(data.body);
-            if (identity.email === data.author) {
+            if (identity.uniqueuserid === data.author) {
                 self.printMessage(data.timestamp, content);
             } else {
                 self.printReceivedMessage(data.timestamp, content);
@@ -68,7 +68,7 @@ var ChatControl = function (notificationControl, avatarControl) {
 
     self.chatHistory = function (username) {
         setTimeout(() => {
-            for (let i = 40; i < 100; i++) {
+            for (let i = 95; i < 100; i++) {
                 var message = currentChannel.messages[i];
                 var content = JSON.parse(message.body);
                 if (username === message.author) {
@@ -95,7 +95,7 @@ var ChatControl = function (notificationControl, avatarControl) {
         const $user = $("<div class=\"message-container__username message-container__username--me\">").text(content.username);
         const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
         const $message = $("<div class=\"message-container__message message-container__message--me\">").text(content.message);
-        renderMessage(content.username, $message, $time, $container, $user, false);
+        renderMessage(`${content.uniqueuserid}${content.username}`, $message, $time, $container, $user, false);
     };
 
     self.printReceivedMessage = function (timestamp, content) {
@@ -103,7 +103,7 @@ var ChatControl = function (notificationControl, avatarControl) {
         const $user = $("<div class=\"message-container__username message-container__username--other\">").text(content.username);
         const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
         const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(content.message);
-        renderMessage(content.username, $message, $time, $container, $user, true, content.avatar);
+        renderMessage(`${content.uniqueuserid}${content.username}`, $message, $time, $container, $user, true, content.avatar);
     };
 
     //private methods

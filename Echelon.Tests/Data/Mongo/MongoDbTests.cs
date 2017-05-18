@@ -24,7 +24,7 @@ namespace Echelon.Tests.Data.Mongo
             var userEntity = new UserEntity
             {
                 Email = "Test@gmail.com",
-                UserName = "Test",
+                DisplayName = "Test",
                 Password = HashHelper.CreateHash("password1")
             };
 
@@ -33,7 +33,7 @@ namespace Echelon.Tests.Data.Mongo
             var userEntity2 = new UserEntity
             {
                 Email = "Test2@gmail.com",
-                UserName = "Test2",
+                DisplayName = "Test2",
                 Password = HashHelper.CreateHash("password1")
             };
 
@@ -78,9 +78,9 @@ namespace Echelon.Tests.Data.Mongo
         public async Task Update_Add_User_Success()
         {
             await
-                _dataService.Update<UserEntity>(entity => { entity.UserName = "updated@gmail.com"; }, "Test@gmail.com");
+                _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; }, "Test@gmail.com");
             var loginEntities = await _dataService.Read<UserEntity>();
-            Assert.That(loginEntities.Any(x => x.UserName.Equals("updated@gmail.com")));
+            Assert.That(loginEntities.Any(x => x.DisplayName.Equals("updated@gmail.com")));
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace Echelon.Tests.Data.Mongo
             var userEntity = new UserEntity
             {
                 Email = "deleteTest@gmail.com",
-                UserName = "Test",
+                DisplayName = "Test",
                 Password = HashHelper.CreateHash("password1")
             };
 

@@ -9,6 +9,19 @@ var AvatarControl = function (ajaxhelper) {
         ajaxhelper.Get(`${siteurl}/api/avatar?email=${email}`,
             response => {
                 self.avatarUrl = response;
+                avatarUrlUser = response;
+                console.log(response);
+                for (let avatar of $(".avatar--user")) {
+                    $(avatar).attr("src", response);
+                }
+            });
+    };
+
+    //public methods
+    self.getAvatar = function (email) {
+        ajaxhelper.Get(`${siteurl}/api/avatar?email=${email}`,
+            response => {
+                self.avatarUrl = response;
                 for (let avatar of $(".avatar--user")) {
                     $(avatar).attr("src", response);
                 }

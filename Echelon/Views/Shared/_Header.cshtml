@@ -33,7 +33,7 @@
 </div>
 
 <div id="rightSideNav" class="sidenav sidenav--right">
-    <span class="closebtn component__text">&times;</span>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "" })
     @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new { @class = "" })
 </div>

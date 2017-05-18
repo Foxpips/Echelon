@@ -26,7 +26,7 @@ namespace Echelon.Tests.Data.Raven
             var userEntity = new UserEntity
             {
                 Email = "Test@gmail.com",
-                UserName = "Test",
+                DisplayName = "Test",
                 Password = HashHelper.CreateHash("password1")
             };
 
@@ -35,7 +35,7 @@ namespace Echelon.Tests.Data.Raven
             var userEntity2 = new UserEntity
             {
                 Email = "simonpmarkey@gmail.com",
-                UserName = "Test2",
+                DisplayName = "Test2",
                 Password = HashHelper.CreateHash("password1")
             };
 
@@ -84,9 +84,9 @@ namespace Echelon.Tests.Data.Raven
         public async Task Remove_Add_User_Success()
         {
             await
-                _dataService.Update<UserEntity>(entity => { entity.UserName = "updated@gmail.com"; }, "test@gmail.com");
+                _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; }, "test@gmail.com");
             var loginEntities = await _dataService.Read<UserEntity>();
-            Assert.That(loginEntities.Any(x => x.UserName.Equals("updated@gmail.com")));
+            Assert.That(loginEntities.Any(x => x.DisplayName.Equals("updated@gmail.com")));
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace Echelon.Tests.Data.Raven
             var userEntity = new UserEntity
             {
                 Email = "deleteTest@gmail.com",
-                UserName = "Test",
+                DisplayName = "Test",
                 Password = HashHelper.CreateHash("password1")
             };
 

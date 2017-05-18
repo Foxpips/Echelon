@@ -50,11 +50,11 @@ var ChatPage = function () {
 
     const sendMessage = function () {
         if ($input.val().length === 0) return;
-
         const dataToSend = JSON.stringify({
+            uniqueuserid: identity.uniqueuserid,
             username: identity.username,
             message: $input.val(),
-            avatar: avatarControl.avatarUrl
+            avatar: avatarUrlUser
         });
 
         currentChannel.sendMessage(dataToSend);

@@ -66,7 +66,6 @@ namespace Echelon.Controllers
         {
             await _dataService.Update<UserEntity>(user =>
             {
-                user.DisplayNameEnabled = profileViewModel.DisplayNameEnabled;
                 user.DisplayName = profileViewModel.DisplayName;
                 user.FirstName = profileViewModel.FirstName;
                 user.LastName = profileViewModel.LastName;
@@ -84,15 +83,23 @@ namespace Echelon.Controllers
                 {
                     if (file.ContentLength > 0)
                     {
-                        var uploadedFileDestination = $"{Guid.NewGuid()}-{file.FileName}";
-                        var filePath = Path.Combine(Server.MapPath("~/UserAvatars/"), Path.GetFileName(uploadedFileDestination));
-                        file.SaveAs(filePath);
+                        var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);
 
-                        var avatarUrl = SiteSettings.AvatarImagesPath + uploadedFileDestination;
+                        var avatarFileName = $"{Guid.NewGuid()}-{DateTime.Now.Millisecond}.png";
+                        var avatarUrl = SiteSettings.AvatarImagesPath + avatarFileName;
+
+                        if (user.AvatarUrl.Contains(SiteSettings.AvatarImagesPath))
+                        {
+                            avatarFileName = Path.GetFileName(user.AvatarUrl);
+                            avatarUrl = user.AvatarUrl;
+                        }
+
+                        var avatarFilePath = Path.Combine(Server.MapPath("~/UserAvatars/"), avatarFileName);
+                        file.SaveAs(avatarFilePath);
+
                         var userEntity = await _dataService.Single<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
 
-                        var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);
-                        await _bus.Publish(new DeleteFileCommand { FilePath = Path.Combine(Server.MapPath("~/UserAvatars/"), Path.GetFileName(user.AvatarUrl) )});
+//                        await _bus.Publish(new DeleteFileCommand { FilePath = Path.Combine(Server.MapPath("~/UserAvatars/"), Path.GetFileName(user.AvatarUrl)) });
                         await _dataService.Update<AvatarEntity>(x => x.AvatarUrl = avatarUrl, userEntity.AvatarId);
                     }
                 }

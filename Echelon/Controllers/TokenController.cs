@@ -36,10 +36,10 @@ namespace Echelon.Controllers
             // Create a random identity for the client
             var user = _owinContext.Authentication.User;
             var userEntity = await _dataService.Single<UserEntity>(x => x.Where(y => y.Email.Equals(user.Identity.Name)));
-            var identity = new { username = userEntity.DisplayNameEnabled ? userEntity.DisplayName : userEntity.UserName, email = userEntity.Email };
+            var identity = new { username = userEntity.DisplayName, uniqueuserid = userEntity.UniqueIdentifier };
 
             // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity.email };
+            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity.uniqueuserid };
 
             // Create an IP messaging grant for this token
             var grant = new IpMessagingGrant

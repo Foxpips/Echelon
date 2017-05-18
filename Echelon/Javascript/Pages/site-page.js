@@ -1,16 +1,17 @@
 ﻿/*jshint esversion: 6 */
 
+var avatarUrlUser;
 var SitePage = function () {
     var cookieHelper = new CookieHelper();
-    const $menubar = $("#menuGlobe");
-    const $rightNav = $("#rightSideNav");
-    const $leftNav = $("#leftSideNav");
-    const theme = document.body.querySelectorAll("[data-attribute='theme']");
-    const ajaxHelper = new AjaxHelper();
-    const avatarControl = new AvatarControl(ajaxHelper);
-    const $userAvatar = $("#headerAvatar");
-    const $menuOverlayRight = $("#menuOverlayRight");
-    const $menuOverlayLeft = $("#menuOverlayLeft");
+    var $menubar = $("#menuGlobe");
+    var $rightNav = $("#rightSideNav");
+    var $leftNav = $("#leftSideNav");
+    var theme = document.body.querySelectorAll("[data-attribute='theme']");
+    var ajaxHelper = new AjaxHelper();
+    var avatarControl = new AvatarControl(ajaxHelper);
+    var $userAvatar = $("#headerAvatar");
+    var $menuOverlayRight = $("#menuOverlayRight");
+    var $menuOverlayLeft = $("#menuOverlayLeft");
     
 
     function hasLocalStorage(storagefunction, nonstoragefunction) {
