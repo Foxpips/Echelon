@@ -1,6 +1,5 @@
 ﻿/*jshint esversion: 6 */
 
-var avatarUrlUser;
 var SitePage = function () {
     var cookieHelper = new CookieHelper();
     var $menubar = $("#menuGlobe");

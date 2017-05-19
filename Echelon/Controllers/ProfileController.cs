@@ -59,7 +59,7 @@ namespace Echelon.Controllers
 
             await UploadAvatar(file, email);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { upload = "success" });
         }
 
         private async Task UpdateProfile(ProfileViewModel profileViewModel, string email)
@@ -99,7 +99,7 @@ namespace Echelon.Controllers
 
                         var userEntity = await _dataService.Single<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
 
-//                        await _bus.Publish(new DeleteFileCommand { FilePath = Path.Combine(Server.MapPath("~/UserAvatars/"), Path.GetFileName(user.AvatarUrl)) });
+                        //                        await _bus.Publish(new DeleteFileCommand { FilePath = Path.Combine(Server.MapPath("~/UserAvatars/"), Path.GetFileName(user.AvatarUrl)) });
                         await _dataService.Update<AvatarEntity>(x => x.AvatarUrl = avatarUrl, userEntity.AvatarId);
                     }
                 }

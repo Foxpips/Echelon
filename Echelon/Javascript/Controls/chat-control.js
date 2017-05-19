@@ -1,6 +1,8 @@
 ﻿/*jshint esversion: 6 */
 var ChatControl = function (notificationControl, avatarControl) {
     var self = this;
+    self.useridentity = "";
+
     var lastOtherAuthor = "";
     var $window = $(window);
 
@@ -11,6 +13,10 @@ var ChatControl = function (notificationControl, avatarControl) {
     var messageContainer = document.getElementById("messages");
     var $chatWindow = container.find("#messages");
     var $participants = container.find("#users");
+
+    var $input = $("#chat-input");
+    var $sendButton = $("#sendButton");
+    var screensaverControl = new ScreenSaverControl();
 
     //constructor
     (function () {
@@ -42,6 +48,7 @@ var ChatControl = function (notificationControl, avatarControl) {
     };
 
     self.setupChannel = function (currentChannel, identity) {
+        self.identity = identity;
         currentChannel.join()
             .then(() => {
                 self.printToLoading("#joinedAs",`<span class="me">${identity.username}</span>`);
@@ -132,4 +139,32 @@ var ChatControl = function (notificationControl, avatarControl) {
         $chatWindow.scrollTop($chatWindow[0].scrollHeight);
         lastOtherAuthor = fromUser;
     }
+
+    const sendMessage = function () {
+        if ($input.val().length === 0) return;
+        const dataToSend = JSON.stringify({
+            uniqueuserid: self.identity.uniqueuserid,
+            username: self.identity.username,
+            message: $input.val(),
+            avatar: avatarControl.currentAvatar()
+        });
+
+        currentChannel.sendMessage(dataToSend);
+        $input.val("");
+    };
+
+    $sendButton.on("click", () => {
+        sendMessage();
+        screensaverControl.runScreenSaver();
+    });
+
+    $input.on("keydown", e => {
+        if (e.keyCode === 13) {
+            e.stopPropagation();
+            e.preventDefault();
+            sendMessage();
+            screensaverControl.runScreenSaver();
+        }
+    });
+
 };

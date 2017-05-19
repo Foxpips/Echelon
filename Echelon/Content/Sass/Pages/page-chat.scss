@@ -16,6 +16,8 @@
 
     @include Middle-more {
         display: block;
+        padding-bottom: 10%;
+        overflow: auto;
     }
 
     &__participant {
@@ -37,40 +39,57 @@
     }
 }
 
-.chat__input {
-    @extend .display-block;
-    @extend .width-100-percent;
-    @extend .outline-none;
-    @extend .bg-color-transparent;
-    @extend .border-none;
-    @extend .bottom-0;
-    @extend .position-absolute;
-    @extend .padding-0;
-    @extend .font-weight-bold;
-    resize: none;
-    z-index: 1;
-    height: 52px;
-    border-top: 1px solid $color-border !important;
-    font-size: 16px;
-    color: $color-gray-dark;
-    text-indent: 10px;
+.chat {
 
-    @include Middle-more {
-        width: 65%;
-        font-size: 34px;
-        height: 60px;
-        left: 17%;
+    &__send-message {
+        @include Middle-less {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        @include Middle-more {
+            position: absolute;
+            bottom: 0;
+            right: 17.5%;
+        }
     }
 
-    @include Middle-less {
-        margin: 10px auto;
-        height: 67px;
-        width: 85%;
+    &__input {
+        @extend .display-block;
+        @extend .width-100-percent;
+        @extend .outline-none;
+        @extend .bg-color-transparent;
+        @extend .border-none;
+        @extend .bottom-0;
+        @extend .position-absolute;
+        @extend .padding-0;
+        @extend .font-weight-bold;
+        resize: none;
+        z-index: 1;
+        height: 52px;
+        border-top: 1px solid $color-border !important;
         font-size: 16px;
-        border-radius: 20px;
-        border: 2px solid $color-primary !important;
-        margin-right: 4px;
-        margin-left: 10px;
+        color: $color-gray-dark;
+        text-indent: 10px;
+
+        @include Middle-more {
+            width: 65%;
+            font-size: 34px;
+            height: 60px;
+            left: 17.5%;
+        }
+
+        @include Middle-less {
+            margin: 10px auto;
+            height: 85px;
+            width: calc(100% - 71px);
+            font-size: 16px;
+            border-radius: 20px;
+            border: 2px solid $color-primary !important;
+            margin-right: 4px;
+            margin-left: 10px;
+        }
     }
 }
 

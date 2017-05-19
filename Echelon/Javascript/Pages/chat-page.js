@@ -7,15 +7,11 @@ var ChatPage = function () {
     var accessManager;
     var messagingClient;
     var selectedChannel = "Anime";
-
-    var $input = $("#chat-input");
+ 
     var endpoint = $("#chat-input").data("target");
-    var $sendButton = $("#sendButton");
-
     var ajaxHelper = new AjaxHelper();
     var notificationControl = new NotificationControl();
-    var screensaverControl = new ScreenSaverControl();
-
+   
     var avatarControl = new AvatarControl(ajaxHelper);
     var chatControl = new ChatControl(notificationControl, avatarControl);
 
@@ -46,32 +42,5 @@ var ChatPage = function () {
                 chatControl.setupChannel(currentChannel, identity);
             }
         });
-    });
-
-    const sendMessage = function () {
-        if ($input.val().length === 0) return;
-        const dataToSend = JSON.stringify({
-            uniqueuserid: identity.uniqueuserid,
-            username: identity.username,
-            message: $input.val(),
-            avatar: avatarUrlUser
-        });
-
-        currentChannel.sendMessage(dataToSend);
-        $input.val("");
-    };
-
-    $sendButton.on("click", () => {
-        sendMessage();
-        screensaverControl.runScreenSaver();
-    });
-
-    $input.on("keydown", e => {
-        if (e.keyCode === 13) {
-            e.stopPropagation();
-            e.preventDefault();
-            sendMessage();
-            screensaverControl.runScreenSaver();
-        }
     });
 };
