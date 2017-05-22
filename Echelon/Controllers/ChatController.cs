@@ -2,6 +2,7 @@
 
 namespace Echelon.Controllers
 {
+    [Authorize]
     [RequireHttps]
     public class ChatController : Controller
     {

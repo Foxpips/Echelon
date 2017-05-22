@@ -244,9 +244,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\AvatarController.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\AutoMapperModule.cs" />
+    <Compile Include="Infrastructure\Autofac\Modules\MediatorModule.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\MvcModule.cs" />
     <Compile Include="Infrastructure\AutoMapper\Profiles\UserProfile.cs" />
     <Compile Include="Infrastructure\Helpers\CookieStore.cs" />
+    <Compile Include="Mediators\ChatMediator.cs" />
+    <Compile Include="Mediators\ExternalLoginMediator.cs" />
+    <Compile Include="Mediators\IMediator.cs" />
+    <Compile Include="Mediators\ProfileMediator.cs" />
     <Compile Include="Models\BusinessModels\GooglePlusInfo.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Infrastructure\Attributes\LocalizedControllerActivator.cs" />

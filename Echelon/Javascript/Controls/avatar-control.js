@@ -8,14 +8,15 @@ var AvatarControl = function (ajaxhelper) {
         ajaxhelper.Get(`${siteurl}/api/avatar?email=${email}`,
             response => {
                 for (let avatar of $(".avatar--user")) {
-                    $(avatar).attr("src", response);
+                    let useravatar = $(avatar);
+                    useravatar.prop("src", `${response}?${new Date().getTime()}`);
                 }
             });
     };
 
     self.currentAvatar = () => {
         return $headerAvatar.prop("src");
-    }
+    };
 
     self.setParticipantAvatars = function (emails, callback) {
         let data = JSON.stringify({ Emails: emails });

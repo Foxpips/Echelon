@@ -17,7 +17,7 @@
             </span>
         }
         <div class="navbar-header">
-            <img id="headerAvatar" data-target="@user" class="avatar avatar--user margin-right-10" src="@ViewBag.AvatarImage" alt="avatar" />
+            <img id="headerAvatar" data-target="@user" class="avatar avatar--user avatar--menu margin-right-10" src="@ViewBag.AvatarImage" alt="avatar" />
             <div class="google-translate__container">
                 <div id="google-translate-element"></div>
             </div>
@@ -27,7 +27,6 @@
 
 <div id="menuOverlayLeft" class="sidenav__overlay sidenav__overlay--right"></div>
 <div id="leftSideNav" class="sidenav sidenav--left">
-    @*<span class="closebtn component__text">&times;</span>*@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     @Html.ActionLink("Home", "Index", "Chat", null, new { @class = "sidenav--slides" })
 </div>

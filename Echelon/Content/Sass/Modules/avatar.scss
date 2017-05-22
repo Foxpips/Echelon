@@ -20,7 +20,7 @@
     -moz-box-shadow: 0 0 0 3px $color-white, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
     box-shadow: 0 0 0 3px $color-white, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
 
-    &--user:hover {
+    &--menu:hover {
         transform: rotate(90deg);
         transition: all .3s ease;
     }
