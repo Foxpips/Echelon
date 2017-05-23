@@ -19,7 +19,7 @@ var AvatarControl = function (ajaxhelper) {
     };
 
     self.setParticipantAvatars = function (emails, callback) {
-        let data = JSON.stringify({ Emails: emails });
+        let data = { Emails: emails };
         ajaxhelper.Post(`${siteurl}/api/avatar/PrintPerson`,
             data,
             response => {

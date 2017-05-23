@@ -19,7 +19,7 @@ var ChatPage = function () {
         chatControl.printToLoading("#loggingIn");
     })();
 
-    $.getJSON(endpoint, { device: "browser", channel: selectedChannel }, data => {
+    ajaxHelper.Post(endpoint, { device: "browser", channel: selectedChannel }, data => {
         identity = data.identity;
 
         accessManager = new window.Twilio.AccessManager(data.token);

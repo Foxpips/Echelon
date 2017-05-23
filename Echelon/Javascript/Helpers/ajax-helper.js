@@ -10,7 +10,7 @@ var AjaxHelper = function() {
     };
 
     self.Post = function(url, data, callback) {
-        ajaxRequest("POST", url, data, callback);
+        ajaxRequest("POST", url, JSON.stringify(data), callback);
     };
 
     //private methods

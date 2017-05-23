@@ -1,28 +1,18 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using AutoMapper;
-using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
-using Echelon.Core.Infrastructure.Services.Login;
-using Echelon.Data.Entities.Users;
+using Echelon.Mediators;
 using Echelon.Models.ViewModels;
-using MassTransit;
-using Microsoft.Owin;
 
 namespace Echelon.Controllers
 {
+    [RequireHttps]
     public class LoginController : Controller
     {
-        private readonly ILoginService _loginService;
-        private readonly IOwinContext _owinContext;
-        private readonly IBus _bus;
-        private readonly IMapper _mapper;
+        private readonly LoginMediator _loginMediator;
 
-        public LoginController(ILoginService loginService, IOwinContext owinContext, IBus bus, IMapper mapper)
+        public LoginController(LoginMediator loginMediator)
         {
-            _mapper = mapper;
-            _bus = bus;
-            _owinContext = owinContext;
-            _loginService = loginService;
+            _loginMediator = loginMediator;
         }
 
         [HttpGet]
@@ -47,20 +37,12 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(LoginViewModel loginViewModel)
         {
-            await _bus.Publish(new LogInfoCommand {Content = $"Attempting to login with email: {loginViewModel.Email}"});
-
-            var loginEntity = _mapper.Map<UserEntity>(loginViewModel);
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && await _loginMediator.Login(loginViewModel))
             {
-                if (await _loginService.LogUserIn(loginEntity, _owinContext.Authentication))
-                {
-                    return RedirectToActionPermanent("Index", "Chat");
-                }
-
-                ModelState.AddModelError("", @"Email or Password is incorrect!");
+                return RedirectToActionPermanent("Index", "Chat");
             }
 
-            await _bus.Publish(new LogInfoCommand {Content = $"User not found: {loginViewModel.Email}"});
+            ModelState.AddModelError("", @"Email or Password is incorrect!");
             return View(loginViewModel);
         }
 
@@ -68,17 +50,9 @@ namespace Echelon.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Logout()
         {
-            if (await _loginService.LogUserOut(_owinContext.Authentication))
-            {
-                await
-                    _bus.Publish(new LogInfoCommand
-                    {
-                        Content = $"Logging user: {_owinContext.Authentication.User.Identity.Name} out"
-                    });
-
-                return RedirectToActionPermanent("Index", "Login");
-            }
-            return RedirectToAction("Account", "Error");
+            return await _loginMediator.Logout()
+                ? RedirectToActionPermanent("Index", "Login")
+                : RedirectToAction("Account", "Error");
         }
     }
 }

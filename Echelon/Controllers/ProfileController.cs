@@ -18,29 +18,32 @@ namespace Echelon.Controllers
             _profileMediator = profileMediator;
         }
 
-        [Authorize]
         public async Task<ActionResult> Index()
         {
             return View(await _profileMediator.GetUser(Email));
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(ProfileViewModel profileViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", @"Please enter a Username!");
+                return View(profileViewModel);
+            }
+
             await _profileMediator.UpdateUser(profileViewModel, Email);
             return View();
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UploadAvatar(ProfileViewModel profileViewModel)
         {
             if (ModelState.IsValid)
             {
-                 await _profileMediator.UploadUserAvatar(profileViewModel.File, Email, Server.MapPath("~/UserAvatars/"));
+                await _profileMediator.UploadUserAvatar(profileViewModel.File, Email, Server.MapPath("~/UserAvatars/"));
             }
 
             return RedirectToAction("Index");

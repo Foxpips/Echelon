@@ -2,10 +2,10 @@
 
 namespace Echelon.Controllers
 {
+    [Authorize]
     [RequireHttps]
     public class NavigationController : Controller
     {
-        [Authorize]
         public ActionResult Index()
         {
             return View();

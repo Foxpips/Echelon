@@ -1,61 +1,26 @@
-﻿using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using Echelon.Data;
-using Echelon.Data.Entities.Users;
-using Microsoft.Owin;
-using Twilio.Auth;
+using Echelon.Mediators;
 
 namespace Echelon.Controllers
 {
+    [Authorize]
+    [RequireHttps]
     public class TokenController : Controller
     {
-        private readonly IDataService _dataService;
-        private readonly IOwinContext _owinContext;
+        private readonly TokenMediator _tokenMediator;
 
-        // Load Twilio configuration from Web.config
-        private static string AccountSid => ConfigurationManager.AppSettings["TwilioAccountSid"];
 
-        private static string ApiKey => ConfigurationManager.AppSettings["TwilioApiKey"];
-
-        private static string ApiSecret => ConfigurationManager.AppSettings["TwilioApiSecret"];
-
-        private static string IpmServiceSid => ConfigurationManager.AppSettings["TwilioIpmServiceSid"];
-
-        public TokenController(IDataService dataService, IOwinContext owinContext)
+        public TokenController(TokenMediator tokenMediator)
         {
-            _owinContext = owinContext;
-            _dataService = dataService;
+            _tokenMediator = tokenMediator;
         }
 
-        // GET: /token
-        [Authorize]
+        [HttpPost]
         public async Task<ActionResult> Index(string device, string channel)
         {
-            // Create a random identity for the client
-            var user = _owinContext.Authentication.User;
-            var userEntity = await _dataService.Single<UserEntity>(x => x.Where(y => y.Email.Equals(user.Identity.Name)));
-            var identity = new { username = userEntity.DisplayName, uniqueuserid = userEntity.UniqueIdentifier };
-
-            // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity.uniqueuserid };
-
-            // Create an IP messaging grant for this token
-            var grant = new IpMessagingGrant
-            {
-                EndpointId = $"EchelonChat:{identity}:{device}",
-                ServiceSid = IpmServiceSid
-            };
-
-            token.AddGrant(grant);
-
-            return Json(new
-            {
-                identity,
-                category = channel,
-                token = token.ToJWT()
-            }, JsonRequestBehavior.AllowGet);
+            return Json(await _tokenMediator.CreateToken(device, channel),
+                JsonRequestBehavior.AllowGet);
         }
     }
 }

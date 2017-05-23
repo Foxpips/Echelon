@@ -59,12 +59,19 @@ namespace Echelon.Core.Infrastructure.Services.Login
 
         public async Task<bool> LogUserOut(IAuthenticationManager authenticationManager)
         {
-            await Task.Run(() =>
+            try
             {
-                authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            });
-            return true;
+                await Task.Run(() =>
+                {
+                    authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                    authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                });
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public async Task<bool> CreateAndLoguserIn(UserEntity userEntity, string avatarUrl,
