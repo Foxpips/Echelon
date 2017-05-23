@@ -65,14 +65,17 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task Connect_Read_DataBase_Success()
         {
+            await Task.Delay(TimeSpan.FromMilliseconds(200));
             var users = await _dataService.Read<UserEntity>();
             Assert.NotNull(users);
+            Console.WriteLine(users.Count);
             Assert.IsTrue(users.Count > 0);
         }
 
         [Test]
         public async Task Read_User_Database()
         {
+            await Task.Delay(TimeSpan.FromSeconds(1));
             var users =
                 await
                     _dataService.Query<UserEntity>(
@@ -84,7 +87,8 @@ namespace Echelon.Tests.Data.Raven
         public async Task Remove_Add_User_Success()
         {
             await
-                _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; }, "test@gmail.com");
+                _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; },
+                    "test@gmail.com");
             var loginEntities = await _dataService.Read<UserEntity>();
             Assert.That(loginEntities.Any(x => x.DisplayName.Equals("updated@gmail.com")));
         }
@@ -109,7 +113,9 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task CreateEmail_Templates_Success()
         {
+            await Task.Delay(TimeSpan.FromMilliseconds(200));
             var expected = await _dataService.Read<EmailTemplatesEntity>();
+            Console.WriteLine(expected.Count);
             Assert.AreEqual(expected.SingleOrDefault()?.Templates.First().Body, "Body Test");
         }
 

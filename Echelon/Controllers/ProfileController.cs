@@ -41,11 +41,7 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UploadAvatar(ProfileViewModel profileViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                await _profileMediator.UploadUserAvatar(profileViewModel.File, Email, Server.MapPath("~/UserAvatars/"));
-            }
-
+            await _profileMediator.UploadUserAvatar(profileViewModel.File, Email, Server.MapPath("~/UserAvatars/"));
             return RedirectToAction("Index");
         }
     }
