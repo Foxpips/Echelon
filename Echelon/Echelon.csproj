@@ -254,6 +254,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\EmbedController.cs" />
     <Compile Include="Controllers\Api\AvatarController.cs" />
     <Compile Include="Infrastructure\Attributes\RequireApiHttpsAttribute.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\AutoMapperModule.cs" />
@@ -381,6 +382,7 @@
     <Content Include="Javascript\Controls\screensaver-control.js" />
     <Content Include="Javascript\Helpers\ajax-helper.js" />
     <Content Include="Javascript\Helpers\cookie-helper.js" />
+    <Content Include="Javascript\Helpers\regex-helper.js" />
     <Content Include="Javascript\Pages\login-page.js" />
     <Content Include="Javascript\Pages\profile-page.js" />
     <Content Include="Javascript\Pages\chat-page.js" />

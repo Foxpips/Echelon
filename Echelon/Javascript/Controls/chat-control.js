@@ -17,6 +17,7 @@ var ChatControl = function (notificationControl, avatarControl) {
     var $input = $("#chat-input");
     var $sendButton = $("#sendButton");
     var screensaverControl = new ScreenSaverControl();
+    var regexHelper = new RegexHelper();
 
     //constructor
     (function () {
@@ -101,7 +102,8 @@ var ChatControl = function (notificationControl, avatarControl) {
         const $container = $("<div class=\"message-container\">");
         const $user = $("<div class=\"message-container__username message-container__username--me\">").text(content.username);
         const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
-        const $message = $("<div class=\"message-container__message message-container__message--me\">").text(content.message);
+        const $message = $("<div class=\"message-container__message message-container__message--me\">");
+        $message.html(filterLinks(content.message, $message));
         renderMessage(`${content.uniqueuserid}${content.username}`, $message, $time, $container, $user, false);
     };
 
@@ -109,9 +111,27 @@ var ChatControl = function (notificationControl, avatarControl) {
         const $container = $("<div class=\"message-container message-container--other\" >");
         const $user = $("<div class=\"message-container__username message-container__username--other\">").text(content.username);
         const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
-        const $message = $("<div class=\"message-container__message message-container__message--other\" >").text(content.message);
+        const $message = $("<div class=\"message-container__message message-container__message--other\" >");
+        $message.html(filterLinks(content.message, $message));
         renderMessage(`${content.uniqueuserid}${content.username}`, $message, $time, $container, $user, true, content.avatar);
     };
+
+    function filterLinks(message, $container) {
+        if (regexHelper.isImage(message)) {
+            console.log(message);
+            return $(`<img class="width-100-percent height-100-percent" src=${message} />`);
+        }
+
+        if (regexHelper.isDailyMotion(message)) {
+            console.log(message);
+            new AjaxHelper().Get(`${siteurl}/api/embed?videoType=DailyMotion&url=${message}`, response => {
+                console.log(response.html);
+                $container.append(response.html);
+            });
+        }
+
+        return message;
+    }
 
     //private methods
     function renderMessage(fromUser, $message, $time, $container, $user, renderAvatar, avatarUrl) {
