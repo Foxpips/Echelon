@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Echelon.Data.Entities.Categories;
 
 namespace Echelon.Core.Infrastructure.Services.Category
 {
     public interface ICategoryService : IService
     {
-        Task<CategoriesEntity> GetCategories();
+        Task<IList<CategoryEntity>> GetCategories();
     }
 }

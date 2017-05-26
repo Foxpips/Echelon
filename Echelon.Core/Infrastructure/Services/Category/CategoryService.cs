@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Data;
 using Echelon.Data.Entities.Categories;
@@ -14,10 +15,10 @@ namespace Echelon.Core.Infrastructure.Services.Category
             _dataService = dataService;
         }
 
-        public async Task<CategoriesEntity> GetCategories()
+        public async Task<IList<CategoryEntity>> GetCategories()
         {
-            var categoriesEntities = await _dataService.Read<CategoriesEntity>();
-            return categoriesEntities.Single();
+            var categoriesEntities = await _dataService.Read<CategoryEntity>();
+            return categoriesEntities;
         }
     }
 }

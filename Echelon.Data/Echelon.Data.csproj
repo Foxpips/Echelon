@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Avatar\AvatarEntity.cs" />
-    <Compile Include="Entities\Categories\CategoriesEntity.cs" />
     <Compile Include="Entities\Categories\CategoryEntity.cs" />
     <Compile Include="Entities\Email\EmailTemplateEntity.cs" />
     <Compile Include="Entities\Email\EmailTemplatesEntity.cs" />
