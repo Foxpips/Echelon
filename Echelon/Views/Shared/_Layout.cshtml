@@ -13,13 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
     @Html.Partial("_Favicon")
     @RenderSection("metadata")
-
-    @{
-        var cookieTheme = CookieStore.GetCookie("theme");
-    }
-
-    @(cookieTheme != null ? Styles.Render("~/content/css/theme-" + cookieTheme) : Styles.Render("~/content/css/theme-Light"))
-
+    @Styles.Render("~/content/css/theme-Light")
 </head>
 
 <body class="window-container overflow-auto component__background">

@@ -12,6 +12,7 @@ using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Infrastructure.Attributes;
 using Echelon.Infrastructure.Settings;
+using FluentValidation.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -44,6 +45,7 @@ namespace Echelon
                 new DefaultControllerFactory(new LocalizedControllerActivator()));
 
             ConfigureCookies(app);
+            ConfigureValidation(container);
             ConfigureApplication();
         }
 
@@ -55,6 +57,13 @@ namespace Echelon
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Email;
+        }
+
+        private static void ConfigureValidation(IContainer container)
+        {
+            FluentValidationModelValidatorProvider.Configure(provider => {
+                provider.ValidatorFactory = new MyCustomValidatorFactory(container);
+            });
         }
 
         private static void ConfigureCookies(IAppBuilder app)

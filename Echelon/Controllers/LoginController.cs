@@ -47,7 +47,7 @@ namespace Echelon.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult> Logout()
         {
             return await _loginMediator.Logout()

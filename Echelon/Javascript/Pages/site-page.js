@@ -1,17 +1,17 @@
 ﻿/*jshint esversion: 6 */
 
 var SitePage = function () {
-    var cookieHelper = new CookieHelper();
     var $menubar = $("#menuGlobe");
     var $rightNav = $("#rightSideNav");
     var $leftNav = $("#leftSideNav");
-    var theme = document.body.querySelectorAll("[data-attribute='theme']");
-    var ajaxHelper = new AjaxHelper();
-    var avatarControl = new AvatarControl(ajaxHelper);
     var $userAvatar = $("#headerAvatar");
     var $menuOverlayRight = $("#menuOverlayRight");
     var $menuOverlayLeft = $("#menuOverlayLeft");
-    
+    var theme = document.body.querySelectorAll("[data-attribute='theme']");
+
+    var cookieHelper = new CookieHelper();
+    var ajaxHelper = new AjaxHelper();
+    var avatarControl = new AvatarControl(ajaxHelper);
 
     function hasLocalStorage(storagefunction, nonstoragefunction) {
         if (typeof (Storage) !== "undefined") {
@@ -23,6 +23,11 @@ var SitePage = function () {
 
     //constructor
     (function () {
+
+        let href = $('link[rel=stylesheet]')[0].href;
+        let replace1 = href.replace(/theme-\w*/, localStorage.theme);
+        $('link[rel=stylesheet]')[0].href = replace1;
+
         if ($userAvatar.length > 0) {
             avatarControl.setUserAvatar($userAvatar.data("target"));
         }
@@ -43,9 +48,13 @@ var SitePage = function () {
 
         $(theme).on("click", function () {
             const themeSelected = $(this).data("target");
+            console.log(themeSelected);
             cookieHelper.setCookie("theme", themeSelected, 300);
             localStorage.theme = themeSelected;
-            // $('link[title=mystyle]')[0].disabled = true;
+            let hreftheme = $('link[rel=stylesheet]')[0].href;
+            let replace = hreftheme.replace(/theme-\w*/, localStorage.theme);
+            $('link[rel=stylesheet]')[0].href = replace;
+            console.log(hreftheme);
         });
     })();
 };
