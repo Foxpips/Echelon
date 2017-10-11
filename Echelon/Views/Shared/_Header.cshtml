@@ -27,12 +27,12 @@
 
 <div id="menuOverlayLeft" class="sidenav__overlay sidenav__overlay--right"></div>
 <div id="leftSideNav" class="sidenav sidenav--left">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="javascript:void(0)" class="closebtn">&times;</a>
     @Html.ActionLink("Home", "Index", "Chat", null, new { @class = "sidenav--slides" })
 </div>
 
 <div id="rightSideNav" class="sidenav sidenav--right">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="javascript:void(0)" class="closebtn">&times;</a>
     @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "sidenav--slides" })
     @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new { @class = "sidenav--slides" })
 </div>

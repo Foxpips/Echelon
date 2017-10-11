@@ -18,7 +18,7 @@
         width: 98%;
         border-radius: 50px;
         margin-top: 2%;
-        height: 30% !important; /* 100% Full-height */
+        height: auto !important; /* 100% Full-height */
     }
 
     &--left {
@@ -66,10 +66,17 @@
     color: $color-white;
     text-align: center;
 }
-  .sidenav--slides:hover{
-            padding-right: 50px;
-            background-color: #3d384f;
+
+.sidenav--slides:hover {
+    padding-right: 50px;
+    background-color: $color-sidenavHover;
+
+    &:last-child {
+      @include Middle-less {
+        border-radius: 0px 0px 50px 50px;
     }
+  }
+}
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus {

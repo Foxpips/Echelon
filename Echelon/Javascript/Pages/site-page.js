@@ -4,6 +4,8 @@ var SitePage = function () {
     var $menubar = $("#menuGlobe");
     var $rightNav = $("#rightSideNav");
     var $leftNav = $("#leftSideNav");
+    var $closeNav = $(".closebtn");
+
     var $userAvatar = $("#headerAvatar");
     var $menuOverlayRight = $("#menuOverlayRight");
     var $menuOverlayLeft = $("#menuOverlayLeft");
@@ -44,6 +46,18 @@ var SitePage = function () {
             $rightNav.toggle("slide");
             $menuOverlayRight.toggle("slide");
             $leftNav.hide();
+        });
+
+        $closeNav.on("click", () => {
+          if ($rightNav.is(":visible")) {
+            $rightNav.toggle("slide");
+            $menuOverlayRight.toggle("slide");
+          }
+
+          if ($leftNav.is(":visible")) {
+            $leftNav.toggle("slide");
+            $menuOverlayLeft.toggle("slide");
+          }
         });
 
         $(theme).on("click", function () {
