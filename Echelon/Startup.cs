@@ -24,79 +24,82 @@ using Owin;
 
 namespace Echelon
 {
-    public class Startup
+  public class Startup
+  {
+    public void Configuration(IAppBuilder app)
     {
-        public void Configuration(IAppBuilder app)
-        {
-            var targetAssembly = GetType().Assembly;
+      var targetAssembly = GetType().Assembly;
 
-            var builder = new ContainerBuilder();
-            builder.RegisterControllers(targetAssembly);
-            builder.RegisterApiControllers(targetAssembly);
+      var builder = new ContainerBuilder();
+      builder.RegisterControllers(targetAssembly);
+      builder.RegisterApiControllers(targetAssembly);
 
-            var container = builder.RegisterCustomModules(true, targetAssembly).Build();
-            app.UseAutofacMiddleware(container);
-            app.UseAutofacMvc();
+      var container = builder.RegisterCustomModules(true, targetAssembly).Build();
+      app.UseAutofacMiddleware(container);
+      app.UseAutofacMvc();
 
-            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+      GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+      DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            ControllerBuilder.Current.SetControllerFactory(
-                new DefaultControllerFactory(new LocalizedControllerActivator()));
+      ControllerBuilder.Current.SetControllerFactory(
+          new DefaultControllerFactory(new LocalizedControllerActivator()));
 
-            ConfigureCookies(app);
-            ConfigureValidation(container);
-            ConfigureApplication();
-        }
+      app.MapSignalR();
 
-        private static void ConfigureApplication()
-        {
-            AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Email;
-        }
-
-        private static void ConfigureValidation(IContainer container)
-        {
-            FluentValidationModelValidatorProvider.Configure(provider => {
-                provider.ValidatorFactory = new MyCustomValidatorFactory(container);
-            });
-        }
-
-        private static void ConfigureCookies(IAppBuilder app)
-        {
-            app.SetDefaultSignInAsAuthenticationType(SiteSettings.CookieName);
-            app.UseExternalSignInCookie();
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                LoginPath = new PathString(SiteSettings.LoginPath),
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                CookieName = SiteSettings.CookieName
-            });
-
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
-            {
-                ClientId = SiteSettings.GoogleClientId,
-                ClientSecret = SiteSettings.GoogleClientSecrect,
-                Scope = {"profile email"},
-                Provider = new GoogleOAuth2AuthenticationProvider
-                {
-                    OnAuthenticated = (context) =>
-                    {
-                        context.Identity.AddClaim(new Claim("urn:google:name",
-                            context.Identity.FindFirstValue(ClaimTypes.Name)));
-                        context.Identity.AddClaim(new Claim("urn:google:email",
-                            context.Identity.FindFirstValue(ClaimTypes.Email)));
-                        context.Identity.AddClaim(new Claim("urn:google:accesstoken", context.AccessToken,
-                            ClaimValueTypes.String, "Google"));
-
-                        return Task.FromResult(0);
-                    }
-                }
-            });
-        }
+      ConfigureCookies(app);
+      ConfigureValidation(container);
+      ConfigureApplication();
     }
+
+    private static void ConfigureApplication()
+    {
+      AreaRegistration.RegisterAllAreas();
+      GlobalConfiguration.Configure(WebApiConfig.Register);
+      FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+      RouteConfig.RegisterRoutes(RouteTable.Routes);
+      BundleConfig.RegisterBundles(BundleTable.Bundles);
+      AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Email;
+    }
+
+    private static void ConfigureValidation(IContainer container)
+    {
+      FluentValidationModelValidatorProvider.Configure(provider =>
+      {
+        provider.ValidatorFactory = new MyCustomValidatorFactory(container);
+      });
+    }
+
+    private static void ConfigureCookies(IAppBuilder app)
+    {
+      app.SetDefaultSignInAsAuthenticationType(SiteSettings.CookieName);
+      app.UseExternalSignInCookie();
+      app.UseCookieAuthentication(new CookieAuthenticationOptions
+      {
+        LoginPath = new PathString(SiteSettings.LoginPath),
+        AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+        CookieName = SiteSettings.CookieName
+      });
+
+      app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
+      {
+        ClientId = SiteSettings.GoogleClientId,
+        ClientSecret = SiteSettings.GoogleClientSecrect,
+        Scope = { "profile email" },
+        Provider = new GoogleOAuth2AuthenticationProvider
+        {
+          OnAuthenticated = (context) =>
+          {
+            context.Identity.AddClaim(new Claim("urn:google:name",
+                          context.Identity.FindFirstValue(ClaimTypes.Name)));
+            context.Identity.AddClaim(new Claim("urn:google:email",
+                          context.Identity.FindFirstValue(ClaimTypes.Email)));
+            context.Identity.AddClaim(new Claim("urn:google:accesstoken", context.AccessToken,
+                          ClaimValueTypes.String, "Google"));
+
+            return Task.FromResult(0);
+          }
+        }
+      });
+    }
+  }
 }
