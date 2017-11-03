@@ -2,10 +2,16 @@
 
 namespace Echelon.Controllers
 {
-    [Authorize]
-    [RequireHttps]
+    //[RequireHttps]
     public class ErrorController : Controller
     {
+        public ActionResult Index()
+        {
+            ViewBag.ErrorMessage = "Oops something went wrong!";
+            return View();
+        }
+
+        [Authorize]
         public ActionResult Account()
         {
             ViewBag.ErrorMessage = "Oops something went wrong!";

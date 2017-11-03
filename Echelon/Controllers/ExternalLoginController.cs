@@ -23,7 +23,7 @@ namespace Echelon.Controllers
 
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-          if(await _externalLoginMediator.ExternalLoginSuccess(returnUrl)) 
+            if (await _externalLoginMediator.ExternalLoginSuccess(returnUrl))
             {
                 return RedirectToAction("Index", "Chat");
             }

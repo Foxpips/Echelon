@@ -10,7 +10,6 @@ namespace Echelon.Mediators
 {
     public class TokenMediator : IMediator
     {
-
         private readonly IDataService _dataService;
         private readonly IOwinContext _owinContext;
 
@@ -33,11 +32,12 @@ namespace Echelon.Mediators
         {
             // Create a random identity for the client
             var user = _owinContext.Authentication.User;
-            var userEntity = await _dataService.Single<UserEntity>(x => x.Where(y => y.Email.Equals(user.Identity.Name)));
-            var identity = new { username = userEntity.DisplayName, uniqueuserid = userEntity.UniqueIdentifier };
+            var userEntity =
+                await _dataService.Single<UserEntity>(x => x.Where(y => y.Email.Equals(user.Identity.Name)));
+            var identity = new {username = userEntity.DisplayName, uniqueuserid = userEntity.UniqueIdentifier};
 
             // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) { Identity = identity.uniqueuserid };
+            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) {Identity = identity.uniqueuserid};
 
             // Create an IP messaging grant for this token
             token.AddGrant(new IpMessagingGrant

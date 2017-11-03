@@ -6,7 +6,7 @@ var AjaxHelper = function() {
 
     //public methods
     self.Get = function(url, callback) {
-        ajaxRequest("GET", url, null, callback);
+      return  ajaxRequest("GET", url, null, callback);
     };
 
     self.Post = function(url, data, callback) {
@@ -16,7 +16,7 @@ var AjaxHelper = function() {
     //private methods
     function ajaxRequest(requestType, url, dataToSend, callback) {
 
-        $.ajax({
+       return $.ajax({
                 async: true,
                 type: requestType,
                 data: dataToSend,

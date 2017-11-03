@@ -21,7 +21,7 @@ namespace Echelon.Mediators
         private readonly IMapper _mapper;
 
         public ExternalLoginMediator(ILoginService loginService, IOwinContext owinContext, IRestService restService,
-             IMapper mapper)
+            IMapper mapper)
         {
             _mapper = mapper;
             _restService = restService;
@@ -58,6 +58,5 @@ namespace Echelon.Mediators
 
             return (await _restService.MakeGenericRequest<GooglePlusInfo>(requestUri))?.Picture;
         }
-
     }
 }

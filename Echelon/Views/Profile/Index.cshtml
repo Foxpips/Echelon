@@ -9,7 +9,7 @@
     <div class="profile-container__information component__background">
         <h3>Profile</h3>
 
-        @using (Html.BeginForm("UploadAvatar", "Profile", FormMethod.Post, new { id = "avatarform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("UploadAvatar", "Profile", FormMethod.Post, new {id = "avatarform", @class = "form-horizontal form-material", enctype = "multipart/form-data"}))
         {
             @Html.AntiForgeryToken()
             <div class="row">
@@ -34,14 +34,14 @@
                 </div>
             </div>
         }
-        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new {id = "detailsform", @class = "form-horizontal form-material", enctype = "multipart/form-data"}))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(false)
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control", placeholder = "FirstName" })
+                        @Html.TextBoxFor(u => u.FirstName, new {@class = "form-control", placeholder = "FirstName"})
                         @Html.ValidationMessageFor(u => u.FirstName)
                     </div>
                 </div>
@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.LastName, new { @class = "form-control", placeholder = "LastName" })
+                        @Html.TextBoxFor(u => u.LastName, new {@class = "form-control", placeholder = "LastName"})
                         @Html.ValidationMessageFor(u => u.LastName)
                     </div>
                 </div>
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.DisplayName, new { @class = "form-control", placeholder = "UserName", required = "true" })
+                        @Html.TextBoxFor(u => u.DisplayName, new {@class = "form-control", placeholder = "UserName", required = "true"})
                         @Html.ValidationMessageFor(u => u.DisplayName)
                     </div>
                 </div>
@@ -67,16 +67,16 @@
             </div>
         }
 
-            <div class="row">
-                <h3>Theme</h3>
-                <button id="themeDark" data-attribute="theme" data-target="theme-Dark" class="btn btn-info">Dark</button>
-                <button id="themeLight" data-attribute="theme" data-target="theme-Light" class="btn btn-info">Light</button>
-            </div>
+        <div class="row">
+            <h3>Theme</h3>
+            <button id="themeDark" data-attribute="theme" data-target="theme-Dark" class="btn btn-info">Dark</button>
+            <button id="themeLight" data-attribute="theme" data-target="theme-Light" class="btn btn-info">Light</button>
+        </div>
     </div>
 </section>
 @section scripts {
     <script>
-        $(function () {
+        $(function() {
             ProfilePage();
         });
     </script>

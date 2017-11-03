@@ -9,6 +9,6 @@ namespace Echelon.Models.ValidationModels
         {
             RuleFor(x => x.Email).EmailAddress().WithMessage("Not Valid").NotEmpty().WithMessage("*Required");
             RuleFor(x => x.Password).NotEmpty().WithMessage("*Required").Length(6, 10);
-        } 
+        }
     }
 }

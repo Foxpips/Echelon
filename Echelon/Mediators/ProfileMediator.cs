@@ -30,7 +30,8 @@ namespace Echelon.Mediators
 
         internal async Task<ProfileViewModel> GetUser(string email)
         {
-            var userEntity = await _dataService.Single<UserEntity>(entities => entities.Where(user => user.Email.Equals(email)));
+            var userEntity =
+                await _dataService.Single<UserEntity>(entities => entities.Where(user => user.Email.Equals(email)));
             return _mapper.Map<ProfileViewModel>(userEntity);
         }
 
@@ -48,26 +49,27 @@ namespace Echelon.Mediators
         {
             if (file != null && file.ContentLength > 0 && file.FileName != null)
             {
-                await _bus.Publish(new LogInfoCommand { Content = $"Uploading : {file.FileName}" });
-                    if (file.ContentLength > 0)
+                await _bus.Publish(new LogInfoCommand {Content = $"Uploading : {file.FileName}"});
+                if (file.ContentLength > 0)
+                {
+                    var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);
+
+                    var avatarFileName = $"{Guid.NewGuid()}-{DateTime.Now.Millisecond}.png";
+                    var avatarUrl = SiteSettings.AvatarImagesPath + avatarFileName;
+
+                    if (user.AvatarUrl.Contains(SiteSettings.AvatarImagesPath))
                     {
-                        var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);
-
-                        var avatarFileName = $"{Guid.NewGuid()}-{DateTime.Now.Millisecond}.png";
-                        var avatarUrl = SiteSettings.AvatarImagesPath + avatarFileName;
-
-                        if (user.AvatarUrl.Contains(SiteSettings.AvatarImagesPath))
-                        {
-                            avatarFileName = Path.GetFileName(user.AvatarUrl);
-                            avatarUrl = user.AvatarUrl;
-                        }
-
-                        var avatarFilePath = Path.Combine(server, avatarFileName);
-                        file.SaveAs(avatarFilePath);
-
-                        var userEntity = await _dataService.Single<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
-                        await _dataService.Update<AvatarEntity>(x => x.AvatarUrl = avatarUrl, userEntity.AvatarId);
+                        avatarFileName = Path.GetFileName(user.AvatarUrl);
+                        avatarUrl = user.AvatarUrl;
                     }
+
+                    var avatarFilePath = Path.Combine(server, avatarFileName);
+                    file.SaveAs(avatarFilePath);
+
+                    var userEntity =
+                        await _dataService.Single<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
+                    await _dataService.Update<AvatarEntity>(x => x.AvatarUrl = avatarUrl, userEntity.AvatarId);
+                }
             }
         }
     }

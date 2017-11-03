@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Echelon.Mediators;
 using Echelon.Models.ViewModels;
@@ -15,9 +16,24 @@ namespace Echelon.Controllers
             _loginMediator = loginMediator;
         }
 
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            filterContext.ExceptionHandled = true;
+
+            // Redirect on error:
+            filterContext.Result = RedirectToAction("Index", "Error");
+
+            //// OR set the result without redirection:
+            //filterContext.Result = new ViewResult
+            //{
+            //    ViewName = "~/Views/Error/Account.cshtml"
+            //};
+        }
+
         [HttpGet]
         public ActionResult Help()
         {
+            throw new StackOverflowException("Test overflow message!");
             return View();
         }
 

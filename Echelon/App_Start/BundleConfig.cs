@@ -18,7 +18,7 @@ namespace Echelon
             {
                 var cssFolder = Path.GetFileName(directory);
                 bundles.Add(new StyleBundle($"~/content/css/{cssFolder}")
-                 .IncludeDirectory($"~/assets/css/{cssFolder}/minified/", "*.css"));
+                    .IncludeDirectory($"~/assets/css/{cssFolder}/minified/", "*.css"));
             }
         }
     }

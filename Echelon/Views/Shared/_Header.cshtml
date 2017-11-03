@@ -6,7 +6,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         @if (string.IsNullOrEmpty(user))
-            {
+        {
             <span>@Login.NotLoggedIn</span>
         }
 
@@ -17,7 +17,7 @@
             </span>
         }
         <div class="navbar-header">
-            <img id="headerAvatar" data-target="@user" class="avatar avatar--user avatar--menu margin-right-10" src="@ViewBag.AvatarImage" alt="avatar" />
+            <img id="headerAvatar" data-target="@user" class="avatar avatar--user avatar--menu margin-right-10" src="@ViewBag.AvatarImage" alt="avatar"/>
             <div class="google-translate__container">
                 <div id="google-translate-element"></div>
             </div>
@@ -28,12 +28,12 @@
 <div id="menuOverlayLeft" class="sidenav__overlay sidenav__overlay--right"></div>
 <div id="leftSideNav" class="sidenav sidenav--left">
     <a href="javascript:void(0)" class="closebtn">&times;</a>
-    @Html.ActionLink("Home", "Index", "Chat", null, new { @class = "sidenav--slides" })
+    @Html.ActionLink("Home", "Index", "Chat", null, new {@class = "sidenav--slides"})
 </div>
 
 <div id="rightSideNav" class="sidenav sidenav--right">
     <a href="javascript:void(0)" class="closebtn">&times;</a>
-    @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "sidenav--slides" })
-    @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new { @class = "sidenav--slides" })
+    @Html.ActionLink("Profile", "Index", "Profile", null, new {@class = "sidenav--slides"})
+    @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new {@class = "sidenav--slides"})
 </div>
 <div id="menuOverlayRight" class="sidenav__overlay sidenav__overlay--left"></div>

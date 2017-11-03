@@ -19,7 +19,6 @@ namespace Echelon.Infrastructure.AutoMapper.Profiles
             CreateMap<ExternalLoginInfo, UserEntity>()
                 .ForMember(dest => dest.UniqueIdentifier, opt => opt.MapFrom(src => Guid.NewGuid()))
                 .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.DefaultUserName))
-
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.RememberMe, opt => opt.MapFrom(src => false))
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => string.Empty));

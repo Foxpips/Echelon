@@ -20,9 +20,17 @@ namespace Echelon.Controllers.Api
             switch (videoType)
             {
                 case VideoTypeEnum.Vimeo:
-                    return Json(await _restService.MakeGenericRequest<object>(new Uri($"https://vimeo.com/api/oembed.json?url={url}")));
+                    return
+                        Json(
+                            await
+                                _restService.MakeGenericRequest<object>(
+                                    new Uri($"https://vimeo.com/api/oembed.json?url={url}")));
                 case VideoTypeEnum.Dailymotion:
-                    return Json(await _restService.MakeGenericRequest<object>(new Uri($"https://www.dailymotion.com/services/oembed?url={url}")));
+                    return
+                        Json(
+                            await
+                                _restService.MakeGenericRequest<object>(
+                                    new Uri($"https://www.dailymotion.com/services/oembed?url={url}")));
                 case VideoTypeEnum.Youtube:
                     break;
                 case VideoTypeEnum.Twitch:

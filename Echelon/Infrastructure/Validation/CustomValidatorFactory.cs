@@ -2,13 +2,13 @@
 using Autofac;
 using FluentValidation;
 
-namespace Echelon
+namespace Echelon.Infrastructure.Validation
 {
-    public class MyCustomValidatorFactory : ValidatorFactoryBase
+    public class CustomValidatorFactory : ValidatorFactoryBase
     {
         private readonly IContainer _container;
 
-        public MyCustomValidatorFactory(IContainer container)
+        public CustomValidatorFactory(IContainer container)
         {
             _container = container;
         }

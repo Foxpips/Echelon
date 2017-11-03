@@ -23,23 +23,7 @@
         <textarea id="chat-input" class="chat__input component__background" rows="1" cols="3" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"></textarea>
         <i id="sendButton" class="basic-icon animated-icon animated-icon--send fa fa-envelope chat__send-message"></i>
         <div class="main-wrapper">
-            <div id="bubbles" class="bubbles">
-                <div class="bubble bubble--one">
-                    <span class="bubble__glow"></span>
-                </div>
-                <div class="bubble bubble--two">
-                    <span class="bubble__glow"></span>
-                </div>
-                <div class="bubble bubble--three">
-                    <span class="bubble__glow"></span>
-                </div>
-                <div class="bubble bubble--four">
-                    <span class="bubble__glow"></span>
-                </div>
-                <div class="bubble bubble--five">
-                    <span class="bubble__glow"></span>
-                </div>
-            </div>
+            @Html.Partial("Screensaver/_Screensaver")
         </div>
     </div>
 </section>
@@ -54,7 +38,7 @@
             new google.translate.TranslateElement({ pageLanguage: '' }, 'google-translate-element');
         }
 
-        $(function () {
+        $(function() {
             ChatPage();
         });
     </script>
