@@ -1,13 +1,14 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace Echelon.Controllers
 {
     //[RequireHttps]
     public class ErrorController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(Guid? errorId)
         {
-            ViewBag.ErrorMessage = "Oops something went wrong!";
+            ViewBag.ErrorMessage = $"Oops something went wrong! ErrorId: {errorId}";
             return View();
         }
 

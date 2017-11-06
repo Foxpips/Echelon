@@ -1,33 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Echelon.Core.Logging.Loggers;
 using Echelon.Mediators;
 using Echelon.Models.ViewModels;
 
 namespace Echelon.Controllers
 {
     [RequireHttps]
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         private readonly LoginMediator _loginMediator;
 
         public LoginController(LoginMediator loginMediator)
         {
             _loginMediator = loginMediator;
-        }
-
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            filterContext.ExceptionHandled = true;
-
-            // Redirect on error:
-            filterContext.Result = RedirectToAction("Index", "Error");
-
-            //// OR set the result without redirection:
-            //filterContext.Result = new ViewResult
-            //{
-            //    ViewName = "~/Views/Error/Account.cshtml"
-            //};
         }
 
         [HttpGet]
@@ -69,6 +56,25 @@ namespace Echelon.Controllers
             return await _loginMediator.Logout()
                 ? RedirectToActionPermanent("Index", "Login")
                 : RedirectToAction("Account", "Error");
+        }
+    }
+
+    public class BaseController : Controller
+    {
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            var clientLogger = DependencyResolver.Current.GetService<IClientLogger>();
+
+            var newGuid = Guid.NewGuid();
+            clientLogger.Error($"Error Guid: {newGuid}");
+            clientLogger.Error(filterContext.Exception.Message);
+            clientLogger.Error(filterContext.Exception.StackTrace);
+            clientLogger.Error(filterContext.Exception.InnerException?.Message);
+
+            filterContext.ExceptionHandled = true;
+
+            // Redirect on error:
+            filterContext.Result = RedirectToAction("Index", "Error", new {errorId = newGuid });
         }
     }
 }
