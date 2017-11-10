@@ -5,13 +5,11 @@
 
 .sidebar {
     @extend .display-none;
-    @extend .position-absolute;
     @extend .text-align-center;
     @extend .height-100-percent;
     @extend .font-weight-bold;
     color: $color-gray-dark;
     right: 1px;
-    width: 17%;
     border-left: 1px solid $color-border;
 
     @include Middle-more {
@@ -40,18 +38,17 @@
 }
 
 .chat {
-
     &__send-message {
+        position: absolute;
+
         @include Middle-less {
-            position: absolute;
             bottom: 0;
             right: 0;
         }
 
         @include Middle-more {
-            position: absolute;
             bottom: 0;
-            right: 17.5%;
+            right: 10px;
         }
     }
 
@@ -62,7 +59,6 @@
         @extend .bg-color-transparent;
         @extend .border-none;
         @extend .bottom-0;
-        @extend .position-absolute;
         @extend .padding-0;
         @extend .font-weight-bold;
         resize: none;
@@ -74,10 +70,8 @@
         text-indent: 10px;
 
         @include Middle-more {
-            width: 65%;
             font-size: 34px;
             height: 60px;
-            left: 17.5%;
         }
 
         @include Middle-less {
@@ -102,7 +96,6 @@
     &__console {
         @extend .width-100-percent;
         @extend .margin-0-auto;
-        @extend .position-absolute;
         @extend .overflow-y-auto;
         @extend .overflow-x-hidden;
         bottom: 70px;
@@ -111,8 +104,6 @@
         margin-bottom: 20px;
 
         @include Middle-more {
-            width: 80%;
-            position: absolute;
             padding-left: 18%;
         }
     }

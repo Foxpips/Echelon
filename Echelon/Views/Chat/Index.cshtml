@@ -4,26 +4,36 @@
 
 @Html.AntiForgeryToken()
 <section id="container" class="form-material">
-    <div class="main-background"></div>
-    <div id="loading">
-        <div class="loading__overlay component__background">
-            <div id="loadingMessages" class="loading__messages">
-                <div id="loggingIn" class="info loading__text loading__text--initial">Logging in...</div>
-                <div id="joiningChannel" class="info loading__text component__background">Joining channel: </div>
-                <div id="joinedAs" class="info loading__text">Joined channel as: </div>
+    <div class="main-background component__background component__background--image"></div>
+    <div class="row">
+        <div class="col-md-10 col-sm-10">
+            <div id="loading">
+                <div class="loading__overlay component__background">
+                    <div id="loadingMessages" class="loading__messages">
+                        <div id="loggingIn" class="info loading__text loading__text--initial">Logging in...</div>
+                        <div id="joiningChannel" class="info loading__text component__background">Joining channel: </div>
+                        <div id="joinedAs" class="info loading__text">Joined channel as: </div>
+                    </div>
+                </div>
+                <div class="loading__icon loading__icon--main"></div>
+            </div>
+            <div id="messages" class="messages__console"></div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <div id="users" class="sidebar component__background">
+                People in chat
             </div>
         </div>
-        <div class="loading__icon loading__icon--main"></div>
     </div>
-    <div id="messages" class="messages__console"></div>
-    <div id="users" class="sidebar component__background">
-        People in chat
-    </div>
-    <div id="input-container">
-        <textarea id="chat-input" class="chat__input component__background" rows="1" cols="3" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"></textarea>
-        <i id="sendButton" class="basic-icon animated-icon animated-icon--send fa fa-envelope chat__send-message"></i>
-        <div class="main-wrapper">
-            @Html.Partial("Screensaver/_Screensaver")
+    <div class="row">
+        <div class="col-md-10 col-sm-10">
+            <div id="input-container">
+                <textarea id="chat-input" class="chat__input component__background" rows="1" cols="3" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"></textarea>
+                <i id="sendButton" class="basic-icon animated-icon animated-icon--send fa fa-envelope chat__send-message"></i>
+                <div class="main-wrapper">
+                    @Html.Partial("Screensaver/_Screensaver")
+                </div>
+            </div>
         </div>
     </div>
 </section>

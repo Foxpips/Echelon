@@ -22,16 +22,20 @@ var ChatControl = function (notificationControl, avatarControl) {
     //constructor
     (function () {
         if ($chatWindow.length !== 0) {
-            const psize = $window.height() - 150;
-            $chatWindow.height(psize);
+            scrollToLatestMessage();
 
             $window.resize(() => {
-                const rsize = $window.height() - 150;
-                $chatWindow.height(rsize);
-                $chatWindow.scrollTop(messageContainer.scrollHeight);
+                scrollToLatestMessage();
             });
         }
     })();
+
+  function scrollToLatestMessage () {
+        console.log("scrolling to bottom");
+        const rsize = $window.height() - 200;
+        $chatWindow.height(rsize);
+        $chatWindow.scrollTop(messageContainer.scrollHeight);
+    }
 
     //public methods
     self.setOnline = function () {
@@ -45,6 +49,7 @@ var ChatControl = function (notificationControl, avatarControl) {
             avatarControl.setParticipantAvatars(members, result => {
                 $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" src=${encodeURI(result.url)} alt="avatar"><div class="sidebar__participant--username">${result.username}</div></div>`));
             });
+
         }, 1000);
     };
 
@@ -127,6 +132,7 @@ var ChatControl = function (notificationControl, avatarControl) {
             new AjaxHelper().Get(`${siteurl}/api/embed?videoType=DailyMotion&url=${message}`, response => {
                 console.log(response.html);
                 $container.append(response.html);
+                scrollToLatestMessage();
             });
         }
 
