@@ -7,22 +7,6 @@
     box-sizing: border-box;
 }
 
-.component {
-
-    &__background {
-        background-color: $color-background;
-    }
-
-    &__text {
-        color: $color-text;
-
-        &--alternate {
-            color: $color-text-alternate;
-        }
-    }
-}
-
-
 .main-background {
     position: absolute;
     width: 50%;
@@ -92,7 +76,54 @@ iframe {
     width: 100% !important;
 }
 
+.btn {
+    @extend .display-inline-block;
+    @extend .vertical-align-middle;
+    @extend .cursor-pointer;
+    @extend .border-none;
+    @extend .margin-0;
+    @extend .overflow-visible;
+    @extend .text-align-center;
+    @extend .font-weight-bold;
+    font-family: inherit;
+    padding: 12px 1em;
+    background-color: $color-primary;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+
+    .btn:hover {
+        background-color: $color-hover;
+    }
+
+    &__control {
+        background-color: $color-primary;
+
+        @include Middle-less {
+            margin-top: 10px;
+        }
+
+
+        &:hover {
+            background-color: powderblue;
+        }
+    }
+}
+
+.field-validation-error {
+    color: $color-red-dark;
+}
+
+.input-validation-error{
+    border: solid 1px $color-red-dark !important;
+}
+
 .footer {
+    display: none;
     position: absolute;
     bottom: 0;
     width: 100%;

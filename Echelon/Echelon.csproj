@@ -380,7 +380,6 @@
     <Content Include="Content\Sass\Modules\loading.scss" />
     <Content Include="Content\Sass\Modules\menuIcons.scss" />
     <Content Include="Content\Sass\Modules\sidemenu.scss" />
-    <Content Include="Content\Sass\Mixins\theme-mixin.scss" />
     <Content Include="Content\Sass\Themes\themeDark.scss" />
     <Content Include="Content\Sass\Themes\themeLight.scss" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -392,6 +391,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\Sass\Modules\translate.scss" />
+    <Content Include="Content\Sass\Modules\formcontrol.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\screensaver-control.js" />
     <Content Include="Javascript\Helpers\ajax-helper.js" />

@@ -15,7 +15,7 @@
     @Styles.Render("~/content/css/theme-Light")
 </head>
 
-<body class="window-container overflow-auto component__background">
+<body class="window-container overflow-auto">
 @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 
 @if (User.Identity.IsAuthenticated)
