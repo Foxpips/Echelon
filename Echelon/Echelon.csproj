@@ -270,6 +270,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\EmbedController.cs" />
     <Compile Include="Controllers\Api\AvatarController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -278,6 +280,7 @@
     <Compile Include="Infrastructure\Autofac\Modules\ValidatorModule.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\MediatorModule.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\MvcModule.cs" />
+    <Compile Include="Infrastructure\AutoMapper\Profiles\RegisterProfile.cs" />
     <Compile Include="Infrastructure\AutoMapper\Profiles\UserProfile.cs" />
     <Compile Include="Infrastructure\Helpers\CookieStore.cs" />
     <Compile Include="Infrastructure\Messaging\ChatHub.cs" />
@@ -286,6 +289,7 @@
     <Compile Include="Mediators\IMediator.cs" />
     <Compile Include="Mediators\LoginMediator.cs" />
     <Compile Include="Mediators\ProfileMediator.cs" />
+    <Compile Include="Mediators\RegisterMediator.cs" />
     <Compile Include="Mediators\TokenMediator.cs" />
     <Compile Include="Models\BusinessModels\GooglePlusInfo.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -305,6 +309,7 @@
     <Compile Include="Models\BusinessModels\Category.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Infrastructure\Validation\CustomValidatorFactory.cs" />
+    <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Chat.es.Designer.cs">
       <DependentUpon>Chat.es.resx</DependentUpon>
@@ -432,6 +437,7 @@
     <Content Include="Views\Chat\ChatHub.cshtml" />
     <Content Include="Views\Shared\Screensaver\_Screensaver.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

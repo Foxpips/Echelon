@@ -5,10 +5,10 @@
     <title>@SiteTitle.LoginPage</title>
 }
 
-<section id="wrapper">
+<section>
     <div class="login">
         <div class="login__container">
-            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new {id = "loginform", @class = "form-horizontal form__container"}))
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new {id = "loginform", @class = "form__container"}))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, Login.LoginFailed)
@@ -47,7 +47,7 @@
                     <div class="form-group text-align-center margin-bottom-0">
                         <p>
                             @Login.NoAccount
-                            <a href="" class="text-primary margin-left-5">
+                            <a href="@Url.Action("Index", "Register")" class="text-primary margin-left-5">
                                 <b>@Login.Register</b>
                             </a>
                         </p>

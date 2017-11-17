@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Echelon.Core.Logging.Loggers;
 using Echelon.Mediators;
 using Echelon.Models.ViewModels;
+using Echelon.Resources;
 
 namespace Echelon.Controllers
 {
@@ -45,7 +45,7 @@ namespace Echelon.Controllers
                 return RedirectToActionPermanent("Index", "Chat");
             }
 
-            ModelState.AddModelError("", @"Email or Password is incorrect!");
+            ModelState.AddModelError(string.Empty, Login.EmailPasswordError);
             return View(loginViewModel);
         }
 
@@ -56,25 +56,6 @@ namespace Echelon.Controllers
             return await _loginMediator.Logout()
                 ? RedirectToActionPermanent("Index", "Login")
                 : RedirectToAction("Account", "Error");
-        }
-    }
-
-    public class BaseController : Controller
-    {
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            var clientLogger = DependencyResolver.Current.GetService<IClientLogger>();
-
-            var newGuid = Guid.NewGuid();
-            clientLogger.Error($"Error Guid: {newGuid}");
-            clientLogger.Error(filterContext.Exception.Message);
-            clientLogger.Error(filterContext.Exception.StackTrace);
-            clientLogger.Error(filterContext.Exception.InnerException?.Message);
-
-            filterContext.ExceptionHandled = true;
-
-            // Redirect on error:
-            filterContext.Result = RedirectToAction("Index", "Error", new {errorId = newGuid });
         }
     }
 }

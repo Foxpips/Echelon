@@ -1,4 +1,5 @@
 ﻿using Echelon.Models.ViewModels;
+using Echelon.Resources;
 using FluentValidation;
 
 namespace Echelon.Models.ValidationModels
@@ -7,8 +8,8 @@ namespace Echelon.Models.ValidationModels
     {
         public LoginViewModelValidator()
         {
-            RuleFor(x => x.Email).EmailAddress().WithMessage("Not Valid").NotEmpty().WithMessage("*Required");
-            RuleFor(x => x.Password).NotEmpty().WithMessage("*Required").Length(6, 10);
+            RuleFor(x => x.Email).EmailAddress().NotEmpty().WithMessage("*Required");
+            RuleFor(x => x.Password).Length(6, 20).NotEmpty().WithMessage("*Required");
         }
     }
 }

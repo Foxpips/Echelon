@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Echelon.Core.Infrastructure.Exceptions;
 using Echelon.Data;
 using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Users;
@@ -78,14 +79,16 @@ namespace Echelon.Core.Infrastructure.Services.Login
             IAuthenticationManager authenticationManager)
         {
             var currentUsers = await _dataservice.Query<UserEntity>(x => x.Where(y => y.Email.Equals(userEntity.Email)));
-            if (!currentUsers.Any())
+            if (currentUsers.Any())
             {
-                var avatarEntity = new AvatarEntity {AvatarUrl = avatarUrl};
-                userEntity.AvatarId = avatarEntity.Id;
-
-                await _dataservice.Create(userEntity);
-                await _dataservice.Create(avatarEntity);
+                throw new UserAlreadyExistsException("Sorry this email is already registered!");
             }
+
+            var avatarEntity = new AvatarEntity { AvatarUrl = avatarUrl };
+            userEntity.AvatarId = avatarEntity.Id;
+
+            await _dataservice.Create(userEntity);
+            await _dataservice.Create(avatarEntity);
 
             return await LogUserIn(userEntity, authenticationManager);
         }

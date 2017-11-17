@@ -9,7 +9,7 @@
     <div class="profile-container__information">
         <h3>Profile</h3>
 
-        @using (Html.BeginForm("UploadAvatar", "Profile", FormMethod.Post, new {id = "avatarform", @class = "form-horizontal form__container", enctype = "multipart/form-data"}))
+        @using (Html.BeginForm("UploadAvatar", "Profile", FormMethod.Post, new {id = "avatarform", @class = "form__container", enctype = "multipart/form-data"}))
         {
             @Html.AntiForgeryToken()
             <div class="row">
@@ -34,7 +34,7 @@
                 </div>
             </div>
         }
-        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new {id = "detailsform", @class = "form-horizontal form__container", enctype = "multipart/form-data"}))
+        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new {id = "detailsform", @class = "form__container", enctype = "multipart/form-data"}))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(false)

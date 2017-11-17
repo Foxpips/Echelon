@@ -61,6 +61,24 @@ namespace Echelon.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry there was a problem creating your account, please try again later.
+        /// </summary>
+        public static string AccountCreationError {
+            get {
+                return ResourceManager.GetString("AccountCreationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email or Password is incorrect!.
+        /// </summary>
+        public static string EmailPasswordError {
+            get {
+                return ResourceManager.GetString("EmailPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Google Login.
         /// </summary>
         public static string GoogleLogIn {

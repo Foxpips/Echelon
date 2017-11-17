@@ -5,8 +5,8 @@
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2882c2">
     <meta name="msapplication-navbutton-color" content="#2882c2">
     <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
@@ -16,31 +16,31 @@
 </head>
 
 <body class="window-container overflow-auto">
-@Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
+    @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 
-@if (User.Identity.IsAuthenticated)
-{
-    @Html.Partial("_Header")
-}
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("_Header")
+    }
 
-@RenderBody()
+    @RenderBody()
 
-@Scripts.Render("~/content/js")
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Place sticky footer content here.</span>
+        </div>
+    </footer>
 
-<script>
-    const siteurl = $("#SiteUrl").val();
-    $(function() {
-        SitePage();
-    });
-</script>
+    @Scripts.Render("~/content/js")
 
-<footer class="footer">
-    <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-    </div>
-</footer>
+    <script>
+        const siteurl = $("#SiteUrl").val();
+        $(function () {
+            SitePage();
+        });
+    </script>
 
-@RenderSection("scripts", false)
+    @RenderSection("scripts", false)
 </body>
 
 </html>
