@@ -22,14 +22,28 @@ namespace Echelon.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult ConfirmRegistration()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult RegistrationSuccess(string id)
+        {
+
+
+            return View();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(RegisterViewModel registerViewModel)
         {
-            if (ModelState.IsValid && await _registerMediator.Register(registerViewModel))
+            if (ModelState.IsValid && await _registerMediator.Register(registerViewModel, Url.Action("RegistrationSuccess")))
             {
-                return RedirectToActionPermanent("Index", "Profile");
+                return RedirectToAction("ConfirmRegistration");
             }
 
             ModelState.AddModelError(string.Empty, Login.AccountCreationError);

@@ -16,7 +16,6 @@
 
     &__container {
         z-index: 4;
-        background: $color-white;
         padding: 25px;
         border-radius: 25px;
 
@@ -31,6 +30,7 @@
     }
 
     &__title {
+        color: $color-text;
         margin: 0 0 12px;
         font-weight: 500;
         text-transform: uppercase;

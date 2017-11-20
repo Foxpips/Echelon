@@ -9,7 +9,7 @@ namespace Echelon.Infrastructure.AutoMapper.Profiles
     {
         public RegisterProfile()
         {
-            CreateMap<RegisterViewModel, UserEntity>()
+            CreateMap<RegisterViewModel, TempUserEntity>()
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.DisplayName))
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => HashHelper.CreateHash(src.Password)));

@@ -438,6 +438,8 @@
     <Content Include="Views\Shared\Screensaver\_Screensaver.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\ConfirmRegistration.cshtml" />
+    <Content Include="Views\Register\RegistrationSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

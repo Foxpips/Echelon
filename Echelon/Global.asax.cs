@@ -36,7 +36,7 @@ namespace Echelon
             var mapPath = Server.MapPath("~/log");
             var errorFile = Path.Combine(currentDirectory, DateTime.Today.ToString(CultureInfo.InvariantCulture));
 
-            var clientLogger = new ClientLogger(errorFile);
+            var clientLogger = new ClientLogger();
             var lastError = Server.GetLastError();
             clientLogger.Error(lastError.Message);
             clientLogger.Error(lastError.InnerException?.Message);

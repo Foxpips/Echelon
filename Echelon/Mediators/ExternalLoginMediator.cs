@@ -40,12 +40,13 @@ namespace Echelon.Mediators
             var userEntity = _mapper.Map<UserEntity>(externalLoginInfoAsync);
             var avatarUrl = await SetGoogleAvatar(externalLoginInfoAsync);
 
-            if (await _loginService.LogUserIn(userEntity, _owinContext.Authentication) ||
-                await _loginService.CreateAndLoguserIn(userEntity, avatarUrl, _owinContext.Authentication))
+            if (await _loginService.LogUserIn(userEntity, _owinContext.Authentication))
             {
                 return true;
             }
-            return false;
+
+            await _loginService.CreateUser(userEntity, avatarUrl);
+            return await _loginService.LogUserIn(userEntity, _owinContext.Authentication);
         }
 
         private async Task<string> SetGoogleAvatar(ExternalLoginInfo externalLoginInfoAsync)

@@ -13,7 +13,7 @@ namespace Echelon.Core.Logging.Loggers
     public class ClientLogger : IClientLogger
     {
         private const string Log4NetFile = "log4net.xml";
-        private ILog Logger { get; set; }
+        private ILog Logger { get; }
 
         public ClientLogger()
         {
@@ -21,33 +21,34 @@ namespace Echelon.Core.Logging.Loggers
             Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         }
 
-        public ClientLogger(string outputPath) : this()
-        {
-            SetOutputPath(outputPath);
-        }
+        //public ClientLogger(string outputPath) : this()
+        //{
+        //    SetOutputPath(outputPath);
+        //}
 
-        public ClientLogger(Type targetType, string outputPath = "")
-        {
-            Configure();
-            Logger = LogManager.GetLogger(targetType);
+        //public ClientLogger(Type targetType, string outputPath = "")
+        //{
+        //    Configure();
+        //    Logger = LogManager.GetLogger(targetType);
 
-            if (!string.IsNullOrEmpty(outputPath))
-            {
-                SetOutputPath(outputPath);
-            }
-        }
+        //    if (!string.IsNullOrEmpty(outputPath))
+        //    {
+        //        SetOutputPath(outputPath);
+        //    }
+        //}
 
         private static void Configure()
         {
-            XmlConfigurator.Configure(
-                new MemoryStream(Encoding.UTF8.GetBytes(ResourceLoader.GetResourceContent(Log4NetFile))));
+            XmlConfigurator.Configure(new MemoryStream(Encoding.UTF8.GetBytes(ResourceLoader.GetResourceContent(Log4NetFile))));
+            SetOutputPath();
         }
 
-        private static void SetOutputPath(string outputPath)
+        private static void SetOutputPath()
         {
             var appender = LogManager.GetRepository().GetAppenders().First(x => x is RollingFileAppender);
-            var fileAppender = ((FileAppender) appender);
-            fileAppender.File = outputPath;
+            var fileAppender = (FileAppender)appender;
+            fileAppender.File = $"{Path.GetDirectoryName(fileAppender.File)}\\{DateTime.Now.ToString("dd-MM-yyyy")}\\log.txt";
+
             fileAppender.ActivateOptions();
         }
 

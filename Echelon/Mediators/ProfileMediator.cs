@@ -49,7 +49,7 @@ namespace Echelon.Mediators
         {
             if (file != null && file.ContentLength > 0 && file.FileName != null)
             {
-                await _bus.Publish(new LogInfoCommand {Content = $"Uploading : {file.FileName}"});
+                await _bus.Send(new LogInfoCommand {Content = $"Uploading : {file.FileName}"});
                 if (file.ContentLength > 0)
                 {
                     var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);

@@ -75,8 +75,7 @@ namespace Echelon.Core.Infrastructure.Services.Login
             }
         }
 
-        public async Task<bool> CreateAndLoguserIn(UserEntity userEntity, string avatarUrl,
-            IAuthenticationManager authenticationManager)
+        public async Task CreateUser(UserEntity userEntity, string avatarUrl)
         {
             var currentUsers = await _dataservice.Query<UserEntity>(x => x.Where(y => y.Email.Equals(userEntity.Email)));
             if (currentUsers.Any())
@@ -89,8 +88,11 @@ namespace Echelon.Core.Infrastructure.Services.Login
 
             await _dataservice.Create(userEntity);
             await _dataservice.Create(avatarEntity);
+        }
 
-            return await LogUserIn(userEntity, authenticationManager);
+        public async Task CreateTempUser(TempUserEntity tempUserEntity)
+        {
+            await _dataservice.Create(tempUserEntity);
         }
     }
 }

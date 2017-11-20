@@ -15,23 +15,27 @@ var SitePage = function () {
     var ajaxHelper = new AjaxHelper();
     var avatarControl = new AvatarControl(ajaxHelper);
 
-//    function hasLocalStorage(storagefunction, nonstoragefunction) {
-//        if (typeof (Storage) !== "undefined") {
-//            storagefunction();
-//        } else {
-//            nonstoragefunction();
-//        }
-//    }
+    //    function hasLocalStorage(storagefunction, nonstoragefunction) {
+    //        if (typeof (Storage) !== "undefined") {
+    //            storagefunction();
+    //        } else {
+    //            nonstoragefunction();
+    //        }
+    //    }
 
     //constructor
     (function () {
-      if (localStorage.theme === undefined) {
-        localStorage.theme = "theme-Light";
-      }
+        if (localStorage.theme === undefined) {
+            localStorage.theme = "theme-Light";
+        }
 
-      let href = $('link[rel=stylesheet]')[0].href;
-        let replace1 = href.replace(/theme-\w*/, localStorage.theme);
-        $('link[rel=stylesheet]')[0].href = replace1;
+        let href = $('link[rel=stylesheet]')[0].href;
+        let currentTheme = href.replace(/theme-\w*/, localStorage.theme);
+        $('link[rel=stylesheet]')[0].href = currentTheme;
+
+        $(window).load(function () {
+            $("html").removeClass("preload");
+        });
 
         if ($userAvatar.length > 0) {
             avatarControl.setUserAvatar($userAvatar.data("target"));
@@ -52,15 +56,15 @@ var SitePage = function () {
         });
 
         $closeNav.on("click", () => {
-          if ($rightNav.is(":visible")) {
-            $rightNav.toggle("slide");
-            $menuOverlayRight.toggle("slide");
-          }
+            if ($rightNav.is(":visible")) {
+                $rightNav.toggle("slide");
+                $menuOverlayRight.toggle("slide");
+            }
 
-          if ($leftNav.is(":visible")) {
-            $leftNav.toggle("slide");
-            $menuOverlayLeft.toggle("slide");
-          }
+            if ($leftNav.is(":visible")) {
+                $leftNav.toggle("slide");
+                $menuOverlayLeft.toggle("slide");
+            }
         });
 
         $(theme).on("click", function () {

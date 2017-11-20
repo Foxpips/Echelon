@@ -10,17 +10,12 @@
     }
 
     .form-control {
-        background-color: $color-background;
         color: $color-text-alternate;
         background-position: center bottom,center calc(99%);
         background-repeat: no-repeat;
         background-size: 0 2px,100% 1px;
         padding: 0;
         transition: background 1s ease-out 0s;
-    }
-
-    .form-control {
-        background-image: linear-gradient(#9675ce, #9675ce),linear-gradient($color-box-bottom, $color-box-bottom);
         border: 0 none;
         border-radius: 3px;
         text-indent: 10px;
@@ -29,10 +24,15 @@
         margin-bottom: 10px;
     }
 
+    input.form-control{
+        background-color: $color-input;
+    }
+
     .form-control:focus {
         background-size: 100% 2px,100% 1px;
         outline: 0 none;
         transition-duration: .3s;
+        background-image: linear-gradient(#9675ce, #9675ce),linear-gradient($color-box-bottom, $color-box-bottom);
     }
 
     .form-bordered .form-group {

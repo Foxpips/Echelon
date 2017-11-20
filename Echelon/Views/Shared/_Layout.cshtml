@@ -1,7 +1,7 @@
 ﻿@using System.Threading
 <!DOCTYPE html>
 
-<html id="htmlContainer" class="window-container overflow-hidden">
+<html id="htmlContainer" class="overflow-hidden preload">
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
@@ -12,10 +12,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
     @Html.Partial("_Favicon")
     @RenderSection("metadata")
-    @Styles.Render("~/content/css/theme-Light")
+    @Styles.Render("~/content/css/theme-Dark")
 </head>
 
-<body class="window-container overflow-auto">
+<body class="window-container overflow-auto theme__background">
     @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 
     @if (User.Identity.IsAuthenticated)

@@ -9,42 +9,42 @@
     <div class="profile-container__information">
         <h3>Register</h3>
         @using (Html.BeginForm("Index", "Register", FormMethod.Post, new { id = "detailsform", @class = "form__container", enctype = "multipart/form-data" }))
-        {
+            {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(false)
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.Email, new { @class = "form-control", placeholder = "Email" })
+                        @Html.TextBoxFor(u => u.Email, new { @class = "form-control", placeholder = "Email", type = "email" })
                         @Html.ValidationMessageFor(u => u.Email)
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 margin-top-10 text-align-center">
-                    <div class="form-group">
-                        @Html.TextBoxFor(u => u.Password, new { @class = "form-control", placeholder = "Password" })
-                        @Html.ValidationMessageFor(u => u.Password)
+                <div class="row">
+                    <div class="col-xs-12 margin-top-10 text-align-center">
+                        <div class="form-group">
+                            @Html.TextBoxFor(u => u.Password, new { @class = "form-control", placeholder = "Password", type = "password" })
+                            @Html.ValidationMessageFor(u => u.Password)
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 margin-top-10 text-align-center">
-                    <div class="form-group">
-                        @Html.TextBoxFor(u => u.DisplayName, new { @class = "form-control", placeholder = "UserName", required = "true" })
-                        @Html.ValidationMessageFor(u => u.DisplayName)
+                <div class="row">
+                    <div class="col-xs-12 margin-top-10 text-align-center">
+                        <div class="form-group">
+                            @Html.TextBoxFor(u => u.DisplayName, new { @class = "form-control", placeholder = "UserName", required = "true" })
+                            @Html.ValidationMessageFor(u => u.DisplayName)
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row text-align-center">
-                <input id="registerBtn" class="btn btn-info btn-lg" type="submit" value="Save">
-            </div>
+                <div class="row text-align-center">
+                    <input id="registerBtn" class="btn btn-info btn-lg" type="submit" value="Save">
+                </div>
         }
     </div>
 </section>
 @section scripts {
     <script>
-        $(function() {
+        $(function () {
         });
     </script>
 }

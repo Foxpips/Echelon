@@ -7,6 +7,20 @@
     box-sizing: border-box;
 }
 
+.theme {
+    &__background {
+        background-color: $color-background;
+    }
+
+    &__text {
+        color: $color-text;
+
+        &--alternate {
+            color: $color-text-alternate;
+        }
+    }
+}
+
 .main-background {
     position: absolute;
     width: 50%;
@@ -28,6 +42,14 @@
 
 .window-container {
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  display: none;
 }
 
 .validation-summary-errors {
