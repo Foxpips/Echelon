@@ -1,6 +1,8 @@
-﻿namespace Echelon.Core.Infrastructure.MassTransit.Commands.Logging
+﻿using Echelon.Core.Infrastructure.MassTransit.Extensions;
+
+namespace Echelon.Core.Infrastructure.MassTransit.Commands.Logging
 {
-    public class LogInfoCommand
+    public class LogInfoCommand : IBusCommand
     {
         public string Content { get; set; }
     }

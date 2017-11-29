@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using AutoMapper;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
+using Echelon.Core.Infrastructure.MassTransit.Extensions;
 using Echelon.Data;
 using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Transforms;
@@ -49,7 +50,7 @@ namespace Echelon.Mediators
         {
             if (file != null && file.ContentLength > 0 && file.FileName != null)
             {
-                await _bus.Send(new LogInfoCommand {Content = $"Uploading : {file.FileName}"});
+                await _bus.SendMessage(new LogInfoCommand { Content = $"Uploading : {file.FileName}" }, SiteSettings.Queue);
                 if (file.ContentLength > 0)
                 {
                     var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);

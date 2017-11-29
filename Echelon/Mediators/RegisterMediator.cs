@@ -4,8 +4,10 @@ using AutoMapper;
 using Echelon.Core.Infrastructure.Exceptions;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Register;
+using Echelon.Core.Infrastructure.MassTransit.Extensions;
 using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Data.Entities.Users;
+using Echelon.Infrastructure.Settings;
 using Echelon.Models.ViewModels;
 using MassTransit;
 using static System.Configuration.ConfigurationManager;
@@ -29,11 +31,10 @@ namespace Echelon.Mediators
         {
             try
             {
-                var sendEndpoint = await _bus.GetSendEndpoint(new Uri("rabbitmq://localhost/echelon_queue"));
-                await sendEndpoint.Send(new LogInfoCommand
+                await _bus.SendMessage(new LogInfoCommand
                 {
                     Content = $"Attempting to register new user with email: {registerViewModel.Email}"
-                });
+                }, SiteSettings.Queue);
 
                 try
                 {
@@ -42,18 +43,18 @@ namespace Echelon.Mediators
                     tempUserEntity.Id = id;
 
                     await _loginService.CreateTempUser(tempUserEntity);
-                    await sendEndpoint.Send(new RegisterNewUserCommand
+                    await _bus.SendMessage(new RegisterNewUserCommand
                     {
                         RegisterUrl = $"{registerUrl}/{id}",
                         Email = tempUserEntity.Email
-                    });
+                    }, SiteSettings.Queue);
                 }
                 catch (UserAlreadyExistsException ex)
                 {
-                    await sendEndpoint.Send(new LogInfoCommand
+                    await _bus.SendMessage(new LogInfoCommand
                     {
                         Content = $"{ex.Message}: {registerViewModel.Email}"
-                    });
+                    }, SiteSettings.Queue);
 
                     return false;
                 }
