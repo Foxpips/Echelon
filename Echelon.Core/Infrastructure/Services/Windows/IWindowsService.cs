@@ -1,7 +1,10 @@
+using System.Threading.Tasks;
+
 namespace Echelon.Core.Infrastructure.Services.Windows
 {
     public interface IWindowsService
     {
-        void Initialize();
+        Task Initialize();
+        Task Shutdown();
     }
 }
