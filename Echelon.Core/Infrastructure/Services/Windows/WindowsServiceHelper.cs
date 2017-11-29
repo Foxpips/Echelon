@@ -15,12 +15,12 @@ namespace Echelon.Core.Infrastructure.Services.Windows
                         s =>
                         {
                             s.ConstructUsing(f => new TService());
-                            s.WhenStarted(tc =>
+                            s.WhenStarted(async tc =>
                             {
-                                tc.Initialize();
+                                await tc.Initialize();
                                 action?.Invoke(tc);
                             });
-                            s.WhenStopped(tc => { });
+                            s.WhenStopped(async tc => {await tc.Shutdown(); });
                         });
 
                     x.RunAsLocalSystem();
