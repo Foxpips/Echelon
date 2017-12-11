@@ -6,7 +6,6 @@ namespace Echelon.Core.Infrastructure.Exceptions
     {
         public UserAlreadyExistsException(string message) : base(message)
         {
-
         }
     }
 }

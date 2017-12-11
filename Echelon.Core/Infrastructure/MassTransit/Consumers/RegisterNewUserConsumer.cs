@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Register;
 using Echelon.Core.Infrastructure.Services.Email;
-using Echelon.Core.Infrastructure.Services.Email.Components;
+using Echelon.Misc.Enums;
 using MassTransit;
 
 namespace Echelon.Core.Infrastructure.MassTransit.Consumers
@@ -17,7 +17,9 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
 
         public async Task Consume(ConsumeContext<RegisterNewUserCommand> context)
         {
-           await _emailSenderService.Send(context.Message.Email, string.Empty, "EchelonChat", EmailTemplateEnum.AccountConfirmation, new { name = "Test" });
+            await
+                _emailSenderService.Send(context.Message.Email, string.Empty, "EchelonChat",
+                    EmailTemplateEnum.AccountConfirmation, new {name = "Test"});
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Echelon.Data.DataProviders.RavenDb
     public class RavenDataService : IDataService
     {
         private readonly IDocumentStore _database = DocumentStoreProvider.Database;
-        private IClientLogger _clientLogger;
+        private readonly IClientLogger _clientLogger;
 
         public RavenDataService(IClientLogger clientLogger)
         {

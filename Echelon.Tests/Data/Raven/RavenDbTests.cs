@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Helpers;
-using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Data.DataProviders.RavenDb;
 using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Email;
 using Echelon.Data.Entities.Transforms;
 using Echelon.Data.Entities.Users;
+using Echelon.Misc.Enums;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Data.Raven
@@ -54,7 +54,7 @@ namespace Echelon.Tests.Data.Raven
                         {
                             Body = "Body Test",
                             Subject = "Subject Test",
-                            Type = EmailTemplateEnum.ForgottenPassword.ToString()
+                            Type = EmailTemplateEnum.ForgottenPassword
                         }
                     }
             };

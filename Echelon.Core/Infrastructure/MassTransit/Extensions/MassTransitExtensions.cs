@@ -6,7 +6,7 @@ namespace Echelon.Core.Infrastructure.MassTransit.Extensions
 {
     public static class MassTransitExtensions
     {
-        public static async Task SendMessage<T>(this IBus bus, T command) where T: class, IBusCommand
+        public static async Task SendMessage<T>(this IBus bus, T command) where T : class, IBusCommand
         {
             var sendEndpoint = await bus.GetSendEndpoint(new Uri("rabbitmq://localhost/echelon_queue"));
             await sendEndpoint.Send(command);

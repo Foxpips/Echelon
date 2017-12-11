@@ -83,7 +83,7 @@ namespace Echelon.Core.Infrastructure.Services.Login
                 throw new UserAlreadyExistsException("Sorry this email is already registered!");
             }
 
-            var avatarEntity = new AvatarEntity { AvatarUrl = avatarUrl };
+            var avatarEntity = new AvatarEntity {AvatarUrl = avatarUrl};
             userEntity.AvatarId = avatarEntity.Id;
 
             await _dataservice.Create(userEntity);

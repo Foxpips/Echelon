@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Echelon.Core.Infrastructure.Services.Email.Components;
+using Echelon.Misc.Enums;
 
 namespace Echelon.Core.Infrastructure.Services.Email
 {

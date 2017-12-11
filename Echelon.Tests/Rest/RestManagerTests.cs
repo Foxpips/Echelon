@@ -27,7 +27,11 @@ namespace Echelon.Tests.Rest
         public async Task Call_Dailymotion_Api_Services()
         {
             var restManager = new RestService(new ClientLogger());
-            var translatedChatModel = await restManager.MakeGenericRequest<object>(new Uri("http://www.dailymotion.com/services/oembed?url=http://www.dailymotion.com/video/x5epodb_horizon-zero-dawn-ravager-trial_videogames"));
+            var translatedChatModel =
+                await
+                    restManager.MakeGenericRequest<object>(
+                        new Uri(
+                            "http://www.dailymotion.com/services/oembed?url=http://www.dailymotion.com/video/x5epodb_horizon-zero-dawn-ravager-trial_videogames"));
             Console.WriteLine(translatedChatModel);
         }
 
@@ -35,7 +39,10 @@ namespace Echelon.Tests.Rest
         public async Task Call_Vimeo_Api_Services()
         {
             var restManager = new RestService(new ClientLogger());
-            var translatedChatModel = await restManager.MakeGenericRequest<object>(new Uri("https://vimeo.com/api/oembed.json?url=https://vimeo.com/112483572"));
+            var translatedChatModel =
+                await
+                    restManager.MakeGenericRequest<object>(
+                        new Uri("https://vimeo.com/api/oembed.json?url=https://vimeo.com/112483572"));
             Console.WriteLine(translatedChatModel);
         }
     }

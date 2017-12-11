@@ -31,8 +31,6 @@ namespace Echelon.Controllers
         [HttpGet]
         public ActionResult RegistrationSuccess(string id)
         {
-
-
             return View();
         }
 
@@ -41,7 +39,8 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(RegisterViewModel registerViewModel)
         {
-            if (ModelState.IsValid && await _registerMediator.Register(registerViewModel, Url.Action("RegistrationSuccess")))
+            if (ModelState.IsValid &&
+                await _registerMediator.Register(registerViewModel, Url.Action("RegistrationSuccess")))
             {
                 return RedirectToAction("ConfirmRegistration");
             }

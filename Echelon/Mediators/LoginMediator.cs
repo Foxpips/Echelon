@@ -30,14 +30,14 @@ namespace Echelon.Mediators
         {
             await
                 _bus.SendMessage(
-                    new LogInfoCommand { Content = $"Attempting to login with email: {loginViewModel.Email}" },
-                    SiteSettings.Queue);
+                    new LogInfoCommand {Content = $"Attempting to login with email: {loginViewModel.Email}"},
+                    QueueSettings.General);
 
             if (await _loginService.LogUserIn(_mapper.Map<UserEntity>(loginViewModel), _owinContext.Authentication))
             {
                 return true;
             }
-            await _bus.Send(new LogInfoCommand { Content = $"User not found: {loginViewModel.Email}" });
+            await _bus.Send(new LogInfoCommand {Content = $"User not found: {loginViewModel.Email}"});
             return false;
         }
 
@@ -46,7 +46,7 @@ namespace Echelon.Mediators
             await _bus.SendMessage(new LogInfoCommand
             {
                 Content = $"Logging user: {_owinContext.Authentication.User.Identity.Name} out"
-            }, SiteSettings.Queue);
+            }, QueueSettings.General);
 
             if (await _loginService.LogUserOut(_owinContext.Authentication))
             {
@@ -57,7 +57,7 @@ namespace Echelon.Mediators
                 _bus.SendMessage(new LogInfoCommand
                 {
                     Content = $"Error could not log user : {_owinContext.Authentication.User.Identity.Name} out"
-                }, SiteSettings.Queue);
+                }, QueueSettings.General);
 
             return false;
         }

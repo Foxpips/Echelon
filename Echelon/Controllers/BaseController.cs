@@ -19,7 +19,7 @@ namespace Echelon.Controllers
             filterContext.ExceptionHandled = true;
 
             // Redirect on error:
-            filterContext.Result = RedirectToAction("Index", "Error", new {errorId = newGuid });
+            filterContext.Result = RedirectToAction("Index", "Error", new {errorId = newGuid});
         }
     }
 }

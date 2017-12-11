@@ -21,8 +21,12 @@ namespace Echelon.Core.Infrastructure.AutoFac.Modules
                     h.Password(AppSettings["RabbitMQPassword"]);
                 });
 
-                sbc.ReceiveEndpoint(host, AppSettings["QueueName"],
-                    ep => { ep.LoadFrom(componentContext.Resolve<ILifetimeScope>()); });
+                sbc.ReceiveEndpoint(host, AppSettings["QueueName"], ep =>
+                {
+                    ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
+//                    var lifetimeScope = builder.Build();
+//                    ep.Consumer<RegisterNewUserConsumer>(lifetimeScope);
+                });
             }))
                 .As<IBusControl>()
                 .As<IBus>()

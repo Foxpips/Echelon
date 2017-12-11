@@ -10,7 +10,6 @@ using Echelon.Data.Entities.Users;
 using Echelon.Infrastructure.Settings;
 using Echelon.Models.ViewModels;
 using MassTransit;
-using static System.Configuration.ConfigurationManager;
 
 namespace Echelon.Mediators
 {
@@ -34,7 +33,7 @@ namespace Echelon.Mediators
                 await _bus.SendMessage(new LogInfoCommand
                 {
                     Content = $"Attempting to register new user with email: {registerViewModel.Email}"
-                }, SiteSettings.Queue);
+                }, QueueSettings.General);
 
                 try
                 {
@@ -47,14 +46,14 @@ namespace Echelon.Mediators
                     {
                         RegisterUrl = $"{registerUrl}/{id}",
                         Email = tempUserEntity.Email
-                    }, SiteSettings.Queue);
+                    }, QueueSettings.General);
                 }
                 catch (UserAlreadyExistsException ex)
                 {
                     await _bus.SendMessage(new LogInfoCommand
                     {
                         Content = $"{ex.Message}: {registerViewModel.Email}"
-                    }, SiteSettings.Queue);
+                    }, QueueSettings.General);
 
                     return false;
                 }

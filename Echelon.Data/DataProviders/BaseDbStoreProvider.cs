@@ -14,7 +14,7 @@ namespace Echelon.Data.DataProviders
             var startupTypes = typeof(DocumentStoreProvider).Assembly.GetExportedTypes()
                 .Where(type => startupType.IsAssignableFrom(type)).ToList();
 
-            foreach (var type in startupTypes.Except(new List<Type> { startupType }))
+            foreach (var type in startupTypes.Except(new List<Type> {startupType}))
             {
                 var instance = Activator.CreateInstance(type) as IDbStartup;
                 instance?.ExecuteInternal(documentStore);

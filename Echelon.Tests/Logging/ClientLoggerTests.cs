@@ -5,7 +5,7 @@ namespace Echelon.Tests.Logging
 {
     public class ClientLoggerTests
     {
-        private ClientLogger _clientLogger;
+        private readonly ClientLogger _clientLogger;
 
         public ClientLoggerTests()
         {

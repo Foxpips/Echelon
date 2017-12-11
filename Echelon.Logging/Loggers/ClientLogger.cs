@@ -39,15 +39,17 @@ namespace Echelon.Core.Logging.Loggers
 
         private static void Configure()
         {
-            XmlConfigurator.Configure(new MemoryStream(Encoding.UTF8.GetBytes(ResourceLoader.GetResourceContent(Log4NetFile))));
+            XmlConfigurator.Configure(
+                new MemoryStream(Encoding.UTF8.GetBytes(ResourceLoader.GetResourceContent(Log4NetFile))));
             SetOutputPath();
         }
 
         private static void SetOutputPath()
         {
             var appender = LogManager.GetRepository().GetAppenders().First(x => x is RollingFileAppender);
-            var fileAppender = (FileAppender)appender;
-            fileAppender.File = $"{Path.GetDirectoryName(fileAppender.File)}\\{DateTime.Now.ToString("dd-MM-yyyy")}\\log.txt";
+            var fileAppender = (FileAppender) appender;
+            fileAppender.File =
+                $"{Path.GetDirectoryName(fileAppender.File)}\\{DateTime.Now.ToString("dd-MM-yyyy")}\\log.txt";
 
             fileAppender.ActivateOptions();
         }

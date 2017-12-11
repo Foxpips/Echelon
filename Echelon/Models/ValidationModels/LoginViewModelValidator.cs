@@ -1,5 +1,4 @@
 ﻿using Echelon.Models.ViewModels;
-using Echelon.Resources;
 using FluentValidation;
 
 namespace Echelon.Models.ValidationModels

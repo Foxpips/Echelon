@@ -5,6 +5,7 @@ using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Data.DataProviders.RavenDb;
 using Echelon.Data.Entities.Email;
+using Echelon.Misc.Enums;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Core
@@ -31,7 +32,7 @@ namespace Echelon.Tests.Core
                         {
                             Body = "Body Test",
                             Subject = "Subject Test",
-                            Type = EmailTemplateEnum.ForgottenPassword.ToString()
+                            Type = EmailTemplateEnum.ForgottenPassword
                         }
                     }
             };

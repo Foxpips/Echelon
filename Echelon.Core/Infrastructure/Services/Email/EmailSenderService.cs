@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data;
 using Echelon.Data.Entities.Email;
+using Echelon.Misc.Enums;
 
 namespace Echelon.Core.Infrastructure.Services.Email
 {
@@ -25,7 +26,8 @@ namespace Echelon.Core.Infrastructure.Services.Email
             var fromAddress = new MailAddress(EmailSettings.EmailAccount, senderName);
 
             var emailTemplates = await _dataService.Read<EmailTemplatesEntity>();
-            var emailContent = emailTemplates.Single().Templates.Single(x => x.Type.Equals(emailTemplateEnum.ToString()));
+            var emailContent = emailTemplates.Single()
+                .Templates.Single(x => x.Type.Equals(emailTemplateEnum.ToString()));
 
             _tokenHelper.Replace(tokens, emailContent.Subject);
             _tokenHelper.Replace(tokens, emailContent.Body);

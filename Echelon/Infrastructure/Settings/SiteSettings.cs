@@ -15,6 +15,5 @@ namespace Echelon.Infrastructure.Settings
         public const string GoogleProvider = "Google";
         public const string GoogleProfileUri = "https://www.googleapis.com/oauth2/v2/userinfo?access_token=";
         public const string GoogleAccessToken = "urn:google:accesstoken";
-        public const string Queue = "rabbitmq://localhost/echelon_queue";
     }
 }

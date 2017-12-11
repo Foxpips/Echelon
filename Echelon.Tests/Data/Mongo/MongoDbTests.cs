@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Helpers;
-using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Data;
 using Echelon.Data.DataProviders.MongoDb;
 using Echelon.Data.Entities.Email;
 using Echelon.Data.Entities.Users;
+using Echelon.Misc.Enums;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Data.Mongo
@@ -48,7 +48,7 @@ namespace Echelon.Tests.Data.Mongo
                         {
                             Body = "Body Test",
                             Subject = "Subject Test",
-                            Type = EmailTemplateEnum.ForgottenPassword.ToString()
+                            Type = EmailTemplateEnum.ForgottenPassword
                         }
                     }
             };
@@ -78,7 +78,8 @@ namespace Echelon.Tests.Data.Mongo
         public async Task Update_Add_User_Success()
         {
             await
-                _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; }, "Test@gmail.com");
+                _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; },
+                    "Test@gmail.com");
             var loginEntities = await _dataService.Read<UserEntity>();
             Assert.That(loginEntities.Any(x => x.DisplayName.Equals("updated@gmail.com")));
         }

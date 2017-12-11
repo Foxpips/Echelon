@@ -5,8 +5,8 @@
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="theme-color" content="#2882c2">
     <meta name="msapplication-navbutton-color" content="#2882c2">
     <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
@@ -16,30 +16,30 @@
 </head>
 
 <body class="window-container overflow-auto theme__background">
-    @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
+@Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        @Html.Partial("_Header")
-    }
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_Header")
+}
 
-    @RenderBody()
+@RenderBody()
 
-    <footer class="footer">
-        <div class="container">
-        </div>
-    </footer>
+<footer class="footer">
+    <div class="container">
+    </div>
+</footer>
 
-    @Scripts.Render("~/content/js")
+@Scripts.Render("~/content/js")
 
-    <script>
-        const siteurl = $("#SiteUrl").val();
-        $(function () {
-            SitePage();
-        });
-    </script>
+<script>
+    const siteurl = $("#SiteUrl").val();
+    $(function() {
+        SitePage();
+    });
+</script>
 
-    @RenderSection("scripts", false)
+@RenderSection("scripts", false)
 </body>
 
 </html>

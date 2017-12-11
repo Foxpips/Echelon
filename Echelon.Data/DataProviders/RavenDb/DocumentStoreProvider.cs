@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using Raven.Abstractions.Util;
 using Raven.Client;
 using Raven.Client.Document;
 

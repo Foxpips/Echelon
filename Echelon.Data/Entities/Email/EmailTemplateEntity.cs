@@ -1,8 +1,14 @@
-﻿namespace Echelon.Data.Entities.Email
+﻿using Echelon.Misc.Attributes;
+using Echelon.Misc.Enums;
+
+namespace Echelon.Data.Entities.Email
 {
-    public class EmailTemplateEntity
+    [Name("Emails")]
+    public class EmailTemplateEntity : EntityBase
     {
-        public string Type { get; set; }
+        public override string Id => ((int) Type).ToString();
+
+        public EmailTemplateEnum Type { get; set; }
 
         public string Subject { get; set; }
 

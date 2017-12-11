@@ -20,7 +20,7 @@ namespace Echelon.Core.Infrastructure.Services.Windows
                                 await tc.Initialize();
                                 action?.Invoke(tc);
                             });
-                            s.WhenStopped(async tc => {await tc.Shutdown(); });
+                            s.WhenStopped(async tc => { await tc.Shutdown(); });
                         });
 
                     x.RunAsLocalSystem();
