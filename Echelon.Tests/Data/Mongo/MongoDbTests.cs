@@ -39,18 +39,11 @@ namespace Echelon.Tests.Data.Mongo
 
             await _dataService.Create(userEntity2);
 
-            var emailTemplates = new EmailTemplatesEntity
+            var emailTemplates = new EmailTemplateEntity
             {
-                Templates =
-                    new List<EmailTemplateEntity>
-                    {
-                        new EmailTemplateEntity
-                        {
-                            Body = "Body Test",
-                            Subject = "Subject Test",
-                            Type = EmailTemplateEnum.ForgottenPassword
-                        }
-                    }
+                Body = "Body Test",
+                Subject = "Subject Test",
+                Type = EmailTemplateEnum.ForgottenPassword
             };
 
             await _dataService.Create(emailTemplates);
@@ -104,15 +97,15 @@ namespace Echelon.Tests.Data.Mongo
         [Test]
         public async Task CreateEmail_Templates_Success()
         {
-            var expected = await _dataService.Read<EmailTemplatesEntity>();
-            Assert.AreEqual(expected.SingleOrDefault()?.Templates.First().Body, "Body Test");
+            var expected = await _dataService.Read<EmailTemplateEntity>();
+            Assert.AreEqual(expected.SingleOrDefault()?.Body, "Body Test");
         }
 
         [OneTimeTearDown]
         public async Task TearDown()
         {
             await _dataService.DeleteDocuments<UserEntity>();
-            await _dataService.DeleteDocuments<EmailTemplatesEntity>();
+            await _dataService.DeleteDocuments<EmailTemplateEntity>();
         }
     }
 }

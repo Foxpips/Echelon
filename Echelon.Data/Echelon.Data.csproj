@@ -73,7 +73,6 @@
     <Compile Include="Entities\Avatar\AvatarEntity.cs" />
     <Compile Include="Entities\Categories\CategoryEntity.cs" />
     <Compile Include="Entities\Email\EmailTemplateEntity.cs" />
-    <Compile Include="Entities\Email\EmailTemplatesEntity.cs" />
     <Compile Include="Entities\Users\TempUserEntity.cs" />
     <Compile Include="Entities\Users\UserEntity.cs" />
     <Compile Include="Entities\EntityBase.cs" />

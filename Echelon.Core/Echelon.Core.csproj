@@ -149,9 +149,7 @@
     <Compile Include="Infrastructure\AutoFac\Modules\MvcModule.cs" />
     <Compile Include="Infrastructure\AutoFac\Modules\ServiceModule.cs" />
     <Compile Include="Infrastructure\MassTransit\Commands\Logging\LogInfoCommand.cs" />
-    <Compile Include="Infrastructure\MassTransit\Commands\Email\SendSignupEmailCommand.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\LogInfoConsumer.cs" />
-    <Compile Include="Infrastructure\MassTransit\Consumers\SendSignupEmailConsumer.cs" />
     <Compile Include="Infrastructure\Services\Rest\RestService.cs" />
     <Compile Include="Infrastructure\Services\Category\CategoryService.cs" />
     <Compile Include="Infrastructure\Services\Category\ICategoryService.cs" />

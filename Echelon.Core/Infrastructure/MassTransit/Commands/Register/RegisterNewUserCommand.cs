@@ -7,5 +7,7 @@ namespace Echelon.Core.Infrastructure.MassTransit.Commands.Register
         public string RegisterUrl { get; set; }
 
         public string Email { get; set; }
+
+        public string UserName { get; set; }
     }
 }

@@ -5,7 +5,6 @@ namespace Echelon.Core.Infrastructure.Services.Email
 {
     public interface IEmailSenderService : IService
     {
-        Task Send(string recipientEmail, string recipientName, string senderName,
-            EmailTemplateEnum emailTemplateEnum, object tokens);
+        Task Send(string recipientEmail, EmailTemplateEnum emailTemplateEnum, object tokens);
     }
 }

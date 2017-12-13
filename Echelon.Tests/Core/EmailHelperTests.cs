@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.Services.Email;
 using Echelon.Core.Infrastructure.Services.Email.Components;
@@ -23,28 +23,32 @@ namespace Echelon.Tests.Core
 
             _emailSenderService = new EmailSenderService(new RavenDataService(new ClientLogger()), _emailTokenHelper);
 
-            var emailTemplates = new EmailTemplatesEntity
-            {
-                Templates =
-                    new List<EmailTemplateEntity>
-                    {
-                        new EmailTemplateEntity
-                        {
-                            Body = "Body Test",
-                            Subject = "Subject Test",
-                            Type = EmailTemplateEnum.ForgottenPassword
-                        }
-                    }
-            };
+            var emailTemplates =
+                new EmailTemplateEntity
+                {
+                    Body = "Body Test",
+                    Subject = "Subject Test",
+                    Type = EmailTemplateEnum.ForgottenPassword
+                };
 
             await _dataService.Create(emailTemplates);
+
+            var emailTemplates2 =
+                new EmailTemplateEntity
+                {
+                    Body = "Account Body Test",
+                    Subject = "Account Subject Test",
+                    Type = EmailTemplateEnum.AccountConfirmation
+                };
+
+            await _dataService.Create(emailTemplates2);
         }
 
         [Test]
         public async Task Email_Send_Success()
         {
             await
-                _emailSenderService.Send("simonpmarkey@gmail.com", "Simon", "Test", EmailTemplateEnum.ForgottenPassword,
+                _emailSenderService.Send("simonpmarkey@gmail.com", EmailTemplateEnum.ForgottenPassword,
                     new {name = "Test"});
         }
 
@@ -61,10 +65,21 @@ namespace Echelon.Tests.Core
             Assert.True("Hi Test how are you? your orderref is 1890".Equals(replace));
         }
 
+        [Test]
+        public async Task EmailHelper_GetTemaplte_Success()
+        {
+            var emailTemplate =
+                await
+                    _dataService.Single<EmailTemplateEntity>(
+                        entities => entities.Where(userEntity => userEntity.Type == EmailTemplateEnum.ForgottenPassword));
+
+            Assert.NotNull(emailTemplate);
+        }
+
         [OneTimeTearDown]
         public async Task TearDown()
         {
-            await _dataService.DeleteDocuments<EmailTemplatesEntity>();
+            await _dataService.DeleteDocuments<EmailTemplateEntity>();
         }
     }
 }

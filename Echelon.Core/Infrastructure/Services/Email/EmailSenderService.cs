@@ -20,26 +20,18 @@ namespace Echelon.Core.Infrastructure.Services.Email
             _dataService = dataService;
         }
 
-        public async Task Send(string recipientEmail, string recipientName, string senderName,
-            EmailTemplateEnum emailTemplateEnum, object tokens)
+        public async Task Send(string recipientEmail, EmailTemplateEnum emailTemplateEnum, object tokens)
         {
-            var fromAddress = new MailAddress(EmailSettings.EmailAccount, senderName);
-
-            var emailTemplates = await _dataService.Read<EmailTemplatesEntity>();
-            var emailContent = emailTemplates.Single()
-                .Templates.Single(x => x.Type.Equals(emailTemplateEnum.ToString()));
-
-            _tokenHelper.Replace(tokens, emailContent.Subject);
-            _tokenHelper.Replace(tokens, emailContent.Body);
-
-            SendMessage(recipientEmail, recipientName, _tokenHelper.Replace(tokens, emailContent.Subject),
-                _tokenHelper.Replace(tokens, emailContent.Body), fromAddress);
+            var fromAddress = new MailAddress(EmailSettings.EmailAccount);
+            var emailTemplate = await _dataService.Single<EmailTemplateEntity>(entities => entities.Where(userEntity => userEntity.Type == emailTemplateEnum));
+            
+            SendMessage(recipientEmail, _tokenHelper.Replace(tokens, emailTemplate.Subject), _tokenHelper.Replace(tokens, emailTemplate.Body), fromAddress);
         }
 
-        private static void SendMessage(string recipientEmail, string recipientName, string subject, string body,
+        private static void SendMessage(string recipientEmail, string subject, string body,
             MailAddress fromAddress)
         {
-            using (var message = new MailMessage(fromAddress, new MailAddress(recipientEmail, recipientName))
+            using (var message = new MailMessage(fromAddress, new MailAddress(recipientEmail))
             {
                 Subject = subject,
                 Body = body

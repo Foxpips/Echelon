@@ -45,7 +45,8 @@ namespace Echelon.Mediators
                     await _bus.SendMessage(new RegisterNewUserCommand
                     {
                         RegisterUrl = $"{registerUrl}/{id}",
-                        Email = tempUserEntity.Email
+                        Email = tempUserEntity.Email,
+                        UserName = tempUserEntity.DisplayName
                     }, QueueSettings.General);
                 }
                 catch (UserAlreadyExistsException ex)

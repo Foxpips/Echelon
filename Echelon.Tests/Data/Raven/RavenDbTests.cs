@@ -39,25 +39,18 @@ namespace Echelon.Tests.Data.Raven
                 Password = HashHelper.CreateHash("password1")
             };
 
-            var avatarEntity = new AvatarEntity {AvatarUrl = "someurl/pic.jpg"};
+            var avatarEntity = new AvatarEntity { AvatarUrl = "someurl/pic.jpg" };
             await _dataService.Create(avatarEntity);
 
             userEntity2.AvatarId = avatarEntity.Id;
             await _dataService.Create(userEntity2);
 
-            var emailTemplates = new EmailTemplatesEntity
-            {
-                Templates =
-                    new List<EmailTemplateEntity>
-                    {
-                        new EmailTemplateEntity
+            var emailTemplates = new EmailTemplateEntity
                         {
                             Body = "Body Test",
                             Subject = "Subject Test",
                             Type = EmailTemplateEnum.ForgottenPassword
-                        }
-                    }
-            };
+                        };
 
             await _dataService.Create(emailTemplates);
         }
@@ -114,9 +107,9 @@ namespace Echelon.Tests.Data.Raven
         public async Task CreateEmail_Templates_Success()
         {
             await Task.Delay(TimeSpan.FromMilliseconds(200));
-            var expected = await _dataService.Read<EmailTemplatesEntity>();
+            var expected = await _dataService.Read<EmailTemplateEntity>();
             Console.WriteLine(expected.Count);
-            Assert.AreEqual(expected.SingleOrDefault()?.Templates.First().Body, "Body Test");
+            Assert.AreEqual(expected.SingleOrDefault()?.Body, "Body Test");
         }
 
         [Test]
@@ -130,7 +123,7 @@ namespace Echelon.Tests.Data.Raven
         public async Task TearDown()
         {
             await _dataService.DeleteDocuments<UserEntity>();
-            await _dataService.DeleteDocuments<EmailTemplatesEntity>();
+            await _dataService.DeleteDocuments<EmailTemplateEntity>();
             await _dataService.DeleteDocuments<AvatarEntity>();
         }
     }
