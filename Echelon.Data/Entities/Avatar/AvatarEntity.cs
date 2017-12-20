@@ -1,10 +1,12 @@
-﻿namespace Echelon.Data.Entities.Avatar
+﻿using Echelon.Misc.Enums;
+
+namespace Echelon.Data.Entities.Avatar
 {
     public class AvatarEntity : EntityBase
     {
         public string ImageName => "Avatar";
 
-        public string FileType { get; set; }
+        public FileType FileType { get; set; }
 
         public string AvatarUrl { get; set; }
     }

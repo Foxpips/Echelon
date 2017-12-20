@@ -17,39 +17,18 @@ namespace Echelon.Tests.Core
         private RavenDataService _dataService;
 
         [SetUp]
-        public async Task SetUp()
+        public void SetUp()
         {
             _dataService = new RavenDataService(new ClientLogger());
-
             _emailSenderService = new EmailSenderService(new RavenDataService(new ClientLogger()), _emailTokenHelper);
-
-            var emailTemplates =
-                new EmailTemplateEntity
-                {
-                    Body = "Body Test",
-                    Subject = "Subject Test",
-                    Type = EmailTemplateEnum.ForgottenPassword
-                };
-
-            await _dataService.Create(emailTemplates);
-
-            var emailTemplates2 =
-                new EmailTemplateEntity
-                {
-                    Body = "Account Body Test",
-                    Subject = "Account Subject Test",
-                    Type = EmailTemplateEnum.AccountConfirmation
-                };
-
-            await _dataService.Create(emailTemplates2);
         }
 
         [Test]
         public async Task Email_Send_Success()
         {
             await
-                _emailSenderService.Send("simonpmarkey@gmail.com", EmailTemplateEnum.ForgottenPassword,
-                    new {name = "Test"});
+                _emailSenderService.Send("simonpmarkey@gmail.com", EmailTemplateEnum.AccountConfirmation,
+                    new { username = "Foxpips", body = "Why hello there world!" });
         }
 
         [Test]
@@ -74,12 +53,6 @@ namespace Echelon.Tests.Core
                         entities => entities.Where(userEntity => userEntity.Type == EmailTemplateEnum.ForgottenPassword));
 
             Assert.NotNull(emailTemplate);
-        }
-
-        [OneTimeTearDown]
-        public async Task TearDown()
-        {
-            await _dataService.DeleteDocuments<EmailTemplateEntity>();
         }
     }
 }

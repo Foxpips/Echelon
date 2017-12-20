@@ -50,9 +50,8 @@ namespace Echelon.Mediators
         {
             if (file != null && file.ContentLength > 0 && file.FileName != null)
             {
-                await
-                    _bus.SendMessage(new LogInfoCommand {Content = $"Uploading : {file.FileName}"},
-                        QueueSettings.General);
+                await _bus.SendMessage(new LogInfoCommand {Content = $"Uploading : {file.FileName}"}, QueueSettings.General);
+
                 if (file.ContentLength > 0)
                 {
                     var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);
@@ -60,24 +59,28 @@ namespace Echelon.Mediators
 
                     if (hasExistingAvatar)
                     {
-                        await SaveNewAvatar(file, email, Path.GetFileName(user.AvatarUrl));
+                        file.SaveAs(Path.GetFileName(user.AvatarUrl));
                     }
                     else
                     {
-                        var avatarFileName = $"{Guid.NewGuid()}-{DateTime.Now.Millisecond}.png";
-                        var avatarUrl = SiteSettings.AvatarImagesPath + avatarFileName;
-
-                        var userEntity = await SaveNewAvatar(file, email, Path.Combine(server, avatarFileName));
-                        await _dataService.Update<AvatarEntity>(x => x.AvatarUrl = avatarUrl, userEntity.AvatarId);
+                        await CreateNewAvatar(file, email, server);
                     }
                 }
             }
         }
 
-        private async Task<UserEntity> SaveNewAvatar(HttpPostedFileBase file, string email, string avatarFilePath)
+        private async Task CreateNewAvatar(HttpPostedFileBase file, string email, string server)
         {
-            file.SaveAs(avatarFilePath);
-            return await _dataService.Single<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
+            var avatarFileName = $"{Guid.NewGuid()}-{DateTime.Now.Millisecond}.png";
+            var avatarUrl = SiteSettings.AvatarImagesPath + avatarFileName;
+
+            file.SaveAs(Path.Combine(server, avatarFileName));
+
+            var userEntity = await _dataService.Single<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
+            var avatarEntity = new AvatarEntity {AvatarUrl = avatarUrl};
+
+            await _dataService.Create(avatarEntity);
+            await _dataService.Update<UserEntity>(currentUser => currentUser.AvatarId = avatarEntity.Id, userEntity.Id);
         }
     }
 }

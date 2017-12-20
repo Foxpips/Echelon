@@ -22,37 +22,6 @@ namespace Echelon.Tests.Data.Raven
         public async Task SetUp()
         {
             _dataService = new RavenDataService(new ClientLogger());
-
-            var userEntity = new UserEntity
-            {
-                Email = "Test@gmail.com",
-                DisplayName = "Test",
-                Password = HashHelper.CreateHash("password1")
-            };
-
-            await _dataService.Create(userEntity);
-
-            var userEntity2 = new UserEntity
-            {
-                Email = "simonpmarkey@gmail.com",
-                DisplayName = "Test2",
-                Password = HashHelper.CreateHash("password1")
-            };
-
-            var avatarEntity = new AvatarEntity { AvatarUrl = "someurl/pic.jpg" };
-            await _dataService.Create(avatarEntity);
-
-            userEntity2.AvatarId = avatarEntity.Id;
-            await _dataService.Create(userEntity2);
-
-            var emailTemplates = new EmailTemplateEntity
-                        {
-                            Body = "Body Test",
-                            Subject = "Subject Test",
-                            Type = EmailTemplateEnum.ForgottenPassword
-                        };
-
-            await _dataService.Create(emailTemplates);
         }
 
         [Test]

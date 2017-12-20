@@ -5,13 +5,21 @@
 }
 
 <section id="wrapper" class="profile-container">
-    <div>
-        <h2>Thank you for signing up! To complete the process please click on the link in the confirmation email we sent you!</h2>
+    <div style="height: 100px; background: dodgerblue;"></div>
+    <div style="margin: 20px">
+        <div>
+            <h2>Thank you for signing up!</h2>
+            <div>To complete the process please click on the link in the confirmation email we sent you!</div>
+        </div>
+
+        <div>
+            <a href="@Url.Action("Index", "Login")"> Home </a>
+        </div>
     </div>
 </section>
 @section scripts {
     <script>
-        $(function() {
+        $(function () {
         });
     </script>
 }

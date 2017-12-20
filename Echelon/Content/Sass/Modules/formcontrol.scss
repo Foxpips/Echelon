@@ -6,10 +6,12 @@
 .form__container {
     @include placeholder-color($color-text);
 
-    @include Middle-more {
-        padding: 25px;
-        border-radius: 25px;
-        border: 4px solid $color-primary;
+    &--border {
+        @include Middle-more {
+            padding: 25px;
+            border-radius: 25px;
+            border: 4px solid $color-primary;
+        }
     }
 
     .form-group {

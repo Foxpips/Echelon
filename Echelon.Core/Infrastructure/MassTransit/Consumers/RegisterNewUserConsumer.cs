@@ -17,9 +17,12 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
 
         public async Task Consume(ConsumeContext<RegisterNewUserCommand> context)
         {
-            await
-                _emailSenderService.Send(context.Message.Email,
-                    EmailTemplateEnum.AccountConfirmation, new {name = "Test"});
+            await _emailSenderService.Send(context.Message.Email, EmailTemplateEnum.AccountConfirmation,
+                new
+                {
+                    username = context.Message.UserName,
+                    registerlink = context.Message.RegisterUrl
+                });
         }
     }
 }
