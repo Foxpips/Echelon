@@ -19,7 +19,7 @@
             </div>
             <div id="messages" class="messages__console"></div>
         </div>
-        <div class="col-md-2 col-sm-2 users" style="height: calc(100vh - 160px); overflow: auto; padding: 0;">
+        <div class="col-md-2 col-sm-2 users" style="">
             <div id="users" class="sidebar">
                 People in chat
             </div>
@@ -30,12 +30,13 @@
             <div id="input-container">
                 <textarea id="chat-input" class="chat__input" rows="1" cols="3" data-target="@Url.Action("Index", "Token")" placeholder="Type a message" tabindex="1"></textarea>
                 <i id="sendButton" class="basic-icon animated-icon animated-icon--send fa fa-envelope chat__send-message"></i>
-                <div class="main-wrapper">
-                    @Html.Partial("Screensaver/_Screensaver")
-                </div>
             </div>
         </div>
     </div>
+</section>
+
+<section>
+    @Html.Partial("Screensaver/_Screensaver")
 </section>
 
 @section scripts {
@@ -48,7 +49,7 @@
             new google.translate.TranslateElement({ pageLanguage: '' }, 'google-translate-element');
         }
 
-        $(function() {
+        $(function () {
             ChatPage();
         });
     </script>

@@ -5,8 +5,8 @@
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2882c2">
     <meta name="msapplication-navbutton-color" content="#2882c2">
     <meta name="apple-mobile-web-app-status-bar-style" content="#2882c2">
@@ -16,30 +16,47 @@
 </head>
 
 <body class="window-container overflow-auto theme__background">
-@Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
+    @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 
-@if (User.Identity.IsAuthenticated)
-{
-    @Html.Partial("_Header")
-}
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("_Header")
+    }
+    else
+    {
+        <nav class="navbar navbar-default">
+            <div class="container-fluid"></div>
+        </nav>
+    }
 
-@RenderBody()
+    @RenderBody()
 
-<footer class="footer">
-    <div class="container">
-    </div>
-</footer>
+    <footer class="footer">
+        <div class="footer__container">
+            <nav>
+                <a href="/contact/">Contact</a>
+                <a href="/about/">About</a>
+                <a href="/archives/">Archives</a>
+                <a href="/advertising/">Advertise</a>
+                <a href="/jobs/">Jobs</a>
+                <a href="/license/">License</a>
+                <a href="/subscription-options/">Subscribe</a>
+                <a href="/feed/">RSS</a>
+                <a href="/guest-posting/">Guest Posting</a>
+            </nav>
+        </div>
+    </footer>
 
-@Scripts.Render("~/content/js")
+    @Scripts.Render("~/content/js")
 
-<script>
-    const siteurl = $("#SiteUrl").val();
-    $(function() {
-        SitePage();
-    });
-</script>
+    <script>
+        const siteurl = $("#SiteUrl").val();
+        $(function () {
+            SitePage();
+        });
+    </script>
 
-@RenderSection("scripts", false)
+    @RenderSection("scripts", false)
 </body>
 
 </html>
