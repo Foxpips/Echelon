@@ -8,7 +8,7 @@ namespace Echelon.Controllers
 {
     [Authorize]
     [RequireHttps]
-    public class ProfileController : Controller
+    public class ProfileController : BaseController
     {
         private readonly ProfileMediator _profileMediator;
         private string Email => Request.GetOwinContext().Authentication.User.Identity.Name;

@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='clean' ProjectOpened='watch' />
+/// <binding BeforeBuild='clean' AfterBuild='build' ProjectOpened='watch' />
 /*jshint esversion: 6 */
 var gulp = require("gulp"),
     babel = require('gulp-babel'),

@@ -1,7 +1,7 @@
 ﻿@using System.Threading
 <!DOCTYPE html>
 
-<html id="htmlContainer" class="overflow-hidden preload">
+<html id="htmlContainer" class="preload">
 
 <head lang="@Thread.CurrentThread.CurrentCulture">
     <title>Echelon</title>
@@ -18,17 +18,7 @@
 <body class="window-container overflow-auto theme__background">
     @Html.Hidden("SiteUrl", $"{Request.Url?.Scheme}://{Request.Url?.Authority}{Url.Content("~")}")
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        @Html.Partial("_Header")
-    }
-    else
-    {
-        <nav class="navbar navbar-default">
-            <div class="container-fluid"></div>
-        </nav>
-    }
-
+    @Html.Partial("_Header")
     @RenderBody()
 
     <footer class="footer">

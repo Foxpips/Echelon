@@ -8,7 +8,13 @@ namespace Echelon.Controllers
     {
         public ActionResult Index(Guid? errorId)
         {
-            ViewBag.ErrorMessage = $"Oops something went wrong! ErrorId: {errorId}";
+            ViewBag.ErrorMessage = $"Oops something went wrong! <br/> ErrorId: {errorId}";
+            return View();
+        }
+
+        public ActionResult NotFound()
+        {
+            ViewBag.ErrorMessage = "Oops that page does not exist!";
             return View();
         }
 

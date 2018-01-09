@@ -1,39 +1,48 @@
 ﻿@using Echelon.Resources
 @{
-    var user = Request.GetOwinContext().Authentication.User.Identity.Name;
+    var user = Request.GetOwinContext().Authentication.User.Identity;
 }
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        @if (string.IsNullOrEmpty(user))
-        {
-            <span>@Login.NotLoggedIn</span>
-        }
+@if (user.IsAuthenticated)
+{
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            @if (string.IsNullOrEmpty(user.Name))
+            {
+                <span>@Login.NotLoggedIn</span>
+            }
 
-        else
-        {
-            <span class="dropdown-toggle profile float-right margin-top-5" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span><i id="menuGlobe" class="material-icons fa fa-globe"></i></span>
-            </span>
-        }
-        <div class="navbar-header">
-            <img id="headerAvatar" data-target="@user" class="avatar avatar--user avatar--menu margin-right-10" src="@ViewBag.AvatarImage" alt="avatar"/>
-            <div class="google-translate__container">
-                <div id="google-translate-element"></div>
+            else
+            {
+                <span class="dropdown-toggle profile float-right margin-top-5" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span><i id="menuHome" class="material-icons fa fa-home"></i></span>
+                </span>
+            }
+            <div class="navbar-header">
+                <img id="headerAvatar" data-target="@user.Name" class="avatar avatar--user avatar--menu margin-right-10" src="@ViewBag.AvatarImage" alt="avatar" />
+                <div class="google-translate__container">
+                    <div id="google-translate-element"></div>
+                </div>
             </div>
         </div>
+    </nav>
+
+    <div id="menuOverlayLeft" class="sidenav__overlay sidenav__overlay--right"></div>
+    <div id="leftSideNav" class="sidenav sidenav--left">
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
+        @Html.ActionLink("Home", "Index", "Chat", null, new { @class = "sidenav--slides" })
     </div>
-</nav>
 
-<div id="menuOverlayLeft" class="sidenav__overlay sidenav__overlay--right"></div>
-<div id="leftSideNav" class="sidenav sidenav--left">
-    <a href="javascript:void(0)" class="closebtn">&times;</a>
-    @Html.ActionLink("Home", "Index", "Chat", null, new {@class = "sidenav--slides"})
-</div>
-
-<div id="rightSideNav" class="sidenav sidenav--right">
-    <a href="javascript:void(0)" class="closebtn">&times;</a>
-    @Html.ActionLink("Profile", "Index", "Profile", null, new {@class = "sidenav--slides"})
-    @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new {@class = "sidenav--slides"})
-</div>
-<div id="menuOverlayRight" class="sidenav__overlay sidenav__overlay--left"></div>
+    <div id="rightSideNav" class="sidenav sidenav--right">
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
+        @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "sidenav--slides" })
+        @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new { @class = "sidenav--slides" })
+    </div>
+    <div id="menuOverlayRight" class="sidenav__overlay sidenav__overlay--left"></div>
+}
+else
+{
+    <nav class="navbar navbar-default">
+        <div class="container-fluid"></div>
+    </nav>
+}

@@ -1,7 +1,7 @@
 ﻿/*jshint esversion: 6 */
 
 var SitePage = function () {
-    var $menubar = $("#menuGlobe");
+    var $menubar = $("#menuHome");
     var $rightNav = $("#rightSideNav");
     var $leftNav = $("#leftSideNav");
     var $closeNav = $(".closebtn");

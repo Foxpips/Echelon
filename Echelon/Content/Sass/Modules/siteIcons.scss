@@ -62,6 +62,7 @@ i.animated-icon:nth-of-type(1) {
 
 i.animated-icon:nth-of-type(1):hover {
     color: $color-primary;
+    border: solid 1px $color-primary;
 }
 
 i.animated-icon:nth-of-type(1):after {

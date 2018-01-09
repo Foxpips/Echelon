@@ -15,7 +15,6 @@ namespace Echelon.Models.ViewModels
 
         public string LastName { get; set; }
 
-        [Required]
         public string DisplayName { get; set; }
     }
 }
