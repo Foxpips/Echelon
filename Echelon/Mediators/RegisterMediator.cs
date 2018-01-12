@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Echelon.Core.Infrastructure.Exceptions;
@@ -6,6 +7,8 @@ using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Register;
 using Echelon.Core.Infrastructure.MassTransit.Extensions;
 using Echelon.Core.Infrastructure.Services.Login;
+using Echelon.Core.Logging.Loggers;
+using Echelon.Data;
 using Echelon.Data.Entities.Users;
 using Echelon.Infrastructure.Settings;
 using Echelon.Models.ViewModels;
@@ -18,12 +21,33 @@ namespace Echelon.Mediators
         private readonly IBus _bus;
         private readonly ILoginService _loginService;
         private readonly IMapper _mapper;
+        private readonly IDataService _dataService;
+        private readonly IClientLogger _logger;
 
-        public RegisterMediator(IBus bus, ILoginService loginService, IMapper mapper)
+        public RegisterMediator(IBus bus, ILoginService loginService, IMapper mapper, IDataService dataService,
+            IClientLogger logger)
         {
+            _logger = logger;
+            _dataService = dataService;
             _bus = bus;
             _loginService = loginService;
             _mapper = mapper;
+        }
+
+        public async Task<bool> CompleteRegistration(string tempUserId)
+        {
+            try
+            {
+                var tempUserEntity = await _dataService.Load<TempUserEntity>(tempUserId);
+                await _dataService.Create(_mapper.Map<UserEntity>(tempUserEntity));
+                await _dataService.Delete<TempUserEntity>(tempUserId);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error completing customer {tempUserId} registration" + ex.Message);
+            }
+
+            return true;
         }
 
         public async Task<bool> Register(RegisterViewModel registerViewModel, string registerUrl)

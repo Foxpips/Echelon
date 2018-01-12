@@ -6,7 +6,7 @@ namespace Echelon.Controllers
 {
     [Authorize]
     [RequireHttps]
-    public class TokenController : Controller
+    public class TokenController : BaseController
     {
         private readonly TokenMediator _tokenMediator;
 

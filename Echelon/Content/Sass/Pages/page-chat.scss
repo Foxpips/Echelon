@@ -8,7 +8,7 @@
     @extend .text-align-center;
     @extend .height-100-percent;
     @extend .font-weight-bold;
-    color: $color-gray-dark;
+    color: $color-shadow-dark;
     right: 1px;
     border-left: 1px solid $color-border;
 
@@ -66,7 +66,7 @@
         height: 52px;
         border-top: 1px solid $color-border !important;
         font-size: 16px;
-        color: $color-gray-dark;
+        color: $color-shadow-dark;
         text-indent: 10px;
 
         @include Middle-more {

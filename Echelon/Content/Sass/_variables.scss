@@ -1,36 +1,36 @@
 ﻿/*--MAIN COLORS--*/
-$color-primary: #268dbb; //deepemerald
-$color-secondary: #7a709e; //deep purple
-$color-tertiary: #de8b5c; //deep purple
-$color-control: #77d1f9; //darkblue #87ceeb
-$color-hover: #5ab5de; //shallowemerald
+$color-white: #ffffff;
+$color-black: #000000;
+
+/*--MAIN COLORS OVERWRITEABLE--*/
+$color-primary: #268dbb; 
+$color-secondary: #7a709e; 
+$color-tertiary: #de8b5c;
+$color-control: #77d1f9; 
+$color-hover: #5ab5de; 
 $color-sidenavHover: #3d384f;
 $color-timestamp: #556b2f;
 
 $color-border: #cad1d4;
-$color-gray: #9b9b9b;
-$color-gray-light: #f1f3f7;
-$color-gray-medium: #dedede;
-$color-gray-dark: #909090;
-$color-gray-darkest: #444444;
+$color-box-bottom: #dedede;
 
-$color-white: #ffffff;
-$color-black: #000000;
-$color-obsidian: #090909;
-$color-box-bottom: #909090;
-
-$color-text: #ffffff;
+$color-text: #000000;
+$color-background: #ffffff;
 $color-text-alternate: #000000;
 $color-input: #dedede;
-
-$color-red-dark: #C12C32;
-$color-green: #556b2f;
 
 $color-btn-hover: #0094ff;
 $color-btn-border-hover: #5a95f5;
 $color-btn-border-bottom: #4285f4;
 $color-username-me: #39b1e6;
 $color-username-other: #946def;
+$color-identifier: #C12C32;
+
+$color-shadow: #9b9b9b;
+$color-shadow-light: #f1f3f7;
+$color-shadow-medium: #dedede;
+$color-shadow-dark: #909090;
+$color-shadow-darkest: #444444;
 
 /*--FONTS--*/
 $font-family-base: montserrat, arial;

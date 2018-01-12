@@ -4,7 +4,7 @@ namespace Echelon.Controllers
 {
     [Authorize]
     [RequireHttps]
-    public class ChatController : Controller
+    public class ChatController : BaseController
     {
         public ActionResult Index()
         {

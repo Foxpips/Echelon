@@ -4,7 +4,7 @@ using System.Web.Mvc;
 namespace Echelon.Controllers
 {
     //[RequireHttps]
-    public class ErrorController : Controller
+    public class ErrorController : BaseController
     {
         public ActionResult Index(Guid? errorId)
         {

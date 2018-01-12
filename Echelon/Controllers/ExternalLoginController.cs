@@ -5,7 +5,7 @@ using Echelon.Mediators;
 namespace Echelon.Controllers
 {
     [RequireHttps]
-    public class ExternalLoginController : Controller
+    public class ExternalLoginController : BaseController
     {
         private readonly ExternalLoginMediator _externalLoginMediator;
 

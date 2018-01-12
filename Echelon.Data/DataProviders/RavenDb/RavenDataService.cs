@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Data.Entities;
@@ -35,6 +36,7 @@ namespace Echelon.Data.DataProviders.RavenDb
             catch (Exception e)
             {
                 _clientLogger.Error($"Accessing Ravendb query error:{e.Message}");
+                throw;
             }
         }
 
@@ -52,9 +54,8 @@ namespace Echelon.Data.DataProviders.RavenDb
             catch (Exception e)
             {
                 _clientLogger.Error($"Accessing Ravendb query error:{e.Message}");
+                throw;
             }
-
-            return default(TReturnType);
         }
 
         public async Task Create<TType>(TType entity) where TType : EntityBase
@@ -65,6 +66,11 @@ namespace Echelon.Data.DataProviders.RavenDb
         public async Task<IList<TType>> Read<TType>()
         {
             return await OpenAndReturn(async session => await session.Query<TType>().ToListAsync());
+        }
+
+        public async Task<TType> Load<TType>(string id)
+        {
+            return await OpenAndReturn(async session => await session.LoadAsync<TType>(id));
         }
 
         public async Task<IList<TType>> Query<TType>(Func<IQueryable<TType>, IQueryable<TType>> action)

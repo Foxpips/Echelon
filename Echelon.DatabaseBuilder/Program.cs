@@ -6,7 +6,6 @@ using Echelon.Data.DataProviders.RavenDb;
 using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Users;
 using Echelon.DatabaseBuilder.EmailTemplates;
-using Echelon.Misc.Attributes;
 using Echelon.Misc.Enums;
 
 namespace Echelon.DatabaseBuilder

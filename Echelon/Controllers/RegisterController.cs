@@ -29,9 +29,14 @@ namespace Echelon.Controllers
         }
 
         [HttpGet]
-        public ActionResult RegistrationSuccess(string id)
+        public async Task<ActionResult> RegistrationSuccess(string id)
         {
-            return View();
+            if (await _registerMediator.CompleteRegistration(id))
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Error");
         }
 
         [HttpPost]
@@ -40,7 +45,7 @@ namespace Echelon.Controllers
         public async Task<ActionResult> Index(RegisterViewModel registerViewModel)
         {
             if (ModelState.IsValid &&
-                await _registerMediator.Register(registerViewModel, Url.Action("RegistrationSuccess")))
+                await _registerMediator.Register(registerViewModel, Url.Action("RegistrationSuccess", "Register", null, Request.Url?.Scheme)))
             {
                 return RedirectToAction("ConfirmRegistration");
             }

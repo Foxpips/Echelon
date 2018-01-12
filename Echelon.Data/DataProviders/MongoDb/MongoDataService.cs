@@ -37,6 +37,11 @@ namespace Echelon.Data.DataProviders.MongoDb
             return all;
         }
 
+        public Task<TType> Load<TType>(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task Delete<TType>(string id) where TType : EntityBase
         {
             await Open<TType>(async collection =>
