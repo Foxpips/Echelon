@@ -77,22 +77,23 @@ namespace Echelon.Core.Infrastructure.Services.Login
 
         public async Task CreateUser(UserEntity userEntity, string avatarUrl)
         {
-            var currentUsers = await _dataservice.Query<UserEntity>(x => x.Where(y => y.Email.Equals(userEntity.Email)));
-            if (currentUsers.Any())
-            {
-                throw new UserAlreadyExistsException("Sorry this email is already registered!");
-            }
-
-            var avatarEntity = new AvatarEntity {AvatarUrl = avatarUrl};
+            var avatarEntity = new AvatarEntity { AvatarUrl = avatarUrl };
             userEntity.AvatarId = avatarEntity.Id;
 
             await _dataservice.Create(userEntity);
             await _dataservice.Create(avatarEntity);
+
         }
 
         public async Task CreateTempUser(TempUserEntity tempUserEntity)
         {
             await _dataservice.Create(tempUserEntity);
+        }
+
+        public async Task<bool> IsRegistered(string email)
+        {
+            var currentUsers = await _dataservice.Query<UserEntity>(x => x.Where(y => y.Email.Equals(email)));
+            return currentUsers.Any();
         }
     }
 }

@@ -61,6 +61,15 @@ namespace Echelon.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry this account already exists!.
+        /// </summary>
+        public static string AccountAlreadyExists {
+            get {
+                return ResourceManager.GetString("AccountAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry there was a problem creating your account, please try again later.
         /// </summary>
         public static string AccountCreationError {

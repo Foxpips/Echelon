@@ -24,8 +24,6 @@ namespace Echelon.Core.Infrastructure.AutoFac.Modules
                 sbc.ReceiveEndpoint(host, AppSettings["QueueName"], ep =>
                 {
                     ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
-//                    var lifetimeScope = builder.Build();
-//                    ep.Consumer<RegisterNewUserConsumer>(lifetimeScope);
                 });
             }))
                 .As<IBusControl>()

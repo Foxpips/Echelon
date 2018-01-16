@@ -10,9 +10,9 @@ namespace Echelon.Misc.Attributes
 {
     public class FileTypesAttribute : ValidationAttribute
     {
-        private readonly List<FileType> _types;
+        private readonly List<FileTypeEnum> _types;
 
-        public FileTypesAttribute(params FileType[] type)
+        public FileTypesAttribute(params FileTypeEnum[] type)
         {
             _types = type.ToList();
         }
@@ -24,11 +24,11 @@ namespace Echelon.Misc.Attributes
                 return true;
             }
 
-            FileType fileExtEnum;
+            FileTypeEnum fileExtEnum;
             var fileExtString = Path.GetExtension(((HttpPostedFileBase) value).FileName)?.Substring(1);
             var hasFileType = Enum.TryParse(fileExtString, true, out fileExtEnum);
 
-            return hasFileType && _types.Contains<FileType>(fileExtEnum);
+            return hasFileType && _types.Contains<FileTypeEnum>(fileExtEnum);
         }
 
         public override string FormatErrorMessage(string name)

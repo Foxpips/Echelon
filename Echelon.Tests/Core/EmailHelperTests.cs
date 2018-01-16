@@ -28,7 +28,7 @@ namespace Echelon.Tests.Core
         {
             await
                 _emailSenderService.Send("simonpmarkey@gmail.com", EmailTemplateEnum.AccountConfirmation,
-                    new { username = "Foxpips", body = "Why hello there world!" });
+                    new {username = "Foxpips", body = "Why hello there world!"});
         }
 
         [Test]
@@ -48,9 +48,8 @@ namespace Echelon.Tests.Core
         public async Task EmailHelper_GetTemaplte_Success()
         {
             var emailTemplate =
-                await
-                    _dataService.Single<EmailTemplateEntity>(
-                        entities => entities.Where(userEntity => userEntity.Type == EmailTemplateEnum.ForgottenPassword));
+                await _dataService.Single<EmailTemplateEntity>(entities =>
+                    entities.Where(userEntity => userEntity.Type == EmailTemplateEnum.ForgottenPassword));
 
             Assert.NotNull(emailTemplate);
         }

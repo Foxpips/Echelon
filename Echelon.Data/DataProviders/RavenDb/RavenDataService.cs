@@ -60,7 +60,7 @@ namespace Echelon.Data.DataProviders.RavenDb
 
         public async Task Create<TType>(TType entity) where TType : EntityBase
         {
-            await Open(session => session.StoreAsync(entity, entity.Id));
+            await Open(async session => { await session.StoreAsync(entity, entity.Id); });
         }
 
         public async Task<IList<TType>> Read<TType>()

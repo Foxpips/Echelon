@@ -6,7 +6,7 @@ namespace Echelon.Data.Entities.Avatar
     {
         public string ImageName => "Avatar";
 
-        public FileType FileType { get; set; }
+        public FileTypeEnum FileType { get; set; }
 
         public string AvatarUrl { get; set; }
     }

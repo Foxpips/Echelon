@@ -56,7 +56,7 @@ namespace Echelon.DatabaseBuilder
                 Password = HashHelper.CreateHash("password1")
             };
 
-            var avatarEntity = new AvatarEntity {AvatarUrl = "someurl/pic.jpg", FileType = FileType.Jpeg };
+            var avatarEntity = new AvatarEntity {AvatarUrl = "someurl/pic.jpg", FileType = FileTypeEnum.Jpeg };
             await _dataService.Create(avatarEntity);
 
             userEntity2.AvatarId = avatarEntity.Id;

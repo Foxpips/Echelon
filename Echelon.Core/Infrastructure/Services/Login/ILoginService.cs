@@ -6,6 +6,7 @@ namespace Echelon.Core.Infrastructure.Services.Login
 {
     public interface ILoginService : IService
     {
+        Task<bool> IsRegistered(string email);
         Task<bool> LogUserIn(UserEntity userEntity, IAuthenticationManager authenticationManager);
         Task<bool> LogUserOut(IAuthenticationManager authenticationManager);
         Task CreateUser(UserEntity userEntity, string avatarUrl);

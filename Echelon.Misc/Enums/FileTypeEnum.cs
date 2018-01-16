@@ -1,6 +1,6 @@
 ﻿namespace Echelon.Misc.Enums
 {
-    public enum FileType
+    public enum FileTypeEnum
     {
         Jpg,
         Jpeg,

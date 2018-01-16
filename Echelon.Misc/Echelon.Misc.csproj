@@ -48,10 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\FileSizeAttribute.cs" />
-    <Compile Include="Enums\FileType.cs" />
+    <Compile Include="Enums\FileTypeEnum.cs" />
     <Compile Include="Attributes\FileTypesAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Enums\EmailTemplateEnum.cs" />
+    <Compile Include="Enums\RegistrationEnum.cs" />
     <Compile Include="Translation\LanguageEnum.cs" />
     <Compile Include="Translation\TranslatedChatModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

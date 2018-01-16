@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\EmailHelperTests.cs" />
+    <Compile Include="Core\FuncTests.cs" />
     <Compile Include="Data\Raven\RavenDbTests.cs" />
     <Compile Include="Data\Mongo\MongoDbTests.cs" />
     <Compile Include="Mapping\MapperTests.cs" />

@@ -21,7 +21,7 @@ namespace Echelon.Data.DataProviders.MongoDb
 
         private static async Task Open<TType>(Func<IMongoCollection<TType>, Task> action)
         {
-            await action(Database.GetCollection<TType>(GetName<TType>()));
+           await action(Database.GetCollection<TType>(GetName<TType>()));
         }
 
         public async Task Create<TType>(TType entity) where TType : EntityBase

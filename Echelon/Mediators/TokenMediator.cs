@@ -33,7 +33,7 @@ namespace Echelon.Mediators
             // Create a random identity for the client
             var user = _owinContext.Authentication.User;
             var userEntity =
-                await _dataService.Single<UserEntity>(x => x.Where(y => y.Email.Equals(user.Identity.Name)));
+                await _dataService.Load<UserEntity>(user.Identity.Name);
             var identity = new {username = userEntity.DisplayName, uniqueuserid = userEntity.UniqueIdentifier};
 
             // Create an Access Token generator

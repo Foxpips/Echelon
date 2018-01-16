@@ -31,8 +31,7 @@ namespace Echelon.Mediators
 
         internal async Task<ProfileViewModel> GetUser(string email)
         {
-            var userEntity =
-                await _dataService.Single<UserEntity>(entities => entities.Where(user => user.Email.Equals(email)));
+            var userEntity = await _dataService.Load<UserEntity>(email);
             return _mapper.Map<ProfileViewModel>(userEntity);
         }
 
@@ -76,7 +75,7 @@ namespace Echelon.Mediators
 
             file.SaveAs(Path.Combine(server, avatarFileName));
 
-            var userEntity = await _dataService.Single<UserEntity>(entities => entities.Where(x => x.Email.Equals(email)));
+            var userEntity = await _dataService.Load<UserEntity>(email);
             var avatarEntity = new AvatarEntity {AvatarUrl = avatarUrl};
 
             await _dataService.Create(avatarEntity);

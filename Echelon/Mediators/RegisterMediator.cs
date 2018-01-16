@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Echelon.Core.Infrastructure.Exceptions;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Register;
 using Echelon.Core.Infrastructure.MassTransit.Extensions;
@@ -50,45 +48,36 @@ namespace Echelon.Mediators
             return true;
         }
 
-        public async Task<bool> Register(RegisterViewModel registerViewModel, string registerUrl)
+        public async Task<RegistrationEnum> Register(RegisterViewModel registerViewModel, string registerUrl)
         {
+            await _bus.SendMessage(new LogInfoCommand
+            {
+                Content = $"Attempting to register new user with email: {registerViewModel.Email}"
+            }, QueueSettings.General);
+
             try
             {
-                await _bus.SendMessage(new LogInfoCommand
-                {
-                    Content = $"Attempting to register new user with email: {registerViewModel.Email}"
-                }, QueueSettings.General);
+                var tempUserEntity = _mapper.Map<TempUserEntity>(registerViewModel);
+                tempUserEntity.Id = Guid.NewGuid().ToString();
 
-                try
+                if (await _loginService.IsRegistered(tempUserEntity.Email))
                 {
-                    var id = Guid.NewGuid().ToString();
-                    var tempUserEntity = _mapper.Map<TempUserEntity>(registerViewModel);
-                    tempUserEntity.Id = id;
-
-                    await _loginService.CreateTempUser(tempUserEntity);
-                    await _bus.SendMessage(new RegisterNewUserCommand
-                    {
-                        RegisterUrl = $"{registerUrl}/{id}",
-                        Email = tempUserEntity.Email,
-                        UserName = tempUserEntity.DisplayName
-                    }, QueueSettings.General);
+                    return RegistrationEnum.AlreadyRegistered;
                 }
-                catch (UserAlreadyExistsException ex)
-                {
-                    await _bus.SendMessage(new LogInfoCommand
-                    {
-                        Content = $"{ex.Message}: {registerViewModel.Email}"
-                    }, QueueSettings.General);
 
-                    return false;
-                }
+                await _bus.SendMessage(new RegisterNewUserCommand
+                {
+                    User = tempUserEntity,
+                    RegisterUrl = $"{registerUrl}/{tempUserEntity.Id}",
+                }, QueueSettings.Registration);
+
+                return RegistrationEnum.Success;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e);
+                _logger.Error($"{ex.Message}: {registerViewModel.Email}");
+                return RegistrationEnum.Failure;
             }
-
-            return true;
         }
     }
 }

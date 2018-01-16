@@ -8,7 +8,7 @@ namespace Echelon.Core.Infrastructure.MassTransit.Extensions
     {
         public static async Task SendMessage<T>(this IBus bus, T command) where T : class, IBusCommand
         {
-            var sendEndpoint = await bus.GetSendEndpoint(new Uri("rabbitmq://localhost/echelon_queue"));
+            var sendEndpoint = await bus.GetSendEndpoint(new Uri("rabbitmq://localhost/general_queue"));
             await sendEndpoint.Send(command);
         }
 
