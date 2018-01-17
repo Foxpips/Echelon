@@ -4,7 +4,7 @@ namespace Echelon.Controllers
 {
     [Authorize]
     [RequireHttps]
-    public class NavigationController : BaseController
+    public class NavigationController : Controller
     {
         public ActionResult Index()
         {

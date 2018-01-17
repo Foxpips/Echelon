@@ -303,6 +303,7 @@
     <Compile Include="Controllers\ExternalLoginController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
+    <Compile Include="Models\ValidationModels\RegisterViewModelValidator.cs" />
     <Compile Include="Models\ValidationModels\LoginViewModelValidator.cs" />
     <Compile Include="Models\ValidationModels\ProfileViewModelValidator.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />

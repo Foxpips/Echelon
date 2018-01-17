@@ -54,9 +54,9 @@ namespace Echelon.Mediators
                 if (file.ContentLength > 0)
                 {
                     var user = await _dataService.TransformUserAvatars<UserAvatarEntity>(email);
-                    var hasExistingAvatar = user.AvatarUrl.Contains(SiteSettings.AvatarImagesPath);
+                    bool? hasExistingAvatar = user.AvatarUrl?.Contains(SiteSettings.AvatarImagesPath);
 
-                    if (hasExistingAvatar)
+                    if (hasExistingAvatar == true)
                     {
                         file.SaveAs(Path.GetFileName(user.AvatarUrl));
                     }

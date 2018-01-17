@@ -13,7 +13,7 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
         private readonly IEmailSenderService _emailSenderService;
         private readonly ILoginService _loginService;
 
-        protected RegisterNewUserConsumer(IEmailSenderService emailSenderService, ILoginService loginService, IClientLogger clientLogger) : base(clientLogger)
+        public RegisterNewUserConsumer(IEmailSenderService emailSenderService, ILoginService loginService, IClientLogger clientLogger) : base(clientLogger)
         {
             _loginService = loginService;
             _emailSenderService = emailSenderService;

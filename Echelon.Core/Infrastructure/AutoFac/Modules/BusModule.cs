@@ -25,6 +25,16 @@ namespace Echelon.Core.Infrastructure.AutoFac.Modules
                 {
                     ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
                 });
+
+                sbc.ReceiveEndpoint(host, "registration_queue", ep =>
+                {
+                    ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
+                });
+
+                sbc.ReceiveEndpoint(host, "general_queue", ep =>
+                {
+                    ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
+                });
             }))
                 .As<IBusControl>()
                 .As<IBus>()

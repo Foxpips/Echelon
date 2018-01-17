@@ -10,14 +10,14 @@ namespace Echelon
         {
             BundleTable.EnableOptimizations = true;
 
-            bundles.Add(new ScriptBundle("~/content/js")
+            bundles.Add(new ScriptBundle("~/bundle/js")
                 .IncludeDirectory("~/assets/js/minified/", "*.js"));
 
             var directories = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\assets\\css");
             foreach (var directory in directories)
             {
                 var cssFolder = Path.GetFileName(directory);
-                bundles.Add(new StyleBundle($"~/content/css/{cssFolder}")
+                bundles.Add(new StyleBundle($"~/bundle/css/{cssFolder}")
                     .IncludeDirectory($"~/assets/css/{cssFolder}/minified/", "*.css"));
             }
         }

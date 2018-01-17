@@ -23,7 +23,7 @@ namespace Echelon.Core.Infrastructure.Services.Email
         public async Task Send(string recipientEmail, EmailTemplateEnum emailTemplateEnum, object tokens)
         {
             var fromAddress = new MailAddress(EmailSettings.EmailAccount);
-            var emailTemplate = await _dataService.Load<EmailTemplateEntity>(emailTemplateEnum.ToString());
+            var emailTemplate = await _dataService.Load<EmailTemplateEntity>(((int)emailTemplateEnum).ToString());
             
             SendMessage(recipientEmail, _tokenHelper.Replace(tokens, emailTemplate.Subject), _tokenHelper.Replace(tokens, emailTemplate.Body), fromAddress);
         }
