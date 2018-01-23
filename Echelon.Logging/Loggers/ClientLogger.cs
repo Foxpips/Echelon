@@ -50,7 +50,6 @@ namespace Echelon.Core.Logging.Loggers
             var fileAppender = (FileAppender) appender;
             fileAppender.File =
                 $"{Path.GetDirectoryName(fileAppender.File)}\\{DateTime.Now.ToString("dd-MM-yyyy")}\\log.txt";
-
             fileAppender.ActivateOptions();
         }
 
@@ -64,17 +63,17 @@ namespace Echelon.Core.Logging.Loggers
             Logger.Debug(message);
         }
 
-        public void Error(object message)
+        public void Error(object message, Exception exception = null)
         {
-            Logger.Error(message);
+            Logger.Error(message, exception);
         }
 
-        public void Fatal(object message)
+        public void Fatal(object message, Exception exception = null)
         {
             Logger.Fatal(message);
         }
 
-        public void Warn(object message)
+        public void Warn(object message, Exception exception = null)
         {
             Logger.Warn(message);
         }

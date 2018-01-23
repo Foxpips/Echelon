@@ -14,6 +14,12 @@
         }
     }
 
+    &--border-right {
+         @include Middle-more {
+             border-right: 1px solid $color-border;
+        }
+    }
+
     .form-group {
         overflow: hidden;
     }

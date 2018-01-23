@@ -22,7 +22,8 @@
                     bowerSourcePath + "history.js/scripts/bundled/html5/jquery.history.js",
                     bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js",
                     bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/transition.js",
-                    bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap.js"
+                    bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap.js",
+                    bowerSourcePath + "toastr/toastr.js"
                 ]
             },
 
@@ -64,6 +65,11 @@
             bootstrap: {
                 fileName: "bootstrap.css",
                 files: [sassSourcePath + "bootstrap.scss"]
+            },
+
+            libs: {
+                fileName: "libs.css",
+                files: [bowerSourcePath + "toastr/toastr.scss"]
             }
         },
 

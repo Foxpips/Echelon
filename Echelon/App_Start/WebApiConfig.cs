@@ -1,4 +1,7 @@
 ﻿using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+using Echelon.Infrastructure.Exceptions.Filters;
+using Echelon.Infrastructure.Exceptions.Handlers;
 
 namespace Echelon
 {
@@ -7,6 +10,8 @@ namespace Echelon
         public static void Register(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
+            config.Filters.Add(new ApiExceptionFilter());
+            config.Services.Replace(typeof(IExceptionHandler), new ApiExceptionHandler());
 
             // Map this rule first
             config.Routes.MapHttpRoute(

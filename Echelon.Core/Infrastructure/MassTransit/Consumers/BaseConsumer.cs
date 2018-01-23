@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Echelon.Core.Infrastructure.Exceptions;
 using Echelon.Core.Logging.Loggers;
 using MassTransit;
 
@@ -19,7 +21,16 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
         //Internal Consume Method
         public async Task Consume(ConsumeContext<T> context)
         {
-            await ConsumeInternal(context);
+            try
+            {
+                await ConsumeInternal(context);
+            }
+            catch (Exception e)
+            {
+                ClientLogger.Error($"TaskRunner Consumer Error: {e.Message}");
+                ClientLogger.Debug($"TaskRunner Call Stack: {e.StackTrace}");
+                throw new TaskRunnerConsumerException($"Error Consuming TaskRunner Message: {typeof(T)}");
+            }
         }
 
         //Fault Handler

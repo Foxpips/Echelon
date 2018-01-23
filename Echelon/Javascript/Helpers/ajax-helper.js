@@ -1,8 +1,10 @@
 ﻿/// <reference path="../VsDocs/jQuery-vsdoc.2.1.0.js" />
+/// <reference path="../Controls/popup-control.js" />
 /*jshint esversion: 6 */
 
 var AjaxHelper = function () {
     var self = this;
+    var popupControl = new PopupControl();
 
     //public methods
     self.Get = function (url, callback) {
@@ -33,13 +35,12 @@ var AjaxHelper = function () {
                          }
                      }
                  } catch (e) {
-                     console.error(`An unexpected error occured please try again! \n${e.message}`);
+                     popupControl.Error(`A very unexpected error occured please try again! \n${e.message}`);
                  }
                  return response;
              })
              .fail((xhr, status, error) => {
-                 console.log(xhr.responseText);
-                 console.error(`An unexpected error occured please try again! \n${error}`);
+                 popupControl.Error(`Error code: ${xhr.status} <br/>${xhr.responseText}`);
              })
              .complete(() => {
              });

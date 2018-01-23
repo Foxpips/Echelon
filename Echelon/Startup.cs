@@ -11,6 +11,7 @@ using Autofac.Integration.WebApi;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Infrastructure.Attributes;
+using Echelon.Infrastructure.Exceptions.Filters;
 using Echelon.Infrastructure.Settings;
 using Echelon.Infrastructure.Validation;
 using FluentValidation.Mvc;
@@ -50,6 +51,8 @@ namespace Echelon
             ConfigureCookies(app);
             ConfigureValidation(container);
             ConfigureApplication();
+
+    
         }
 
         private static void ConfigureApplication()

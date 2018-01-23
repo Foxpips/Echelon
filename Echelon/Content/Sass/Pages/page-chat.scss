@@ -10,7 +10,6 @@
     @extend .font-weight-bold;
     color: $color-shadow-dark;
     right: 1px;
-    border-left: 1px solid $color-border;
 
     @include Middle-more {
         display: block;
@@ -71,7 +70,7 @@
 
         @include Middle-more {
             font-size: 34px;
-            height: 60px;
+            height: 100px;
         }
 
         @include Middle-less {

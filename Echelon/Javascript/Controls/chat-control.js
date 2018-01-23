@@ -1,7 +1,7 @@
 ﻿/*jshint esversion: 6 */
 var ChatControl = function (notificationControl, avatarControl) {
     var self = this;
-    self.useridentity = "";
+    self.identity = "";
 
     var lastOtherAuthor = "";
     var $window = $(window);
@@ -31,7 +31,6 @@ var ChatControl = function (notificationControl, avatarControl) {
     })();
 
   function scrollToLatestMessage () {
-        console.log("scrolling to bottom");
         const rsize = $window.height() - 200;
         $chatWindow.height(rsize);
         $chatWindow.scrollTop(messageContainer.scrollHeight);
