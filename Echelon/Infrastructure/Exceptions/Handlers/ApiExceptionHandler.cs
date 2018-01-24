@@ -30,7 +30,7 @@ namespace Echelon.Infrastructure.Exceptions.Handlers
             clientLogger.Debug($"{guid} {e.StackTrace}");
 
             // Access Exception using context.Exception;  
-            string errorMessage = $"Error ID: {guid} \nApologies an error has occurred! \nSome features may not function correctly";
+            string errorMessage = $"Error ID: {guid} Apologies an error has occurred! Some features may not function correctly";
             var response = context.Request.CreateResponse(HttpStatusCode.InternalServerError, errorMessage);
 
             response.Headers.Add("X-Error", errorMessage);

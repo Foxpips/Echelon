@@ -18,11 +18,9 @@ namespace Echelon.Infrastructure.Exceptions.Filters
             var guid = $"Api-Error-{Guid.NewGuid()}";
             clientLogger.Error($"{guid} {e.Message}");
             clientLogger.Debug($"{guid} {e.StackTrace}");
-             throw new StackOverflowException();
-
             actionExecutedContext.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
             {
-                Content = new StringContent($"Error ID: {guid} \nApologies an error has occurred! \nSome features may not function correctly"),
+                Content = new StringContent($"Error ID: {guid} Apologies an error has occurred! Some features may not function correctly"),
                 ReasonPhrase = "Api Internal Server Error has occurred.",
                 StatusCode = HttpStatusCode.InternalServerError,
             };

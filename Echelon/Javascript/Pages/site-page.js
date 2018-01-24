@@ -11,27 +11,21 @@ var SitePage = function () {
     var $menuOverlayLeft = $("#menuOverlayLeft");
     var theme = document.body.querySelectorAll("[data-attribute='theme']");
 
-    var cookieHelper = new CookieHelper();
     var ajaxHelper = new AjaxHelper();
+    var storageControl = new StorageControl();
     var avatarControl = new AvatarControl(ajaxHelper);
-
-    //    function hasLocalStorage(storagefunction, nonstoragefunction) {
-    //        if (typeof (Storage) !== "undefined") {
-    //            storagefunction();
-    //        } else {
-    //            nonstoragefunction();
-    //        }
-    //    }
 
     //constructor
     (function () {
-        if (localStorage.theme === undefined) {
-            localStorage.theme = "theme-Light";
+        const selectedTheme = storageControl.get("theme");
+
+        if (selectedTheme === undefined) {
+            storageControl.add("theme", "theme-Light");
         }
 
-        let href = $('link[rel=stylesheet]')[0].href;
-        let currentTheme = href.replace(/theme-\w*/, localStorage.theme);
-        $('link[rel=stylesheet]')[0].href = currentTheme;
+        let currentThemeHref = $('link[rel=stylesheet]')[0].href;
+        let newThemeHref = currentThemeHref.replace(/theme-\w*/,  storageControl.get("theme"));
+        $('link[rel=stylesheet]')[0].href = newThemeHref;
 
         $(window).load(function () {
             $("html").removeClass("preload");
@@ -66,16 +60,13 @@ var SitePage = function () {
                 $menuOverlayLeft.toggle("slide");
             }
         });
-
-        $(theme).on("click", function () {
-            const themeSelected = $(this).data("target");
-            console.log(themeSelected);
-            cookieHelper.setCookie("theme", themeSelected, 300);
-            localStorage.theme = themeSelected;
-            let hreftheme = $('link[rel=stylesheet]')[0].href;
-            let replace = hreftheme.replace(/theme-\w*/, localStorage.theme);
-            $('link[rel=stylesheet]')[0].href = replace;
-            console.log(hreftheme);
-        });
     })();
+
+    $(theme).on("click", function () {
+        const selectedTheme = $(this).data("target");
+        storageControl.add("theme", selectedTheme);
+        let currentThemeHref = $('link[rel=stylesheet]')[0].href;
+        let newThemeHref = currentThemeHref.replace(/theme-\w*/, selectedTheme);
+        $('link[rel=stylesheet]')[0].href = newThemeHref;
+    });
 };

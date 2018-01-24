@@ -35,12 +35,18 @@ var AjaxHelper = function () {
                          }
                      }
                  } catch (e) {
-                     popupControl.Error(`A very unexpected error occured please try again! \n${e.message}`);
+                     popupControl.Error(`A very unexpected error occured please try again! ${e.message}`);
                  }
                  return response;
              })
              .fail((xhr, status, error) => {
-                 popupControl.Error(`Error code: ${xhr.status} <br/>${xhr.responseText}`);
+                 popupControl.Error(`${xhr.responseText} Error code: ${xhr.status}`, function() {
+                     if (confirm('Disable popup notifications?')) {
+                         
+                     } else {
+                         // Do nothing!
+                     }
+                 });
              })
              .complete(() => {
              });

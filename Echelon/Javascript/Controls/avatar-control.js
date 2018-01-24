@@ -9,7 +9,7 @@ var AvatarControl = function (ajaxhelper) {
             response => {
                 for (let avatar of $(".avatar--user")) {
                     let useravatar = $(avatar);
-                    useravatar.prop("src", `${response}?${new Date().getTime()}`);
+                    useravatar.prop("src", `${response}?time=${new Date().getTime()}`);
                 }
             });
     };

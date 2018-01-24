@@ -122,14 +122,11 @@ var ChatControl = function (notificationControl, avatarControl) {
 
     function filterLinks(message, $container) {
         if (regexHelper.isImage(message)) {
-            console.log(message);
             return $(`<img class="width-100-percent height-100-percent" src=${message} />`);
         }
 
         if (regexHelper.isDailyMotion(message)) {
-            console.log(message);
             new AjaxHelper().Get(`${siteurl}/api/embed?videoType=DailyMotion&url=${message}`, response => {
-                console.log(response.html);
                 $container.append(response.html);
                 scrollToLatestMessage();
             });

@@ -25,7 +25,8 @@
     }
 
     .form-control {
-        color: $color-text-alternate;
+        @extend .font-weight-bold;
+        color: $color-text;
         background-position: center bottom,center calc(99%);
         background-repeat: no-repeat;
         background-size: 0 2px,100% 1px;
@@ -40,7 +41,7 @@
     }
 
     input.form-control {
-        background-color: $color-input;
+        background-color: $color-bg3;
     }
 
     .form-control:focus {

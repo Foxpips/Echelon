@@ -20,7 +20,6 @@ namespace Echelon.Controllers
         [HttpGet]
         public ActionResult Help()
         {
-            throw new StackOverflowException("Test overflow message!");
             return View();
         }
 

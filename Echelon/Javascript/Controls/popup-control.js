@@ -5,6 +5,7 @@ var PopupControl = function() {
     toastr.options = {
         "closeButton": true,
         "debug": false,
+        "onclick": null,
         "newestOnTop": false,
         "progressBar": false,
         "positionClass": "toast-bottom-right",
@@ -19,15 +20,18 @@ var PopupControl = function() {
         "hideMethod": "fadeOut"
     };
 
-    self.Information = text => {
+    self.Information = (text, onclickCallback) => {
+        toastr.options.onclick = onclickCallback;
         toastr.info(text);
     };
 
-    self.Error = text => {
+    self.Error = (text, onclickCallback) => {
+        toastr.options.onclick = onclickCallback;
         toastr.error(text);
     };
 
-    self.Warning = text => {
+    self.Warning = (text, onclickCallback) => {
+        toastr.options.onclick = onclickCallback;
         toastr.warning(text);
     };
 };

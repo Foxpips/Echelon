@@ -7,9 +7,29 @@
     box-sizing: border-box;
 }
 
+body:after{
+  content: "beta";
+  position: fixed;
+  width: 80px;
+  height: 25px;
+  background: #644aee;
+  bottom: 7px;
+  left: -20px;
+  text-align: center;
+  font-size: 13px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+  line-height: 27px;
+  -ms-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+
 .theme {
     &__background {
-        background-color: $color-background;
+        background: linear-gradient(90deg, $color-bg1 0%, $color-bg1 51%, $color-bg2 130%);
     }
 
     &__text {
@@ -40,7 +60,8 @@
 }
 
 .window-container {
-    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    /*font-family: 'Helvetica Neue', Helvetica, sans-serif;*/
+    font-family: cursive, Helvetica, sans-serif;
 }
 
 .preload * {

@@ -31,8 +31,6 @@ namespace Echelon.Controllers.Api
         {
             var user = await _dataservice.TransformUserAvatars<UserAvatarEntity>(email);
 
-            throw new StackOverflowException();
-
             if (user == null)
             {
                 return NotFound();
