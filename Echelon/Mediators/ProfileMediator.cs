@@ -5,6 +5,7 @@ using System.Web;
 using AutoMapper;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.MassTransit.Extensions;
+using Echelon.Core.Infrastructure.Settings;
 using Echelon.Data;
 using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Transforms;

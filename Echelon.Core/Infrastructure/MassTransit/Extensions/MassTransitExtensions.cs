@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Echelon.Core.Infrastructure.Settings;
 using MassTransit;
 
 namespace Echelon.Core.Infrastructure.MassTransit.Extensions
@@ -12,9 +13,9 @@ namespace Echelon.Core.Infrastructure.MassTransit.Extensions
             await sendEndpoint.Send(command);
         }
 
-        public static async Task SendMessage<T>(this IBus bus, T command, string endpoint) where T : class, IBusCommand
+        public static async Task SendMessage<T>(this IBus bus, T command, string queueName) where T : class, IBusCommand
         {
-            var sendEndpoint = await bus.GetSendEndpoint(new Uri(endpoint));
+            var sendEndpoint = await bus.GetSendEndpoint(new Uri($"{QueueSettings.QueueEndpoint}{queueName}"));
             await sendEndpoint.Send(command);
         }
     }

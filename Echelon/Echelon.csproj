@@ -286,7 +286,6 @@
     <Compile Include="Infrastructure\Exceptions\Handlers\ApiExceptionHandler.cs" />
     <Compile Include="Infrastructure\Helpers\CookieStore.cs" />
     <Compile Include="Infrastructure\Messaging\ChatHub.cs" />
-    <Compile Include="Infrastructure\Settings\QueueSettings.cs" />
     <Compile Include="Mediators\ChatMediator.cs" />
     <Compile Include="Mediators\ExternalLoginMediator.cs" />
     <Compile Include="Mediators\IMediator.cs" />

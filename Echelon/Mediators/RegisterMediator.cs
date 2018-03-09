@@ -5,6 +5,7 @@ using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Register;
 using Echelon.Core.Infrastructure.MassTransit.Extensions;
 using Echelon.Core.Infrastructure.Services.Login;
+using Echelon.Core.Infrastructure.Settings;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Data;
 using Echelon.Data.Entities.Users;

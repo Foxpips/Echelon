@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using Echelon.Core.Infrastructure.Settings;
 using MassTransit;
 using static System.Configuration.ConfigurationManager;
 
@@ -21,17 +22,12 @@ namespace Echelon.Core.Infrastructure.AutoFac.Modules
                     h.Password(AppSettings["RabbitMQPassword"]);
                 });
 
-                sbc.ReceiveEndpoint(host, AppSettings["QueueName"], ep =>
+                sbc.ReceiveEndpoint(host, QueueSettings.Registration, ep =>
                 {
                     ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
                 });
 
-                sbc.ReceiveEndpoint(host, "registration_queue", ep =>
-                {
-                    ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
-                });
-
-                sbc.ReceiveEndpoint(host, "general_queue", ep =>
+                sbc.ReceiveEndpoint(host, QueueSettings.General, ep =>
                 {
                     ep.LoadFrom(componentContext.Resolve<ILifetimeScope>());
                 });

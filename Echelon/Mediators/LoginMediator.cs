@@ -3,6 +3,7 @@ using AutoMapper;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.MassTransit.Extensions;
 using Echelon.Core.Infrastructure.Services.Login;
+using Echelon.Core.Infrastructure.Settings;
 using Echelon.Data.Entities.Users;
 using Echelon.Infrastructure.Settings;
 using Echelon.Models.ViewModels;
@@ -28,8 +29,7 @@ namespace Echelon.Mediators
 
         public async Task<bool> Login(LoginViewModel loginViewModel)
         {
-            await
-                _bus.SendMessage(
+            await _bus.SendMessage(
                     new LogInfoCommand { Content = $"Attempting to login with email: {loginViewModel.Email}" },
                     QueueSettings.General);
 

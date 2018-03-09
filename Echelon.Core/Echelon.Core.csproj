@@ -140,6 +140,7 @@
     <Compile Include="Infrastructure\MassTransit\Extensions\MassTransitExtensions.cs" />
     <Compile Include="Extensions\Autofac\AutofacExtensions.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
+    <Compile Include="Infrastructure\Settings\QueueSettings.cs" />
     <Compile Include="Infrastructure\Services\Rest\IRestService.cs" />
     <Compile Include="Infrastructure\Services\Email\EmailSenderService.cs" />
     <Compile Include="Infrastructure\Services\Email\Components\EmailTokenHelper.cs" />
