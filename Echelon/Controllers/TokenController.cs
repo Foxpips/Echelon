@@ -19,8 +19,7 @@ namespace Echelon.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(string device, string channel)
         {
-            return Json(await _tokenMediator.CreateToken(device, channel),
-                JsonRequestBehavior.AllowGet);
+            return Json(await _tokenMediator.CreateToken(device, channel), JsonRequestBehavior.AllowGet);
         }
     }
 }

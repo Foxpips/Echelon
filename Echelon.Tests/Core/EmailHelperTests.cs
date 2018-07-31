@@ -5,6 +5,7 @@ using Echelon.Core.Infrastructure.Services.Email.Components;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Data.DataProviders.RavenDb;
 using Echelon.Data.Entities.Email;
+using Echelon.DatabaseBuilder.EmailTemplates;
 using Echelon.Misc.Enums;
 using NUnit.Framework;
 
@@ -17,10 +18,14 @@ namespace Echelon.Tests.Core
         private RavenDataService _dataService;
 
         [SetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
-            _dataService = new RavenDataService(new ClientLogger());
-            _emailSenderService = new EmailSenderService(new RavenDataService(new ClientLogger()), _emailTokenHelper);
+            var clientLogger = new ClientLogger();
+            _dataService = new RavenDataService(clientLogger);
+            _emailSenderService = new EmailSenderService(new RavenDataService(clientLogger), _emailTokenHelper,
+                clientLogger);
+            await _dataService.Create(EmailTemplateSettings.ForgottenPassword);
+            await _dataService.Create(EmailTemplateSettings.AccountConfirmation);
         }
 
         [Test]
@@ -28,7 +33,7 @@ namespace Echelon.Tests.Core
         {
             await
                 _emailSenderService.Send("simonpmarkey@gmail.com", EmailTemplateEnum.AccountConfirmation,
-                    new {username = "Foxpips", body = "Why hello there world!"});
+                    new {username = "Foxpips", registerlink = "Why hello there world!"});
         }
 
         [Test]

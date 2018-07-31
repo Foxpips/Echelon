@@ -62,5 +62,13 @@ namespace Echelon.Mediators
 
             return false;
         }
+
+        public async Task ResetPassword(string email)
+        {
+            await _bus.SendMessage(new ResetPasswordCommand
+            {
+                Email = email
+            });
+        }
     }
 }

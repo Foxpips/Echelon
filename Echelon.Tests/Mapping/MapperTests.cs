@@ -18,7 +18,6 @@ namespace Echelon.Tests.Mapping
 
             var tempUserEntity = new TempUserEntity
             {
-                Id = "TestId",
                 Email = "Test@Test.com",
                 Password = "TestPassword",
                 DisplayName = "TestDisplayName"

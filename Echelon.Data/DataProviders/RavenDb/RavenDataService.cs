@@ -123,7 +123,7 @@ namespace Echelon.Data.DataProviders.RavenDb
         {
             return await OpenAndReturn(async session =>
             {
-                var userEntities = session.Query<UserEntity>().Where(x => x.Email.Equals(id));
+                var userEntities = session.Query<UserEntity>().Customize(c=>c.WaitForNonStaleResults()).Where(x => x.Email.Equals(id));
                 var transformedTypes = await userEntities.TransformWith<UserAvatarTransform, TType>().ToListAsync();
 
                 await session.SaveChangesAsync();

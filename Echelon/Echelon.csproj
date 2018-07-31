@@ -307,6 +307,7 @@
     <Compile Include="Models\ValidationModels\RegisterViewModelValidator.cs" />
     <Compile Include="Models\ValidationModels\LoginViewModelValidator.cs" />
     <Compile Include="Models\ValidationModels\ProfileViewModelValidator.cs" />
+    <Compile Include="Models\ViewModels\ForgottenPasswordModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\CategoriesViewModel.cs" />
     <Compile Include="Models\BusinessModels\Category.cs" />
@@ -338,6 +339,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Menu.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Registration.es.Designer.cs">
+      <DependentUpon>Registration.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Registration.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Registration.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\SiteDocument.es.Designer.cs">
       <DependentUpon>SiteDocument.es.resx</DependentUpon>
@@ -440,12 +451,13 @@
     <Content Include="Views\Login\Help.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Chat\ChatHub.cshtml" />
-    <Content Include="Views\Shared\Screensaver\_Screensaver.cshtml" />
+    <Content Include="Views\Shared\_Screensaver.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\ConfirmRegistration.cshtml" />
     <Content Include="Views\Register\RegistrationSuccess.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -465,6 +477,7 @@
     <EmbeddedResource Include="Resources\Login.es.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Login.es.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Login.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -478,6 +491,14 @@
     <EmbeddedResource Include="Resources\Menu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Menu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Registration.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Registration.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Registration.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Registration.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\SiteDocument.es.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -496,6 +517,7 @@
     <EmbeddedResource Include="Resources\SiteTitle.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SiteTitle.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -88,11 +88,29 @@ namespace Echelon.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forgotten Password.
+        /// </summary>
+        public static string ForgottenPassword {
+            get {
+                return ResourceManager.GetString("ForgottenPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Google Login.
         /// </summary>
         public static string GoogleLogIn {
             get {
                 return ResourceManager.GetString("GoogleLogIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your Email and instructions will be sent to you!.
+        /// </summary>
+        public static string Instructions {
+            get {
+                return ResourceManager.GetString("Instructions", resourceCulture);
             }
         }
         
@@ -160,11 +178,29 @@ namespace Echelon.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recover Password.
+        /// </summary>
+        public static string RecoverPassword {
+            get {
+                return ResourceManager.GetString("RecoverPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
             }
         }
     }

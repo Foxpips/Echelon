@@ -117,52 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GoogleLogIn" xml:space="preserve">
-    <value>Google Login</value>
+  <data name="CompleteEmailClick" xml:space="preserve">
+    <value>Tocar a la email por la completa</value>
   </data>
-  <data name="LogIn" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="LoginFailed" xml:space="preserve">
-    <value>Login failed. Check your login details</value>
-  </data>
-  <data name="LogOut" xml:space="preserve">
-    <value>Logout</value>
-  </data>
-  <data name="NoAccount" xml:space="preserve">
-    <value>Don't have an account?</value>
-  </data>
-  <data name="NotLoggedIn" xml:space="preserve">
-    <value>Not logged in</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="MissingEmail" xml:space="preserve">
-    <value>Please enter a valid email address</value>
-  </data>
-  <data name="MissingPassword" xml:space="preserve">
-    <value>Please enter your password</value>
-  </data>
-  <data name="EmailPasswordError" xml:space="preserve">
-    <value>Email or Password is incorrect!</value>
-  </data>
-  <data name="AccountCreationError" xml:space="preserve">
-    <value>Sorry there was a problem creating your account, please try again later</value>
-  </data>
-  <data name="AccountAlreadyExists" xml:space="preserve">
-    <value>Sorry this account already exists!</value>
-  </data>
-  <data name="ForgottenPassword" xml:space="preserve">
-    <value>Forgotten Password</value>
-  </data>
-  <data name="Instructions" xml:space="preserve">
-    <value>Enter your Email and instructions will be sent to you!</value>
-  </data>
-  <data name="RecoverPassword" xml:space="preserve">
-    <value>Recover Password</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
+  <data name="SignUpSuccess" xml:space="preserve">
+    <value>Muchas gracias por a listo</value>
   </data>
 </root>

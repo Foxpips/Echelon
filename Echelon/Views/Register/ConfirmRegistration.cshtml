@@ -1,14 +1,15 @@
-﻿@model Echelon.Models.ViewModels.RegisterViewModel
+﻿@using Echelon.Resources
+@model Echelon.Models.ViewModels.RegisterViewModel
 
 @section metadata{
     <title>Confirm Registration</title>
 }
 
 <section id="wrapper" class="profile-container">
-    <div style="margin: 20px">
+    <div class="margin">
         <div>
-            <h2>Thank you for signing up!</h2>
-            <div>To complete the process please click on the link in the confirmation email we sent you!</div>
+            <h2>@Registration.SignUpSuccess</h2>
+            <div>@Registration.CompleteEmailClick</div>
         </div>
 
         <div>

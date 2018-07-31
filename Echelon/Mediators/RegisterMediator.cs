@@ -59,7 +59,7 @@ namespace Echelon.Mediators
             try
             {
                 var tempUserEntity = _mapper.Map<TempUserEntity>(registerViewModel);
-                tempUserEntity.Id = Guid.NewGuid().ToString();
+                //tempUserEntity.Id = Guid.NewGuid().ToString();
 
                 if (await _loginService.IsRegistered(tempUserEntity.Email))
                 {

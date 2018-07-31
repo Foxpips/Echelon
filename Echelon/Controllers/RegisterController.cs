@@ -24,23 +24,6 @@ namespace Echelon.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult ConfirmRegistration()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> RegistrationSuccess(string id)
-        {
-            if (await _registerMediator.CompleteRegistration(id))
-            {
-                return View();
-            }
-
-            return RedirectToAction("Index", "Error");
-        }
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -66,6 +49,23 @@ namespace Echelon.Controllers
             }
 
             return View(registerViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult ConfirmRegistration()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> RegistrationSuccess(string id)
+        {
+            if (await _registerMediator.CompleteRegistration(id))
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Error", new { errorId = id });
         }
     }
 }

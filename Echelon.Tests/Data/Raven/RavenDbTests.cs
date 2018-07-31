@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Helpers;
@@ -22,6 +21,8 @@ namespace Echelon.Tests.Data.Raven
         public async Task SetUp()
         {
             _dataService = new RavenDataService(new ClientLogger());
+            await _dataService.Create(new UserEntity { FirstName = "TestName", Email = "Test@gmail.com" });
+            await _dataService.Create(new EmailTemplateEntity { Body = "Body Test", Subject = "Subject Test", Type = EmailTemplateEnum.ForgottenPassword });
         }
 
         [Test]
@@ -38,11 +39,8 @@ namespace Echelon.Tests.Data.Raven
         public async Task Read_User_Database()
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
-            var users =
-                await
-                    _dataService.Query<UserEntity>(
-                        entities => entities.Where(userEntity => userEntity.Email == "Test@gmail.com"));
-            Console.WriteLine(users.First().Email);
+            var users = await _dataService.Query<UserEntity>(entities => entities.Where(userEntity => userEntity.Email == "Test@gmail.com"));
+            Assert.IsTrue(users.Any());
         }
 
         [Test]
@@ -75,16 +73,28 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task CreateEmail_Templates_Success()
         {
-            await Task.Delay(TimeSpan.FromMilliseconds(200));
             var expected = await _dataService.Read<EmailTemplateEntity>();
-            Console.WriteLine(expected.Count);
-            Assert.AreEqual(expected.SingleOrDefault()?.Body, "Body Test");
+            Assert.AreEqual("Body Test", expected.SingleOrDefault()?.Body);
         }
 
         [Test]
         public async Task IndexTest_Scenario_Result()
         {
-            var avatarUserEntity = await _dataService.TransformUserAvatars<UserAvatarEntity>("simonpmarkey@gmail.com");
+            var avatarEntity = new AvatarEntity
+            {
+                AvatarUrl = "someurl/pic.jpg",
+                FileType = FileTypeEnum.Jpg
+            };
+            var userEntity = new UserEntity
+            {
+                Email = "testuser@gmail.com",
+                AvatarId = avatarEntity.Id
+            };
+
+            await _dataService.Create(avatarEntity);
+            await _dataService.Create(userEntity);
+
+            var avatarUserEntity = await _dataService.TransformUserAvatars<UserAvatarEntity>(userEntity.Id);
             Assert.AreEqual(avatarUserEntity.AvatarUrl, "someurl/pic.jpg");
         }
 
@@ -95,5 +105,9 @@ namespace Echelon.Tests.Data.Raven
             await _dataService.DeleteDocuments<EmailTemplateEntity>();
             await _dataService.DeleteDocuments<AvatarEntity>();
         }
+    }
+
+    public class Iteme
+    {
     }
 }

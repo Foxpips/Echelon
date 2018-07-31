@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Echelon.Mediators;
 using Echelon.Models.ViewModels;
@@ -55,6 +54,24 @@ namespace Echelon.Controllers
             return await _loginMediator.Logout()
                 ? RedirectToActionPermanent("Index", "Login")
                 : RedirectToAction("Account", "Error");
+        }
+
+        public ActionResult ForgottenPassword()
+        {
+           return View(); 
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgottenPassword(ForgottenPasswordModel forgottenPasswordModel)
+        {
+            if (ModelState.IsValid)
+            {
+                await _loginMediator.ResetPassword(forgottenPasswordModel.Email);
+            }
+
+            return View();
         }
     }
 }

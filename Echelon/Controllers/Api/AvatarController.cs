@@ -26,7 +26,6 @@ namespace Echelon.Controllers.Api
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IHttpActionResult> GetAvatar(string email)
         {
             var user = await _dataservice.TransformUserAvatars<UserAvatarEntity>(email);

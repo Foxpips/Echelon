@@ -20,22 +20,7 @@
 
     @Html.Partial("_Header")
     @RenderBody()
-
-    <footer class="footer">
-        <div class="footer__container">
-            <nav>
-                <a href="/contact/">Contact</a>
-                <a href="/about/">About</a>
-                <a href="/archives/">Archives</a>
-                <a href="/advertising/">Advertise</a>
-                <a href="/jobs/">Jobs</a>
-                <a href="/license/">License</a>
-                <a href="/subscription-options/">Subscribe</a>
-                <a href="/feed/">RSS</a>
-                <a href="/guest-posting/">Guest Posting</a>
-            </nav>
-        </div>
-    </footer>
+    @Html.Partial("_Footer")
 
     @Scripts.Render("~/bundle/js")
 

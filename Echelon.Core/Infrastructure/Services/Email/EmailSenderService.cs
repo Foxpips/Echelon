@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.Services.Email.Components;
+using Echelon.Core.Logging.Loggers;
 using Echelon.Data;
 using Echelon.Data.Entities.Email;
 using Echelon.Misc.Enums;
@@ -13,10 +15,12 @@ namespace Echelon.Core.Infrastructure.Services.Email
     {
         private readonly IDataService _dataService;
         private readonly ITokenHelper _tokenHelper;
+        private readonly IClientLogger _clientLogger;
 
-        public EmailSenderService(IDataService dataService, ITokenHelper tokenHelper)
+        public EmailSenderService(IDataService dataService, ITokenHelper tokenHelper, IClientLogger clientLogger)
         {
             _tokenHelper = tokenHelper;
+            _clientLogger = clientLogger;
             _dataService = dataService;
         }
 
@@ -24,8 +28,15 @@ namespace Echelon.Core.Infrastructure.Services.Email
         {
             var fromAddress = new MailAddress(EmailSettings.EmailAccount);
             var emailTemplate = await _dataService.Load<EmailTemplateEntity>(((int)emailTemplateEnum).ToString());
-            
-            SendMessage(recipientEmail, _tokenHelper.Replace(tokens, emailTemplate.Subject), _tokenHelper.Replace(tokens, emailTemplate.Body), fromAddress);
+
+            try
+            {
+                SendMessage(recipientEmail, _tokenHelper.Replace(tokens, emailTemplate.Subject), _tokenHelper.Replace(tokens, emailTemplate.Body), fromAddress);
+            }
+            catch (Exception ex)
+            {
+                _clientLogger.Error($"sending message failed for email {recipientEmail} with error {ex.Message}");
+            }
         }
 
         private static void SendMessage(string recipientEmail, string subject, string body,

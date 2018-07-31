@@ -335,6 +335,22 @@ $atomic-color-accent: "#ffaa00";
     margin-right: auto;
 }
 
+.margin-5 {
+    margin: 5px;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+
+.margin-15 {
+    margin: 15px;
+}
+
+.margin-20 {
+    margin: 20px;
+}
+
 .margin-top-5 {
     margin-top: 5px;
 }
@@ -367,19 +383,17 @@ $atomic-color-accent: "#ffaa00";
     margin-bottom: 20px;
 }
 
-.margin-bottom-20-small{
-    @include Middle-less{
+.margin-bottom-20-small {
+    @include Middle-less {
         margin-bottom: 20px;
     }
 }
 
-.margin-top-20-small{
-    @include Middle-less{
+.margin-top-20-small {
+    @include Middle-less {
         margin-top: 20px;
     }
 }
-
-
 
 .margin-left-5 {
     margin-left: 5px;
@@ -519,7 +533,7 @@ $atomic-color-accent: "#ffaa00";
     padding-top: 0 !important;
 }
 
-.padding-top-5{
+.padding-top-5 {
     padding-top: 5px;
 }
 

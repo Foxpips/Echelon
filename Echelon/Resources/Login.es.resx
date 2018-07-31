@@ -147,4 +147,22 @@
   <data name="EmailPasswordError" xml:space="preserve">
     <value>Email no Password son malo!</value>
   </data>
+    <data name="RecoverPassword" xml:space="preserve">
+    <value>Recover Password</value>
+  </data>
+    <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+    <data name="Instructions" xml:space="preserve">
+    <value>Enter your Email and instructions will be sent to you!</value>
+  </data>
+    <data name="ForgottenPassword" xml:space="preserve">
+    <value>Forgotten Password</value>
+  </data>
+    <data name="AccountAlreadyExists" xml:space="preserve">
+    <value>Sorry this account already exists!</value>
+  </data>
+    <data name="AccountCreationError" xml:space="preserve">
+    <value>Sorry there was a problem creating your account, please try again later</value>
+  </data>
 </root>
