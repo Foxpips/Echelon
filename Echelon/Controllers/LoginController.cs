@@ -56,22 +56,6 @@ namespace Echelon.Controllers
                 : RedirectToAction("Account", "Error");
         }
 
-        public ActionResult ForgottenPassword()
-        {
-           return View(); 
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgottenPassword(ForgottenPasswordModel forgottenPasswordModel)
-        {
-            if (ModelState.IsValid)
-            {
-                await _loginMediator.ResetPassword(forgottenPasswordModel.Email);
-            }
-
-            return View();
-        }
+       
     }
 }

@@ -22,7 +22,7 @@ namespace Echelon.Tests.Data.Raven
         {
             _dataService = new RavenDataService(new ClientLogger());
             await _dataService.Create(new UserEntity { FirstName = "TestName", Email = "Test@gmail.com" });
-            await _dataService.Create(new EmailTemplateEntity { Body = "Body Test", Subject = "Subject Test", Type = EmailTemplateEnum.ForgottenPassword });
+            await _dataService.Create(new EmailTemplateEntity { Body = "Body Test", Subject = "Subject Test", Type = EmailTemplateEnum.ResetPassword });
         }
 
         [Test]

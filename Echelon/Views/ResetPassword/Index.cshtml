@@ -5,7 +5,7 @@
     <title>@Login.ForgottenPassword</title>
 }
 
-@using (Html.BeginForm("ForgottenPassword", "Login", FormMethod.Post, new {id = "recoverform", @class = "form__container form__container--border"}))
+@using (Html.BeginForm("Index", "ResetPassword", FormMethod.Post, new {id = "recoverform", @class = "form__container form__container--border"}))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, Login.LoginFailed)

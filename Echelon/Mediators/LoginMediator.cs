@@ -5,7 +5,6 @@ using Echelon.Core.Infrastructure.MassTransit.Extensions;
 using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Core.Infrastructure.Settings;
 using Echelon.Data.Entities.Users;
-using Echelon.Infrastructure.Settings;
 using Echelon.Models.ViewModels;
 using MassTransit;
 using Microsoft.Owin;
@@ -61,14 +60,6 @@ namespace Echelon.Mediators
                 }, QueueSettings.General);
 
             return false;
-        }
-
-        public async Task ResetPassword(string email)
-        {
-            await _bus.SendMessage(new ResetPasswordCommand
-            {
-                Email = email
-            });
         }
     }
 }

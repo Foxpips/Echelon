@@ -59,7 +59,6 @@ namespace Echelon.Mediators
             try
             {
                 var tempUserEntity = _mapper.Map<TempUserEntity>(registerViewModel);
-                //tempUserEntity.Id = Guid.NewGuid().ToString();
 
                 if (await _loginService.IsRegistered(tempUserEntity.Email))
                 {
@@ -69,7 +68,7 @@ namespace Echelon.Mediators
                 await _bus.SendMessage(new RegisterNewUserCommand
                 {
                     User = tempUserEntity,
-                    RegisterUrl = $"{registerUrl}/{tempUserEntity.Id}",
+                    RegisterUrl = $"{registerUrl}/{tempUserEntity.Id}"
                 }, QueueSettings.Registration);
 
                 return RegistrationEnum.Success;

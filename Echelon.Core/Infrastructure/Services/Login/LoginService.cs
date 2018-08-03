@@ -92,8 +92,7 @@ namespace Echelon.Core.Infrastructure.Services.Login
 
         public async Task<bool> IsRegistered(string email)
         {
-            var currentUsers = await _dataservice.Query<UserEntity>(x => x.Where(y => y.Email.Equals(email)));
-            return currentUsers.Any();
+            return await _dataservice.Exists<UserEntity>(email);
         }
     }
 }

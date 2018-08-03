@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Core
@@ -17,6 +19,23 @@ namespace Echelon.Tests.Core
             });
 
             Console.WriteLine(getNetwork);
+        }
+
+        [Test]
+        public void Method_Scenario_Result2()
+        {
+            var strings = "one,two,three".Split(',');
+
+            Console.WriteLine(strings.Contains("one"));
+
+
+            foreach (var s in strings)
+            {
+                if (Regex.IsMatch(s,"one"))
+                {
+                    Console.WriteLine(true);
+                }
+            }
         }
     }
 

@@ -24,7 +24,7 @@ namespace Echelon.Tests.Core
             _dataService = new RavenDataService(clientLogger);
             _emailSenderService = new EmailSenderService(new RavenDataService(clientLogger), _emailTokenHelper,
                 clientLogger);
-            await _dataService.Create(EmailTemplateSettings.ForgottenPassword);
+            await _dataService.Create(EmailTemplateSettings.ResetPassword);
             await _dataService.Create(EmailTemplateSettings.AccountConfirmation);
         }
 
@@ -33,7 +33,7 @@ namespace Echelon.Tests.Core
         {
             await
                 _emailSenderService.Send("simonpmarkey@gmail.com", EmailTemplateEnum.AccountConfirmation,
-                    new {username = "Foxpips", registerlink = "Why hello there world!"});
+                    new {username = "Foxpips", link = "Why hello there world!"});
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Echelon.Tests.Core
         {
             var emailTemplate =
                 await _dataService.Single<EmailTemplateEntity>(entities =>
-                    entities.Where(userEntity => userEntity.Type == EmailTemplateEnum.ForgottenPassword));
+                    entities.Where(userEntity => userEntity.Type == EmailTemplateEnum.ResetPassword));
 
             Assert.NotNull(emailTemplate);
         }

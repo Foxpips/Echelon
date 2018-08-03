@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Data.Entities;
@@ -129,6 +128,11 @@ namespace Echelon.Data.DataProviders.RavenDb
                 await session.SaveChangesAsync();
                 return transformedTypes.SingleOrDefault();
             });
+        }
+
+        public async Task<bool> Exists<TType>(string id)
+        {
+            return await OpenAndReturn(async session => await session.LoadAsync<TType>(id)) != null;
         }
 
         public async Task<TTransformedType> GetIndex<TTransformer, TTransformedType>(string id)

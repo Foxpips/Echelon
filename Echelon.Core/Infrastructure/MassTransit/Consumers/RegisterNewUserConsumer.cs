@@ -28,7 +28,7 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
                 new
                 {
                     username = message.User.DisplayName,
-                    registerlink = message.RegisterUrl
+                    link = message.RegisterUrl
                 });
         }
     }

@@ -66,6 +66,11 @@ namespace Echelon.Data.DataProviders.MongoDb
             throw new NotImplementedException();
         }
 
+        public Task<bool> Exists<TType>(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<UserAvatarEntity> TransformUserAvatars(string id)
         {
             throw new NotImplementedException();

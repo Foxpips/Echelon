@@ -17,5 +17,6 @@ namespace Echelon.Data
         Task<TType> Single<TType>(Func<IQueryable<TType>, IQueryable<TType>> action);
         Task DeleteDocuments<TType>();
         Task<TType> TransformUserAvatars<TType>(string id);
+        Task<bool> Exists<TType>(string id);
     }
 }

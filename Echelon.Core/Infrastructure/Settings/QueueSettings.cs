@@ -5,5 +5,6 @@
         public const string QueueEndpoint = "rabbitmq://localhost/";
         public const string General = "general_queue";
         public const string Registration = "registration_queue";
+        public const string ResetPassword = "resetPassword_queue";
     }
 }

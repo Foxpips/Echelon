@@ -271,7 +271,9 @@
     <Compile Include="Controllers\Api\EmbedController.cs" />
     <Compile Include="Controllers\Api\AvatarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Mediators\ResetPasswordMediator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -304,6 +306,8 @@
     <Compile Include="Controllers\ExternalLoginController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
+    <Compile Include="Models\ValidationModels\ForgotPasswordViewModelValidator.cs" />
+    <Compile Include="Models\ValidationModels\ResetPasswordViewModelValidator.cs" />
     <Compile Include="Models\ValidationModels\RegisterViewModelValidator.cs" />
     <Compile Include="Models\ValidationModels\LoginViewModelValidator.cs" />
     <Compile Include="Models\ValidationModels\ProfileViewModelValidator.cs" />
@@ -444,7 +448,7 @@
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Favicon.cshtml" />
-    <Content Include="Views\Login\ForgottenPassword.cshtml" />
+    <Content Include="Views\ResetPassword\Index.cshtml" />
     <Content Include="Views\Navigation\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Error\Account.cshtml" />
@@ -458,6 +462,7 @@
     <Content Include="Views\Register\RegistrationSuccess.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\ResetPassword\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

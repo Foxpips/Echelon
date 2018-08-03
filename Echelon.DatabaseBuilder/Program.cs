@@ -32,7 +32,7 @@ namespace Echelon.DatabaseBuilder
 
             await CreateSampleUsers();
 
-            await _dataService.Create(EmailTemplateSettings.ForgottenPassword);
+            await _dataService.Create(EmailTemplateSettings.ResetPassword);
             await _dataService.Create(EmailTemplateSettings.AccountConfirmation);
 
             await Console.Out.WriteLineAsync("Finished");
