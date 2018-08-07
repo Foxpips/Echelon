@@ -4,6 +4,7 @@ using Echelon.Core.Helpers;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Data.DataProviders.RavenDb;
 using Echelon.Data.Entities.Avatar;
+using Echelon.Data.Entities.Email;
 using Echelon.Data.Entities.Users;
 using Echelon.DatabaseBuilder.EmailTemplates;
 using Echelon.Misc.Enums;
@@ -14,7 +15,7 @@ namespace Echelon.DatabaseBuilder
     {
         private static RavenDataService _dataService;
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             Task.Run(async () =>
             {
@@ -32,8 +33,12 @@ namespace Echelon.DatabaseBuilder
 
             await CreateSampleUsers();
 
-            await _dataService.Create(EmailTemplateSettings.ResetPassword);
-            await _dataService.Create(EmailTemplateSettings.AccountConfirmation);
+            var type = typeof(EmailTemplateSettings);
+            foreach (var fieldInfo in type.GetProperties())
+            {
+                var entity = fieldInfo.GetValue(type) as EmailTemplateEntity;
+                await _dataService.Create(entity);
+            }
 
             await Console.Out.WriteLineAsync("Finished");
         }

@@ -268,6 +268,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\BaseApiController.cs" />
     <Compile Include="Controllers\Api\EmbedController.cs" />
     <Compile Include="Controllers\Api\AvatarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -294,6 +295,8 @@
     <Compile Include="Mediators\LoginMediator.cs" />
     <Compile Include="Mediators\ProfileMediator.cs" />
     <Compile Include="Mediators\RegisterMediator.cs" />
+    <Compile Include="Models\ViewModels\AvatarViewModel.cs" />
+    <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Mediators\TokenMediator.cs" />
     <Compile Include="Models\BusinessModels\GooglePlusInfo.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -462,7 +465,9 @@
     <Content Include="Views\Register\RegistrationSuccess.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\ResetPassword\ResetPassword.cshtml" />
+    <Content Include="Views\ResetPassword\ResetPasswordSuccess.cshtml" />
+    <Content Include="Views\ResetPassword\ConfirmResetPassword.cshtml" />
+    <Content Include="Views\ResetPassword\ResetPasswordForm.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

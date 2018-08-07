@@ -1,5 +1,4 @@
-﻿using Echelon.Core.Infrastructure.MassTransit.Extensions;
-using Echelon.Data.Entities.Users;
+﻿using Echelon.Data.Entities.Users;
 
 namespace Echelon.Core.Infrastructure.MassTransit.Commands.Register
 {

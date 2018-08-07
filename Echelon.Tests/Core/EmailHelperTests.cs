@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.Services.Email;
 using Echelon.Core.Infrastructure.Services.Email.Components;
@@ -26,6 +27,17 @@ namespace Echelon.Tests.Core
                 clientLogger);
             await _dataService.Create(EmailTemplateSettings.ResetPassword);
             await _dataService.Create(EmailTemplateSettings.AccountConfirmation);
+        }
+
+        [Test]
+        public void Create_EmailTemplates_Dynamically()
+        {
+            var type = typeof(EmailTemplateSettings);
+            foreach (var fieldInfo in type.GetProperties())
+            {
+                var entity = fieldInfo.GetValue(type) as EmailTemplateEntity;
+                Console.WriteLine(entity?.Subject);
+            }
         }
 
         [Test]

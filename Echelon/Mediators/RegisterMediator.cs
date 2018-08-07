@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using Echelon.Core.Extensions.MassTransit;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Register;
-using Echelon.Core.Infrastructure.MassTransit.Extensions;
 using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Core.Infrastructure.Settings;
 using Echelon.Core.Logging.Loggers;

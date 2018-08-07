@@ -1,6 +1,4 @@
-﻿using Echelon.Core.Infrastructure.MassTransit.Extensions;
-
-namespace Echelon.Core.Infrastructure.MassTransit.Commands.Logging
+﻿namespace Echelon.Core.Infrastructure.MassTransit.Commands.ResetPassword
 {
     public class ResetPasswordCommand : IBusCommand
     {

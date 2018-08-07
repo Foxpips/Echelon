@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
+using Echelon.Core.Infrastructure.MassTransit.Commands.ResetPassword;
 using Echelon.Core.Infrastructure.Services.Email;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Misc.Enums;
@@ -22,7 +23,7 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
             var message = context.Message;
             await
                 _emailSenderService.Send(message.Email, EmailTemplateEnum.ResetPassword,
-                    new {resetLink = message.ResetLink});
+                    new {link = message.ResetLink});
         }
     }
 }

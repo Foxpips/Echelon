@@ -3,8 +3,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 using AutoMapper;
+using Echelon.Core.Extensions.MassTransit;
 using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
-using Echelon.Core.Infrastructure.MassTransit.Extensions;
 using Echelon.Core.Infrastructure.Settings;
 using Echelon.Data;
 using Echelon.Data.Entities.Avatar;
@@ -49,7 +49,7 @@ namespace Echelon.Mediators
         {
             if (file != null && file.ContentLength > 0 && file.FileName != null)
             {
-                await _bus.SendMessage(new LogInfoCommand {Content = $"Uploading : {file.FileName}"}, QueueSettings.General);
+                await _bus.SendMessage(new LogInfoCommand { Content = $"Uploading : {file.FileName}" }, QueueSettings.General);
 
                 if (file.ContentLength > 0)
                 {
@@ -58,7 +58,7 @@ namespace Echelon.Mediators
 
                     if (hasExistingAvatar == true)
                     {
-                        file.SaveAs(Path.GetFileName(user.AvatarUrl));
+                        file.SaveAs(Path.Combine(server, Path.GetFileName(user.AvatarUrl)));
                     }
                     else
                     {
@@ -76,7 +76,7 @@ namespace Echelon.Mediators
             file.SaveAs(Path.Combine(server, avatarFileName));
 
             var userEntity = await _dataService.Load<UserEntity>(email);
-            var avatarEntity = new AvatarEntity {AvatarUrl = avatarUrl};
+            var avatarEntity = new AvatarEntity { AvatarUrl = avatarUrl };
 
             await _dataService.Create(avatarEntity);
             await _dataService.Update<UserEntity>(currentUser => currentUser.AvatarId = avatarEntity.Id, userEntity.Id);

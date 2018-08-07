@@ -7,16 +7,16 @@ using MassTransit;
 
 namespace Echelon.Core.Infrastructure.MassTransit.Consumers
 {
-    public class DeleteFileConsumer : IConsumer<DeleteFileCommand>
+    public class DeleteFileConsumer : BaseConsumer<DeleteFileCommand>
     {
         private readonly IClientLogger _clientLogger;
 
-        public DeleteFileConsumer(IClientLogger clientLogger)
+        public DeleteFileConsumer(IClientLogger clientLogger) : base(clientLogger)
         {
             _clientLogger = clientLogger;
         }
 
-        public async Task Consume(ConsumeContext<DeleteFileCommand> context)
+        protected override async Task ConsumeInternal(ConsumeContext<DeleteFileCommand> context)
         {
             await Console.Out.WriteLineAsync($"Logging Info: {context.Message.FilePath}");
             _clientLogger.Info($"Deleting file: {context.Message.FilePath}");

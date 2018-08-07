@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Echelon.Core.Infrastructure.Settings;
+using Echelon.Data.Entities.Users;
 using NUnit.Framework;
 
 namespace Echelon.Tests.Core
 {
     public class FuncTests
     {
+        [Test]
+        public void LoadConsts_Dynamically_Result()
+        {
+            var type = typeof(QueueSettings);
+
+            var fieldInfos = type.GetFields();
+
+            foreach (var fieldInfo in fieldInfos)
+            {
+                Console.WriteLine(fieldInfo.GetValue(type).ToString());
+            }
+        }
+
         [Test]
         public void Method_Scenario_Result()
         {

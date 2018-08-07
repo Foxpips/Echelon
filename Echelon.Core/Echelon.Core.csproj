@@ -133,13 +133,14 @@
     <Compile Include="Infrastructure\Exceptions\RegisterAccountException.cs" />
     <Compile Include="Infrastructure\Exceptions\TaskRunnerConsumerException.cs" />
     <Compile Include="Infrastructure\MassTransit\Commands\File\DeleteFileCommand.cs" />
-    <Compile Include="Infrastructure\MassTransit\Commands\Logging\ResetPasswordCommand.cs" />
+    <Compile Include="Infrastructure\MassTransit\Commands\ResetPassword\ResetPasswordCommand.cs" />
     <Compile Include="Infrastructure\MassTransit\Commands\Register\RegisterNewUserCommand.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\BaseConsumer.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\DeleteFileConsumer.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\ResetPasswordConsumer.cs" />
     <Compile Include="Infrastructure\MassTransit\Consumers\RegisterNewUserConsumer.cs" />
-    <Compile Include="Infrastructure\MassTransit\Extensions\MassTransitExtensions.cs" />
+    <Compile Include="Infrastructure\MassTransit\Commands\IBusCommand.cs" />
+    <Compile Include="Extensions\MassTransit\MassTransitExtensions.cs" />
     <Compile Include="Extensions\Autofac\AutofacExtensions.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Infrastructure\Settings\QueueSettings.cs" />

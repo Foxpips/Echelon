@@ -4,6 +4,12 @@ namespace Echelon.Data.Entities
 {
     public abstract class EntityBase
     {
-        public virtual string Id { get;} = Guid.NewGuid().ToString();
+        private string _id;
+
+        public virtual string Id
+        {
+            get { return _id ?? (_id = Guid.NewGuid().ToString()); }
+            set { _id = value; }
+        }
     }
 }

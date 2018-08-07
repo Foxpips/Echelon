@@ -52,8 +52,8 @@ namespace Echelon.Mediators
         private async Task<string> SetGoogleAvatar(ExternalLoginInfo externalLoginInfoAsync)
         {
             var requestUri =
-                new Uri(SiteSettings.GoogleProfileUri + externalLoginInfoAsync.ExternalIdentity.Claims.Where(
-                    c => c.Type.Equals(SiteSettings.GoogleAccessToken))
+                new Uri(SiteSettings.GoogleProfileUri + externalLoginInfoAsync.ExternalIdentity.Claims
+                    .Where(c => c.Type.Equals(SiteSettings.GoogleAccessToken))
                     .Select(c => c.Value)
                     .FirstOrDefault());
 

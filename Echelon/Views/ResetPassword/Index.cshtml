@@ -5,39 +5,44 @@
     <title>@Login.ForgottenPassword</title>
 }
 
-@using (Html.BeginForm("Index", "ResetPassword", FormMethod.Post, new {id = "recoverform", @class = "form__container form__container--border"}))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, Login.LoginFailed)
+<section id="wrapper" class="profile-container">
+    <div class="profile-container__information">
+        @using (Html.BeginForm("Index", "ResetPassword", FormMethod.Post, new {id = "resetform", @class = "form__container form__container--border"}))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, Login.LoginFailed)
 
-    <div class="form-group ">
-        <div class="col-xs-12">
-            <h3>@Login.RecoverPassword</h3>
-            <p class="text-muted">@Login.Instructions </p>
-        </div>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h3>@Login.RecoverPassword</h3>
+                    <p class="text-muted">@Login.Instructions </p>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    @Html.TextBoxFor(u => u.Email, new
+                    {
+                        @class = "form-control",
+                        placeholder = "Email",
+                        required = "true",
+                        oninvalid = "this.setCustomValidity('" + Login.MissingEmail + "')",
+                        oninput = "setCustomValidity('')"
+                    })
+                </div>
+            </div>
+            <div class="form-group text-align-center margin-top-20">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">@Login.Reset</button>
+                </div>
+            </div>
+        }
     </div>
-    <div class="form-group ">
-        <div class="col-xs-12">
-            @Html.TextBoxFor(u => u.Email, new
-            {
-                @class = "form-control",
-                placeholder = "Email",
-                required = "true",
-                oninvalid = "this.setCustomValidity('" + Login.MissingEmail + "')",
-                oninput = "setCustomValidity('')"
-            })
-        </div>
-    </div>
-    <div class="form-group text-align-center margin-top-20">
-        <div class="col-xs-12">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">@Login.Reset</button>
-        </div>
-    </div>
-}
+</section>
+
 
 @section scripts {
     <script>
-        $(function () {
+        $(function() {
         });
     </script>
 }

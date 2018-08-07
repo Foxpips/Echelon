@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Echelon.Core.Infrastructure.Exceptions;
 using Echelon.Data;
 using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Users;
@@ -40,8 +39,7 @@ namespace Echelon.Core.Infrastructure.Services.Login
                     new Claim(ClaimTypes.Name, userEntity.DisplayName ?? userEntity.Email)
                 };
 
-                var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie, ClaimTypes.Email,
-                    ClaimTypes.Role);
+                var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie, ClaimTypes.Email, ClaimTypes.Role);
 
                 await LogUserOut(authenticationManager);
 

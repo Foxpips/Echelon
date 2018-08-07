@@ -27,22 +27,27 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(ProfileViewModel profileViewModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("", @"Please enter a Username!");
-                return View(profileViewModel);
+                await _profileMediator.UpdateUser(profileViewModel, Email);
+                return View();
             }
 
-            await _profileMediator.UpdateUser(profileViewModel, Email);
-            return View();
+            ModelState.AddModelError("", @"Please enter a Username!");
+            return View(profileViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UploadAvatar(ProfileViewModel profileViewModel)
+        public async Task<ActionResult> UploadAvatar(AvatarViewModel avatarViewModel)
         {
-            await _profileMediator.UploadUserAvatar(profileViewModel.File, Email, Server.MapPath("~/UserAvatars/"));
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _profileMediator.UploadUserAvatar(avatarViewModel.File, Email, Server.MapPath("~/UserAvatars/"));
+                return RedirectToAction("Index");
+            }
+
+            return View("Index");
         }
     }
 }

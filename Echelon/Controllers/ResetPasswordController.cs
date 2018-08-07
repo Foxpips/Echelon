@@ -26,36 +26,52 @@ namespace Echelon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(ForgottenPasswordModel forgottenPasswordModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("", @"Please enter a valid email!");
-                return View();
+                await _resetPasswordMediator.ResetPassword(forgottenPasswordModel.Email,
+                    Url.Action("ResetPasswordForm", "ResetPassword", null, Request.Url?.Scheme));
+
+                return RedirectToAction("ConfirmResetPassword");
             }
 
-            await _resetPasswordMediator.ResetPassword(forgottenPasswordModel.Email, Url.Action("ResetPassword", "ResetPassword", null, Request.Url?.Scheme));
+            ModelState.AddModelError("", @"Please enter a valid email!");
+            return View(forgottenPasswordModel);
+        }
 
+        [HttpGet]
+        public ActionResult ConfirmResetPassword()
+        {
             return View();
         }
 
-        public async Task<ActionResult> ResetPassword(string id)
+        [HttpGet]
+        public async Task<ActionResult> ResetPasswordForm(string id)
         {
-            var resetPasswordViewModel = await _resetPasswordMediator.GetUserToReset(id);
+            var resetPasswordViewModel = await _resetPasswordMediator.GetUserToResetById(id);
             if (resetPasswordViewModel != null)
             {
                 return View(resetPasswordViewModel);
             }
-            return RedirectToAction("Index","Error");
+            return RedirectToAction("Index", "Error");
         }
 
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel resetPasswordModel)
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPasswordForm(ResetPasswordViewModel resetPasswordModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("", @"Please enter a valid password!");
-                return View();
+                await _resetPasswordMediator.UpdateUser(resetPasswordModel);
+                return RedirectToAction("ResetPasswordSuccess");
             }
 
-            await _resetPasswordMediator.UpdateUser(resetPasswordModel);
+            ModelState.AddModelError("", @"Please enter a valid password!");
+            return View(resetPasswordModel);
+        }
+
+        public ActionResult ResetPasswordSuccess()
+        {
             return View();
         }
     }

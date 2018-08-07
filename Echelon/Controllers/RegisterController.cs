@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Echelon.Core.Infrastructure.Exceptions;
 using Echelon.Mediators;
@@ -48,6 +47,7 @@ namespace Echelon.Controllers
                 }
             }
 
+            ModelState.AddModelError("", @"Apologies something went wrong, please try again later!");
             return View(registerViewModel);
         }
 

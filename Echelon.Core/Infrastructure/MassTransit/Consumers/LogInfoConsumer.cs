@@ -6,16 +6,16 @@ using MassTransit;
 
 namespace Echelon.Core.Infrastructure.MassTransit.Consumers
 {
-    public class LogInfoConsumer : IConsumer<LogInfoCommand>
+    public class LogInfoConsumer : BaseConsumer<LogInfoCommand>
     {
         private readonly IClientLogger _clientLogger;
 
-        public LogInfoConsumer(IClientLogger clientLogger)
+        public LogInfoConsumer(IClientLogger clientLogger) : base(clientLogger)
         {
             _clientLogger = clientLogger;
         }
 
-        public async Task Consume(ConsumeContext<LogInfoCommand> context)
+        protected override async Task ConsumeInternal(ConsumeContext<LogInfoCommand> context)
         {
             await Console.Out.WriteLineAsync($"Logging Info: {context.Message.Content}");
             _clientLogger.Info($"Logging Info: {context.Message.Content}");

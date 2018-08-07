@@ -1,4 +1,5 @@
 ﻿using Echelon.Mediators;
+using Echelon.Models.ViewModels;
 using FluentValidation;
 
 namespace Echelon.Models.ValidationModels

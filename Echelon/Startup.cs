@@ -10,8 +10,8 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
+using Echelon.Core.Logging.Loggers;
 using Echelon.Infrastructure.Attributes;
-using Echelon.Infrastructure.Exceptions.Filters;
 using Echelon.Infrastructure.Settings;
 using Echelon.Infrastructure.Validation;
 using FluentValidation.Mvc;
@@ -39,6 +39,7 @@ namespace Echelon
             var container = builder.RegisterCustomModules(true, targetAssembly).Build();
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
+            app.Use<CustomLoggingMiddleware>(container.Resolve<IClientLogger>());
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
@@ -51,8 +52,6 @@ namespace Echelon
             ConfigureCookies(app);
             ConfigureValidation(container);
             ConfigureApplication();
-
-    
         }
 
         private static void ConfigureApplication()
@@ -86,7 +85,7 @@ namespace Echelon
             {
                 ClientId = SiteSettings.GoogleClientId,
                 ClientSecret = SiteSettings.GoogleClientSecrect,
-                Scope = {"profile email"},
+                Scope = { "profile email" },
                 Provider = new GoogleOAuth2AuthenticationProvider
                 {
                     OnAuthenticated = (context) =>
@@ -102,6 +101,22 @@ namespace Echelon
                     }
                 }
             });
+        }
+    }
+
+    public class CustomLoggingMiddleware : OwinMiddleware
+    {
+        private readonly IClientLogger _logger;
+
+        public CustomLoggingMiddleware(OwinMiddleware next, IClientLogger logger) : base(next)
+        {
+            _logger = logger;
+        }
+
+        public override async Task Invoke(IOwinContext context)
+        {
+            _logger.Info($"{context.Request.Scheme} {context.Request.Method}: {context.Request.Path}");
+            await Next.Invoke(context);
         }
     }
 }

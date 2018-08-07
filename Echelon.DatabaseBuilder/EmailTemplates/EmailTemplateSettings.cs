@@ -7,8 +7,8 @@ namespace Echelon.DatabaseBuilder.EmailTemplates
     {
         public static EmailTemplateEntity ResetPassword => new EmailTemplateEntity
         {
-            Subject = "Forgotten Password",
-            Body = "Forgot your password?\n No Problem. Just click the link below to reset it\n {{link}} \n If you did not request to have your password reset please ignore this email.",
+            Subject = "Reset Password",
+            Body = "In order to reset your password simply click the link below\n {{link}} \nIf you did not request to have your password reset please ignore this email.",
             Type = EmailTemplateEnum.ResetPassword
         };
 
