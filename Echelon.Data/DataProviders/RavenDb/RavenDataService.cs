@@ -35,7 +35,7 @@ namespace Echelon.Data.DataProviders.RavenDb
             catch (Exception e)
             {
                 _clientLogger.Error($"Accessing Ravendb query error:{e.Message}");
-                throw;
+                throw new RavenDataServiceException(e);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Echelon.Data.DataProviders.RavenDb
             catch (Exception e)
             {
                 _clientLogger.Error($"Accessing Ravendb query error:{e.Message}");
-                throw;
+                throw new RavenDataServiceException(e);
             }
         }
 
@@ -122,7 +122,7 @@ namespace Echelon.Data.DataProviders.RavenDb
         {
             return await OpenAndReturn(async session =>
             {
-                var userEntities = session.Query<UserEntity>().Customize(c=>c.WaitForNonStaleResults()).Where(x => x.Email.Equals(id));
+                var userEntities = session.Query<UserEntity>().Customize(c => c.WaitForNonStaleResults()).Where(x => x.Email.Equals(id));
                 var transformedTypes = await userEntities.TransformWith<UserAvatarTransform, TType>().ToListAsync();
 
                 await session.SaveChangesAsync();

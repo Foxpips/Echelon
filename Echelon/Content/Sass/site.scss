@@ -64,14 +64,6 @@ body:after{
     font-family: cursive, Helvetica, sans-serif;
 }
 
-.preload * {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
-    display: none;
-}
-
 .validation-summary-errors {
     color: $color-identifier;
 }

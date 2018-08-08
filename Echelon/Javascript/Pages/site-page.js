@@ -23,12 +23,12 @@ var SitePage = function () {
             storageControl.add("theme", "theme-Light");
         }
 
-        let currentThemeHref = $('link[rel=stylesheet]')[0].href;
-        let newThemeHref = currentThemeHref.replace(/theme-\w*/,  storageControl.get("theme"));
+        const currentThemeHref = $('link[rel=stylesheet]')[0].href;
+        const newThemeHref = currentThemeHref.replace(/theme-\w*/,  storageControl.get("theme"));
         $('link[rel=stylesheet]')[0].href = newThemeHref;
 
         $(window).load(function () {
-            $("html").removeClass("preload");
+            $("#htmlContainer").removeAttr("style");
         });
 
         if ($userAvatar.length > 0) {

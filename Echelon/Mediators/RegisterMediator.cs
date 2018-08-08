@@ -8,8 +8,9 @@ using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Core.Infrastructure.Settings;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Data;
+using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Users;
-using Echelon.Infrastructure.Settings;
+using Echelon.Misc.Enums;
 using Echelon.Models.ViewModels;
 using MassTransit;
 
@@ -38,7 +39,11 @@ namespace Echelon.Mediators
             try
             {
                 var tempUserEntity = await _dataService.Load<TempUserEntity>(tempUserId);
-                await _dataService.Create(_mapper.Map<UserEntity>(tempUserEntity));
+                var avatarEntity = new AvatarEntity { FileType = FileTypeEnum.Png, AvatarUrl = "https://localhost/Echelon/Content/Images/missing-image.png" };
+                var userEntity = _mapper.Map<UserEntity>(tempUserEntity, options => options.AfterMap((source, dest) => ((UserEntity) dest).AvatarId = avatarEntity.Id));
+
+                await _dataService.Create(avatarEntity);
+                await _dataService.Create(userEntity);
                 await _dataService.Delete<TempUserEntity>(tempUserId);
             }
             catch (Exception ex)

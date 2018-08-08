@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataProviders\RavenDb\RavenDataServiceException.cs" />
     <Compile Include="Entities\Avatar\AvatarEntity.cs" />
     <Compile Include="Entities\Categories\CategoryEntity.cs" />
     <Compile Include="Entities\Email\EmailTemplateEntity.cs" />

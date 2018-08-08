@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\AutoFac\Modules\HelperModule.cs" />
+    <Compile Include="Infrastructure\Exceptions\DataServiceException.cs" />
     <Compile Include="Infrastructure\Exceptions\RegisterAccountException.cs" />
     <Compile Include="Infrastructure\Exceptions\TaskRunnerConsumerException.cs" />
     <Compile Include="Infrastructure\MassTransit\Commands\File\DeleteFileCommand.cs" />
