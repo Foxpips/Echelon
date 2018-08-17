@@ -274,6 +274,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Infrastructure\Middleware\CustomLoggingMiddleware.cs" />
     <Compile Include="Mediators\ResetPasswordMediator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

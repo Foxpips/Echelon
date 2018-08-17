@@ -8,7 +8,7 @@
 }
 
 body:after{
-  content: "beta";
+  content: "Alpha";
   position: fixed;
   width: 80px;
   height: 25px;
@@ -39,6 +39,10 @@ body:after{
             color: $color-text-alternate;
         }
     }
+
+    &__link{
+        color: #5cb4ff;
+    }
 }
 
 .main-background {
@@ -60,7 +64,6 @@ body:after{
 }
 
 .window-container {
-    /*font-family: 'Helvetica Neue', Helvetica, sans-serif;*/
     font-family: cursive, Helvetica, sans-serif;
 }
 
@@ -164,10 +167,9 @@ iframe {
 .footer {
     position: fixed;
     bottom: 0;
-    width: 100%;
+    @extend .width-100-percent;
     height: 10%;
     background-color: $color-shadow-darkest;
-    /*display: flex;*/
     display: none;
     flex-direction: column;
     color: $text-color;

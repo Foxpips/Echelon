@@ -8,6 +8,7 @@ using Echelon.Data.Entities.Avatar;
 using Echelon.Data.Entities.Email;
 using Echelon.Data.Entities.Transforms;
 using Echelon.Data.Entities.Users;
+using Echelon.DatabaseBuilder.EmailTemplates;
 using Echelon.Misc.Enums;
 using NUnit.Framework;
 
@@ -22,7 +23,13 @@ namespace Echelon.Tests.Data.Raven
         {
             _dataService = new RavenDataService(new ClientLogger());
             await _dataService.Create(new UserEntity { FirstName = "TestName", Email = "Test@gmail.com" });
-            await _dataService.Create(new EmailTemplateEntity { Body = "Body Test", Subject = "Subject Test", Type = EmailTemplateEnum.ResetPassword });
+
+            var type = typeof(EmailTemplateSettings);
+            foreach (var fieldInfo in type.GetProperties())
+            {
+                var entity = fieldInfo.GetValue(type) as EmailTemplateEntity;
+                await _dataService.Create(entity);
+            }
         }
 
         [Test]
@@ -38,7 +45,6 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task Read_User_Database()
         {
-            await Task.Delay(TimeSpan.FromSeconds(1));
             var users = await _dataService.Query<UserEntity>(entities => entities.Where(userEntity => userEntity.Email == "Test@gmail.com"));
             Assert.IsTrue(users.Any());
         }
@@ -46,10 +52,8 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task Remove_Add_User_Success()
         {
-            await
-                _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; },
-                    "test@gmail.com");
-            var loginEntities = await _dataService.Read<UserEntity>();
+            await _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; }, "Test@gmail.com");
+            var loginEntities = await _dataService.Query<UserEntity>(x => x.Where(y => y.DisplayName != null));
             Assert.That(loginEntities.Any(x => x.DisplayName.Equals("updated@gmail.com")));
         }
 
@@ -73,8 +77,8 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task CreateEmail_Templates_Success()
         {
-            var expected = await _dataService.Read<EmailTemplateEntity>();
-            Assert.AreEqual("Body Test", expected.SingleOrDefault()?.Body);
+            var expected = await _dataService.Load<EmailTemplateEntity>(((int)EmailTemplateEnum.ResetPassword).ToString());
+            Assert.AreEqual(EmailTemplateSettings.ResetPassword.Body, expected.Body);
         }
 
         [Test]
@@ -105,9 +109,5 @@ namespace Echelon.Tests.Data.Raven
             await _dataService.DeleteDocuments<EmailTemplateEntity>();
             await _dataService.DeleteDocuments<AvatarEntity>();
         }
-    }
-
-    public class Iteme
-    {
     }
 }

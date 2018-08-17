@@ -12,6 +12,7 @@ using Echelon;
 using Echelon.Core.Extensions.Autofac;
 using Echelon.Core.Logging.Loggers;
 using Echelon.Infrastructure.Attributes;
+using Echelon.Infrastructure.Middleware;
 using Echelon.Infrastructure.Settings;
 using Echelon.Infrastructure.Validation;
 using FluentValidation.Mvc;
@@ -39,7 +40,7 @@ namespace Echelon
             var container = builder.RegisterCustomModules(true, targetAssembly).Build();
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
-            app.Use<CustomLoggingMiddleware>(container.Resolve<IClientLogger>());
+            //app.Use<CustomLoggingMiddleware>(container.Resolve<IClientLogger>());
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
@@ -101,22 +102,6 @@ namespace Echelon
                     }
                 }
             });
-        }
-    }
-
-    public class CustomLoggingMiddleware : OwinMiddleware
-    {
-        private readonly IClientLogger _logger;
-
-        public CustomLoggingMiddleware(OwinMiddleware next, IClientLogger logger) : base(next)
-        {
-            _logger = logger;
-        }
-
-        public override async Task Invoke(IOwinContext context)
-        {
-            _logger.Info($"{context.Request.Scheme} {context.Request.Method}: {context.Request.Path}");
-            await Next.Invoke(context);
         }
     }
 }

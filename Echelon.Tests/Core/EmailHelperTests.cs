@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Echelon.Core.Infrastructure.Services.Email;
 using Echelon.Core.Infrastructure.Services.Email.Components;
@@ -23,20 +22,13 @@ namespace Echelon.Tests.Core
         {
             var clientLogger = new ClientLogger();
             _dataService = new RavenDataService(clientLogger);
-            _emailSenderService = new EmailSenderService(new RavenDataService(clientLogger), _emailTokenHelper,
-                clientLogger);
-            await _dataService.Create(EmailTemplateSettings.ResetPassword);
-            await _dataService.Create(EmailTemplateSettings.AccountConfirmation);
-        }
+            _emailSenderService = new EmailSenderService(new RavenDataService(clientLogger), _emailTokenHelper, clientLogger);
 
-        [Test]
-        public void Create_EmailTemplates_Dynamically()
-        {
             var type = typeof(EmailTemplateSettings);
             foreach (var fieldInfo in type.GetProperties())
             {
                 var entity = fieldInfo.GetValue(type) as EmailTemplateEntity;
-                Console.WriteLine(entity?.Subject);
+                await _dataService.Create(entity);
             }
         }
 

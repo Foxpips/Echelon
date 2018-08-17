@@ -4,20 +4,19 @@
 @import "../Themes//*@echo title*/";
 
 .login {
-    @extend .width-100-percent;
-    @extend .height-100-percent;
-    @extend .position-relative;
-    @extend .margin-0-auto;
-    margin-top: calc(20vh - 80px);
-
-    @include Middle-more {
-        width: 400px;
-    }
-
     &__container {
+        @extend .width-100-percent;
+        @extend .height-100-percent;
+        @extend .position-relative;
+        @extend .margin-0-auto;
+        margin-top: calc(20vh - 80px);
         z-index: 4;
         padding: 25px;
         color: $color-text;
+
+        @include Middle-more {
+            width: 400px;
+        }
     }
 
     &__social {

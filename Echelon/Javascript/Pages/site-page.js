@@ -17,14 +17,15 @@ var SitePage = function () {
 
     //constructor
     (function () {
-        const selectedTheme = storageControl.get("theme");
+        let selectedTheme = storageControl.get("theme");
 
         if (selectedTheme === undefined) {
-            storageControl.add("theme", "theme-Light");
+            selectedTheme = "theme-Light";
+            storageControl.add("theme", selectedTheme);
         }
 
         const currentThemeHref = $('link[rel=stylesheet]')[0].href;
-        const newThemeHref = currentThemeHref.replace(/theme-\w*/,  storageControl.get("theme"));
+        const newThemeHref = currentThemeHref.replace(/theme-\w*/, selectedTheme);
         $('link[rel=stylesheet]')[0].href = newThemeHref;
 
         $(window).load(function () {

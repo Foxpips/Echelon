@@ -135,7 +135,7 @@ i.material-icons:nth-of-type(3):after {
 i.material-icons:hover {
     background-color: white;
     border-radius: 50%;
-    transform: rotate(90deg);
+    transform: rotate(360deg);
     cursor: pointer;
     box-shadow: none;
 }
@@ -147,7 +147,6 @@ p {
 }
 
 @media (min-width:993px) {
-
 
     i.material-icons:after {
         border-width: 3px;

@@ -64,7 +64,7 @@ namespace Echelon.Data.DataProviders.RavenDb
 
         public async Task<IList<TType>> Read<TType>()
         {
-            return await OpenAndReturn(async session => await session.Query<TType>().ToListAsync());
+            return await OpenAndReturn(async session => await session.Query<TType>().Customize(x => x.WaitForNonStaleResults()).ToListAsync());
         }
 
         public async Task<TType> Load<TType>(string id)
@@ -76,7 +76,7 @@ namespace Echelon.Data.DataProviders.RavenDb
         {
             return await OpenAndReturn(async session =>
             {
-                var types = await action(session.Query<TType>()).ToListAsync();
+                var types = await action(session.Query<TType>().Customize(cust => cust.WaitForNonStaleResults())).ToListAsync();
                 await session.SaveChangesAsync();
                 return types;
             });

@@ -37,6 +37,10 @@
 }
 
 .chat {
+    &__container {
+        padding: 50px 0 0 0;
+    }
+
     &__send-message {
         position: absolute;
 

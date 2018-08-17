@@ -5,8 +5,8 @@
     <title>@Login.ForgottenPassword</title>
 }
 
-<section id="wrapper" class="profile-container">
-    <div class="profile-container__information">
+<section id="wrapper" class="page-container">
+    <div class="page-container__information">
         <h3>@Login.RecoverPassword</h3>
         @using (Html.BeginForm("Index", "ResetPassword", FormMethod.Post, new {id = "resetform", @class = "form__container form__container--border"}))
         {

@@ -40,10 +40,10 @@
     &__overlay {
         display: none;
         width: 100%;
-        height: calc(100% - 60px) !important;
+        height: 100vh;
         z-index: 3;
         background-color: black;
-        position: absolute;
+        position: fixed;
         opacity: 0.5;
 
         &--right {
