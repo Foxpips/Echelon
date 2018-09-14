@@ -427,6 +427,7 @@
     <Content Include="Javascript\Helpers\ajax-helper.js" />
     <Content Include="Javascript\Helpers\cookie-helper.js" />
     <Content Include="Javascript\Helpers\regex-helper.js" />
+    <Content Include="Javascript\Pages\chathub-page.js" />
     <Content Include="Javascript\Pages\login-page.js" />
     <Content Include="Javascript\Pages\profile-page.js" />
     <Content Include="Javascript\Pages\chat-page.js" />

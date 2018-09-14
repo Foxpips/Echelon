@@ -4,17 +4,22 @@
     <title>Echelon Chat</title>
 }
 
-<section>
-    <div class="form__container">
-        <i class="fa fa-th-list fa-1" aria-hidden="true"></i>
-        <ul>
-            @if (Model?.Categories != null)
+@Html.AntiForgeryToken()
+<section id="container" class="page-container__information">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            @foreach (var item in Model.Categories)
             {
-                foreach (var category in Model.Categories)
-                {
-                    <li>@category.Name</li>
-                }
+                <div>@item.Name</div>
             }
-        </ul>
+        </div>
     </div>
 </section>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            ChatPage();
+        });
+    </script>
+}

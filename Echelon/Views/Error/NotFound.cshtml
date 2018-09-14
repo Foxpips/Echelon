@@ -2,15 +2,17 @@
     <title>Echelon Chat</title>
 }
 
-<section>
-    <div class="alert alert-danger fade in alert-dismissable error">
-        @Html.Raw(ViewBag.ErrorMessage)
+<section class="page-container">
+    <div class="page-container__information">
+        <div class="alert alert-danger fade in shake">
+            @Html.Raw(ViewBag.ErrorMessage)
+        </div>
     </div>
 </section>
 
 @section scripts {
     <script>
-        $(function() {
+        $(function () {
         });
     </script>
 }
