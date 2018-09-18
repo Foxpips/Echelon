@@ -8,11 +8,11 @@ var ChatControl = function (notificationControl, avatarControl) {
 
     var $body = $("body");
     var $loading = $("#loading");
-    var container = $("#container");
+    var $container = $("#container");
 
     var messageContainer = document.getElementById("messages");
-    var $chatWindow = container.find("#messages");
-    var $participants = container.find("#users");
+    var $chatWindow = $container.find("#messages");
+    var $participants = $container.find("#users");
 
     var $input = $("#chat-input");
     var $sendButton = $("#sendButton");
@@ -139,7 +139,7 @@ var ChatControl = function (notificationControl, avatarControl) {
     function renderMessage(fromUser, $message, $time, $container, $user, renderAvatar, avatarUrl) {
         if (fromUser === lastOtherAuthor) {
             $container.append($message);
-            $(container.find(".message-container__timestamp").last()).hide();
+            $($container.find(".message-container__timestamp").last()).hide();
         }
         else {
             if (renderAvatar) {

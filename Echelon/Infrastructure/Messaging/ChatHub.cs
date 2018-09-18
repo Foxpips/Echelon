@@ -9,9 +9,9 @@ namespace Echelon.Infrastructure.Messaging
     {
         private static readonly ConcurrentDictionary<string, string> Dic = new ConcurrentDictionary<string, string>();
 
-        public void Send(string name, string message)
+        public void Send(string name, string message, string uniqueId)
         {
-            Clients.All.SendMessage(name, message);
+            Clients.All.SendMessage(name, message, uniqueId);
         }
 
         public void SendToSpecific(string name, string message, string to)

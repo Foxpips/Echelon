@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Echelon.Data;
 using Echelon.Data.Entities.Users;
 using Microsoft.Owin;
-using Twilio.Auth;
 
 namespace Echelon.Mediators
 {
@@ -32,25 +31,12 @@ namespace Echelon.Mediators
         {
             // Create a random identity for the client
             var user = _owinContext.Authentication.User;
-            var userEntity =
-                await _dataService.Load<UserEntity>(user.Identity.Name);
+            var userEntity = await _dataService.Load<UserEntity>(user.Identity.Name);
             var identity = new {username = userEntity.DisplayName, uniqueuserid = userEntity.UniqueIdentifier};
-
-            // Create an Access Token generator
-            var token = new AccessToken(AccountSid, ApiKey, ApiSecret) {Identity = identity.uniqueuserid};
-
-            // Create an IP messaging grant for this token
-            token.AddGrant(new IpMessagingGrant
-            {
-                EndpointId = $"EchelonChat:{identity}:{device}",
-                ServiceSid = IpmServiceSid
-            });
 
             return new
             {
                 identity,
-                category = channel,
-                token = token.ToJWT()
             };
         }
     }
