@@ -1,6 +1,6 @@
 ﻿/*jshint esversion: 6 */
 
-var ChatHubController = function (identity) {
+var ChatHubController = function (userToken) {
     var chat = $.connection.chatHub;
     const $hub = $.connection.hub;
 
@@ -8,14 +8,13 @@ var ChatHubController = function (identity) {
     const $sendMessage = $("#sendButton");
 
     var $window = $(window);
+    var $loading = $("#loading");
     var $container = $("#container");
-    var messageContainer = document.getElementById("messages");
-
-    var lastOtherAuthor = "";
     var $chatWindow = $container.find("#messages");
     var $participants = $container.find("#users");
-    var $loading = $("#loading");
+    var messageContainer = document.getElementById("messages");
 
+    var previousSender = "";
     var members = [];
 
     //constructor
@@ -31,32 +30,74 @@ var ChatHubController = function (identity) {
         $loading.hide();
     })();
 
+    chat.client.ChangeName = function () {
+        chat.server.notify(userToken.username, $hub.id);
+    };
+
+    chat.client.Online = function (name, avatarUrl) {
+        $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" src=${avatarUrl} alt=""><div class="sidebar__participant--username">${name}</div></div>`));
+    };
+
+    chat.client.Enters = function (name) {
+        $chatWindow.append(`<div class="border"><i>${name} enters chatroom</i></div>`);
+        members.push(name);
+    };
+
+    chat.client.SendMessage = function (user, message) {
+        console.log("here");
+        console.log(user);
+        console.log(message);
+        if (userToken.uniqueId === user.UniqueId) {
+            self.printMessage(user, message);
+        } else {
+            self.printReceivedMessage(user, message);
+        }
+    };
+
+    chat.client.Disconnected = function (name) {
+        $chatWindow.append(`<div class="border"><i>${name} leaves chatroom</i></div>`);
+    };
+
+    $.connection.hub.start().done(function () {
+        chat.server.notify(userToken, $hub.id);
+
+        $sendMessage.on("click", function () {
+            chat.server.send(userToken, $message.val());
+            $message.val("").focus();
+        });
+    });
+
     function scrollToLatestMessage() {
         const rsize = $window.height() - 200;
         $chatWindow.height(rsize);
         $chatWindow.scrollTop(messageContainer.scrollHeight);
     }
 
-    self.printMessage = function (timestamp, content) {
-        const $container = $("<div class=\"message-container\">");
-        const $user = $("<div class=\"message-container__username message-container__username--me\">").text(content.username);
-        const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
-        const $currentmessage = $("<div class=\"message-container__message message-container__message--me\">");
-        $currentmessage.html(content.message, $currentmessage);
-        renderMessage(`${content.uniqueuserid}${content.username}`, $currentmessage, $time, $container, $user, false);
+    self.printMessage = function (content, message) {
+        console.log("here 2");
+        console.log(content.UniqueId);
+        console.log(content.UserName);
+
+        const $containerHtml = $("<div class=\"message-container\">");
+        const $userHtml = $("<div class=\"message-container__username message-container__username--me\">").text(content.UserName);
+        const $currentmessageHtml = $("<div class=\"message-container__message message-container__message--me\">");
+        $currentmessageHtml.html(message, $currentmessageHtml);
+        renderMessage(`${content.UniqueId}${content.UserName}`, $currentmessageHtml, $containerHtml, $userHtml, false);
     };
 
-    self.printReceivedMessage = function (timestamp, content) {
-        const $container = $("<div class=\"message-container message-container--other\" >");
-        const $user = $("<div class=\"message-container__username message-container__username--other\">").text(content.username);
-        const $time = $("<div class=\"message-container__timestamp\">").text(` ${timestamp.toLocaleTimeString()}`);
-        const $currentmessage = $("<div class=\"message-container__message message-container__message--other\" >");
-        $currentmessage.html(content.message, $currentmessage);
-        renderMessage(`${content.uniqueuserid}${content.username}`, $currentmessage, $time, $container, $user, true, content.avatar);
+    self.printReceivedMessage = function (content, message) {
+        const $containerHtml = $("<div class=\"message-container message-container--other\" >");
+        const $userHtml = $("<div class=\"message-container__username message-container__username--other\">").text(content.UserName);
+        const $currentmessageHtml = $("<div class=\"message-container__message message-container__message--other\" >");
+        $currentmessageHtml.html(message, $currentmessageHtml);
+        renderMessage(`${content.UniqueId}${content.UserName}`, $currentmessageHtml, $containerHtml, $userHtml, true, content.AvatarUrl);
     };
 
-    function renderMessage(fromUser, $currentmessage, $time, $chatcontainer, $user, renderAvatar, avatarUrl) {
-        if (fromUser === lastOtherAuthor) {
+    function renderMessage(currentSender, $currentmessage, $chatcontainer, $user, renderAvatar, avatarUrl) {
+        console.log(currentSender);
+        console.log(previousSender);
+
+        if (currentSender === previousSender) {
             $chatcontainer.append($currentmessage);
             $($chatcontainer.find(".message-container__timestamp").last()).hide();
         }
@@ -73,56 +114,9 @@ var ChatHubController = function (identity) {
 
             $chatcontainer.append($user).append($currentmessage);
         }
-
-        $chatcontainer.append($time);
+        $chatcontainer.append($("<div class=\"message-container__timestamp\">").text(` ${new Date().toLocaleTimeString()}`));
         $chatWindow.append($chatcontainer);
         $chatWindow.scrollTop($chatWindow[0].scrollHeight);
-        lastOtherAuthor = fromUser;
+        previousSender = currentSender;
     }
-
-    chat.client.ChangeName = function () {
-        chat.server.notify(identity.username, $hub.id);
-    };
-
-    chat.client.Online = function (name) {
-        $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" alt="avatar"><div class="sidebar__participant--username">${name}</div></div>`));
-    };
-
-    chat.client.Enters = function (name) {
-        $chatWindow.append(`<div class="border"><i>${name} enters chatroom</i></div>`);
-        members.push(name);
-    };
-
-    chat.client.SendMessage = function (name, message, uniqueId) {
-        const timestamp = new Date();
-
-        let content = {
-            name: name,
-            message: message,
-            uniqueId: uniqueId,
-            avatar: ""
-        };
-
-        console.log(content);
-
-        if (identity.uniqueuserid === uniqueId) {
-            self.printMessage(timestamp, content);
-        } else {
-            self.printReceivedMessage(timestamp, content);
-        }
-    };
-
-    chat.client.Disconnected = function (name) {
-        $chatWindow.append(`<div class="border"><i>${name} leaves chatroom</i></div>`);
-    };
-
-    $.connection.hub.start()
-        .done(function () {
-            chat.server.notify(identity.username, $hub.id);
-            $sendMessage.click(function () {
-                console.log("asd");
-                chat.server.send(identity.username, $message.val(), identity.uniqueuserid);
-                $message.val("").focus();
-            });
-        });
 };

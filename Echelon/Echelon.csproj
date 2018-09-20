@@ -459,7 +459,6 @@
     <Content Include="Views\Error\Account.cshtml" />
     <Content Include="Views\Login\Help.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Chat\ChatHub.cshtml" />
     <Content Include="Views\Shared\_Screensaver.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />

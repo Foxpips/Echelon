@@ -80,9 +80,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Echelon.Tests\Twilio\TwilioConnectionTests.cs">
-      <Link>TwilioConnectionTests.cs</Link>
-    </Compile>
     <Compile Include="MassTransitService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

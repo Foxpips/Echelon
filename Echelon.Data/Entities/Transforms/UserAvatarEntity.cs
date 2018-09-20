@@ -6,6 +6,6 @@ namespace Echelon.Data.Entities.Transforms
 
         public string AvatarUrl { get; set; }
 
-        public string Email { get; set; }
+        public string UniqueIdentifier { get; set; }
     }
 }

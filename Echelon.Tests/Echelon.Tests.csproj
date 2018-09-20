@@ -124,7 +124,6 @@
     <Compile Include="Logging\ClientLoggerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest\RestManagerTests.cs" />
-    <Compile Include="Twilio\TwilioConnectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

@@ -80,7 +80,6 @@ namespace Echelon.Core.Infrastructure.Services.Login
 
             await _dataservice.Create(userEntity);
             await _dataservice.Create(avatarEntity);
-
         }
 
         public async Task CreateTempUser(TempUserEntity tempUserEntity)

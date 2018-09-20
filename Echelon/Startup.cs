@@ -92,11 +92,10 @@ namespace Echelon
                     OnAuthenticated = (context) =>
                     {
                         context.Identity.AddClaim(new Claim("urn:google:name",
-                            context.Identity.FindFirstValue(ClaimTypes.Name)));
+                        context.Identity.FindFirstValue(ClaimTypes.Name)));
                         context.Identity.AddClaim(new Claim("urn:google:email",
-                            context.Identity.FindFirstValue(ClaimTypes.Email)));
-                        context.Identity.AddClaim(new Claim("urn:google:accesstoken", context.AccessToken,
-                            ClaimValueTypes.String, "Google"));
+                        context.Identity.FindFirstValue(ClaimTypes.Email)));
+                        context.Identity.AddClaim(new Claim("urn:google:accesstoken", context.AccessToken, ClaimValueTypes.String, "Google"));
 
                         return Task.FromResult(0);
                     }
