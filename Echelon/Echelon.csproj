@@ -283,7 +283,6 @@
     <Compile Include="Infrastructure\Autofac\Modules\AutoMapperModule.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\ValidatorModule.cs" />
     <Compile Include="Infrastructure\Autofac\Modules\MediatorModule.cs" />
-    <Compile Include="Infrastructure\Autofac\Modules\MvcModule.cs" />
     <Compile Include="Infrastructure\AutoMapper\Profiles\RegisterProfile.cs" />
     <Compile Include="Infrastructure\AutoMapper\Profiles\UserProfile.cs" />
     <Compile Include="Infrastructure\Exceptions\Filters\ApiExceptionFilter.cs" />

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -46,7 +45,7 @@ namespace Echelon.Controllers.Api
                     var item = new
                     {
                         url = avatarEntity.AvatarUrl ?? "https://localhost/Echelon/Content/Images/missing-image.png",
-                        username = avatarEntity.DisplayName
+                        username = avatarEntity.UserName
                     };
 
                     urllist.Add(item);

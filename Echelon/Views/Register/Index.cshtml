@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.Email, new {@class = "form-control", placeholder = "Email", type = "email", required = "true" })
+                        @Html.TextBoxFor(u => u.Email, new {@class = "form-control", placeholder = "Email", type = "email", required = "true"})
                         @Html.ValidationMessageFor(u => u.Email)
                     </div>
                 </div>
@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.Password, new {@class = "form-control", placeholder = "Password", type = "password", required="true"})
+                        @Html.TextBoxFor(u => u.Password, new {@class = "form-control", placeholder = "Password", type = "password", required = "true"})
                         @Html.ValidationMessageFor(u => u.Password)
                     </div>
                 </div>
@@ -31,8 +31,8 @@
             <div class="row">
                 <div class="col-xs-12 margin-top-10 text-align-center">
                     <div class="form-group">
-                        @Html.TextBoxFor(u => u.DisplayName, new {@class = "form-control", placeholder = "UserName", required = "true"})
-                        @Html.ValidationMessageFor(u => u.DisplayName)
+                        @Html.TextBoxFor(u => u.UserName, new {@class = "form-control", placeholder = "UserName", required = "true"})
+                        @Html.ValidationMessageFor(u => u.UserName)
                     </div>
                 </div>
             </div>

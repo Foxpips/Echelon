@@ -20,11 +20,11 @@ namespace Echelon.Tests.Mapping
             {
                 Email = "Test@Test.com",
                 Password = "TestPassword",
-                DisplayName = "TestDisplayName"
+                UserName = "TestDisplayName"
             };
             var userEntity = Mapper.Instance.Map<UserEntity>(tempUserEntity);
 
-            Assert.That(userEntity.DisplayName.Equals(tempUserEntity.DisplayName));
+            Assert.That(userEntity.UserName.Equals(tempUserEntity.UserName));
         }
 
         public class ProductProfile : Profile

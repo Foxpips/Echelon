@@ -10,9 +10,7 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Echelon;
 using Echelon.Core.Extensions.Autofac;
-using Echelon.Core.Logging.Loggers;
 using Echelon.Infrastructure.Attributes;
-using Echelon.Infrastructure.Middleware;
 using Echelon.Infrastructure.Settings;
 using Echelon.Infrastructure.Validation;
 using FluentValidation.Mvc;
@@ -86,16 +84,17 @@ namespace Echelon
             {
                 ClientId = SiteSettings.GoogleClientId,
                 ClientSecret = SiteSettings.GoogleClientSecrect,
-                Scope = { "profile email" },
+                Scope = {"profile email"},
                 Provider = new GoogleOAuth2AuthenticationProvider
                 {
                     OnAuthenticated = (context) =>
                     {
                         context.Identity.AddClaim(new Claim("urn:google:name",
-                        context.Identity.FindFirstValue(ClaimTypes.Name)));
+                            context.Identity.FindFirstValue(ClaimTypes.Name)));
                         context.Identity.AddClaim(new Claim("urn:google:email",
-                        context.Identity.FindFirstValue(ClaimTypes.Email)));
-                        context.Identity.AddClaim(new Claim("urn:google:accesstoken", context.AccessToken, ClaimValueTypes.String, "Google"));
+                            context.Identity.FindFirstValue(ClaimTypes.Email)));
+                        context.Identity.AddClaim(new Claim("urn:google:accesstoken", context.AccessToken,
+                            ClaimValueTypes.String, "Google"));
 
                         return Task.FromResult(0);
                     }

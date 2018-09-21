@@ -53,9 +53,9 @@ namespace Echelon.Tests.Data.Raven
         [Test]
         public async Task Remove_Add_User_Success()
         {
-            await _dataService.Update<UserEntity>(entity => { entity.DisplayName = "updated@gmail.com"; }, "Test@gmail.com");
-            var loginEntities = await _dataService.Query<UserEntity>(x => x.Where(y => y.DisplayName != null));
-            Assert.That(loginEntities.Any(x => x.DisplayName.Equals("updated@gmail.com")));
+            await _dataService.Update<UserEntity>(entity => { entity.UserName = "updated@gmail.com"; }, "Test@gmail.com");
+            var loginEntities = await _dataService.Query<UserEntity>(x => x.Where(y => y.UserName != null));
+            Assert.That(loginEntities.Any(x => x.UserName.Equals("updated@gmail.com")));
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace Echelon.Tests.Data.Raven
             var userEntity = new UserEntity
             {
                 Email = "deleteTest@gmail.com",
-                DisplayName = "Test",
+                UserName = "Test",
                 Password = HashHelper.CreateHash("password1")
             };
 

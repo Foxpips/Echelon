@@ -1,5 +1,3 @@
-using System;
-
 namespace Echelon.Models.ViewModels
 {
     public class ResetPasswordViewModel

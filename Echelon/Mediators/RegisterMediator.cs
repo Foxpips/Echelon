@@ -39,8 +39,13 @@ namespace Echelon.Mediators
             try
             {
                 var tempUserEntity = await _dataService.Load<TempUserEntity>(tempUserId);
-                var avatarEntity = new AvatarEntity { FileType = FileTypeEnum.Png, AvatarUrl = "https://localhost/Echelon/Content/Images/missing-image.png" };
-                var userEntity = _mapper.Map<UserEntity>(tempUserEntity, options => options.AfterMap((source, dest) => ((UserEntity) dest).AvatarId = avatarEntity.Id));
+                var avatarEntity = new AvatarEntity
+                {
+                    FileType = FileTypeEnum.Png,
+                    AvatarUrl = "https://localhost/Echelon/Content/Images/missing-image.png"
+                };
+                var userEntity = _mapper.Map<UserEntity>(tempUserEntity,
+                    options => options.AfterMap((source, dest) => ((UserEntity) dest).AvatarId = avatarEntity.Id));
 
                 await _dataService.Create(avatarEntity);
                 await _dataService.Create(userEntity);

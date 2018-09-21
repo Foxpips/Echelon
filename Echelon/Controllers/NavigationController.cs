@@ -23,10 +23,10 @@ namespace Echelon.Controllers
             {
                 Categories = new List<Category>()
                 {
-                    new Category{Name = "Gaming"},
-                    new Category{Name = "Music"},
-                    new Category{Name = "Work"},
-                    new Category{Name = "Anime"}
+                    new Category {Name = "Gaming"},
+                    new Category {Name = "Music"},
+                    new Category {Name = "Work"},
+                    new Category {Name = "Anime"}
                 }
             });
         }

@@ -39,7 +39,7 @@ namespace Echelon.Mediators
         {
             await _dataService.Update<UserEntity>(user =>
             {
-                user.DisplayName = profileViewModel.DisplayName;
+                user.UserName = profileViewModel.UserName;
                 user.FirstName = profileViewModel.FirstName;
                 user.LastName = profileViewModel.LastName;
             }, email);
@@ -49,7 +49,9 @@ namespace Echelon.Mediators
         {
             if (file != null && file.ContentLength > 0 && file.FileName != null)
             {
-                await _bus.SendMessage(new LogInfoCommand { Content = $"Uploading : {file.FileName}" }, QueueSettings.General);
+                await
+                    _bus.SendMessage(new LogInfoCommand {Content = $"Uploading : {file.FileName}"},
+                        QueueSettings.General);
 
                 if (file.ContentLength > 0)
                 {
@@ -76,7 +78,7 @@ namespace Echelon.Mediators
             file.SaveAs(Path.Combine(server, avatarFileName));
 
             var userEntity = await _dataService.Load<UserEntity>(email);
-            var avatarEntity = new AvatarEntity { AvatarUrl = avatarUrl };
+            var avatarEntity = new AvatarEntity {AvatarUrl = avatarUrl};
 
             await _dataService.Create(avatarEntity);
             await _dataService.Update<UserEntity>(currentUser => currentUser.AvatarId = avatarEntity.Id, userEntity.Id);

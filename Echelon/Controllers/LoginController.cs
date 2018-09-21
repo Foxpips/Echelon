@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Echelon.Mediators;
 using Echelon.Models.ViewModels;
@@ -56,7 +55,5 @@ namespace Echelon.Controllers
                 ? RedirectToActionPermanent("Index", "Login")
                 : RedirectToAction("Account", "Error");
         }
-
-       
     }
 }

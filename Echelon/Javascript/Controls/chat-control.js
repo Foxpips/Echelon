@@ -46,7 +46,7 @@ var ChatControl = function (notificationControl, avatarControl) {
             }
 
             avatarControl.setParticipantAvatars(members, result => {
-                $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" src=${encodeURI(result.url)} alt="avatar"><div class="sidebar__participant--username">${result.username}</div></div>`));
+                $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" src=${encodeURI(result.url)}><div class="sidebar__participant--username">${result.username}</div></div>`));
             });
 
         }, 1000);
@@ -143,7 +143,7 @@ var ChatControl = function (notificationControl, avatarControl) {
         }
         else {
             if (renderAvatar) {
-                $container.append($(`<img class="avatar avatar--other" src="${avatarUrl}" alt="avatar">`));
+                $container.append($(`<img class="avatar avatar--other" src="${avatarUrl}">`));
             }
 
             if ($message.hasClass("message-container__message--me")) {

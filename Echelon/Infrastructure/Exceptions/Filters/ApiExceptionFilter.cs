@@ -20,7 +20,9 @@ namespace Echelon.Infrastructure.Exceptions.Filters
             clientLogger.Debug($"{guid} {e.StackTrace}");
             actionExecutedContext.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
             {
-                Content = new StringContent($"Error Filter ID: {guid} Apologies an error has occurred! Some features may not function correctly"),
+                Content =
+                    new StringContent(
+                        $"Error Filter ID: {guid} Apologies an error has occurred! Some features may not function correctly"),
                 ReasonPhrase = "Api Internal Server Error has occurred.",
                 StatusCode = HttpStatusCode.InternalServerError,
             };

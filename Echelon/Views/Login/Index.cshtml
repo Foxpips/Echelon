@@ -6,89 +6,89 @@
 }
 
 <section class="page-container">
-        <div class="login__container page-container__information">
-            <h3>@Login.LogIn</h3>
-            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { id = "loginform", @class = "form__container form__container--border" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, Login.LoginFailed)
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            @Html.TextBoxFor(u => u.Email, new
-                       {
-                           @class = "form-control",
-                           placeholder = "Email",
-                           required = "true",
-                           oninvalid = "this.setCustomValidity('" + Login.MissingEmail + "')",
-                           oninput = "setCustomValidity('')"
-                       })
-                            @Html.ValidationMessageFor(u => u.Email)
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            @Html.PasswordFor(u => u.Password, new
-                       {
-                           @class = "form-control",
-                           placeholder = "Password",
-                           required = "true",
-                           oninvalid = "this.setCustomValidity('" + Login.MissingPassword + "')",
-                           oninput = "setCustomValidity('')"
-                       })
-                            @Html.ValidationMessageFor(u => u.Password)
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="form-group text-align-center margin-top-20">
-                            <button class="btn btn-info btn-lg btn-block" type="submit">@Login.LogIn</button>
-                        </div>
-                    </div>
-                </div>
-            }
+    <div class="login__container page-container__information">
+        <h3>@Login.LogIn</h3>
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post, new {id = "loginform", @class = "form__container form__container--border"}))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, Login.LoginFailed)
             <div class="row">
-                <div class="col-xs-12 margin-top-10 text-align-center">
-                    <div class="login__social">
-                        <a class="btn google__btn google__icon fz-df" href="@Url.Action("LoginGoogle", "ExternalLogin")">
-                            <span class="google__label">@Login.GoogleLogIn</span>
-                        </a>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        @Html.TextBoxFor(u => u.Email, new
+                        {
+                            @class = "form-control",
+                            placeholder = "Email",
+                            required = "true",
+                            oninvalid = "this.setCustomValidity('" + Login.MissingEmail + "')",
+                            oninput = "setCustomValidity('')"
+                        })
+                        @Html.ValidationMessageFor(u => u.Email)
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="form-group text-align-center margin-bottom-0">
+                    <div class="form-group">
+                        @Html.PasswordFor(u => u.Password, new
+                        {
+                            @class = "form-control",
+                            placeholder = "Password",
+                            required = "true",
+                            oninvalid = "this.setCustomValidity('" + Login.MissingPassword + "')",
+                            oninput = "setCustomValidity('')"
+                        })
+                        @Html.ValidationMessageFor(u => u.Password)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group text-align-center margin-top-20">
+                        <button class="btn btn-info btn-lg btn-block" type="submit">@Login.LogIn</button>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-xs-12 margin-top-10 text-align-center">
+                <div class="login__social">
+                    <a class="btn google__btn google__icon fz-df" href="@Url.Action("LoginGoogle", "ExternalLogin")">
+                        <span class="google__label">@Login.GoogleLogIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group text-align-center margin-bottom-0">
+                    <div>
                         <div>
-                            <div>
-                                @Login.NoAccount
-                                <a href="@Url.Action("Index", "Register")" class="text-primary margin-left-5">
-                                    <b>@Login.Register</b>
-                                </a>
-                            </div>
-                            <div>
-                                @Login.ForgottenPassword?
-                                <a href="@Url.Action("Index", "ResetPassword")" class="text-primary margin-left-5">
-                                    <b>@Login.Reset</b>
-                                </a>
-                            </div>
+                            @Login.NoAccount
+                            <a href="@Url.Action("Index", "Register")" class="text-primary margin-left-5">
+                                <b>@Login.Register</b>
+                            </a>
+                        </div>
+                        <div>
+                            @Login.ForgottenPassword?
+                            <a href="@Url.Action("Index", "ResetPassword")" class="text-primary margin-left-5">
+                                <b>@Login.Reset</b>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 @section scripts {
     <script>
-        $(function () {
+        $(function() {
             LoginPage();
         });
     </script>

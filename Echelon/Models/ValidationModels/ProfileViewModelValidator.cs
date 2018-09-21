@@ -7,7 +7,7 @@ namespace Echelon.Models.ValidationModels
     {
         public ProfileViewModelValidator()
         {
-            RuleFor(x => x.DisplayName).NotEmpty().WithMessage("*Required");
+            RuleFor(x => x.UserName).NotEmpty().WithMessage("*Required");
         }
     }
 }

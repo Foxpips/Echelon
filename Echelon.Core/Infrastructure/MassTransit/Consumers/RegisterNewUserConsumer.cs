@@ -27,7 +27,7 @@ namespace Echelon.Core.Infrastructure.MassTransit.Consumers
             await _emailSenderService.Send(message.User.Email, EmailTemplateEnum.AccountConfirmation,
                 new
                 {
-                    username = message.User.DisplayName,
+                    username = message.User.UserName,
                     link = message.RegisterUrl
                 });
         }

@@ -18,7 +18,6 @@ namespace Echelon.Controllers.Api
 
         protected override BadRequestResult BadRequest()
         {
-            
             return base.BadRequest();
         }
 

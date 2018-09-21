@@ -7,13 +7,10 @@ var StorageControl = function () {
     (function () {
         if (hasLocalStorage()) {
             localStorageEnabled = true;
-            console.log(localStorageEnabled);
         }
     }());
 
     self.add = function (key, value) {
-        console.log("adding");
-        console.log(key);
         if (localStorageEnabled) {
             localStorage.setItem(key, value);
         } else {
@@ -22,9 +19,6 @@ var StorageControl = function () {
     };
 
     self.get = function (key) {
-        console.log("getting");
-        console.log(key);
-        console.log(localStorageEnabled);
         if (localStorageEnabled) {
             return localStorage.getItem(key) || undefined;
         } else {
@@ -41,20 +35,15 @@ var StorageControl = function () {
     };
 
     function hasLocalStorage() {
-        console.log(localStorageEnabled);
-        console.log(localStorage === "undefined");
         if (localStorage === "undefined") {
-            console.log("has no storage");
             localStorageEnabled = false;
             return;
         }
-        console.log(localStorageEnabled);
         var test = "test";
         try {
             localStorage.setItem(test, test);
             localStorage.removeItem(test);
             localStorageEnabled = true;
-            console.log(localStorageEnabled);
         } catch (e) {
             localStorageEnabled = false;
         }

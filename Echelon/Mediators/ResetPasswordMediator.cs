@@ -2,13 +2,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Echelon.Core.Extensions.MassTransit;
 using Echelon.Core.Helpers;
-using Echelon.Core.Infrastructure.MassTransit.Commands.Logging;
 using Echelon.Core.Infrastructure.MassTransit.Commands.ResetPassword;
 using Echelon.Core.Infrastructure.Services.Login;
 using Echelon.Core.Infrastructure.Settings;
 using Echelon.Data;
 using Echelon.Data.Entities.Users;
-using Echelon.Infrastructure.AutoMapper.Profiles;
 using Echelon.Models.ViewModels;
 using MassTransit;
 
@@ -34,7 +32,7 @@ namespace Echelon.Mediators
             var userExists = await _loginService.IsRegistered(email);
             if (userExists)
             {
-                var resetUserEntity = new ResetPasswordEntity { Email = email };
+                var resetUserEntity = new ResetPasswordEntity {Email = email};
                 await _dataService.Create(resetUserEntity);
 
                 await _bus.SendMessage(new ResetPasswordCommand
@@ -61,7 +59,9 @@ namespace Echelon.Mediators
         public async Task UpdateUser(ResetPasswordViewModel resetViewModel)
         {
             var resetUserEntity = await _dataService.Load<ResetPasswordEntity>(resetViewModel.Id);
-            await _dataService.Update<UserEntity>(x => x.Password = HashHelper.CreateHash(resetViewModel.Password), resetUserEntity.Email);
+            await
+                _dataService.Update<UserEntity>(x => x.Password = HashHelper.CreateHash(resetViewModel.Password),
+                    resetUserEntity.Email);
             await _dataService.Delete<ResetPasswordEntity>(resetViewModel.Id);
         }
     }

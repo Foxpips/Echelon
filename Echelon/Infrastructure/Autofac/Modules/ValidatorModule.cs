@@ -9,7 +9,8 @@ namespace Echelon.Infrastructure.Autofac.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            foreach (var validators in GetType().Assembly.ExportedTypes.Where(type => type.IsAssignableTo<IValidator>()))
+            foreach (var validators in GetType().Assembly.ExportedTypes.Where(type => type.IsAssignableTo<IValidator>())
+                )
             {
                 var validatorInterface = validators.GetInterfaces().Single(IsValidator);
                 builder.RegisterType(validators).As(validatorInterface).SingleInstance();

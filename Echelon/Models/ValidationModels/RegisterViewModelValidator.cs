@@ -9,7 +9,7 @@ namespace Echelon.Models.ValidationModels
         {
             RuleFor(x => x.Email).EmailAddress().NotEmpty().WithMessage("*Required");
             RuleFor(x => x.Password).Length(6, 20).NotEmpty().WithMessage("*Required");
-            RuleFor(x => x.DisplayName).Length(1, 20).NotEmpty().WithMessage("*Required");
+            RuleFor(x => x.UserName).Length(1, 20).NotEmpty().WithMessage("*Required");
         }
     }
 }

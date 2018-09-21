@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
@@ -8,7 +7,8 @@ namespace Echelon.Infrastructure.Messaging
 {
     public class ChatHub : Hub
     {
-        private static readonly ConcurrentDictionary<string, ChatUser> Dic = new ConcurrentDictionary<string, ChatUser>();
+        private static readonly ConcurrentDictionary<string, ChatUser> Dic =
+            new ConcurrentDictionary<string, ChatUser>();
 
         public void Send(ChatUser user, string message)
         {
@@ -27,20 +27,23 @@ namespace Echelon.Infrastructure.Messaging
             Dic.TryAdd(user.UniqueId, user);
             foreach (var entry in Dic)
             {
-                Clients.Caller.Online(entry.Value.UserName, entry.Value.AvatarUrl);
+                Clients.Caller.Online(entry.Value);
             }
 
-            Clients.Others.Enters(user.UserName);
+            Clients.Others.Enters(user);
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
             var name = Dic.FirstOrDefault(x => x.Value.HubId == Context.ConnectionId.ToString());
-            if (string.IsNullOrEmpty(name.Key)) { return Clients.All.Disconnected("User");}
+            if (string.IsNullOrEmpty(name.Key))
+            {
+                return Clients.All.Disconnected("User");
+            }
 
             ChatUser userDisconnecting;
             Dic.TryRemove(name.Key, out userDisconnecting);
-            return Clients.All.Disconnected(name.Value.UserName);
+            return Clients.All.Disconnected(name.Value);
         }
     }
 

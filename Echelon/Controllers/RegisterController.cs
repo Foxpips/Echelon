@@ -30,7 +30,10 @@ namespace Echelon.Controllers
         {
             if (ModelState.IsValid)
             {
-                var registrationResult = await _registerMediator.Register(registerViewModel, Url.Action("RegistrationSuccess", "Register", null, Request.Url?.Scheme));
+                var registrationResult =
+                    await
+                        _registerMediator.Register(registerViewModel,
+                            Url.Action("RegistrationSuccess", "Register", null, Request.Url?.Scheme));
 
                 switch (registrationResult)
                 {
@@ -65,7 +68,7 @@ namespace Echelon.Controllers
                 return View();
             }
 
-            return RedirectToAction("Index", "Error", new { errorId = id });
+            return RedirectToAction("Index", "Error", new {errorId = id});
         }
     }
 }

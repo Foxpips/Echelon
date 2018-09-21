@@ -48,7 +48,7 @@ namespace Echelon.DatabaseBuilder
             var userEntity = new UserEntity
             {
                 Email = "Test@gmail.com",
-                DisplayName = "Test",
+                UserName = "Test",
                 Password = HashHelper.CreateHash("password1")
             };
 
@@ -57,7 +57,7 @@ namespace Echelon.DatabaseBuilder
             var userEntity2 = new UserEntity
             {
                 Email = "simonpmarkey@gmail.com",
-                DisplayName = "Test2",
+                UserName = "Test2",
                 Password = HashHelper.CreateHash("password1")
             };
 

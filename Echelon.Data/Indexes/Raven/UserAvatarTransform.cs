@@ -13,8 +13,8 @@ namespace Echelon.Data.Indexes.Raven
             TransformResults = avatarEntities => avatarEntities.Select(userEntity => new
             {
                 userEntity.Email,
-                userEntity.UniqueIdentifier,
-                userEntity.DisplayName,
+                userEntity.UniqueId,
+                userEntity.UserName,
                 LoadDocument<AvatarEntity>(userEntity.AvatarId).AvatarUrl
             });
         }

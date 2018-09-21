@@ -31,31 +31,31 @@ var ChatHubController = function (userToken) {
     })();
 
     chat.client.ChangeName = function () {
-        chat.server.notify(userToken.username, $hub.id);
+        chat.server.notify(userToken.UserName, $hub.id);
     };
 
-    chat.client.Online = function (name, avatarUrl) {
-        $participants.append($(`<div class="sidebar__participant"><img class="avatar avatar--other avatar--participant" src=${avatarUrl} alt=""><div class="sidebar__participant--username">${name}</div></div>`));
+    chat.client.Online = function (user) {
+        $participants.append($(`<div class="sidebar__participant" data-onlineUser=${user.UniqueId}><img class="avatar avatar--other avatar--participant" src=${user.AvatarUrl} alt=""><div class="sidebar__participant--username">${user.UserName}</div></div>`));
     };
 
-    chat.client.Enters = function (name) {
-        $chatWindow.append(`<div class="border"><i>${name} enters chatroom</i></div>`);
-        members.push(name);
+    chat.client.Enters = function (user) {
+        $chatWindow.append(`<div class="border"><i>${user.UserName} enters chatroom</i></div>`);
+        $participants.append($(`<div class="sidebar__participant" data-onlineUser=${user.UniqueId}><img class="avatar avatar--other avatar--participant" src=${user.AvatarUrl} alt=""><div class="sidebar__participant--username">${user.UserName}</div></div>`));
+        members.push(user.UserName);
     };
 
     chat.client.SendMessage = function (user, message) {
-        console.log("here");
-        console.log(user);
-        console.log(message);
-        if (userToken.uniqueId === user.UniqueId) {
+        if (userToken.UniqueId === user.UniqueId) {
             self.printMessage(user, message);
         } else {
             self.printReceivedMessage(user, message);
         }
     };
 
-    chat.client.Disconnected = function (name) {
-        $chatWindow.append(`<div class="border"><i>${name} leaves chatroom</i></div>`);
+    chat.client.Disconnected = function (user) {
+        $chatWindow.append(`<div class="border"><i>${user.UserName} leaves chatroom</i></div>`);
+        $(`.sidebar__participant[data-onlineUser="${user.UniqueId}"]`).remove();
+
     };
 
     $.connection.hub.start().done(function () {
@@ -74,10 +74,6 @@ var ChatHubController = function (userToken) {
     }
 
     self.printMessage = function (content, message) {
-        console.log("here 2");
-        console.log(content.UniqueId);
-        console.log(content.UserName);
-
         const $containerHtml = $("<div class=\"message-container\">");
         const $userHtml = $("<div class=\"message-container__username message-container__username--me\">").text(content.UserName);
         const $currentmessageHtml = $("<div class=\"message-container__message message-container__message--me\">");
@@ -94,16 +90,13 @@ var ChatHubController = function (userToken) {
     };
 
     function renderMessage(currentSender, $currentmessage, $chatcontainer, $user, renderAvatar, avatarUrl) {
-        console.log(currentSender);
-        console.log(previousSender);
-
         if (currentSender === previousSender) {
             $chatcontainer.append($currentmessage);
             $($chatcontainer.find(".message-container__timestamp").last()).hide();
         }
         else {
             if (renderAvatar) {
-                $chatcontainer.append($(`<img class="avatar avatar--other" src="${avatarUrl}" alt="avatar">`));
+                $chatcontainer.append($(`<img class="avatar avatar--other" src="${avatarUrl}">`));
             }
 
             if ($currentmessage.hasClass("message-container__message--me")) {
