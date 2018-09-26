@@ -397,7 +397,6 @@
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
     <Content Include="Javascript\Controls\avatar-control.js" />
-    <Content Include="Javascript\Controls\chat-control.js" />
     <Content Include="Javascript\Controls\notification-control.js" />
     <Content Include="Content\Sass\Pages\page-profile.scss" />
     <Content Include="Content\Sass\Modules\siteIcons.scss" />
@@ -419,6 +418,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\Sass\Modules\translate.scss" />
     <Content Include="Content\Sass\Modules\formcontrol.scss" />
+    <Content Include="Content\Sass\Modules\loginIcons.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\storage-control.js" />
     <Content Include="Javascript\Controls\popup-control.js" />
@@ -426,7 +426,7 @@
     <Content Include="Javascript\Helpers\ajax-helper.js" />
     <Content Include="Javascript\Helpers\cookie-helper.js" />
     <Content Include="Javascript\Helpers\regex-helper.js" />
-    <Content Include="Javascript\Pages\chathub-page.js" />
+    <Content Include="Javascript\Controls\chathub-control.js" />
     <Content Include="Javascript\Pages\login-page.js" />
     <Content Include="Javascript\Pages\profile-page.js" />
     <Content Include="Javascript\Pages\chat-page.js" />

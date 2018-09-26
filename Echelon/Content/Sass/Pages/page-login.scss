@@ -22,6 +22,7 @@
     &__social {
         @extend .display-block;
         margin-bottom: 30px;
+        display: flex;
     }
 
     &__title {

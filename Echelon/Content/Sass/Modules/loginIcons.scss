@@ -1,0 +1,85 @@
+﻿@import "../mixins";
+@import "atomic.scss";
+@import "../variables";
+@import "../Themes//*@echo title*/";
+
+.social__button {
+    background: #fafafa;
+    border-radius: 5px;
+    color: #737373;
+    white-space: nowrap;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+    transition-property: background-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+
+    @include Middle-less {
+        flex-grow: 1;
+    }
+
+    &--facebook {
+        color: $color-text;
+        background-color: $color-btn-hover;
+        margin-left: 20px;
+    }
+
+    &:focus,
+    &:hover {
+        box-shadow: 3px 4px 5px 3px rgba(0,0,0,.2);
+        text-decoration: none;
+    }
+
+    &:active {
+        background-color: #e5e5e5;
+        box-shadow: none;
+        transition-duration: 10ms;
+    }
+}
+
+.button {
+
+    &__google-icon {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 8px 0 8px 8px;
+        width: 36px;
+        height: 36px;
+        box-sizing: border-box;
+        background-image: url(../../assets/imgs/g-logo.png);
+        background-size: 30px 30px;
+        background-position-y: 4px;
+        background-repeat: no-repeat;
+    }
+
+    &__google-text {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0 24px;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 'Roboto',arial,sans-serif;
+    }
+
+    &__facebook-icon {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 8px 0 8px 8px;
+        width: 36px;
+        height: 36px;
+        box-sizing: border-box;
+        background-image: url(../../assets/imgs/g-logo.png);
+        background-size: 30px 30px;
+        background-position-y: 4px;
+        background-repeat: no-repeat;
+    }
+
+    &__facebook-text {
+        color: $color-white;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0 24px;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 'Roboto',arial,sans-serif;
+    }
+}

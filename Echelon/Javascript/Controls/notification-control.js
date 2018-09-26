@@ -1,8 +1,9 @@
 ﻿/*jshint esversion: 6 */
 
-var NotificationControl = function () {
+var NotificationControl = function (popupControl) {
     var self = this;
     self.windowActive = true;
+    self.showWarning = true;
 
     //constructor
     (function () {
@@ -11,14 +12,14 @@ var NotificationControl = function () {
     })();
 
     //public methods
-    self.sendNotification = function (content) {
+    self.sendNotification = function (user, message) {
         if (self.windowActive === false) {
             if (window.Notification.permission === "granted") {
-                var notification = new window.Notification(content.username,
+                var notification = new window.Notification(user.UserName,
                 {
-                    icon: content.avatar,
-                    body: content.message,
-                    tag: content.username
+                    icon: user.AvatarUrl,
+                    body: message,
+                    tag: user.UserName
                 });
 
                 notification.onclick = () => {
@@ -28,7 +29,11 @@ var NotificationControl = function () {
             }
             else if (window.Notification.permission !== "denied") {
                 Notification.requestPermission(permission => {
+                    popupControl.Success("Notifications are enabled");
                 });
+            } else if(self.showWarning) {
+                self.showWarning = false;
+                popupControl.Warning("Notifications are disabled");
             }
         }
     };

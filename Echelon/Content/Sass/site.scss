@@ -7,24 +7,24 @@
     box-sizing: border-box;
 }
 
-body:after{
-  content: "Alpha";
-  position: fixed;
-  width: 80px;
-  height: 25px;
-  background: #644aee;
-  bottom: 7px;
-  left: -20px;
-  text-align: center;
-  font-size: 13px;
-  font-family: sans-serif;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: #fff;
-  line-height: 27px;
-  -ms-transform:rotate(45deg);
-  -webkit-transform:rotate(45deg);
-  transform:rotate(45deg);
+body:after {
+    content: "Alpha";
+    position: fixed;
+    width: 80px;
+    height: 25px;
+    background: #644aee;
+    bottom: 7px;
+    left: -20px;
+    text-align: center;
+    font-size: 13px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    line-height: 27px;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .theme {
@@ -40,7 +40,7 @@ body:after{
         }
     }
 
-    &__link{
+    &__link {
         color: #5cb4ff;
     }
 }
@@ -160,8 +160,13 @@ iframe {
 }
 
 @keyframes example {
-    from {height: 0%;}
-    to {height: 10%;}
+    from {
+        height: 0%;
+    }
+
+    to {
+        height: 10%;
+    }
 }
 
 .footer {
@@ -173,7 +178,6 @@ iframe {
     display: none;
     flex-direction: column;
     color: $text-color;
-    
     animation-name: example;
     animation-duration: 0.9s;
 
@@ -193,7 +197,7 @@ iframe {
 
         a {
             color: $color-white;
-            border-radius: 0 25px 25px 0px ;
+            border-radius: 0 25px 25px 0px;
 
             &:hover {
                 background-color: $color-primary;
@@ -201,34 +205,44 @@ iframe {
         }
     }
 }
-.shake{
-  animation: shakeAnimation 0.82s cubic-bezier(.36,.07,.49,.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+
+.shake {
+    animation: shakeAnimation 0.82s cubic-bezier(.36,.07,.49,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .shake:hover {
-  animation: shakeAnimation 1.82s cubic-bezier(.56,.27,.39,.99) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+    animation: shakeAnimation 1.82s cubic-bezier(.56,.27,.39,.99) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 @keyframes shakeAnimation {
-  10%, 90% {
-    transform: translate3d(-4px, 0, 0);
-  }
-  
-  20%, 80% {
-    transform: translate3d(6px, 0, 0);
-  }
+    10%, 90% {
+        transform: translate3d(-4px, 0, 0);
+    }
 
-  30%, 50%, 70% {
-    transform: translate3d(-8px, 0, 0);
-  }
+    20%, 80% {
+        transform: translate3d(6px, 0, 0);
+    }
 
-  40%, 60% {
-    transform: translate3d(8px, 0, 0);
-  }
+    30%, 50%, 70% {
+        transform: translate3d(-8px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(8px, 0, 0);
+    }
+}
+
+.toast-top-full-width {
+    top: 10vh !important;
+
+    @include Middle-more{
+        width: 18%;
+        left: 0 !important
+    }
 }

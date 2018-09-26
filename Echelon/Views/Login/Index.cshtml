@@ -57,8 +57,13 @@
         <div class="row">
             <div class="col-xs-12 margin-top-10 text-align-center">
                 <div class="login__social">
-                    <a class="btn google__btn google__icon fz-df" href="@Url.Action("LoginGoogle", "ExternalLogin")">
-                        <span class="google__label">@Login.GoogleLogIn</span>
+                    <a type="button" class="social__button" href="@Url.Action("LoginGoogle", "ExternalLogin")">
+                        <span class="button__google-icon"></span>
+                        <span class="button__google-text">Google</span>
+                    </a>
+                    <a type="button" class="social__button social__button--facebook" href="@Url.Action("LoginGoogle", "ExternalLogin")">
+                        <span class="button__facebook-icon"></span>
+                        <span class="button__facebook-text">Facebook</span>
                     </a>
                 </div>
             </div>

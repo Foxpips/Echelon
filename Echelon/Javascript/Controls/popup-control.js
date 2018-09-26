@@ -8,11 +8,11 @@ var PopupControl = function() {
         "onclick": null,
         "newestOnTop": false,
         "progressBar": false,
-        "positionClass": "toast-bottom-right",
+        "positionClass": "toast-top-full-width",
         "preventDuplicates": true,
         "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "8000",
+        "hideDuration": "100",
+        "timeOut": "5000",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",
@@ -21,16 +21,24 @@ var PopupControl = function() {
     };
 
     self.Information = (text, onclickCallback) => {
+        toastr.clear();
         toastr.options.onclick = onclickCallback;
         toastr.info(text);
     };
 
     self.Error = (text, onclickCallback) => {
+        toastr.clear();
         toastr.options.onclick = onclickCallback;
         toastr.error(text);
     };
 
+    self.Success = (text) => {
+        toastr.clear();
+        toastr.success(text);
+    };
+
     self.Warning = (text, onclickCallback) => {
+        toastr.clear();
         toastr.options.onclick = onclickCallback;
         toastr.warning(text);
     };

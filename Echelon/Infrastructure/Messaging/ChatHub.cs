@@ -12,13 +12,13 @@ namespace Echelon.Infrastructure.Messaging
 
         public void Send(ChatUser user, string message)
         {
-            Clients.All.SendMessage(user, message);
+            Clients.All.ReceiveMessage(user, message);
         }
 
         public void SendToSpecific(ChatUser user, string message, string to)
         {
-            Clients.Caller.SendMessage(user, message);
-            Clients.Client(Dic[to].HubId).SendMessage(user, message);
+            Clients.Caller.ReceiveMessage(user, message);
+            Clients.Client(Dic[to].HubId).ReceiveMessage(user, message);
         }
 
         public void Notify(ChatUser user, string hubId)
