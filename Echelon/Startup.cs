@@ -18,6 +18,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Owin;
 
@@ -78,6 +79,29 @@ namespace Echelon
                 LoginPath = new PathString(SiteSettings.LoginPath),
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 CookieName = SiteSettings.CookieName
+            });
+
+            app.UseFacebookAuthentication(new FacebookAuthenticationOptions
+            {
+                AppId= SiteSettings.FacebookAppId,
+                AppSecret = SiteSettings.FacebookAppSecrect,
+                Scope = { "email" },
+                Provider = new FacebookAuthenticationProvider()
+                {
+                    OnAuthenticated = (context) =>
+                    {
+                        context.Identity.AddClaim(new Claim("urn:facebook:name",
+                            context.Identity.FindFirstValue(ClaimTypes.Name)));
+                        context.Identity.AddClaim(new Claim("urn:facebook:email",
+                            context.Identity.FindFirstValue(ClaimTypes.Email)));
+                        context.Identity.AddClaim(new Claim("urn:facebook:id",
+                            context.Identity.FindFirstValue(ClaimTypes.NameIdentifier)));
+                        context.Identity.AddClaim(new Claim("urn:facebook:accesstoken", context.AccessToken,
+                            ClaimValueTypes.String, "Facebook"));
+
+                        return Task.FromResult(0);
+                    }
+                }
             });
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions

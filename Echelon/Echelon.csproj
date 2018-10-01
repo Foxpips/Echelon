@@ -61,8 +61,8 @@
       <HintPath>..\packages\Autofac.Mvc5.Owin.4.0.1\lib\net45\Autofac.Integration.Mvc.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac.Integration.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Owin.4.0.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
+    <Reference Include="Autofac.Integration.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.4.2.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -130,20 +130,24 @@
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.1.3\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Google, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -399,12 +403,11 @@
     <Content Include="Javascript\Controls\avatar-control.js" />
     <Content Include="Javascript\Controls\notification-control.js" />
     <Content Include="Content\Sass\Pages\page-profile.scss" />
-    <Content Include="Content\Sass\Modules\siteIcons.scss" />
+    <Content Include="Content\Sass\Modules\site-icons.scss" />
     <Content Include="Content\Sass\Modules\screensaver.scss" />
     <Content Include="Content\Sass\Modules\avatar.scss" />
     <Content Include="Content\Sass\Modules\loading.scss" />
-    <Content Include="Content\Sass\Modules\menuIcons.scss" />
-    <Content Include="Content\Sass\Modules\sidemenu.scss" />
+    <Content Include="Content\Sass\Modules\side-menu.scss" />
     <Content Include="Content\Sass\Themes\themeDark.scss" />
     <Content Include="Content\Sass\Themes\themeLight.scss" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -417,8 +420,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\Sass\Modules\translate.scss" />
-    <Content Include="Content\Sass\Modules\formcontrol.scss" />
-    <Content Include="Content\Sass\Modules\loginIcons.scss" />
+    <Content Include="Content\Sass\Modules\form-control.scss" />
+    <Content Include="Content\Sass\Modules\login-icons.scss" />
     <None Include="Javascript\VsDocs\jQuery-vsdoc.2.1.0.js" />
     <Content Include="Javascript\Controls\storage-control.js" />
     <Content Include="Javascript\Controls\popup-control.js" />

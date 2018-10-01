@@ -13,6 +13,7 @@ var NotificationControl = function (popupControl) {
 
     //public methods
     self.sendNotification = function (user, message) {
+        console.log(message);
         if (self.windowActive === false) {
             if (window.Notification.permission === "granted") {
                 var notification = new window.Notification(user.UserName,

@@ -7,6 +7,7 @@ using Echelon.Core.Infrastructure.Services.Rest;
 using Echelon.Data.Entities.Users;
 using Echelon.Infrastructure.Settings;
 using Echelon.Models.BusinessModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -34,11 +35,16 @@ namespace Echelon.Mediators
             return new ChallengeResult(SiteSettings.GoogleProvider, redirectUri, _owinContext);
         }
 
-        public async Task<bool> ExternalLoginSuccess(string returnUrl)
+        internal ChallengeResult FacebookChallengeResult(string redirectUri)
+        {
+            return new ChallengeResult(SiteSettings.FacebokProvider, redirectUri, _owinContext);
+        }
+
+        public async Task<bool> ExternalLoginSuccess(string returnUrl, string provider)
         {
             var externalLoginInfoAsync = await _owinContext.Authentication.GetExternalLoginInfoAsync();
             var userEntity = _mapper.Map<UserEntity>(externalLoginInfoAsync);
-            var avatarUrl = await SetGoogleAvatar(externalLoginInfoAsync);
+            var avatarUrl = await SetAvatar(externalLoginInfoAsync, provider);
 
             if (await _loginService.LogUserIn(userEntity, _owinContext.Authentication))
             {
@@ -49,15 +55,22 @@ namespace Echelon.Mediators
             return await _loginService.LogUserIn(userEntity, _owinContext.Authentication);
         }
 
-        private async Task<string> SetGoogleAvatar(ExternalLoginInfo externalLoginInfoAsync)
+        private async Task<string> SetAvatar(ExternalLoginInfo externalLoginInfo, string provider)
         {
-            var requestUri =
-                new Uri(SiteSettings.GoogleProfileUri + externalLoginInfoAsync.ExternalIdentity.Claims
-                    .Where(c => c.Type.Equals(SiteSettings.GoogleAccessToken))
-                    .Select(c => c.Value)
-                    .FirstOrDefault());
+            switch (provider)
+            {
+                case SiteSettings.FacebokProvider:
+                    return SiteSettings.FacebookProfileUri.Replace("{userId}", externalLoginInfo.ExternalIdentity.GetUserId());
+                case SiteSettings.GoogleProvider:
+                    var requestUri =
+                        new Uri(SiteSettings.GoogleProfileUri + externalLoginInfo.ExternalIdentity.Claims
+                            .Where(c => c.Type.Equals(SiteSettings.GoogleAccessToken))
+                            .Select(c => c.Value)
+                            .FirstOrDefault());
 
-            return (await _restService.MakeGenericRequest<GooglePlusInfo>(requestUri))?.Picture;
+                    return (await _restService.MakeGenericRequest<GooglePlusInfo>(requestUri))?.Picture;
+                default: return string.Empty;
+            }
         }
     }
 }

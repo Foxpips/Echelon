@@ -15,7 +15,7 @@
             else
             {
                 <span class="dropdown-toggle profile float-right margin-top-5" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span><i id="menuHome" class="material-icons fa fa-home"></i></span>
+                    <span><i id="menuHome" class="material-icons fa fa-bars"></i></span>
                 </span>
             }
             <div class="navbar-header">
@@ -30,12 +30,12 @@
     <div id="menuOverlayLeft" class="sidenav__overlay sidenav__overlay--right"></div>
     <div id="leftSideNav" class="sidenav sidenav--left">
         <a href="javascript:void(0)" class="closebtn">&times;</a>
-        @Html.ActionLink("Home", "Index", "Chat", null, new {@class = "sidenav--slides"})
+        @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "sidenav--slides" })
     </div>
 
     <div id="rightSideNav" class="sidenav sidenav--right">
         <a href="javascript:void(0)" class="closebtn">&times;</a>
-        @Html.ActionLink("Profile", "Index", "Profile", null, new {@class = "sidenav--slides"})
+        @Html.ActionLink("Home", "Index", "Chat", null, new { @class = "sidenav--slides" })
         @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new {@class = "sidenav--slides"})
     </div>
     <div id="menuOverlayRight" class="sidenav__overlay sidenav__overlay--left"></div>
@@ -44,7 +44,7 @@ else
 {
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <span class="float-left margin-top-5" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="float-right margin-top-5" role="button" aria-haspopup="true" aria-expanded="false">
                 <a href="@Url.Action("Index", "Login")"><i class="material-icons fa fa-home"></i></a>
             </span> 
         </div>

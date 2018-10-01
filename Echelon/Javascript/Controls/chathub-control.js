@@ -58,6 +58,7 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
             printMyMessage(user, message);
         } else {
             printTheirMessage(user, message);
+            notificationControl.sendNotification(user, message);
         }
     };
 
@@ -88,7 +89,6 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
 
     function sendMessage() {
         chat.server.send(userToken, $message.val());
-        notificationControl.sendNotification(userToken, $message.val);
         $message.val("").focus();
 
         screensaverControl.runScreenSaver();
@@ -103,8 +103,7 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
 
     function printMyMessage(content, message) {
         const $containerHtml = $("<div class=\"message-container\">");
-        const $userHtml = $("<div class=\"message-container__username message-container__username--me\">")
-            .text(content.UserName);
+        const $userHtml = $("<div class=\"message-container__username message-container__username--me\">").text(content.UserName);
         const $currentmessageHtml = $("<div class=\"message-container__message message-container__message--me\">");
         $currentmessageHtml.html(filterLinks(message, $currentmessageHtml));
         renderMessage(`${content.UniqueId}${content.UserName}`, $currentmessageHtml, $containerHtml, $userHtml, false);
@@ -112,16 +111,10 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
 
     function printTheirMessage(content, message) {
         const $containerHtml = $("<div class=\"message-container message-container--other\" >");
-        const $userHtml = $("<div class=\"message-container__username message-container__username--other\">")
-            .text(content.UserName);
+        const $userHtml = $("<div class=\"message-container__username message-container__username--other\">").text(content.UserName);
         const $currentmessageHtml = $("<div class=\"message-container__message message-container__message--other\">");
         $currentmessageHtml.html(filterLinks(message, $currentmessageHtml));
-        renderMessage(`${content.UniqueId}${content.UserName}`,
-            $currentmessageHtml,
-            $containerHtml,
-            $userHtml,
-            true,
-            content.AvatarUrl);
+        renderMessage(`${content.UniqueId}${content.UserName}`, $currentmessageHtml, $containerHtml, $userHtml, true, content.AvatarUrl);
     }
 
     function renderMessage(currentSender, $currentmessage, $chatcontainer, $user, renderAvatar, avatarUrl) {
@@ -141,8 +134,7 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
 
             $chatcontainer.append($user).append($currentmessage);
         }
-        $chatcontainer.append($("<div class=\"message-container__timestamp\">")
-            .text(` ${new Date().toLocaleTimeString()}`));
+        $chatcontainer.append($("<div class=\"message-container__timestamp\">").text(` ${new Date().toLocaleTimeString()}`));
         $chatWindow.append($chatcontainer);
         $chatWindow.scrollTop($chatWindow[0].scrollHeight);
         previousSender = currentSender;

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using Echelon.Infrastructure.Settings;
 using Echelon.Mediators;
 
 namespace Echelon.Controllers
@@ -18,12 +19,19 @@ namespace Echelon.Controllers
         {
             return
                 _externalLoginMediator.GoogleChallengeResult(Url.Action("ExternalLoginCallback", "ExternalLogin",
-                    new {ReturnUrl = returnUrl}));
+                    new { ReturnUrl = returnUrl, Provider = SiteSettings.GoogleProvider }));
         }
 
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        public ActionResult LoginFacebook(string returnUrl)
         {
-            if (await _externalLoginMediator.ExternalLoginSuccess(returnUrl))
+            return
+                _externalLoginMediator.FacebookChallengeResult(Url.Action("ExternalLoginCallback", "ExternalLogin",
+                    new { ReturnUrl = returnUrl, Provider = SiteSettings.FacebokProvider }));
+        }
+
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl, string provider)
+        {
+            if (await _externalLoginMediator.ExternalLoginSuccess(returnUrl, provider))
             {
                 return RedirectToAction("Index", "Chat");
             }
