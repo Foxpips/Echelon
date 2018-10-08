@@ -396,7 +396,6 @@
     <Content Include="Content\Images\spinner-black.gif" />
     <Content Include="Content\Images\white-circles-wallpaper.jpg" />
     <Content Include="Favicons\echelon.ico" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
@@ -410,11 +409,6 @@
     <Content Include="Content\Sass\Modules\side-menu.scss" />
     <Content Include="Content\Sass\Themes\themeDark.scss" />
     <Content Include="Content\Sass\Themes\themeLight.scss" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
@@ -426,6 +420,7 @@
     <Content Include="Javascript\Controls\storage-control.js" />
     <Content Include="Javascript\Controls\popup-control.js" />
     <Content Include="Javascript\Controls\screensaver-control.js" />
+    <Content Include="Javascript\ThirdParty\translate-control.js" />
     <Content Include="Javascript\Helpers\ajax-helper.js" />
     <Content Include="Javascript\Helpers\cookie-helper.js" />
     <Content Include="Javascript\Helpers\regex-helper.js" />

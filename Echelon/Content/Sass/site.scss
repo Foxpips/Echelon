@@ -17,7 +17,7 @@ body:after {
     left: -20px;
     text-align: center;
     font-size: 13px;
-    font-family: sans-serif;
+    /*font-family: sans-serif;*/
     text-transform: uppercase;
     font-weight: bold;
     color: #fff;
@@ -34,10 +34,6 @@ body:after {
 
     &__text {
         color: $color-text;
-
-        &--alternate {
-            color: $color-text-alternate;
-        }
     }
 
     &__link {
@@ -64,7 +60,7 @@ body:after {
 }
 
 .window-container {
-    font-family: cursive, Helvetica, sans-serif;
+    /*font-family: cursive, Helvetica, sans-serif;*/
 }
 
 .validation-summary-errors {
@@ -122,7 +118,7 @@ iframe {
     @extend .overflow-visible;
     @extend .text-align-center;
     @extend .font-weight-bold;
-    font-family: inherit;
+    /*font-family: inherit;*/
     padding: 12px 1em;
     background-color: $color-primary;
     -moz-border-radius: 3px;

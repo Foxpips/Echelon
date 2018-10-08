@@ -1,14 +1,16 @@
 ﻿/*jshint esversion: 6 */
 
 var SitePage = function () {
-    var $menubar = $("#menuHome");
+    var $menuBarButton = $("#menuHome");
     var $rightNav = $("#rightSideNav");
     var $leftNav = $("#leftSideNav");
-    var $closeNav = $(".closebtn");
+    var $closeNav = $(".sidenav__overlay");
 
-    var $userAvatar = $("#headerAvatar");
+    var $userAvatarButton = $("#headerAvatar");
     var $menuOverlayRight = $("#menuOverlayRight");
     var $menuOverlayLeft = $("#menuOverlayLeft");
+    var $activeUsersMenu = $("#usersSideNav");
+    var $menuUsersButton = $("#menuUsers");
     var theme = document.body.querySelectorAll("[data-attribute='theme']");
 
     var ajaxHelper = new AjaxHelper();
@@ -32,22 +34,44 @@ var SitePage = function () {
             $("#htmlContainer").removeAttr("style");
         });
 
-        if ($userAvatar.length > 0) {
-            avatarControl.setUserAvatar($userAvatar.data("target"));
+        if ($userAvatarButton.length > 0) {
+            avatarControl.setUserAvatar($userAvatarButton.data("target"));
         }
 
-        $userAvatar.on("click", () => {
+        $userAvatarButton.on("click", () => {
             $menuOverlayRight.hide();
             $leftNav.toggle("slide");
+
             $menuOverlayLeft.toggle("slide");
             $rightNav.hide();
         });
 
-        $menubar.on("click", () => {
+        $menuBarButton.on("click", () => {
             $menuOverlayLeft.hide();
             $rightNav.toggle("slide");
+
             $menuOverlayRight.toggle("slide");
             $leftNav.hide();
+        });
+
+        $menuUsersButton.on("click", () => {
+            $menuOverlayLeft.hide();
+            $menuOverlayRight.hide();
+            $activeUsersMenu.toggle("slide", () => {
+                let $chatContainerMessages = $(".chat-container__messages");
+                console.log($activeUsersMenu.is(":visible"));
+                if ($activeUsersMenu.is(":visible")) {
+
+                    $chatContainerMessages.removeClass("col-md-12 col-sm-12");
+                    $chatContainerMessages.addClass("col-md-10 col-sm-10");
+                } else {
+                    $chatContainerMessages.removeClass("col-md-10 col-sm-10");
+                    $chatContainerMessages.addClass("col-md-12 col-sm-12");
+                }
+            });
+
+            $leftNav.hide();
+            $rightNav.hide();
         });
 
         $closeNav.on("click", () => {

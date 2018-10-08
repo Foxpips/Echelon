@@ -7,8 +7,7 @@ namespace Echelon.Infrastructure.Messaging
 {
     public class ChatHub : Hub
     {
-        private static readonly ConcurrentDictionary<string, ChatUser> Dic =
-            new ConcurrentDictionary<string, ChatUser>();
+        private static readonly ConcurrentDictionary<string, ChatUser> CurrentUsers = new ConcurrentDictionary<string, ChatUser>();
 
         public void Send(ChatUser user, string message)
         {
@@ -18,14 +17,14 @@ namespace Echelon.Infrastructure.Messaging
         public void SendToSpecific(ChatUser user, string message, string to)
         {
             Clients.Caller.ReceiveMessage(user, message);
-            Clients.Client(Dic[to].HubId).ReceiveMessage(user, message);
+            Clients.Client(CurrentUsers[to].HubId).ReceiveMessage(user, message);
         }
 
         public void Notify(ChatUser user, string hubId)
         {
             user.HubId = hubId;
-            Dic.TryAdd(user.UniqueId, user);
-            foreach (var entry in Dic)
+            CurrentUsers.TryAdd(user.UniqueId, user);
+            foreach (var entry in CurrentUsers)
             {
                 Clients.Caller.Online(entry.Value);
             }
@@ -35,14 +34,14 @@ namespace Echelon.Infrastructure.Messaging
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            var name = Dic.FirstOrDefault(x => x.Value.HubId == Context.ConnectionId.ToString());
+            var name = CurrentUsers.FirstOrDefault(x => x.Value.HubId == Context.ConnectionId.ToString());
             if (string.IsNullOrEmpty(name.Key))
             {
                 return Clients.All.Disconnected("User");
             }
 
             ChatUser userDisconnecting;
-            Dic.TryRemove(name.Key, out userDisconnecting);
+            CurrentUsers.TryRemove(name.Key, out userDisconnecting);
             return Clients.All.Disconnected(name.Value);
         }
     }

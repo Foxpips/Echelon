@@ -62,11 +62,10 @@
     &__text {
         @extend .font-weight-bold;
         @extend .position-relative;
-        display: none;
         width: 200px;
         height: 50px;
         animation-name: messageslide;
-        animation-duration: 1.5s;
+        animation-duration: 0.8s;
         color: $color-primary;
 
         @keyframes messageslide {
@@ -76,7 +75,7 @@
             }
 
             25% {
-                left: 150px;
+                left: 0px;
                 top: 0px;
             }
         }

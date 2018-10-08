@@ -27,7 +27,7 @@ namespace Echelon.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Navigation");
+                return RedirectToAction("Index", "Chat");
             }
 
             return View();

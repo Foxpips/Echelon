@@ -11,10 +11,12 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
     const $sendMessageButton = $("#sendButton");
 
     const $window = $(window);
+    const $joiningChannel = $("#joiningChannel");
+    const $joinedAs = $("#joinedAs");
     const $loading = $("#loading");
     const $container = $("#container");
     const $chatWindow = $container.find("#messages");
-    const $participants = $container.find("#users");
+    const $participants = $("#usersSideNav");
     const $usersContainer = $container.find(".users__container");
     const $selectedUser = $container.find("#participants");
 
@@ -29,7 +31,7 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
                 scrollToLatestMessage();
             });
         }
-
+    
         initialiseUi();
     })();
 
@@ -38,10 +40,9 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
     };
 
     chat.client.Online = function (user) {
-        $participants
-            .append(`<div class="sidebar__participant" data-onlineUser=${user.UniqueId
-        }><img class="avatar avatar--other avatar--participant" src=${user.AvatarUrl
-        } alt=""><div class="sidebar__participant--username">${user.UserName}</div></div>`);
+        $participants.append(`<a><div class="userMenu__participant" data-onlineUser=${user.UniqueId
+        }><img class ="avatar avatar--menu avatar--participant" src=${user.AvatarUrl
+        } alt=""><div class ="userMenu__participant--username">${user.UserName}</div></div></a>`);
     };
 
     chat.client.Enters = function (user) {
@@ -157,10 +158,16 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
     }
 
     function initialiseUi() {
+        $joiningChannel.append("General");
+        $joinedAs.append(userToken.UserName);
+
+        $(document.body).on("click", ".goog-te-combo", function () {
+            $(".skiptranslate").not(".goog-te-gadget").hide();
+        });
+
         setTimeout(() => {
             $("body").removeAttr("style");
-            $(".skiptranslate").not(".goog-te-gadget").remove();
-            console.log("its happeneing");
+            $(".skiptranslate").not(".goog-te-gadget").hide();
             $loading.hide();
         }, 1000);
     }

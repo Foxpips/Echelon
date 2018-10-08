@@ -8,22 +8,7 @@ namespace Echelon.Controllers
     {
         public ActionResult Index()
         {
-            if (Request.IsAuthenticated)
-            {
-                return View();
-            }
-
-            return RedirectToAction("Index", "Login");
-        }
-
-        public ActionResult ChatHub()
-        {
-            if (Request.IsAuthenticated)
-            {
-                return View();
-            }
-
-            return RedirectToAction("Index", "Login");
+            return View();
         }
     }
 }

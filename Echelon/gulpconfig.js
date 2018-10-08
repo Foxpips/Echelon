@@ -23,7 +23,8 @@
                     bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js",
                     bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap/transition.js",
                     bowerSourcePath + "bootstrap-sass-official/assets/javascripts/bootstrap.js",
-                    bowerSourcePath + "toastr/toastr.js"
+                    bowerSourcePath + "toastr/toastr.js",
+                    bowerSourcePath + "signalr/jquery.signalR.js"
                 ]
             },
 
@@ -80,7 +81,7 @@
             },
             icons: {
                 destPath: "fonts",
-                files: bowerSourcePath + "/font-awesome/fonts/*.*"
+                files: bowerSourcePath + "/font-awesome/web-fonts-with-css/webfonts/*.*"
             }
         }
     };

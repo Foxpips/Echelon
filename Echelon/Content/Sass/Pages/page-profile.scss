@@ -6,7 +6,7 @@
 .page-container {
     @extend .margin-0-auto;
     @extend .width-100-percent;
-    color: $color-text-alternate;
+    color: $color-text;
 
     @include Middle-more {
         width: 700px;

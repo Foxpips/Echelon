@@ -26,6 +26,7 @@
         }
 
         &--username {
+            color: $color-shadow-dark;
             margin-top: 15px;
             overflow: hidden;
             white-space: nowrap;
@@ -89,6 +90,18 @@
             border: 2px solid $color-primary !important;
             margin-right: 4px;
             margin-left: 10px;
+        }
+    }
+}
+
+.chat-container {
+    &__messages {
+        display: block;
+
+        &--border-right {
+            @include Middle-more {
+                border-right: 1px solid $color-border;
+            }
         }
     }
 }
@@ -228,7 +241,7 @@
     overflow-y: auto;
     overflow-x: hidden;
 
-    @include Middle-less{
-       display: none;
+    @include Middle-less {
+        display: none;
     }
 }

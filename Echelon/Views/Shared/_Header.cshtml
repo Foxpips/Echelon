@@ -15,11 +15,14 @@
             else
             {
                 <span class="dropdown-toggle profile float-right margin-top-5" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span><i id="menuHome" class="material-icons fa fa-bars"></i></span>
+                    <span><i id="menuHome" class="material-icons fas fa-bars"></i></span>
+                </span>
+                <span class="profile float-right margin-top-5" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span><i id="menuUsers" class="material-icons fas fa-users"></i></span>
                 </span>
             }
             <div class="navbar-header">
-                <img id="headerAvatar" data-target="@user.Name" class="avatar avatar--user avatar--menu margin-right-10" src="@ViewBag.AvatarImage"/>
+                <img id="headerAvatar" data-target="@user.Name" class="avatar avatar--user avatar--profileMenu margin-right-10" src="@ViewBag.AvatarImage"/>
                 <div class="google-translate__container">
                     <div id="google-translate-element"></div>
                 </div>
@@ -28,17 +31,17 @@
     </nav>
 
     <div id="menuOverlayLeft" class="sidenav__overlay sidenav__overlay--right"></div>
+    <div id="menuOverlayRight" class="sidenav__overlay sidenav__overlay--left"></div>
+
     <div id="leftSideNav" class="sidenav sidenav--left">
-        <a href="javascript:void(0)" class="closebtn">&times;</a>
         @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "sidenav--slides" })
     </div>
 
     <div id="rightSideNav" class="sidenav sidenav--right">
-        <a href="javascript:void(0)" class="closebtn">&times;</a>
         @Html.ActionLink("Home", "Index", "Chat", null, new { @class = "sidenav--slides" })
         @Html.ActionLink(Login.LogOut, "Logout", "Login", null, new {@class = "sidenav--slides"})
     </div>
-    <div id="menuOverlayRight" class="sidenav__overlay sidenav__overlay--left"></div>
+    <div id="usersSideNav" class="userMenu userMenu--right"></div>
 }
 else
 {

@@ -72,10 +72,10 @@
     background-color: $color-sidenavHover;
 
     &:last-child {
-      @include Middle-less {
-        border-radius: 0px 0px 50px 50px;
+        @include Middle-less {
+            border-radius: 0px 0px 50px 50px;
+        }
     }
-  }
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -92,10 +92,9 @@
     margin-left: 50px;
     color: $color-white;
 
-    &:hover{
+    &:hover {
         color: $color-identifier;
     }
-
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -112,5 +111,85 @@
 
     .sidenav a {
         font-size: 18px;
+    }
+}
+
+
+.userMenu {
+    padding-top: 60px;
+    z-index: 3;
+    height: 100% !important;
+    width: 17%; 
+    position: fixed; 
+    background-color: $color-user-menu;
+    box-shadow: #444 2px 0 5px 1px;
+
+    @include Middle-more{
+        display: block;
+    }
+
+    @include Middle-less{
+         width: 100%; 
+    }
+
+    &--left {
+        left: 0px;
+    }
+
+    &--right {
+        right: 0px;
+    }
+}
+
+/* The navigation menu links */
+.userMenu a {
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    transition: 0.3s;
+    text-align: center;
+    box-shadow: black 10px -6px 19px;
+}
+
+.userMenu {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 50px;
+
+    &:hover {
+        color: $color-identifier;
+    }
+}
+
+.userMenu {
+    @extend .display-none;
+    @extend .text-align-center;
+    @extend .height-100-percent;
+    @extend .font-weight-bold;
+    color: $color-shadow-dark;
+    right: 1px;
+    display: block;
+    padding-bottom: 10%;
+
+    &__participant {
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $color-box-bottom;
+        }
+
+        &--username {
+            color: $color-text-alternate;
+            margin-top: 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-align: left;
+        }
     }
 }
