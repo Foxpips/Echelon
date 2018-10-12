@@ -31,27 +31,19 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
                 scrollToLatestMessage();
             });
         }
-    
+
         initialiseUi();
     })();
 
-    chat.client.ChangeName = function () {
-        chat.server.notify(userToken.UserName, $hub.id);
-    };
-
     chat.client.Online = function (user) {
-        $participants.append(`<a><div class="userMenu__participant" data-onlineUser=${user.UniqueId
-        }><img class ="avatar avatar--menu avatar--participant" src=${user.AvatarUrl
-        } alt=""><div class ="userMenu__participant--username">${user.UserName}</div></div></a>`);
+        setUserOnlineIcon(user);
+        members.push(user.UserName);
     };
 
     chat.client.Enters = function (user) {
         popupControl.Information(`${user.UserName} has joined`);
-        $participants
-            .append(`<div class="sidebar__participant" data-onlineUser=${user.UniqueId
-        }><img class="avatar avatar--other avatar--participant" src=${user.AvatarUrl
-        } alt=""><div class="sidebar__participant--username">${user.UserName}</div></div>`);
         members.push(user.UserName);
+        setUserOnlineIcon(user);
     };
 
     chat.client.ReceiveMessage = function (user, message) {
@@ -65,8 +57,7 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
 
     chat.client.Disconnected = function (user) {
         popupControl.Information(`${user.UserName} has left`);
-        $(`.sidebar__participant[data-onlineUser="${user.UniqueId}"]`).remove();
-
+        $(`.userOnlineMenu__container[data-onlineUser="${user.UniqueId}"]`).remove();
     };
 
     $.connection.hub.start()
@@ -87,6 +78,12 @@ var ChatHubController = function (userToken, regexHelper, screensaverControl, no
                     }
                 });
         });
+
+    function setUserOnlineIcon(user) {
+        $participants.append(`<a class= "userOnlineMenu__container" data-onlineUser=${user.UniqueId
+        }><div class ="userOnlineMenu__participant" ><img class ="avatar avatar--menu avatar--participant" src=${user.AvatarUrl
+        } alt=""><div class ="userOnlineMenu__participant--username">${user.UserName}</div></div></a>`);
+    }
 
     function sendMessage() {
         chat.server.send(userToken, $message.val());

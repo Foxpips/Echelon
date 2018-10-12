@@ -115,21 +115,27 @@
 }
 
 
-.userMenu {
+.userOnlineMenu {
+    @extend .display-none;
+    @extend .text-align-center;
+    @extend .height-100-percent;
+    @extend .font-weight-bold;
+    @extend .overflow-auto;
+    color: $color-shadow-dark;
+    padding-bottom: 10%;
+    position: absolute;
+    right: 1px;
     padding-top: 60px;
-    z-index: 3;
-    height: 100% !important;
-    width: 17%; 
-    position: fixed; 
+    width: 17%;
     background-color: $color-user-menu;
     box-shadow: #444 2px 0 5px 1px;
 
-    @include Middle-more{
+    @include Middle-more {
         display: block;
     }
 
-    @include Middle-less{
-         width: 100%; 
+    @include Middle-less {
+        width: 100%;
     }
 
     &--left {
@@ -139,40 +145,20 @@
     &--right {
         right: 0px;
     }
-}
-
-/* The navigation menu links */
-.userMenu a {
-    padding: 8px 8px 8px 8px;
-    text-decoration: none;
-    font-size: 14px;
-    display: block;
-    transition: 0.3s;
-    text-align: center;
-    box-shadow: black 10px -6px 19px;
-}
-
-.userMenu {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    font-size: 36px;
-    margin-left: 50px;
+    /* The navigation menu links */
+    & a {
+        padding: 8px 8px 8px 8px;
+        text-decoration: none;
+        font-size: 14px;
+        display: block;
+        transition: 0.3s;
+        text-align: center;
+        box-shadow: 0 4px 5px -3px grey;
+    }
 
     &:hover {
         color: $color-identifier;
     }
-}
-
-.userMenu {
-    @extend .display-none;
-    @extend .text-align-center;
-    @extend .height-100-percent;
-    @extend .font-weight-bold;
-    color: $color-shadow-dark;
-    right: 1px;
-    display: block;
-    padding-bottom: 10%;
 
     &__participant {
         overflow: hidden;

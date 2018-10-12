@@ -97,12 +97,6 @@
 .chat-container {
     &__messages {
         display: block;
-
-        &--border-right {
-            @include Middle-more {
-                border-right: 1px solid $color-border;
-            }
-        }
     }
 }
 
