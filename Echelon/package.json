@@ -19,12 +19,12 @@
     "gulp-preprocess": "2.0.0",
     "gulp-print": "^2.0.1",
     "gulp-rename": "^1.2.2",
-    "gulp-run-sequence": "0.3.2",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "2.0.1",
     "jshint": "^2.0.4",
     "jshint-stylish": "^2.1.0",
-    "rimraf": "2.2.8"
+    "rimraf": "2.2.8",
+    "run-sequence": "^2.2.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",

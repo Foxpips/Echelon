@@ -1,25 +1,49 @@
 ﻿@model Echelon.Models.ViewModels.CategoriesViewModel
 
 @section metadata{
-    <title>Echelon Chat</title>
+  <title>Echelon Chat</title>
 }
 
 @Html.AntiForgeryToken()
 <section id="container" class="page-container__information">
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            @foreach (var item in Model.Categories)
-            {
-                <div>@item.Name</div>
-            }
-        </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <input id="channelFilter" type="text" class="form-control" style="border: 3px solid #528ba2; height: 43px; margin: auto; padding: 10px; text-align: center; width: 50%;" placeholder="Search rooms">
     </div>
+    <section class="channel-list">
+      <div id="channels" class="col-md-12 col-sm-12 text-align-center">
+        @foreach (var item in Model.Categories)
+        {
+          <div data-name="@item.Name">@item.Name</div>
+        }
+      </div>
+    </section>
+  </div>
 </section>
 
 @section scripts {
-    <script type="text/javascript">
-        $(function() {
-            ChatPage();
-        });
-    </script>
+  <script type="text/javascript">
+    $(function() {
+
+      var words = ['Gaming', 'Music', 'Work', 'Anime', 'romance', 'misc'];
+
+      $("#channelFilter")
+        .on('change keydown paste input',
+          function() {
+            $("#channels").children().hide();
+            var $filterVal = $(this).val();
+
+            const result = words.filter(word => {
+              var regex = new RegExp($filterVal);
+              return regex.test(word);
+            });
+
+            result.forEach(function (value) {
+              console.log(value);
+              //$(".channel-list").find("div[data-type*=" + value + "]").each(function(i) {$(this).show();});
+              $(".channel-list").find("div[data-name*=" + value + "]").show();
+            });
+          });
+    });
+  </script>
 }

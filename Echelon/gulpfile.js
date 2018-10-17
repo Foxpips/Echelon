@@ -15,7 +15,7 @@ var gulp = require("gulp"),
     clone = require("gulp-clone"),
     rename = require("gulp-rename"),
     bower = require("gulp-bower"),
-    runSequence = require("gulp-run-sequence"),
+    runSequence = require("run-sequence"),
     cmq = require("gulp-combine-media-queries"),
     renameOptions = { suffix: ".min" };
 

@@ -14,7 +14,6 @@ var ChatPage = function () {
     const notificationControl = new NotificationControl(popupControl);
    
     (function() {
-
         ajaxHelper.Post(endpoint, { device: browser, channel: selectedChannel }, data => {
             ChatHubController(data.identity, regexHelper, screenSaverControl, notificationControl, popupControl);
         });
